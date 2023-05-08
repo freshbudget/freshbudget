@@ -11,7 +11,7 @@ A family-friendly way to manage your money and stay on top of your budget.
 #### Clone repo
 
 ```bash
-git clone https://github.com/freshbudget/freshbudget.app.git freshbudget
+git clone https://github.com/freshbudget/freshbudget.git freshbudget
 ```
 
 #### Install PHP dependencies
@@ -19,6 +19,7 @@ git clone https://github.com/freshbudget/freshbudget.app.git freshbudget
 ```bash
 composer install
 ```
+
 #### Install frontend dependencies (optional)
 
 ```bash
@@ -27,8 +28,8 @@ yarn install
 
 #### Create databases
 
-- freshbudget
-- freshbudgettest (for tests)
+- `freshbudget`
+- `freshbudgettest` (for tests, optional change database name in `.env.testing` if required)
 
 #### Generate Application Key
 
