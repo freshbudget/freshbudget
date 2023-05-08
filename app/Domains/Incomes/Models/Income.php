@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App\Domains\Incomes\Models;
 
+use App\Domains\Budgets\Models\Budget;
+use App\Models\User;
+use Database\Factories\IncomeFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Income extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUlids;
 
     /**
      * The attributes that are mass assignable.
@@ -44,18 +48,43 @@ class Income extends Model
         'meta' => 'array',
     ];
 
-    public function incomeTypeIncomeFrequency(): BelongsTo
+    /*
+    |----------------------------------
+    | Model Configuration
+    |----------------------------------
+    */
+    public function getRouteKeyName()
     {
-        return $this->belongsTo(IncomeTypeIncomeFrequency::class);
+        return 'ulid';
     }
 
+    public static function newFactory()
+    {
+        return IncomeFactory::new();
+    }
+
+    public function uniqueIds(): array
+    {
+        return ['ulid'];
+    }
+
+    /*
+    |----------------------------------
+    | Relationships
+    |----------------------------------
+    */
     public function budget(): BelongsTo
     {
-        return $this->belongsTo(Budget::class);
+        return $this->belongsTo(Budget::class, 'budget_id');
+    }
+
+    public function frequency(): BelongsTo
+    {
+        return $this->belongsTo(IncomeFrequency::class, 'frequency_id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\BudgetUser::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

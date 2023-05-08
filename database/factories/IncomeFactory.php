@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Budget;
-use App\Models\Income;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Models\Income;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,18 +22,77 @@ class IncomeFactory extends Factory
     public function definition(): array
     {
         return [
-            'ulid' => $this->faker->word,
             'budget_id' => Budget::factory(),
             'user_id' => User::factory(),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'url' => $this->faker->url,
             'username' => $this->faker->userName,
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
-            'amount' => $this->faker->numberBetween(-10000, 10000),
-            'currency' => $this->faker->word,
-            'meta' => '{}',
+            'start_date' => $this->faker->dateTimeBetween('now-1year', 'now'),
+            'end_date' => null,
+            'amount' => $this->faker->numberBetween(0, 10000),
+            'currency' => null,
+            'meta' => null,
         ];
+    }
+
+    /**
+     * Indicate that the income has a different currency.
+     */
+    public function withCurrency(string $currency): self
+    {
+        return $this->state(function (array $attributes) use ($currency) {
+            return [
+                'currency' => $currency,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the income's amount.
+     */
+    public function withAmount(int $amount): self
+    {
+        return $this->state(function (array $attributes) use ($amount) {
+            return [
+                'amount' => $amount,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the income's start date.
+     */
+    public function withStartDate(string $startDate): self
+    {
+        return $this->state(function (array $attributes) use ($startDate) {
+            return [
+                'start_date' => $startDate,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the income's end date.
+     */
+    public function withEndDate(string $endDate): self
+    {
+        return $this->state(function (array $attributes) use ($endDate) {
+            return [
+                'end_date' => $endDate,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the income's meta.
+     */
+    public function withMeta(array $meta): self
+    {
+        return $this->state(function (array $attributes) use ($meta) {
+            return [
+                'meta' => json_encode($meta),
+            ];
+        });
     }
 }

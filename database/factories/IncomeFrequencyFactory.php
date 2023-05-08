@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\IncomeFrequency;
+use App\Domains\Incomes\Models\IncomeFrequency;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IncomeFrequencyFactory extends Factory
@@ -20,10 +20,9 @@ class IncomeFrequencyFactory extends Factory
     public function definition(): array
     {
         return [
-            'ulid' => $this->faker->word,
             'name' => $this->faker->name,
             'abbr' => $this->faker->word,
-            'tagline' => $this->faker->word,
+            'tagline' => $this->faker->sentence,
             'description' => $this->faker->text,
         ];
     }

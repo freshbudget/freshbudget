@@ -20,10 +20,9 @@ class IncomeTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'ulid' => $this->faker->word,
             'name' => $this->faker->name,
             'abbr' => $this->faker->word,
-            'tagline' => $this->faker->word,
+            'tagline' => $this->faker->sentence,
             'description' => $this->faker->text,
         ];
     }
