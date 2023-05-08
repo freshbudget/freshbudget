@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 Artisan::command('make:domain', function () {
 
@@ -12,12 +12,7 @@ Artisan::command('make:domain', function () {
         return;
     }
 
-    // check if the user passed an argument
-    if ($this->argument('name')) {
-        $domain = $this->argument('name');
-    } else {
-        $domain = $this->ask('Domain name?'); // e.g. User
-    }
+    $domain = $this->ask('Domain name?'); // e.g. User
 
     $domain = str($domain)->studly(); // e.g. Users
 
