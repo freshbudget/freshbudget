@@ -1,11 +1,11 @@
 <?php
 
+use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Incomes\Models\Income;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Event;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Budgets\Events\BudgetCreated;
-use App\Domains\Budgets\Models\BudgetInvitation;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {

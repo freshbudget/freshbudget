@@ -2,16 +2,16 @@
 
 namespace App\Domains\Budgets\Models;
 
+use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Incomes\Models\Income;
 use App\Domains\Users\Models\User;
 use Database\Factories\BudgetFactory;
-use App\Domains\Incomes\Models\Income;
-use Illuminate\Database\Eloquent\Model;
-use App\Domains\Budgets\Events\BudgetCreated;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Budget extends Model
 {
@@ -85,7 +85,7 @@ class Budget extends Model
     {
         return $this->hasMany(Income::class, 'budget_id');
     }
-    
+
     public function invitations(): HasMany
     {
         return $this->hasMany(BudgetInvitation::class, 'budget_id');
