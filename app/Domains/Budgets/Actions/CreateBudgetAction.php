@@ -5,6 +5,7 @@ namespace App\Domains\Budgets\Actions;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Users\Models\User;
 use Closure;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class CreateBudgetAction

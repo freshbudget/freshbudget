@@ -1,10 +1,11 @@
 <?php
 
-use App\Domains\Budgets\Events\BudgetCreated;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Event;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Models\Income;
+use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Budgets\Models\BudgetInvitation;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {
@@ -110,4 +111,17 @@ test('it can check if a user exists with a given email', function () {
 
     // check if the first user is an owner
     expect($budget->hasUserWithEmail($user->email))->toBeFalse();
+});
+
+// test it has many incomes
+test('it has many incomes', function () {
+    $model = Budget::factory()->create();
+
+    // create 3 incomes
+    $model->incomes()->createMany(
+        Income::factory()->count(3)->make()->toArray()
+    );
+
+    expect($model->incomes->count())->toBe(3);
+    expect($model->incomes->first())->toBeInstanceOf(Income::class);
 });
