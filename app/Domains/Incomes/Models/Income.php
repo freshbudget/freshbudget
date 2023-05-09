@@ -3,7 +3,7 @@
 namespace App\Domains\Incomes\Models;
 
 use App\Domains\Budgets\Models\Budget;
-use App\Models\User;
+use App\Domains\Users\Models\User;
 use Database\Factories\IncomeFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -4,7 +4,7 @@ use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeFrequency;
 use App\Domains\Incomes\Models\IncomeType;
-use App\Models\User;
+use App\Domains\Users\Models\User;
 
 test('when model is created, a ulid is generated', function () {
     $model = Income::factory()->create();

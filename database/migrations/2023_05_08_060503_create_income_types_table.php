@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('income_types', function (Blueprint $table) {
             $table->id();
-            $table->string('ulid');
+            $table->string('ulid')->unique()->index();
             $table->string('name');
             $table->string('abbr');
             $table->string('tagline')->nullable();

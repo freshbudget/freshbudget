@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
-            $table->string('ulid');
+            $table->string('ulid')->unique()->index();
             $table->string('name');
             $table->string('currency')->nullable()->default('USD');
             $table->unsignedBigInteger('owner_id')->index();
+            $table->boolean('personal')->default(false);
             $table->timestamps();
         });
     }

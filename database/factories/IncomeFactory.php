@@ -6,7 +6,7 @@ use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeFrequency;
 use App\Domains\Incomes\Models\IncomeType;
-use App\Models\User;
+use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IncomeFactory extends Factory

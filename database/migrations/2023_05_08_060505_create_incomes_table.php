@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->string('ulid');
+            $table->string('ulid')->unique()->index();
             $table->unsignedBigInteger('budget_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');

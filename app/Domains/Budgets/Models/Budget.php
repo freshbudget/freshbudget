@@ -2,7 +2,8 @@
 
 namespace App\Domains\Budgets\Models;
 
-use App\Models\User;
+use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Users\Models\User;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +25,7 @@ class Budget extends Model
         'ulid',
         'name',
         'currency',
+        'personal',
     ];
 
     /**
@@ -34,6 +36,16 @@ class Budget extends Model
     protected $casts = [
         'id' => 'integer',
         'owner_id' => 'integer',
+        'personal' => 'boolean',
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => BudgetCreated::class,
     ];
 
     /*
@@ -41,6 +53,13 @@ class Budget extends Model
     | Model Configuration
     |----------------------------------
     */
+    protected static function booted(): void
+    {
+        static::created(function (Budget $budget) {
+            $budget->users()->attach($budget->owner->id);
+        });
+    }
+
     public function getRouteKeyName()
     {
         return 'ulid';
@@ -73,6 +92,26 @@ class Budget extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'budget_user', 'budget_id', 'user_id');
+        return $this->belongsToMany(User::class, 'budget_user', 'budget_id', 'user_id')->withTimestamps();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Team Budget Functionality
+    |--------------------------------------------------------------------------
+    */
+    public function hasUser(User $user): bool
+    {
+        return $this->users->contains($user) || $this->owner->is($user);
+    }
+
+    public function hasUserWithEmail(string $email): bool
+    {
+        return $this->users()->where('email', $email)->exists();
+    }
+
+    public function isOwnedBy(User $user): bool
+    {
+        return $this->owner->is($user);
     }
 }
