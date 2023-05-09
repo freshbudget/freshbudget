@@ -2,13 +2,14 @@
 
 namespace App\Domains\Incomes\Models;
 
-use App\Domains\Budgets\Models\Budget;
 use App\Models\User;
 use Database\Factories\IncomeFactory;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Domains\Budgets\Models\Budget;
 use Illuminate\Database\Eloquent\Model;
+use App\Domains\Incomes\Models\IncomeType;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Income extends Model
 {
@@ -24,6 +25,7 @@ class Income extends Model
         'budget_id',
         'user_id',
         'name',
+        'type_id',
         'description',
         'url',
         'username',
@@ -31,6 +33,7 @@ class Income extends Model
         'end_date',
         'amount',
         'currency',
+        'frequency_id',
         'meta',
     ];
 
@@ -43,8 +46,11 @@ class Income extends Model
         'id' => 'integer',
         'budget_id' => 'integer',
         'user_id' => 'integer',
+        'type_id' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
+        'amount' => 'integer',
+        'frequency_id' => 'integer',
         'meta' => 'array',
     ];
 
@@ -81,6 +87,11 @@ class Income extends Model
     public function frequency(): BelongsTo
     {
         return $this->belongsTo(IncomeFrequency::class, 'frequency_id');
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(IncomeType::class, 'type_id');
     }
 
     public function user(): BelongsTo

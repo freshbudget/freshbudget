@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Models\Income;
+use App\Domains\Incomes\Models\IncomeFrequency;
+use App\Domains\Incomes\Models\IncomeType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,14 +28,52 @@ class IncomeFactory extends Factory
             'user_id' => User::factory(),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
+            'type_id' => IncomeType::factory(),
             'url' => $this->faker->url,
             'username' => $this->faker->userName,
             'start_date' => $this->faker->dateTimeBetween('now-1year', 'now'),
             'end_date' => null,
             'amount' => $this->faker->numberBetween(0, 10000),
             'currency' => null,
+            'frequency_id' => IncomeFrequency::factory(),
             'meta' => null,
         ];
+    }
+
+    /**
+     * Indicate the user that owns the income.
+     */
+    public function ownedBy(User $user): self
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'user_id' => $user->id,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the type of income.
+     */
+    public function withType(IncomeType $type): self
+    {
+        return $this->state(function (array $attributes) use ($type) {
+            return [
+                'type_id' => $type->id,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the income frequency.
+     */
+    public function withFrequency(IncomeFrequency $frequency): self
+    {
+        return $this->state(function (array $attributes) use ($frequency) {
+            return [
+                'frequency_id' => $frequency->id,
+            ];
+        });
     }
 
     /**

@@ -18,12 +18,14 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
             $table->text('url')->nullable();
             $table->string('username')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('amount')->nullable();
             $table->string('currency')->nullable()->default('USD');
+            $table->unsignedBigInteger('frequency_id')->nullable();
             $table->json('meta')->nullable();
             $table->timestamps();
         });
