@@ -57,6 +57,10 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'app_url' => env('DASHBOARD_URL', 'app.freshbudgetapp.test'),
+
+    'api_url' => env('API_URL', 'api.freshbudgetapp.test'),
+
     'asset_url' => env('ASSET_URL'),
 
     /*

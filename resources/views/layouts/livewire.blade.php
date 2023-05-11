@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
 @push('head::end')
+    <style>[x-cloak] { display: none !important; }</style>
     @livewireStyles
     @vite(['resources/css/app.css'])
 @endpush

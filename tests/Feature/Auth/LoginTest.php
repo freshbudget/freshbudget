@@ -14,13 +14,6 @@ test('login page is accessible', function () {
     $response->assertStatus(200);
 });
 
-// test the login page is at /login
-test('login page is at /login', function () {
-    $response = $this->get('/login');
-
-    $response->assertStatus(200);
-});
-
 // assert we see the livewire component on the page
 test('login page contains livewire component', function () {
     $response = $this->get(route('login'));
@@ -29,12 +22,12 @@ test('login page contains livewire component', function () {
 });
 
 // test authenticated users are redirected to the welcome page
-test('authenticated users are redirected to the welcome page', function () {
+test('authenticated users are redirected to the app dashboard', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get(route('login'));
 
-    $response->assertRedirect(route('welcome'));
+    $response->assertRedirect(route('app.index'));
 });
 
 // tes email is required

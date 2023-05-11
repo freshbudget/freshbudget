@@ -14,13 +14,6 @@ test('register page is accessible', function () {
     $response->assertStatus(200);
 });
 
-// test the register page is at /register
-test('register page is at /register', function () {
-    $response = $this->get('/register');
-
-    $response->assertStatus(200);
-});
-
 /// assert we see the livewire component on the page
 test('register page contains livewire component', function () {
     $response = $this->get(route('register'));
@@ -29,12 +22,12 @@ test('register page contains livewire component', function () {
 });
 
 // authenticated users are redirected to the welcome page
-test('authenticated users are redirected to the welcome page', function () {
+test('authenticated users are redirected to the app dashboard', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get(route('register'));
 
-    $response->assertRedirect(route('welcome'));
+    $response->assertRedirect(route('app.index'));
 });
 
 // test name is required
