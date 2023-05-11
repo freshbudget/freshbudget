@@ -1,0 +1,1 @@
+<label {{ $attributes }}>{{ $slot }}@if($attributes->has('required'))<span>*</span>@endif</label>

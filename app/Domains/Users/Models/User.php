@@ -110,6 +110,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /*
+    |----------------------------------
+    | Two Factor Authentication
+    |----------------------------------
+    */
+    public function twoFactorAuthEnabledAndConfirmed(): bool
+    {
+        return $this->two_factor_enabled;
+    }
+
+    /*
     |--------------------------------------------------------------------------
     | Team Budget Functionality
     |--------------------------------------------------------------------------
