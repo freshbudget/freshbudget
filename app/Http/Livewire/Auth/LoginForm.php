@@ -29,7 +29,7 @@ class LoginForm extends Component
         } catch (TooManyRequestsException $exception) {
             $this->addError(
                 'status',
-                "Too many attempts, please wait {$exception->secondsUntilAvailable} before next attempt.");
+                "Too many attempts, please wait {$exception->secondsUntilAvailable} seconds before next attempt.");
         }
 
         $this->validate();

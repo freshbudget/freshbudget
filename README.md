@@ -31,6 +31,12 @@ yarn install
 - `freshbudget`
 - `freshbudgettest` (for tests, optional change database name in `.env.testing` if required)
 
+#### Copy `.env.example` to `.env`
+
+```bash
+cp .env.example .env
+```
+
 #### Generate Application Key
 
 ```bash
@@ -42,6 +48,10 @@ php artisan key:generate
 ```bash
 php artisan migrate
 ```
+
+#### Add subdomains to etc\hosts file
+
+We are currently using subdomains for the authentication and application routes. You should configure your local `etc\hosts` file to point `api.domain.test`, `app.domain.test` and `domain.test` to this application. You can also reconfigure this behavior by modifiying the `.env` file.
 
 ## Testing
 
