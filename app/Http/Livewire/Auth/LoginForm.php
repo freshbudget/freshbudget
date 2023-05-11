@@ -54,9 +54,9 @@ class LoginForm extends Component
             ]);
 
             // TODO: redirect to two factor challenge
-            return redirect()->route('welcome');
+            return redirect()->route('app.index');
         } else {
-            return redirect()->intended(route('welcome'));
+            return redirect()->intended(route('app.index'));
         }
     }
 

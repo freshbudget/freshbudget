@@ -52,7 +52,7 @@ class RegisterForm extends Component
 
         auth()->login($user, remember: true);
 
-        return redirect()->route('welcome');
+        return redirect()->route('app.index');
     }
 
     public function render()

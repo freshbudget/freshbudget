@@ -82,7 +82,7 @@ test('valid credentials are authenticated', function () {
         ->set('password', 'password')
         ->call('attempt')
         ->assertHasNoErrors()
-        ->assertRedirect(route('welcome'));
+        ->assertRedirect(route('app.index'));
 
     $this->assertAuthenticatedAs($user);
 });
@@ -100,7 +100,7 @@ test('an authenticated event is fired', function () {
         ->set('password', 'password')
         ->call('attempt')
         ->assertHasNoErrors()
-        ->assertRedirect(route('welcome'));
+        ->assertRedirect(route('app.index'));
 
     $this->assertAuthenticatedAs($user);
 
@@ -135,7 +135,7 @@ test('if user has 2FA enabled they are redirected to the 2FA challenge after aut
         ->set('email', $user->email)
         ->set('password', 'password')
         ->call('attempt')
-        ->assertRedirect(route('welcome'));
+        ->assertRedirect(route('app.index'));
 });
 
 // test if the user has 2FA enabled they are redirected to the 2fa challenge and the session is flashed
@@ -146,6 +146,6 @@ test('if user has 2FA enabled they are redirected to the 2FA challenge and the s
         ->set('email', $user->email)
         ->set('password', 'password')
         ->call('attempt')
-        ->assertRedirect(route('welcome'))
+        ->assertRedirect(route('app.index'))
         ->assertSessionHas('two_factor');
 });
