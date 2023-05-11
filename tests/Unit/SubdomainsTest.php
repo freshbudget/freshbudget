@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // test the welcome page is at the root domain
 test('welcome page is at the root domain', function () {

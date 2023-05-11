@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest as EmailVerificationFormRequest;
-use Illuminate\Http\Request;
 
 class EmailVerificationRequestController extends Controller
 {
@@ -12,20 +11,7 @@ class EmailVerificationRequestController extends Controller
     {
         $request->fulfill();
 
-        return redirect()->route('welcome')
-            ->with('message', 'Email verified!');
-    }
-
-    public function create(Request $request)
-    {
-        $request->user()->sendEmailVerificationNotification();
-
-        return back(fallback: route('verification.notice'))
-            ->with('message', 'Verification link sent!');
-    }
-
-    public function show()
-    {
-        return view('auth.verify-email');
+        return redirect()->intended(default: route('app.index'))
+            ->with('status', 'Email verified!');
     }
 }

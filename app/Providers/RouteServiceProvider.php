@@ -42,11 +42,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->domain(config('app.app_url'))
                 ->group(base_path('routes/auth.php'));
-            
+
             // app.domain.tld
             Route::middleware('web')
                 ->domain(config('app.app_url'))
-                ->group(base_path('routes/app.php'));            
+                ->group(base_path('routes/app.php'));
         });
     }
 

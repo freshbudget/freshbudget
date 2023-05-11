@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\EmailVerificationRequestController;
+use App\Http\Livewire\Auth\EmailVerificationRequestForm;
 use App\Http\Livewire\Auth\LoginForm;
 use App\Http\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
@@ -17,18 +19,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware(['auth'])
     ->name('logout');
 
-Route::get('/email/verification', [EmailVerificationRequestController::class, 'show'])
+Route::get('/email/verification', EmailVerificationRequestForm::class)
     ->middleware(['auth'])
     ->name('verification.notice');
-
-// Route::post('/email/verification/send', [EmailVerificationRequestController::class, 'create'])
-//     ->middleware(['auth', 'throttle:5,1'])
-//     ->name('verification.send');
 
 Route::get('/email/verification/{id}/{hash}', [EmailVerificationRequestController::class, 'attempt'])
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
-
-// Route::get('/password/confirm', PasswordConfirmationController::class)
-//     ->middleware(['auth'])
-//     ->name('password.confirm');

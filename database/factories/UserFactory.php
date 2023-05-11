@@ -48,6 +48,16 @@ class UserFactory extends Factory
     }
 
     /**
+     * Indicate that the model has a verified email address.
+     */
+    public function verified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => now(),
+        ]);
+    }
+
+    /**
      * Indicate that the model has two factor authentication enabled.
      */
     public function withTwoFactorAuth(): static
