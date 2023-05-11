@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }}</title>
     @stack('head::end')
 </head>
-<body @stack('body::tag')>
+<body @stack('body::tag') class="antialiased text-gray-900 @stack('body::classes')">
     @stack('body::start')
     
     @yield('body')

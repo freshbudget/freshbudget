@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class MakeDomainCommand extends Command
 {
@@ -28,7 +28,7 @@ class MakeDomainCommand extends Command
     {
         if (! app()->isLocal()) {
             $this->error('This command can only be run in local environment!');
-    
+
             return;
         }
 
