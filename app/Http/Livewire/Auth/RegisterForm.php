@@ -38,6 +38,8 @@ class RegisterForm extends Component
             $this->addError(
                 'status',
                 "Too many attempts, please wait {$exception->secondsUntilAvailable} seconds before next attempt.");
+
+            return;
         }
 
         $this->validate();

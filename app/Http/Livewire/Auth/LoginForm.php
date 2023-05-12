@@ -17,6 +17,8 @@ class LoginForm extends Component
 
     public $remember = true;
 
+    public $usingEmail = false;
+
     protected $rules = [
         'email' => ['required', 'email'],
         'password' => ['required'],
@@ -30,6 +32,8 @@ class LoginForm extends Component
             $this->addError(
                 'status',
                 "Too many attempts, please wait {$exception->secondsUntilAvailable} seconds before next attempt.");
+
+            return;
         }
 
         $this->validate();
@@ -37,7 +41,7 @@ class LoginForm extends Component
         $status = auth()->attempt($this->only(['email', 'password']), $this->remember);
 
         if (! $status) {
-            $this->addError('status', 'The provided credentials do not match our records.');
+            $this->addError('status', 'Please try again, the provided credentials do not match our records.');
 
             return;
         }

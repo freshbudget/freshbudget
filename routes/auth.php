@@ -26,3 +26,11 @@ Route::get('/email/verification', EmailVerificationRequestForm::class)
 Route::get('/email/verification/{id}/{hash}', [EmailVerificationRequestController::class, 'attempt'])
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
+
+// Route::get('/password/reset', PasswordResetRequestForm::class)
+//     ->middleware(['guest'])
+//     ->name('password.request');
+
+// Route::get('/password/confirm', PasswordConfirmForm::class)
+//     ->middleware(['auth'])
+//     ->name('password.confirm');

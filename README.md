@@ -68,3 +68,9 @@ We use Laravel Pint to automatically standardize code styling, before pushing ch
 ```bash
 ./vendor/bin/pint
 ```
+
+# Deployment Script Considerations
+
+```bash
+php artisan icons:cache
+```
