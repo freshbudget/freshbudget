@@ -21,6 +21,8 @@ class RegisterForm extends Component
 
     public $password_confirmation = '';
 
+    public $usingEmail = false;
+
     public function rules(): array
     {
         return [

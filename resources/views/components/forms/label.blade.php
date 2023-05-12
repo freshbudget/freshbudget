@@ -1,1 +1,1 @@
-<label {{ $attributes }}>{{ $slot }}@if($attributes->has('required'))<span>*</span>@endif</label>
+<label {{ $attributes }}>{{ $slot }}@if($attributes->has('required'))<span class="ml-1 text-red-400">*</span>@endif</label>

@@ -8,9 +8,13 @@
             Continue with Google
         </a>
 
+        <button type="button" x-show="!usingEmail" x-on:click="usingEmail = !usingEmail;$focus.focus($refs.email)" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center mt-2">
+            Continue with email
+        </button>
+
         <div x-cloak x-show="usingEmail" class="w-full pb-3">
 
-            <form wire:submit.prevent="attempt" class="space-y-3">
+            <form wire:submit.prevent="attempt" class="space-y-4">
 
                 @error('status')
                     <div class="text-xs text-center text-red-400">
@@ -19,15 +23,15 @@
                 @enderror
         
                 <div>
-                    <x-forms.label for="email" required class="sr-only">Email address</x-forms.label>
-                    <input type="email" id="email" x-ref="email" wire:model="email" placeholder="Enter your email address" class="block w-full transition duration-75 border-gray-300 rounded-lg focus:outline-none ring-green-500 focus:border-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-green-400">
-                    @error('email') <span class="text-sm text-red-400">{{ $message }}</span> @enderror
+                    <x-forms.label for="email" required class="block mb-1 text-gray-800">Email address</x-forms.label>
+                    <x-forms.input type="email" id="email" x-ref="email" wire:model.defer="email" />
+                    <x-forms.validation-error for="email" />
                 </div>
         
                 <div>
-                    <x-forms.label for="password" required class="sr-only">Enter your password</x-forms.label>
-                    <input type="password" id="password" wire:model="password" placeholder="Enter your password" class="block w-full transition duration-75 border-gray-300 rounded-lg focus:outline-none ring-green-500 focus:border-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-green-400">
-                    @error('password') <span class="text-sm text-red-400">{{ $message }}</span> @enderror
+                    <x-forms.label for="password" required class="block mb-1 text-gray-800">Password</x-forms.label>
+                    <x-forms.input type="password" id="password" wire:model.defer="password" />
+                    <x-forms.validation-error for="password" />
                 </div>
         
                 <button type="submit" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center mt-2 disabled:opacity-75 disabled:bg-gray-200">
@@ -37,10 +41,6 @@
             </form>
 
         </div>
-
-        <button type="button" x-show="!usingEmail" x-on:click="usingEmail = !usingEmail;$focus.focus($refs.email)" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center mt-2">
-            Continue with email
-        </button>
 
     </div>
 
