@@ -1,6 +1,7 @@
 <?php
 
 use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Budgets\Events\BudgetDeleted;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Incomes\Models\Income;
@@ -124,4 +125,33 @@ test('it has many incomes', function () {
 
     expect($model->incomes->count())->toBe(3);
     expect($model->incomes->first())->toBeInstanceOf(Income::class);
+});
+
+// test when a budget is deleting, an event is dispatched
+test('when a budget is deleting, an event is dispatched', function () {
+    Event::fake([
+        BudgetDeleted::class,
+    ]);
+
+    $model = Budget::factory()->create();
+
+    $model->delete();
+
+    Event::assertDispatched(BudgetDeleted::class, function ($event) use ($model) {
+        return $event->budget->is($model);
+    });
+});
+
+// test it can add a user
+test('it can add a user', function () {
+    $budget = Budget::factory()->create();
+
+    // create 1 users
+    $user = User::factory()->create();
+
+    // add the user
+    $budget->addUser($user);
+
+    // check if the user is a member
+    expect($budget->hasUser($user))->toBeTrue();
 });

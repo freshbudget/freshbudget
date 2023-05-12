@@ -2,6 +2,8 @@
 
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Users\Models\User;
+use Carbon\Carbon;
 
 test('when model is created, a ulid is generated', function () {
     $model = BudgetInvitation::factory()->create();
@@ -72,4 +74,51 @@ test('the factory can generate a model with a pending state', function () {
 
     expect($model->state)->toBe(BudgetInvitation::STATE_PENDING);
     expect($model->isPending())->toBeTrue();
+});
+
+// by default the invitation is pending and expires in 7 days
+test('by default the invitation is pending and expires in 7 days', function () {
+    $model = BudgetInvitation::factory()->create();
+
+    expect($model->state)->toBe(BudgetInvitation::STATE_PENDING);
+    expect($model->expires_at)->toBeInstanceOf(Carbon::class);
+    expect(now()->diffInDays($model->expires_at))->toBe(6);
+});
+
+// test it knows who sent the invitation
+test('it knows who sent the invitation', function () {
+    $model = BudgetInvitation::factory()->create();
+
+    expect($model->sender)->toBeInstanceOf(User::class);
+});
+
+// test the invitation is expired if the expires_at date is in the past or the state is expired
+test('the invitation is expired if the expires_at date is in the past or the state is expired', function () {
+    $model = BudgetInvitation::factory()->pending()->create();
+
+    expect($model->isExpired())->toBeFalse();
+
+    $model->expires_at = now()->subDay();
+    $model->save();
+
+    expect($model->isExpired())->toBeTrue();
+
+    $model->state = BudgetInvitation::STATE_EXPIRED;
+    $model->save();
+
+    expect($model->isExpired())->toBeTrue();
+});
+
+// test it can accept an invitation
+test('it can accept an invitation', function () {
+    $user = User::factory()->create();
+
+    $model = BudgetInvitation::factory()->pending()->create([
+        'email' => $user->email,
+    ]);
+
+    $model->accept($user);
+
+    expect($model->isAccepted())->toBeTrue();
+    expect($model->budget->users->contains($user))->toBeTrue();
 });

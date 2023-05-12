@@ -146,6 +146,6 @@ test('if user has 2FA enabled they are redirected to the 2FA challenge and the s
 // test that the wire:model is set for email and password
 test('wire:model is set for email and password', function () {
     livewire(LoginForm::class)
-        ->assertSeeHtml('wire:model="email"')
-        ->assertSeeHtml('wire:model="password"');
+        ->assertSeeHtml('wire:model.defer="email"')
+        ->assertSeeHtml('wire:model.defer="password"');
 });

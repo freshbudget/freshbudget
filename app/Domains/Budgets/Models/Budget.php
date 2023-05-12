@@ -3,6 +3,7 @@
 namespace App\Domains\Budgets\Models;
 
 use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Budgets\Events\BudgetDeleted;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Users\Models\User;
 use Database\Factories\BudgetFactory;
@@ -47,6 +48,7 @@ class Budget extends Model
      */
     protected $dispatchesEvents = [
         'created' => BudgetCreated::class,
+        'deleted' => BudgetDeleted::class,
     ];
 
     /*
@@ -106,6 +108,11 @@ class Budget extends Model
     | Team Budget Functionality
     |--------------------------------------------------------------------------
     */
+    public function addUser(User $user): void
+    {
+        $this->users()->attach($user->id);
+    }
+
     public function hasUser(User $user): bool
     {
         return $this->users->contains($user) || $this->owner->is($user);

@@ -63,6 +63,7 @@ class MakeDomainCommand extends Command
             'Events',
             'Exceptions',
             'Models',
+            'Notifications',
             'Policies',
             'Jobs',
             'Support',

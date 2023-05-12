@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('currency')->nullable()->default('USD');
             $table->unsignedBigInteger('owner_id')->index();
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('personal')->default(false);
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BudgetInvitationFactory extends Factory
@@ -25,9 +26,10 @@ class BudgetInvitationFactory extends Factory
             'name' => $this->faker->name,
             'nickname' => $this->faker->name,
             'email' => $this->faker->safeEmail,
-            'expires_at' => $this->faker->dateTimeBetween('now', '+1 week'),
+            'expires_at' => now()->addDays(7),
             'state' => BudgetInvitation::STATE_PENDING,
             'budget_id' => Budget::factory(),
+            'invited_by_id' => User::factory(),
         ];
     }
 

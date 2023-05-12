@@ -2,6 +2,7 @@
 
 namespace App\Domains\Budgets\Models;
 
+use App\Domains\Users\Models\User;
 use Database\Factories\BudgetInvitationFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,6 +36,7 @@ class BudgetInvitation extends Model
         'expires_at',
         'state',
         'budget_id',
+        'invited_by_id',
     ];
 
     /**
@@ -46,6 +48,7 @@ class BudgetInvitation extends Model
         'id' => 'integer',
         'expires_at' => 'datetime',
         'budget_id' => 'integer',
+        'invited_by_id' => 'integer',
     ];
 
     /*
@@ -58,8 +61,14 @@ class BudgetInvitation extends Model
         static::creating(function (BudgetInvitation $invitation) {
             if (! $invitation->token) {
                 $invitation->token = self::generateToken();
+                $invitation->expires_at = now()->addDays(7);
             }
         });
+    }
+
+    public static function generateToken(): string
+    {
+        return Str::random(32);
     }
 
     public function getRouteKeyName()
@@ -82,9 +91,11 @@ class BudgetInvitation extends Model
     | Affordances, Helpers, etc.
     |----------------------------------
     */
-    public static function generateToken(): string
+    public function accept(User $user)
     {
-        return Str::random(32);
+        $this->budget->addUser($user);
+
+        $this->markAsAccepted();
     }
 
     public function isAccepted(): bool
@@ -94,7 +105,7 @@ class BudgetInvitation extends Model
 
     public function isExpired(): bool
     {
-        return $this->state === self::STATE_EXPIRED;
+        return $this->state === self::STATE_EXPIRED || $this->expires_at->isPast();
     }
 
     public function isPending(): bool
@@ -107,6 +118,34 @@ class BudgetInvitation extends Model
         return $this->state === self::STATE_REJECTED;
     }
 
+    public function markAsAccepted(): void
+    {
+        $this->update([
+            'state' => self::STATE_ACCEPTED,
+        ]);
+    }
+
+    public function markAsExpired(): void
+    {
+        $this->update([
+            'state' => self::STATE_EXPIRED,
+        ]);
+    }
+
+    public function markAsPending(): void
+    {
+        $this->update([
+            'state' => self::STATE_PENDING,
+        ]);
+    }
+
+    public function markAsRejected(): void
+    {
+        $this->update([
+            'state' => self::STATE_REJECTED,
+        ]);
+    }
+
     /*
     |----------------------------------
     | Relationships
@@ -115,5 +154,10 @@ class BudgetInvitation extends Model
     public function budget(): BelongsTo
     {
         return $this->belongsTo(Budget::class, 'budget_id');
+    }
+
+    public function sender(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'invited_by_id');
     }
 }
