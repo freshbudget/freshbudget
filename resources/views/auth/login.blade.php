@@ -5,11 +5,11 @@
     <div x-data="{ usingEmail: @entangle('usingEmail') }" class="flex flex-col items-center mt-6 select-none">
         
         <a x-show="!usingEmail" href="{{ route('register') }}" class="px-5 font-semibold inline-block py-2.5 bg-green-600 hover:bg-gradient-to-br hover:from-green-500 hover:to-green-600 border border-green-700 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-green-700 focus:outline-none focus:shadow text-green-50/100 shadow-sm hover:shadow-md hover:text-green-50 active:shadow-inner w-full text-center">
-            Continue with Google
+            Login with your Google account
         </a>
 
-        <button type="button" x-show="!usingEmail" x-on:click="usingEmail = !usingEmail;$focus.focus($refs.email)" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center mt-2">
-            Continue with email
+        <button type="button" x-show="!usingEmail" x-on:click="usingEmail = !usingEmail;$focus.focus($refs.email)" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center mt-3">
+            Login with your email
         </button>
 
         <div x-cloak x-show="usingEmail" class="w-full pb-3">
