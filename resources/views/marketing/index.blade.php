@@ -53,10 +53,7 @@
 
         <ul class="mt-5 space-y-2.5 text-base sm:text-lg text-gray-600">
             <li class="flex items-center">
-                @svg('banknotes', 'w-6 h-6 mr-4 text-green-500') Track actual monthly income
-            </li>
-            <li class="flex items-center">
-                @svg('creditcard', 'w-6 h-6 mr-4 text-green-500') Track actual monthly expense amounts 
+                @svg('scale', 'w-6 h-6 mr-4 text-green-500') Track actual monthly income and expense amounts
             </li>
             <li class="flex items-center">
                 @svg('pencilsquare', 'w-6 h-6 mr-4 text-green-500') Mark bills as payed, the amount, and from which account
@@ -96,6 +93,9 @@
             </li>
             <li class="flex items-center">
                 @svg('users', 'w-6 h-6 mr-4 text-green-500') Ensure everyone understands the financial situation and goals
+            </li>
+            <li class="flex items-center">
+                @svg('smile', 'w-6 h-6 mr-4 text-green-500') Sleep better knowing you have a plan
             </li>
         </ul>
 
