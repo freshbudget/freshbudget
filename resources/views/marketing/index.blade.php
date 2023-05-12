@@ -100,38 +100,10 @@
         </ul>
 
     </section>
-
-    <footer class="mt-20 bg-gray-100 py-14">
-
-        <div class="max-w-3xl px-4 mx-auto">
-            
-            <div class="space-y-3 text-gray-500">
-    
-                <div class="flex items-center space-x-3">
-                    <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" class="w-8 h-8 select-none"> 
-                    <p class="text-2xl font-semibold text-gray-700">Fresh Budget</p>
-                </div>
-    
-                <p>
-                    We've helped 5+ people manage their finances and we can help you too!
-                </p>
-    
-                <p class="text-sm">
-                    &copy; {{ date('Y') }} {{ config('app.name') }} &mdash; 
-                    <a href="#" class="hover:underline">Terms of Service</a>
-                    &mdash; 
-                    <a href="#" class="hover:underline">Privacy Policy</a>
-                </p>
-    
-            </div>
-
-        </div>
-
-    </footer>
     
 @endsection
 
-@push('body::end')
+{{-- @push('body::end')
     <script>
         function fireConfetti(event) {
             confetti({
@@ -144,4 +116,4 @@
             });
         }
     </script>    
-@endpush
+@endpush --}}
