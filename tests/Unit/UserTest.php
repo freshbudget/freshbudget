@@ -1,8 +1,11 @@
 <?php
 
+use App\Domains\Budgets\Events\BudgetInvitationAccepted;
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Event;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {
@@ -100,6 +103,25 @@ test('it can retrive owned budgets', function () {
     expect($user->ownedBudgets->contains($budget))->toBeTrue();
 });
 
+// test it can retrieve all budgets it belongs to
+test('it can retrieve all budgets it belongs to', function () {
+    // given a user
+    $user = User::factory()->create();
+
+    // we expect the user to have 1 budget, the personal budget
+    expect($user->joinedBudgets->count())->toBe(1);
+
+    // given a budget, the user is invited to and accepts
+    $budget = Budget::factory()->create();
+    $budget->addUser($user);
+
+    // refresh the user
+    $user->refresh();
+
+    // we expect the user to have 2 budgets, the personal budget and the budget they were invited to
+    expect($user->joinedBudgets->count())->toBe(2);
+});
+
 // test it can check if it owns a budget
 test('it can check if it owns a budget', function () {
     $user = User::factory()->create();
@@ -149,4 +171,41 @@ test('it cannot switch to a budget it does not own', function () {
 
     expect($user->isCurrentBudget($budget))->toBeFalse();
     expect($user->isCurrentBudget($user->personalBudget()))->toBeTrue();
+});
+
+// test it can accept an invitation to a budget
+test('it can accept an invitation to a budget', function () {
+    Event::fake([
+        BudgetInvitationAccepted::class,
+    ]);
+
+    $user = User::factory()->create();
+
+    $budget = Budget::factory()->create();
+
+    $invitation = BudgetInvitation::factory()->create([
+        'budget_id' => $budget->id,
+        'email' => $user->email,
+    ]);
+
+    $user->acceptBudgetInvitation($invitation);
+
+    expect($budget->hasUser($user))->toBeTrue();
+    expect($invitation->isAccepted())->toBeTrue();
+
+    Event::assertDispatched(BudgetInvitationAccepted::class, function ($event) use ($invitation) {
+        return $event->invitation->is($invitation);
+    });
+});
+
+test('when it invites a user to a budget, a budget invitation is created', function () {
+    $budget = Budget::factory()->create();
+
+    $owner = $budget->owner;
+
+    $user = User::factory()->create();
+
+    $invitation = $owner->inviteToBudget($budget, $user->email, $user->name, $user->nickname);
+
+    expect($invitation)->toBeInstanceOf(BudgetInvitation::class);
 });

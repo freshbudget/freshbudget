@@ -32,16 +32,20 @@
 
         <ul class="mt-5 space-y-2.5 text-base sm:text-lg text-gray-600">
             <li class="flex items-center">
-                @svg('banknotes', 'w-6 h-6 mr-4 text-green-500') Add one, or multiple, estimated monthly incomes
+                @svg('banknotes', 'w-6 h-6 mr-4 text-green-500')
+                Add one, or multiple, estimated monthly incomes
             </li>
             <li class="flex items-center">
-                @svg('creditcard', 'w-6 h-6 mr-4 text-green-500') Add expenses and estimated payment amounts
+                @svg('creditcard', 'w-6 h-6 mr-4 text-green-500')
+                Add expenses and estimated payment amounts
             </li>
             <li class="flex items-center">
-                @svg('pluscircle', 'w-6 h-6 mr-4 text-green-500') Add accounts to track your all your balances in one place
+                @svg('pluscircle', 'w-6 h-6 mr-4 text-green-500')
+                Add accounts to track your all your balances in one place
             </li>
             <li class="flex items-center">
-                @svg('userplus', 'w-6 h-6 mr-4 text-green-500') Invite additional people to help you manage your budget
+                @svg('userplus', 'w-6 h-6 mr-4 text-green-500')
+                Invite additional people to help you manage your budget
             </li>
         </ul>
 

@@ -29,7 +29,7 @@ class BudgetInvitationFactory extends Factory
             'expires_at' => now()->addDays(7),
             'state' => BudgetInvitation::STATE_PENDING,
             'budget_id' => Budget::factory(),
-            'invited_by_id' => User::factory(),
+            'sender_id' => User::factory(),
         ];
     }
 

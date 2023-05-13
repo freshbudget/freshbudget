@@ -36,7 +36,7 @@ class BudgetInvitation extends Model
         'expires_at',
         'state',
         'budget_id',
-        'invited_by_id',
+        'sender_id',
     ];
 
     /**
@@ -48,7 +48,7 @@ class BudgetInvitation extends Model
         'id' => 'integer',
         'expires_at' => 'datetime',
         'budget_id' => 'integer',
-        'invited_by_id' => 'integer',
+        'sender_id' => 'integer',
     ];
 
     /*
@@ -91,13 +91,6 @@ class BudgetInvitation extends Model
     | Affordances, Helpers, etc.
     |----------------------------------
     */
-    public function accept(User $user)
-    {
-        $this->budget->addUser($user);
-
-        $this->markAsAccepted();
-    }
-
     public function isAccepted(): bool
     {
         return $this->state === self::STATE_ACCEPTED;
@@ -158,6 +151,6 @@ class BudgetInvitation extends Model
 
     public function sender(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'invited_by_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 }

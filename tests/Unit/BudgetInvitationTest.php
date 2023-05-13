@@ -2,8 +2,10 @@
 
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Budgets\Notifications\InvitationAcceptedNotification;
 use App\Domains\Users\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Notification;
 
 test('when model is created, a ulid is generated', function () {
     $model = BudgetInvitation::factory()->create();
@@ -109,16 +111,24 @@ test('the invitation is expired if the expires_at date is in the past or the sta
     expect($model->isExpired())->toBeTrue();
 });
 
-// test it can accept an invitation
-test('it can accept an invitation', function () {
-    $user = User::factory()->create();
-
-    $model = BudgetInvitation::factory()->pending()->create([
-        'email' => $user->email,
+// when a user accepts the invitation, the state is changed to accepted, and an notification is sent to the sender
+test('when a user accepts the invitation, the state is changed to accepted, and an notification is sent to the sender', function () {
+    Notification::fake([
+        InvitationAcceptedNotification::class,
     ]);
 
-    $model->accept($user);
+    $user = User::factory()->create();
 
-    expect($model->isAccepted())->toBeTrue();
-    expect($model->budget->users->contains($user))->toBeTrue();
+    $invitation = BudgetInvitation::factory()->pending()->create([
+        'email' => $user->email,
+        'name' => $user->name,
+    ]);
+
+    expect($invitation->isAccepted())->toBeFalse();
+
+    $user->acceptBudgetInvitation($invitation);
+
+    expect($invitation->isAccepted())->toBeTrue();
+
+    Notification::assertSentTo($invitation->sender, InvitationAcceptedNotification::class);
 });

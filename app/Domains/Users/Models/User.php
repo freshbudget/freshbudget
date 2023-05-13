@@ -3,7 +3,12 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Budgets\Actions\CreateBudgetAction;
+use App\Domains\Budgets\Events\BudgetInvitationAccepted;
+use App\Domains\Budgets\Events\CurrentBudgetSwitched;
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Budgets\Notifications\InvitationAcceptedNotification;
+use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -12,11 +17,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUlids;
+    use HasApiTokens, HasFactory, HasUlids, Notifiable;
+
+    const SELF_REGISTERED = 'self-registration';
+
+    const REGISTERED_VIA_INVITATION = 'registered-via-invitation';
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_recovery_codes',
         'two_factor_confirmed_at',
         'current_budget_id',
+        'registration_source',
     ];
 
     /**
@@ -94,6 +105,16 @@ class User extends Authenticatable implements MustVerifyEmail
     | Accessors, Mutators, Scopes, etc.
     |----------------------------------
     */
+    public function getAvatarAttribute(): string
+    {
+        return 'https://ui-avatars.com/api/?name='.urlencode(str()->ascii($this->name)).'&color=c084fc&background=cbd5e1';
+    }
+
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->nickname ?? $this->name;
+    }
+
     public function setPasswordAttribute(string $password): void
     {
         $this->attributes['password'] = bcrypt($password);
@@ -116,7 +137,8 @@ class User extends Authenticatable implements MustVerifyEmail
     */
     public function twoFactorAuthEnabledAndConfirmed(): bool
     {
-        return $this->two_factor_enabled;
+        return $this->two_factor_enabled &&
+            ! is_null($this->two_factor_confirmed_at);
     }
 
     /*
@@ -124,10 +146,20 @@ class User extends Authenticatable implements MustVerifyEmail
     | Team Budget Functionality
     |--------------------------------------------------------------------------
     */
+    public function acceptBudgetInvitation(BudgetInvitation $invitation): void
+    {
+        $invitation->budget->addUser($this);
+
+        $invitation->markAsAccepted();
+
+        event(new BudgetInvitationAccepted($invitation));
+
+        $invitation->sender->notify(new InvitationAcceptedNotification($invitation));
+    }
+
     public function belongsToBudget(Budget $budget): bool
     {
-        return $this->ownsBudget($budget) ||
-            $this->budgets->contains($budget->team);
+        return $this->ownsBudget($budget) || $budget->hasUser($this);
     }
 
     public function currentBudget(): BelongsTo
@@ -139,6 +171,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Budget::class, 'current_budget_id');
     }
 
+    public function inviteToBudget(Budget $budget, string $email, string $name, string $nickname = ''): BudgetInvitation
+    {
+        if (! $this->belongsToBudget($budget)) {
+            throw new \Exception('User does not belong to budget');
+        }
+
+        $invitation = $budget->invitations()->create([
+            'email' => $email,
+            'name' => $name,
+            'nickname' => $nickname,
+            'sender_id' => $this->id,
+            'state' => BudgetInvitation::STATE_PENDING,
+        ]);
+
+        Notification::route('mail', $email)->notify(new InvitedToBudgetNotification($invitation));
+
+        return $invitation;
+    }
+
     public function isCurrentBudget(Budget $budget): bool
     {
         return $budget->id === $this->currentBudget->id;
@@ -147,6 +198,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function ownedBudgets(): HasMany
     {
         return $this->hasMany(Budget::class, 'owner_id');
+    }
+
+    public function joinedBudgets()
+    {
+        return $this->belongsToMany(Budget::class, 'budget_user')->withTimestamps();
     }
 
     public function ownsBudget(Budget $budget): bool
@@ -170,6 +226,8 @@ class User extends Authenticatable implements MustVerifyEmail
         ])->save();
 
         $this->setRelation('currentBudget', $budget);
+
+        event(new CurrentBudgetSwitched($budget));
 
         return true;
     }

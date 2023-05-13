@@ -155,3 +155,26 @@ test('it can add a user', function () {
     // check if the user is a member
     expect($budget->hasUser($user))->toBeTrue();
 });
+
+// test it can remove a user
+test('it can remove a user', function () {
+    $budget = Budget::factory()->create();
+
+    // create 1 users
+    $user = User::factory()->create();
+
+    // add the user
+    $budget->addUser($user);
+
+    // check if the user is a member
+    expect($budget->hasUser($user))->toBeTrue();
+
+    // remove the user
+    $budget->removeUser($user);
+
+    // refresh the model
+    $budget->refresh();
+
+    // check if the user is a member
+    expect($budget->hasUser($user))->toBeFalse();
+});

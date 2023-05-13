@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Users\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->text('two_factor_recovery_codes')->nullable();
             $table->timestamp('two_factor_confirmed_at')->nullable();
             $table->foreignId('current_budget_id')->nullable()->index();
+            $table->string('registration_source')->default(User::SELF_REGISTERED)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

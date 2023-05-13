@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('state');
             $table->unsignedBigInteger('budget_id')->nullable();
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
-            $table->unsignedBigInteger('invited_by_id')->nullable();
-            $table->foreign('invited_by_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

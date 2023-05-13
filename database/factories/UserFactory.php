@@ -64,6 +64,7 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'two_factor_enabled' => true,
+            'two_factor_confirmed_at' => now(),
         ]);
     }
 }
