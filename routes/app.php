@@ -7,7 +7,6 @@ Route::view('/', 'app.index')
     ->middleware(['auth'])
     ->name('app.index');
 
-// Budget Invitations
-Route::get('/invitations/{invitation}', [BudgetInvitationsController::class, 'show'])
-    ->middleware(['throttle:5,1'])
+Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::class, 'accept'])
+    ->middleware(['auth'])
     ->name('invitations.accept');

@@ -41,7 +41,7 @@ class InvitedToBudgetNotification extends Notification implements ShouldQueue
             ->line(
                 "You've been invited to join the budget `{$this->invitation->budget->name}` on ".config('app.name')." by {$this->invitation->sender->name}."
             )
-            ->action('Accept Invitation', route('invitations.accept', $this->invitation).'?token='.$this->invitation->token)
+            ->action('View Invitation', route('invitations.show', $this->invitation).'?token='.$this->invitation->token)
             ->line("This invitation will expire in one week ({$this->invitation->expires_at->format('d-M-Y')}). If you did not expect this invitation, you can simply ignore this email.");
     }
 

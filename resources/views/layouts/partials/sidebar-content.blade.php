@@ -74,7 +74,7 @@
         <div x-data="{ open: false }" class="relative">
 
             <button x-on:click="open=!open" class="flex items-center pl-2.5 pr-3 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
-                <img src="{{ auth()->user()->avatar }}" alt="avatar" class="w-6 h-6 rounded-full mr-2.5">
+                @svg('profile', 'w-5 h-5 mr-2.5')
                 {{ auth()->user()->display_name }}
             </button>
 
@@ -84,9 +84,15 @@
                     @svg('cog', 'w-5 h-5 mr-2.5') Account settings
                 </a>
 
-                <a href="#" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)" x-on:mouseout="">
-                    @svg('logout', 'w-5 h-5 mr-2.5') Logout
-                </a>
+                <form action="{{ route('logout') }}" method="post">
+                    
+                    @csrf
+
+                    <button type="submit" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent  focus:border-gray-300 w-full focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)" x-on:mouseout="">
+                        @svg('logout', 'w-5 h-5 mr-2.5') Logout
+                    </button>
+
+                </form>
 
             </div>
 
