@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" @stack('html::tag')>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @stack('html::tag')>
 <head>
     @stack('head::start')
     <meta charset="UTF-8">
@@ -15,6 +15,7 @@
     
     @yield('body')
 
+    
     @stack('body::end')
 </body>
 </html>

@@ -22,7 +22,7 @@
 
     </div>
 
-    <div class="max-w-xl p-6 mb-8">        
+    <div>        
         @yield('tab')
     </div>
 

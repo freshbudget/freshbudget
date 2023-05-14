@@ -9,6 +9,7 @@
 @push('body::end')
     @livewireScripts
     @vite(['resources/js/app.js'])
+    @livewire('notifications')
 @endpush
 
 @section('body')

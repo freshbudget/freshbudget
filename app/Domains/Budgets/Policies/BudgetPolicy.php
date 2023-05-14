@@ -2,8 +2,8 @@
 
 namespace App\Domains\Budgets\Policies;
 
-use App\Domains\Users\Models\User;
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Users\Models\User;
 
 class BudgetPolicy
 {

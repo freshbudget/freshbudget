@@ -7,9 +7,7 @@
     </h3>
 
     <div class="max-w-xl p-6 mb-8">
-        
         todo...
-
     </div>
 
 @endsection
