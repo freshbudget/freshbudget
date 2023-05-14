@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\App\Budgets\BudgetsController;
+use App\Http\Controllers\App\Budgets\CurrentBudgetController;
 use App\Http\Controllers\App\Incomes\IncomesController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::get('/budgets/create', [BudgetsController::class, 'create'])
 Route::get('/budgets/{budget}', [BudgetsController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.budgets.show');
+
+Route::post('/budgets/{budget}/current', CurrentBudgetController::class)
+    ->middleware(['auth'])
+    ->name('app.budgets.current');
 
 Route::get('/incomes', [IncomesController::class, 'index'])
     ->middleware(['auth', 'verified'])

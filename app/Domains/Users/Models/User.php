@@ -208,7 +208,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function joinedBudgets()
     {
-        return $this->belongsToMany(Budget::class, 'budget_user')->withTimestamps();
+        return $this->belongsToMany(Budget::class, 'budget_users')->withTimestamps();
     }
 
     public function ownsBudget(Budget $budget): bool

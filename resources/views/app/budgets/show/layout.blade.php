@@ -10,11 +10,11 @@
 
         <nav class="flex w-full px-6 -mb-px space-x-0">
 
-            <a href="#" class="block px-3 py-3 font-semibold border-b-4 border-gray-400">
+            <a href="#" class="block px-3 py-3 font-semibold border-b-2 border-gray-400">
                 Members
             </a>
 
-            <a href="#" class="block px-3 py-3 font-semibold border-b-4 border-transparent hover:border-gray-300">
+            <a href="#" class="block px-3 py-3 font-semibold border-b-2 border-transparent hover:border-gray-300">
                 Settings
             </a>
 

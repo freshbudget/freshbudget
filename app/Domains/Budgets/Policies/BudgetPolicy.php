@@ -12,6 +12,11 @@ class BudgetPolicy
         return auth()->check();
     }
 
+    public function setAsCurrent(User $user, Budget $budget): bool
+    {
+        return $budget->hasUser($user);
+    }
+
     public function view(User $user, Budget $budget): bool
     {
         return $budget->hasUser($user);

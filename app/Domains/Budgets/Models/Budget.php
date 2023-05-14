@@ -100,7 +100,7 @@ class Budget extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'budget_user', 'budget_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'budget_users', 'budget_id', 'user_id')->withTimestamps();
     }
 
     /*
@@ -126,11 +126,6 @@ class Budget extends Model
     public function isOwnedBy(User $user): bool
     {
         return $this->owner->is($user);
-    }
-
-    public function invite()
-    {
-
     }
 
     public function removeUser(User $user): void

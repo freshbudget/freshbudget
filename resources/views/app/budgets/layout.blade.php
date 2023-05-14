@@ -4,7 +4,7 @@
 
     <section class="flex h-screen overflow-hidden">
 
-        <div class="flex flex-col flex-shrink-0 bg-white border-r border-gray-300 select-none w-96">
+        <div class="flex flex-col flex-shrink-0 bg-white border-r border-gray-300 select-none w-80">
             
             <div class="sticky top-0 z-10 px-5 py-4 space-y-4 border-gray-300 backdrop-blur-sm">
 

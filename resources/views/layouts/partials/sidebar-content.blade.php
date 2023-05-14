@@ -25,7 +25,7 @@
     
                 <div class="px-2">
     
-                    <a href="#" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                    <a href="{{ route('app.budgets.show', currentBudget()) }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
                         @svg('cog', 'w-5 h-5 mr-2.5') Settings
                     </a>
     
@@ -42,9 +42,14 @@
                 <div class="px-2">
                     
                     @foreach (auth()->user()->joinedBudgets->take(3) as $budget)
-                        <a href="#" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 truncate focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
-                            {{ $budget->name }}
-                        </a>
+                        <form action="{{ route('app.budgets.current', $budget) }}" method="post">
+
+                            @csrf
+
+                            <button type="submit" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 truncate focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed w-full" x-on:mouseenter="$focus.focus($el)">
+                                {{ $budget->name }}
+                            </button>
+                        </form>
                     @endforeach
     
                 </div>

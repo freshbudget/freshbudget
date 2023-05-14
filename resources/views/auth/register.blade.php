@@ -24,7 +24,7 @@
         
                 <div>
                     <x-forms.label for="name" required class="block mb-1 text-gray-800">What is your name?</x-forms.label>
-                    <x-forms.input type="text" id="name" x-ref="name" wire:model.defer="name" autofocus />
+                    <x-forms.input type="text" id="name" x-ref="name" wire:model.defer="name" />
                     <x-forms.validation-error for="name" />
                 </div>
 
