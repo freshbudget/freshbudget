@@ -4,10 +4,12 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Models\Income;
+use Illuminate\Validation\Rules\Password;
+use App\Domains\Budgets\Policies\BudgetPolicy;
 use App\Domains\Incomes\Policies\IncomePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Validation\Rules\Password;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Income::class => IncomePolicy::class,
+        Budget::class => BudgetPolicy::class,
     ];
 
     /**

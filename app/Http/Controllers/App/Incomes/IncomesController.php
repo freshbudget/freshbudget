@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Incomes;
+namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeFrequency;
