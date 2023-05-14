@@ -27,6 +27,16 @@ class BudgetsController extends Controller
         ]);
     }
 
+    public function show(Budget $budget)
+    {
+        $this->authorize('view', $budget);
+
+        return view('app.budgets.show.index', [
+            'budget' => $budget,
+            'budgets' => user()->budgets()->orderBy('name')->get(),
+        ]);
+    }
+
     public function store(Request $request)
     {
         $this->authorize('create', Budget::class);
@@ -39,6 +49,6 @@ class BudgetsController extends Controller
 
         user()->switchCurrentBudget($budget);
 
-        return redirect()->route('app.budgets.index');
+        return redirect()->route('app.budgets.show', $budget);
     }
 }

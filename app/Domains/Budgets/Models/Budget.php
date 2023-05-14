@@ -130,7 +130,7 @@ class Budget extends Model
 
     public function invite()
     {
-        
+
     }
 
     public function removeUser(User $user): void

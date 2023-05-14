@@ -10,6 +10,7 @@
         "danharrin/livewire-rate-limiting": "^1.1",
         "filament/filament": "^2.0",
         "filament/forms": "^2.0",
+        "filament/tables": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.8",
         "laravel/sanctum": "^3.2",

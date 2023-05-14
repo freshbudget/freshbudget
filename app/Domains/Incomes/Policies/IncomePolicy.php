@@ -12,7 +12,7 @@ class IncomePolicy
     {
         return $budget->users->contains($user);
     }
-    
+
     public function show(User $user, Income $income, Budget $budget): bool
     {
         // check that the income belongs to the budget
