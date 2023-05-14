@@ -123,13 +123,18 @@ class Budget extends Model
         return $this->users()->where('email', $email)->exists();
     }
 
-    public function removeUser(User $user): void
-    {
-        $this->users()->detach($user->id);
-    }
-
     public function isOwnedBy(User $user): bool
     {
         return $this->owner->is($user);
+    }
+
+    public function invite()
+    {
+        
+    }
+
+    public function removeUser(User $user): void
+    {
+        $this->users()->detach($user->id);
     }
 }

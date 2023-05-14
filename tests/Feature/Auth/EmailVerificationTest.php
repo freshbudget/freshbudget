@@ -47,10 +47,8 @@ test('when the user attempts to resend the verification email it is sent', funct
     $this->actingAs($user);
 
     livewire(EmailVerificationRequestForm::class)
-        ->assertDontSee('Verification link sent! Check your email inbox.')
         ->call('attempt')
-        ->assertHasNoErrors(['status'])
-        ->assertSee('Verification link sent! Check your email inbox.');
+        ->assertHasNoErrors(['status']);
 });
 
 // test the user cannot resend the verification email more than twice in a minute

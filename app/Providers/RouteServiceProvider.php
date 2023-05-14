@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/auth.php'));
 
             // app.domain.tld
-            Route::middleware('web')
+            Route::middleware(['web', 'verified'])
                 ->domain(config('app.app_url'))
                 ->group(base_path('routes/app.php'));
         });

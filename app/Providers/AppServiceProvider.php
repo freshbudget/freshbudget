@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Debugbar::disable();
+
+        Model::preventLazyLoading();
         Model::preventSilentlyDiscardingAttributes($this->app->isLocal());
     }
 }

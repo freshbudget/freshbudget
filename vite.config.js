@@ -7,13 +7,11 @@ export default defineConfig({
             input: [
                 'resources/css/marketing.css',
                 'resources/css/app.css', 
-                'resources/js/marketing.js',
                 'resources/js/app.js'
             ],
             refresh: [
                 ...refreshPaths,
                 'app/Http/Livewire/**',
-                'app/Forms/Components/**',
             ],
         }),
     ],

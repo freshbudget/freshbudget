@@ -20,3 +20,7 @@ Route::view('/privacy', 'marketing.privacy')
 Route::get('/invitations/{invitation}', [BudgetInvitationsController::class, 'show'])
     ->middleware(['throttle:50,1'])
     ->name('invitations.show');
+
+Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::class, 'accept'])
+    ->middleware(['auth'])
+    ->name('invitations.accept');

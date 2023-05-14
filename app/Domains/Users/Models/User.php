@@ -24,8 +24,14 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, HasUlids, Notifiable;
 
+    /**
+     * A flag to indicate the user self registered with the application.
+     */
     const SELF_REGISTERED = 'self-registration';
 
+    /**
+     * A flag to indicate the user registered via an invitation.
+     */
     const REGISTERED_VIA_INVITATION = 'registered-via-invitation';
 
     /**
@@ -174,7 +180,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function inviteToBudget(Budget $budget, string $email, string $name, string $nickname = ''): BudgetInvitation
     {
         if (! $this->belongsToBudget($budget)) {
-            throw new \Exception('User does not belong to budget');
+            throw new \Exception('You cannot invite a user to a budget you dont belong to.');
         }
 
         $invitation = $budget->invitations()->create([

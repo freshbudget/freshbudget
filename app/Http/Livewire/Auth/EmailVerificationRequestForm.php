@@ -18,7 +18,7 @@ class EmailVerificationRequestForm extends Component
 
             auth()->user()->sendEmailVerificationNotification();
 
-            session()->flash('status', 'Verification link sent! Check your email inbox.');
+            session()->flash('status', 'Verification link sent, check your email!');
         } catch (TooManyRequestsException $exception) {
             $this->addError('status', "Too many attempts. Please try again in {$exception->secondsUntilAvailable} seconds.");
         } catch (Exception $exception) {

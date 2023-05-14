@@ -26,7 +26,7 @@ class IncomeFactory extends Factory
         return [
             'budget_id' => Budget::factory(),
             'user_id' => User::factory(),
-            'name' => $this->faker->name,
+            'name' => $this->faker->company,
             'description' => $this->faker->text,
             'type_id' => IncomeType::factory(),
             'url' => $this->faker->url,

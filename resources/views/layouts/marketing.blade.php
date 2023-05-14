@@ -4,10 +4,6 @@
     @vite(['resources/css/marketing.css'])    
 @endpush
 
-@push('body::end')
-    @vite(['resources/js/marketing.js'])    
-@endpush
-
 @push('body::classes', 'bg-white selection:bg-gray-300')
 
 @section('body')

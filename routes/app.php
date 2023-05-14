@@ -1,12 +1,20 @@
 <?php
 
-use App\Http\Controllers\Invitations\BudgetInvitationsController;
+use App\Incomes\IncomesController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'app.index')
     ->middleware(['auth'])
     ->name('app.index');
 
-Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::class, 'accept'])
+Route::get('/incomes', [IncomesController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('app.incomes.index');
+
+Route::get('/incomes/create', [IncomesController::class, 'create'])
     ->middleware(['auth'])
-    ->name('invitations.accept');
+    ->name('app.incomes.create');
+
+Route::get('/incomes/{income}', [IncomesController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('app.incomes.show');
