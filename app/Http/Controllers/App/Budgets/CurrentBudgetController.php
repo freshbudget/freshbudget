@@ -13,6 +13,6 @@ class CurrentBudgetController extends Controller
 
         user()->switchCurrentBudget($budget);
 
-        return redirect()->route('app.index');
+        return back(fallback: route('app.index'));
     }
 }

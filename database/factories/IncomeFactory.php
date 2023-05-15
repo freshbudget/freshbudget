@@ -33,7 +33,6 @@ class IncomeFactory extends Factory
             'username' => $this->faker->userName,
             'start_date' => $this->faker->dateTimeBetween('now-1year', 'now'),
             'end_date' => null,
-            'amount' => $this->faker->numberBetween(0, 10000),
             'currency' => null,
             'frequency_id' => IncomeFrequency::factory(),
             'meta' => null,
@@ -87,19 +86,7 @@ class IncomeFactory extends Factory
             ];
         });
     }
-
-    /**
-     * Indicate the income's amount.
-     */
-    public function withAmount(int $amount): self
-    {
-        return $this->state(function (array $attributes) use ($amount) {
-            return [
-                'amount' => $amount,
-            ];
-        });
-    }
-
+    
     /**
      * Indicate the income's start date.
      */

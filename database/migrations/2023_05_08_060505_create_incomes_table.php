@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->integer('amount')->nullable();
             $table->string('currency')->nullable()->default('USD');
             $table->unsignedBigInteger('frequency_id')->nullable();
             $table->foreign('frequency_id')->references('id')->on('income_frequencies')->onDelete('set null');

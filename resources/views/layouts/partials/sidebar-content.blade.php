@@ -88,6 +88,10 @@
         </a>
 
         <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
+            @svg('pencilsquare', 'w-5 h-5 mr-2.5') Transactions
+        </a>
+
+        <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
             @svg('files', 'w-5 h-5 mr-2.5') Files
         </a>
         

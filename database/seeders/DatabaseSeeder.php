@@ -21,14 +21,12 @@ class DatabaseSeeder extends Seeder
         $user->personalBudget()->incomes()->create([
             'name' => 'Salary',
             'description' => 'My monthly salary',
-            'amount' => 100000,
             'start_date' => now()->subWeek(),
         ]);
 
         $user->personalBudget()->incomes()->create([
             'name' => 'Disability',
             'description' => 'Disability income from the government',
-            'amount' => 32150,
             'start_date' => now()->subMonth(),
         ]);
     }

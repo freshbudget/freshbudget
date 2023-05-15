@@ -30,7 +30,6 @@ class Income extends Model
         'username',
         'start_date',
         'end_date',
-        'amount',
         'currency',
         'frequency_id',
         'meta',
@@ -48,7 +47,6 @@ class Income extends Model
         'type_id' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
-        'amount' => 'integer',
         'frequency_id' => 'integer',
         'meta' => 'array',
     ];

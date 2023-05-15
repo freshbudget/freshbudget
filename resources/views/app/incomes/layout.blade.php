@@ -41,7 +41,7 @@
                                 <h3 class="font-semibold">{{ $income->name }}</h3>
                                 
                                 <p>
-                                    <span class="italic text-gray-500">Estimated</span> ${{ $income->amount }} / month
+                                    <span class="italic text-gray-500">Estimated</span>
                                 </p>
 
                                 <p>
