@@ -28,6 +28,7 @@ class Budget extends Model
         'name',
         'currency',
         'personal',
+        'deleted_by'
     ];
 
     /**
@@ -39,6 +40,7 @@ class Budget extends Model
         'id' => 'integer',
         'owner_id' => 'integer',
         'personal' => 'boolean',
+        'deleted_by' => 'integer',
     ];
 
     /**
@@ -83,6 +85,11 @@ class Budget extends Model
     | Relationships
     |----------------------------------
     */
+    public function deleter(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
+
     public function incomes(): HasMany
     {
         return $this->hasMany(Income::class, 'budget_id');

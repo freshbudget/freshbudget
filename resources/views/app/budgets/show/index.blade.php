@@ -11,7 +11,7 @@
 
         </div>
         
-        @livewire('tables.budgets.members-table')        
+        @livewire('tables.budgets.members-table')
 
     </div>
 @endsection

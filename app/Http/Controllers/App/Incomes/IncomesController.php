@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeFrequency;
-use App\Domains\Incomes\Models\IncomeType;
 use App\Http\Controllers\Controller;
 
 class IncomesController extends Controller
@@ -34,9 +32,6 @@ class IncomesController extends Controller
 
         return view('app.incomes.create', [
             'incomes' => user()->currentBudget->incomes()->orderBy('name')->get(),
-            'users' => user()->currentBudget->users()->orderBy('name')->select(['users.ulid', 'name'])->get(),
-            'types' => IncomeType::orderBy('name')->select(['id', 'name'])->get(),
-            'frequencies' => IncomeFrequency::orderBy('name')->select(['id', 'name'])->get(),
         ]);
     }
 }

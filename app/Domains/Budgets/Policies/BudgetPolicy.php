@@ -12,6 +12,16 @@ class BudgetPolicy
         return auth()->check();
     }
 
+    public function delete(User $user, Budget $budget): bool
+    {
+        return $budget->isOwnedBy($user);
+    }
+
+    public function edit(User $user, Budget $budget): bool
+    {
+        return $budget->isOwnedBy($user);
+    }
+
     public function setAsCurrent(User $user, Budget $budget): bool
     {
         return $budget->hasUser($user);

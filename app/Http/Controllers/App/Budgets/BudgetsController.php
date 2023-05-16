@@ -18,6 +18,36 @@ class BudgetsController extends Controller
         ]);
     }
 
+    public function destroy(Budget $budget)
+    {
+        $this->authorize('delete', $budget);
+
+        $budget->update([
+            'deleted_by' => user()->id,
+        ]);
+
+        // need to update the current budget if it's the one being deleted
+        if (user()->current_budget_id === $budget->id) {
+            user()->update([
+                'current_budget_id' => null,
+            ]);
+        }
+
+        $budget->delete();
+
+        return redirect()->route('app.budgets.index');
+    }
+
+    public function edit(Budget $budget)
+    {
+        $this->authorize('edit', $budget);
+
+        return view('app.budgets.show.settings', [
+            'budget' => $budget,
+            'budgets' => user()->budgets()->orderBy('name')->get(),
+        ]);
+    }
+
     public function index()
     {
         $this->authorize('viewAny', Budget::class);

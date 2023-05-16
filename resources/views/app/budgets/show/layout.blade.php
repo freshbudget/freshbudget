@@ -10,11 +10,11 @@
 
         <nav class="flex w-full px-6 -mb-px space-x-0">
 
-            <a href="#" class="block px-3 py-3 font-semibold border-b-2 border-gray-400">
+            <a href="{{ route('app.budgets.show', $budget) }}" class="block px-3 py-3 border-b-2 {{ active('app.budgets.show', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
                 Members
             </a>
 
-            <a href="#" class="block px-3 py-3 font-semibold border-b-2 border-transparent hover:border-gray-300">
+            <a href="{{ route('app.budgets.edit', $budget) }}" class="block px-3 py-3 font-semibold border-b-2 {{ active('app.budgets.edit', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
                 Settings
             </a>
 

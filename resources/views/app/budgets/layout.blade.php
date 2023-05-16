@@ -34,8 +34,14 @@
                     
                     @foreach ($budgets as $budget)
 
-                        <a href="{{ route('app.budgets.show', $budget) }}" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active(route('app.budgets.show', $budget), 'font-semibold text-gray-900') }}">
-                            <span class="truncate">{{ $budget->name  }}</span>
+                        <a 
+                            href="{{ route('app.budgets.show', $budget) }}" 
+                            class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active([route('app.budgets.show', $budget), route('app.budgets.edit', $budget)], 'font-semibold text-gray-900') }}">
+
+                            <span class="truncate">
+                                {{ $budget->name  }}
+                            </span>
+                            
                         </a>
                         
                         

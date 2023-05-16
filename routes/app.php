@@ -34,6 +34,14 @@ Route::get('/budgets/{budget}', [BudgetsController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.budgets.show');
 
+Route::get('/budgets/{budget}/settings', [BudgetsController::class, 'edit'])
+    ->middleware(['auth'])
+    ->name('app.budgets.edit');
+
+Route::delete('/budgets/{budget}', [BudgetsController::class, 'destroy'])
+    ->middleware(['auth'])
+    ->name('app.budgets.destroy');
+
 /*
 |--------------------------------------------------------------------------
 | Incomes

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('frequency_id')->nullable();
             $table->foreign('frequency_id')->references('id')->on('income_frequencies')->onDelete('set null');
             $table->json('meta')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

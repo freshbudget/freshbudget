@@ -13,20 +13,25 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // create a test user
-        $user = User::factory()->unverified()->create([
+        $user = User::factory()->verified()->create([
+            'name' => 'Wyatt',
+            'nickname' => 'Wyatt',
             'email' => 'user@email.com',
         ]);
 
         // create an income for the personal budget
         $user->personalBudget()->incomes()->create([
-            'name' => 'Salary',
-            'description' => 'My monthly salary',
+            'name' => 'Wyatt Salary',
             'start_date' => now()->subWeek(),
         ]);
 
         $user->personalBudget()->incomes()->create([
-            'name' => 'Disability',
-            'description' => 'Disability income from the government',
+            'name' => 'Side hustle',
+            'start_date' => now()->subMonth(),
+        ]);
+
+        $user->personalBudget()->incomes()->create([
+            'name' => 'Amber Salary',
             'start_date' => now()->subMonth(),
         ]);
     }

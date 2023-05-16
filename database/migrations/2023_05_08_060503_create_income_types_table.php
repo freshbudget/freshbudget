@@ -64,6 +64,18 @@ return new class extends Migration
                 'tagline' => 'Interest Income',
                 'description' => 'An income that is received as interest.',
             ],
+            [
+                'name' => 'Hourly',
+                'abbr' => 'HRL',
+                'tagline' => 'Hourly Income',
+                'description' => 'An income that is received as hourly.',
+            ],
+            [
+                'name' => 'Sales',
+                'abbr' => 'SAL',
+                'tagline' => 'Sales Income',
+                'description' => 'An income that is received from the sales of goods or services.',
+            ],
         ];
 
         foreach ($types as $type) {

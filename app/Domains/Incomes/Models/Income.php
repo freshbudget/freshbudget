@@ -33,6 +33,7 @@ class Income extends Model
         'currency',
         'frequency_id',
         'meta',
+        'active',
     ];
 
     /**
@@ -49,6 +50,7 @@ class Income extends Model
         'end_date' => 'date',
         'frequency_id' => 'integer',
         'meta' => 'array',
+        'active' => 'boolean',
     ];
 
     /*

@@ -36,7 +36,44 @@ class IncomeFactory extends Factory
             'currency' => null,
             'frequency_id' => IncomeFrequency::factory(),
             'meta' => null,
+            'active' => true,
         ];
+    }
+
+    /**
+     * Indicate the income is active.
+     */
+    public function active(): self
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'active' => true,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the income is inactive.
+     */
+    public function inactive(): self
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'active' => false,
+            ];
+        });
+    }
+
+    /**
+     * Indicate the budget that owns the income.
+     */
+    public function ownedByBudget(Budget $budget): self
+    {
+        return $this->state(function (array $attributes) use ($budget) {
+            return [
+                'budget_id' => $budget->id,
+            ];
+        });
     }
 
     /**
@@ -86,7 +123,7 @@ class IncomeFactory extends Factory
             ];
         });
     }
-    
+
     /**
      * Indicate the income's start date.
      */

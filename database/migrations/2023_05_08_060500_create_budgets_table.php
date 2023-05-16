@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id')->index();
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('personal')->default(false);
+            $table->unsignedBigInteger('deleted_by')->nullable()->index();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
