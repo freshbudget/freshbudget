@@ -130,5 +130,5 @@ class IncomeDeductionFactory extends Factory
                 'active' => false,
             ];
         });
-    }    
+    }
 }

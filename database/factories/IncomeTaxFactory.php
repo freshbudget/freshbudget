@@ -130,5 +130,5 @@ class IncomeTaxFactory extends Factory
                 'active' => false,
             ];
         });
-    }    
+    }
 }

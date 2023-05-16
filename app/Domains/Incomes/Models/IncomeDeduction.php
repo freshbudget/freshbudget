@@ -2,12 +2,11 @@
 
 namespace App\Domains\Incomes\Models;
 
-use App\Domains\Incomes\Models\Income;
-use Illuminate\Database\Eloquent\Model;
 use Database\Factories\IncomeDeductionFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class IncomeDeduction extends Model
 {
