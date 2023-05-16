@@ -28,7 +28,7 @@ class Budget extends Model
         'name',
         'currency',
         'personal',
-        'deleted_by'
+        'deleted_by',
     ];
 
     /**

@@ -27,7 +27,7 @@ class BudgetsController extends Controller
             dd('You cannot delete a personal budget');
         }
 
-        if($budget->hasCurrentUsers(user())) {
+        if ($budget->hasCurrentUsers(user())) {
             // throw an error, or ask if they want to transfer ownership
             dd('You cannot delete a budget that still has users');
         }
