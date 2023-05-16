@@ -22,6 +22,16 @@ class BudgetsController extends Controller
     {
         $this->authorize('delete', $budget);
 
+        if ($budget->personal) {
+            // throw an error
+            dd('You cannot delete a personal budget');
+        }
+
+        if($budget->hasCurrentUsers(user())) {
+            // throw an error, or ask if they want to transfer ownership
+            dd('You cannot delete a budget that still has users');
+        }
+
         $budget->update([
             'deleted_by' => user()->id,
         ]);

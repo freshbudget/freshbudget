@@ -36,3 +36,5 @@ okay so i want to get the incomes estimated mountly amount, I will ask the model
 So when I want to update a income entitlement, I set the new amount(s) and "click save". this will `make` a new income entitlment record, which will be handled by the projector. The projector will take that unsaved record, and do the calculation to determine the incomes new estimated monthly income.
 
 Why can't i just store the amount in laravel stats again? Maybe I will need to anyways, because I need to be able to plot estimated montly income over time anyways?
+
+- How to handle incomes that are assigned to a user that are attached to a budget, if the user leaves the budget?

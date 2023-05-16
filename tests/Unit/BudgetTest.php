@@ -52,11 +52,11 @@ test('it belongs to many users via the members', function () {
     $users = User::factory()->count(3)->create();
 
     // attach the users to the budget
-    $model->users()->attach($users);
+    $model->members()->attach($users);
 
     // should be 4 users (3 created + 1 owner)
-    expect($model->users->count())->toBe(4);
-    expect($model->users->first())->toBeInstanceOf(User::class);
+    expect($model->members->count())->toBe(4);
+    expect($model->members->first())->toBeInstanceOf(User::class);
 });
 
 // test an event is dispatched when a budget is created

@@ -10,7 +10,7 @@ class IncomePolicy
 {
     public function create(User $user, Budget $budget): bool
     {
-        return $budget->users->contains($user);
+        return $budget->members->contains($user);
     }
 
     public function show(User $user, Income $income, Budget $budget): bool
@@ -21,7 +21,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->users->contains($user)) {
+        if (! $budget->members->contains($user)) {
             return false;
         }
 
@@ -30,6 +30,6 @@ class IncomePolicy
 
     public function viewAny(User $user, Budget $budget): bool
     {
-        return $budget->users->contains($user);
+        return $budget->members->contains($user);
     }
 }

@@ -31,8 +31,6 @@ class IncomeFactory extends Factory
             'type_id' => IncomeType::factory(),
             'url' => $this->faker->url,
             'username' => $this->faker->userName,
-            'start_date' => $this->faker->dateTimeBetween('now-1year', 'now'),
-            'end_date' => null,
             'currency' => null,
             'frequency_id' => IncomeFrequency::factory(),
             'meta' => null,
@@ -120,30 +118,6 @@ class IncomeFactory extends Factory
         return $this->state(function (array $attributes) use ($currency) {
             return [
                 'currency' => $currency,
-            ];
-        });
-    }
-
-    /**
-     * Indicate the income's start date.
-     */
-    public function withStartDate(string $startDate): self
-    {
-        return $this->state(function (array $attributes) use ($startDate) {
-            return [
-                'start_date' => $startDate,
-            ];
-        });
-    }
-
-    /**
-     * Indicate the income's end date.
-     */
-    public function withEndDate(string $endDate): self
-    {
-        return $this->state(function (array $attributes) use ($endDate) {
-            return [
-                'end_date' => $endDate,
             ];
         });
     }

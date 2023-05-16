@@ -61,7 +61,7 @@ class Budget extends Model
     protected static function booted(): void
     {
         static::created(function (Budget $budget) {
-            $budget->users()->attach($budget->owner->id);
+            $budget->members()->attach($budget->owner->id);
         });
     }
 
@@ -105,7 +105,7 @@ class Budget extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function users(): BelongsToMany
+    public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'budget_users', 'budget_id', 'user_id')->withTimestamps();
     }
@@ -117,17 +117,17 @@ class Budget extends Model
     */
     public function addUser(User $user): void
     {
-        $this->users()->attach($user->id);
+        $this->members()->attach($user->id);
     }
 
     public function hasUser(User $user): bool
     {
-        return $this->users->contains($user) || $this->owner->is($user);
+        return $this->members->contains($user) || $this->owner->is($user);
     }
 
     public function hasUserWithEmail(string $email): bool
     {
-        return $this->users()->where('email', $email)->exists();
+        return $this->members()->where('email', $email)->exists();
     }
 
     public function isOwnedBy(User $user): bool
@@ -137,6 +137,20 @@ class Budget extends Model
 
     public function removeUser(User $user): void
     {
-        $this->users()->detach($user->id);
+        $this->members()->detach($user->id);
+    }
+
+    /**
+     * Determine if the budget has any current users.
+     * i.e. users that have the budget set as their current budget.
+     * And optionally, exclude the given user.
+     */
+    public function hasCurrentUsers(User $user = null): bool
+    {
+        return $this->members()
+            ->where('current_budget_id', $this->id)
+            ->when($user, function ($query, $user) {
+                $query->where('user_id', '!=', $user->id);
+            })->exists();
     }
 }
