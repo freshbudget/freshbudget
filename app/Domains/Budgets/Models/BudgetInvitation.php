@@ -3,6 +3,7 @@
 namespace App\Domains\Budgets\Models;
 
 use App\Domains\Users\Models\User;
+use Carbon\Carbon;
 use Database\Factories\BudgetInvitationFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,6 +40,7 @@ class BudgetInvitation extends Model
         'state',
         'budget_id',
         'sender_id',
+        'sent_at',
     ];
 
     /**
@@ -51,6 +53,7 @@ class BudgetInvitation extends Model
         'expires_at' => 'datetime',
         'budget_id' => 'integer',
         'sender_id' => 'integer',
+        'sent_at' => 'datetime',
     ];
 
     /*
@@ -150,6 +153,13 @@ class BudgetInvitation extends Model
     {
         $this->update([
             'state' => self::STATE_REJECTED,
+        ]);
+    }
+
+    public function markAsSent($time = null): void
+    {
+        $this->update([
+            'sent_at' => Carbon::parse($time ?? now()),
         ]);
     }
 

@@ -1,11 +1,11 @@
 <?php
 
-use App\Domains\Users\Models\User;
-use Illuminate\Support\Facades\Event;
-use App\Domains\Budgets\Models\Budget;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Budgets\Events\BudgetInvitationAccepted;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Users\Models\User;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Event;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {
@@ -177,7 +177,7 @@ test('it cannot switch to a budget it does not own', function () {
 
     expect($user->currentBudget->is($user->personalBudget()))->toBeTrue();
 
-    expect(fn() => $user->switchCurrentBudget($budget))->toThrow(Exception::class);
+    expect(fn () => $user->switchCurrentBudget($budget))->toThrow(Exception::class);
     expect($user->currentBudgetIs($budget))->toBeFalse();
     expect($user->currentBudgetIs($user->personalBudget()))->toBeTrue();
 });

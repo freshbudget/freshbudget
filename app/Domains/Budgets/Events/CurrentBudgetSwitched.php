@@ -2,10 +2,10 @@
 
 namespace App\Domains\Budgets\Events;
 
-use App\Domains\Users\Models\User;
 use App\Domains\Budgets\Models\Budget;
-use Illuminate\Queue\SerializesModels;
+use App\Domains\Users\Models\User;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class CurrentBudgetSwitched
 {

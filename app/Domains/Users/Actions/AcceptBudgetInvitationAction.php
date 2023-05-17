@@ -5,6 +5,10 @@ namespace App\Domains\Users\Actions;
 use App\Domains\Budgets\Events\BudgetInvitationAccepted;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Budgets\Notifications\InvitationAcceptedNotification;
+use App\Domains\Users\Exceptions\CannotAcceptExpiredInvitation;
+use App\Domains\Users\Exceptions\CannotAcceptInvitationBudgetDeleted;
+use App\Domains\Users\Exceptions\CannotAcceptInvitationNotSentToYou;
+use App\Domains\Users\Exceptions\CannotAcceptRejectedInvitation;
 use App\Domains\Users\Models\User;
 
 class AcceptBudgetInvitationAction
@@ -13,32 +17,36 @@ class AcceptBudgetInvitationAction
     {
         // ensure that the recipient email matches the invitation email
         if ($recipient->email !== $invitation->email) {
-            throw new \Exception('You cannot accept an invitation that was not sent to you.');
+            throw new CannotAcceptInvitationNotSentToYou();
         }
 
         // ensure the invitaition isnt expired
         if ($invitation->isExpired()) {
-            throw new \Exception('You cannot accept an expired invitation.');
+            throw new CannotAcceptExpiredInvitation();
         }
 
         // ensure the invitation wasn't already rejected
         if ($invitation->isRejected()) {
-            throw new \Exception('You cannot accept a rejected invitation.');
+            throw new CannotAcceptRejectedInvitation();
         }
 
         // ensure the invitation wasn't already accepted
+        // if so we can just return because the end state
+        // has already been achieved
         if ($invitation->isAccepted()) {
             return;
         }
 
         // ensure the budget still exists
         if (! $invitation->budget) {
-            throw new \Exception('You cannot accept an invitation to a budget that no longer exists.');
+            throw new CannotAcceptInvitationBudgetDeleted();
         }
 
         // ensure the recipient doesn't already belong to the budget
+        // if so we can just return because the end state
+        // has already been achieved
         if ($invitation->budget->hasUser($recipient)) {
-            throw new \Exception('You cannot accept an invitation to a budget you already belong to.');
+            return;
         }
 
         // add the recipient to the budget

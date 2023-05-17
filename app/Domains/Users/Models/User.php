@@ -3,7 +3,6 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Budgets\Actions\CreateBudgetAction;
-use App\Domains\Budgets\Events\CurrentBudgetSwitched;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
@@ -191,7 +190,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function inviteToBudget(Budget $budget, string $email, string $name, string $nickname = ''): BudgetInvitation
     {
         return app(SendBudgetInvitationAction::class)->execute($this, $budget, $email, $name, $nickname);
-    }   
+    }
 
     public function ownsBudget(Budget $budget): bool
     {

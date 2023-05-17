@@ -1,7 +1,8 @@
 <?php
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Tests\TestCase;
+
 // use Plannr\Laravel\FastRefreshDatabase\Traits\FastRefreshDatabase;
 
 /*

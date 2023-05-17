@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->unsignedBigInteger('sender_id')->nullable();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('set null');
+            $table->timestamp('sent_at')->nullable();
             $table->timestamps();
         });
     }

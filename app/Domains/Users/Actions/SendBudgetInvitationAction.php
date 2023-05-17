@@ -5,6 +5,8 @@ namespace App\Domains\Users\Actions;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
+use App\Domains\Users\Exceptions\CannotSendInvitationsForBudgetYouDontOwn;
+use App\Domains\Users\Exceptions\InvitationFailedToSend;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Notification;
 
@@ -14,7 +16,7 @@ class SendBudgetInvitationAction
     {
         // ensure the sender is the owner of the budget
         if (! $budget->isOwnedBy($sender)) {
-            throw new \Exception('You cannot invite users to a budget you do not own.');
+            throw new CannotSendInvitationsForBudgetYouDontOwn();
         }
 
         // ensure the recipient isn't already a member of the budget
@@ -36,9 +38,11 @@ class SendBudgetInvitationAction
             Notification::route('mail', $email)
                 ->notify(new InvitedToBudgetNotification($invitation));
         } catch (\Exception $e) {
+            report($e);
+
             $invitation->markAsFailed();
 
-            throw $e;
+            throw new InvitationFailedToSend();
         }
 
         return $invitation;
