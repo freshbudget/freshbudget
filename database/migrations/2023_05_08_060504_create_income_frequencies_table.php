@@ -30,31 +30,31 @@ return new class extends Migration
         $types = [
             [
                 'name' => 'One Time',
-                'abbr' => 'OT',
+                'abbr' => 'one-time',
                 'tagline' => 'One Time Income',
                 'description' => 'An income that occurs only once.',
             ],
             [
                 'name' => 'Weekly',
-                'abbr' => 'Weekly',
+                'abbr' => 'weekly',
                 'tagline' => 'Weekly Income',
                 'description' => 'An income that occurs every week.',
             ],
             [
                 'name' => 'Bi-Weekly',
-                'abbr' => 'Bi-Weekly',
+                'abbr' => 'bi-weekly',
                 'tagline' => 'Bi-Weekly Income',
                 'description' => 'An income that occurs every two weeks.',
             ],
             [
                 'name' => 'Monthly',
-                'abbr' => 'Monthly',
+                'abbr' => 'monthly',
                 'tagline' => 'Monthly Income',
                 'description' => 'An income that occurs every month.',
             ],
             [
                 'name' => 'Irregular',
-                'abbr' => 'Irregular',
+                'abbr' => 'irregular',
                 'tagline' => 'Irregular Income',
                 'description' => 'An income that occurs irregularly.',
             ],

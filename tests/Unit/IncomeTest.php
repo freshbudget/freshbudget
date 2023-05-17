@@ -5,6 +5,7 @@ use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeFrequency;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Users\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 test('when model is created, a ulid is generated', function () {
     $model = Income::factory()->create();
@@ -49,4 +50,11 @@ test('the model belongs to a user via the owner, optionally', function () {
     ]);
 
     expect($model->user)->toBeInstanceOf(User::class);
+});
+
+// test an income can have many entitlements
+test('an income can have many entitlements', function () {
+    $model = Income::factory()->create();
+
+    expect($model->entitlements)->toBeInstanceOf(Collection::class);
 });

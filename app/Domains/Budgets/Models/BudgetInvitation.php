@@ -22,6 +22,8 @@ class BudgetInvitation extends Model
 
     const STATE_REJECTED = 'rejected';
 
+    const STATE_FAILED = 'failed';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -91,6 +93,11 @@ class BudgetInvitation extends Model
     | Affordances, Helpers, etc.
     |----------------------------------
     */
+    public function failedToSend(): bool
+    {
+        return $this->state === self::STATE_FAILED;
+    }
+
     public function isAccepted(): bool
     {
         return $this->state === self::STATE_ACCEPTED;
@@ -122,6 +129,13 @@ class BudgetInvitation extends Model
     {
         $this->update([
             'state' => self::STATE_EXPIRED,
+        ]);
+    }
+
+    public function markAsFailed(): void
+    {
+        $this->update([
+            'state' => self::STATE_FAILED,
         ]);
     }
 

@@ -3,12 +3,11 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Budgets\Actions\CreateBudgetAction;
-use App\Domains\Budgets\Events\BudgetInvitationAccepted;
 use App\Domains\Budgets\Events\CurrentBudgetSwitched;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Budgets\Notifications\InvitationAcceptedNotification;
-use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
+use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
+use App\Domains\Users\Actions\SendBudgetInvitationAction;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -17,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Notification;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -154,13 +152,7 @@ class User extends Authenticatable implements MustVerifyEmail
     */
     public function acceptBudgetInvitation(BudgetInvitation $invitation): void
     {
-        $invitation->budget->addUser($this);
-
-        $invitation->markAsAccepted();
-
-        event(new BudgetInvitationAccepted($invitation));
-
-        $invitation->sender->notify(new InvitationAcceptedNotification($invitation));
+        app(AcceptBudgetInvitationAction::class)->execute($this, $invitation);
     }
 
     public function belongsToBudget(Budget $budget): bool
@@ -179,21 +171,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function inviteToBudget(Budget $budget, string $email, string $name, string $nickname = ''): BudgetInvitation
     {
-        if (! $this->belongsToBudget($budget)) {
-            throw new \Exception('You cannot invite a user to a budget you dont belong to.');
-        }
-
-        $invitation = $budget->invitations()->create([
-            'email' => $email,
-            'name' => $name,
-            'nickname' => $nickname,
-            'sender_id' => $this->id,
-            'state' => BudgetInvitation::STATE_PENDING,
-        ]);
-
-        Notification::route('mail', $email)->notify(new InvitedToBudgetNotification($invitation));
-
-        return $invitation;
+        return app(SendBudgetInvitationAction::class)->execute($this, $budget, $email, $name, $nickname);
     }
 
     public function isCurrentBudget(Budget $budget): bool
