@@ -1,11 +1,11 @@
 <?php
 
-use App\Domains\Budgets\Events\BudgetInvitationAccepted;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Models\User;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Event;
+use App\Domains\Budgets\Models\Budget;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Budgets\Events\BudgetInvitationAccepted;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {
@@ -88,19 +88,29 @@ test('it can check if the given budget is the current budget', function () {
     $user = User::factory()->create();
     $budget = Budget::factory()->create();
 
-    expect($user->isCurrentBudget($user->personalBudget()))->toBeTrue();
-    expect($user->isCurrentBudget($budget))->toBeFalse();
+    expect($user->currentBudgetIs($user->personalBudget()))->toBeTrue();
+    expect($user->currentBudgetIs($budget))->toBeFalse();
 });
 
 // test it can retrive owned budgets
 test('it can retrive owned budgets', function () {
     $user = User::factory()->create();
-    $budget = Budget::factory()->create([
-        'owner_id' => $user->id,
-    ]);
 
-    expect($user->ownedBudgets->count())->toBe(2);
-    expect($user->ownedBudgets->contains($budget))->toBeTrue();
+    expect($user->ownedBudgets->count())->toBe(1);
+
+    // create a budget that the user does not own
+    $budget2 = Budget::factory()->create();
+
+    // invite the user to the budget
+    $budget2->addUser($user);
+
+    // refresh the user
+    $user->refresh();
+
+    expect($user->ownedBudgets->count())->toBe(1);
+    expect($user->ownedBudgets->contains($budget2))->toBeFalse();
+    expect($user->joinedBudgets->count())->toBe(2);
+    expect($user->joinedBudgets->contains($budget2))->toBeTrue();
 });
 
 // test it can retrieve all budgets it belongs to
@@ -157,7 +167,7 @@ test('it can switch current budgets', function () {
 
     $user->switchCurrentBudget($budget);
 
-    expect($user->isCurrentBudget($budget))->toBeTrue();
+    expect($user->currentBudgetIs($budget))->toBeTrue();
 });
 
 // test it cannot switch to a budget it does not own
@@ -167,10 +177,9 @@ test('it cannot switch to a budget it does not own', function () {
 
     expect($user->currentBudget->is($user->personalBudget()))->toBeTrue();
 
-    $user->switchCurrentBudget($budget);
-
-    expect($user->isCurrentBudget($budget))->toBeFalse();
-    expect($user->isCurrentBudget($user->personalBudget()))->toBeTrue();
+    expect(fn() => $user->switchCurrentBudget($budget))->toThrow(Exception::class);
+    expect($user->currentBudgetIs($budget))->toBeFalse();
+    expect($user->currentBudgetIs($user->personalBudget()))->toBeTrue();
 });
 
 // test it can accept an invitation to a budget

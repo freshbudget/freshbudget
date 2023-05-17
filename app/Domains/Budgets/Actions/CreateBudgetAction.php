@@ -22,6 +22,6 @@ class CreateBudgetAction
 
     public function execute(array $data, User $owner): Budget
     {
-        return $owner->budgets()->create($data);
+        return $owner->ownedBudgets()->create($data);
     }
 }

@@ -8,11 +8,13 @@ use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
 use App\Domains\Users\Actions\SendBudgetInvitationAction;
+use App\Domains\Users\Actions\SwitchCurrentBudgetAction;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,12 +25,14 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, HasFactory, HasUlids, Notifiable;
 
     /**
-     * A flag to indicate the user self registered with the application.
+     * A flag to indicate the user self registered with the application. This is the default registration source.
+     * In the future, this may be used to determine how many users are self registered vs invited.
      */
     const SELF_REGISTERED = 'self-registration';
 
     /**
      * A flag to indicate the user registered via an invitation.
+     * In the future, this may be used to determine how many users are self registered vs invited.
      */
     const REGISTERED_VIA_INVITATION = 'registered-via-invitation';
 
@@ -129,9 +133,28 @@ class User extends Authenticatable implements MustVerifyEmail
     | Relationships
     |----------------------------------
     */
-    public function budgets(): HasMany
+    public function currentBudget(): BelongsTo
+    {
+        if (is_null($this->current_budget_id) && $this->id) {
+            $this->switchCurrentBudget($this->personalBudget());
+        }
+
+        return $this->belongsTo(Budget::class, 'current_budget_id');
+    }
+
+    public function joinedBudgets(): BelongsToMany
+    {
+        return $this->belongsToMany(Budget::class, 'budget_users')->withTimestamps();
+    }
+
+    public function ownedBudgets(): HasMany
     {
         return $this->hasMany(Budget::class, 'owner_id');
+    }
+
+    public function personalBudget(): Budget
+    {
+        return $this->joinedBudgets()->where('personal', true)->first();
     }
 
     /*
@@ -147,7 +170,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /*
     |--------------------------------------------------------------------------
-    | Team Budget Functionality
+    | Budget (Team) Functionality
     |--------------------------------------------------------------------------
     */
     public function acceptBudgetInvitation(BudgetInvitation $invitation): void
@@ -160,59 +183,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->ownsBudget($budget) || $budget->hasUser($this);
     }
 
-    public function currentBudget(): BelongsTo
+    public function currentBudgetIs(Budget $budget): bool
     {
-        if (is_null($this->current_budget_id) && $this->id) {
-            $this->switchCurrentBudget($this->personalBudget());
-        }
-
-        return $this->belongsTo(Budget::class, 'current_budget_id');
+        return $budget->id === $this->currentBudget->id;
     }
 
     public function inviteToBudget(Budget $budget, string $email, string $name, string $nickname = ''): BudgetInvitation
     {
         return app(SendBudgetInvitationAction::class)->execute($this, $budget, $email, $name, $nickname);
-    }
-
-    public function isCurrentBudget(Budget $budget): bool
-    {
-        return $budget->id === $this->currentBudget->id;
-    }
-
-    public function ownedBudgets(): HasMany
-    {
-        return $this->hasMany(Budget::class, 'owner_id');
-    }
-
-    public function joinedBudgets()
-    {
-        return $this->belongsToMany(Budget::class, 'budget_users')->withTimestamps();
-    }
+    }   
 
     public function ownsBudget(Budget $budget): bool
     {
         return $this->id === $budget->owner_id;
     }
 
-    public function personalBudget(): Budget
-    {
-        return $this->budgets()->where('personal', true)->first();
-    }
-
     public function switchCurrentBudget(Budget $budget): bool
     {
-        if (! $this->belongsToBudget($budget)) {
-            return false;
-        }
-
-        $this->forceFill([
-            'current_budget_id' => $budget->id,
-        ])->save();
-
-        $this->setRelation('currentBudget', $budget);
-
-        event(new CurrentBudgetSwitched($budget));
-
-        return true;
+        return (bool) app(SwitchCurrentBudgetAction::class)->execute($this, $budget);
     }
 }
