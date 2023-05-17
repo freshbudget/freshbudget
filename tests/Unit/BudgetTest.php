@@ -1,12 +1,14 @@
 <?php
 
-use App\Domains\Budgets\Events\BudgetCreated;
-use App\Domains\Budgets\Events\BudgetDeleted;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Incomes\Models\Income;
+use Illuminate\Support\Arr;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Event;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Models\Income;
+use App\Domains\Budgets\Events\BudgetCreated;
+use App\Domains\Budgets\Events\BudgetDeleted;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\Budgets\Models\BudgetInvitation;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {
@@ -29,6 +31,13 @@ test('the model belongs to a user via the owner', function () {
     $model = Budget::factory()->create();
 
     expect($model->owner)->toBeInstanceOf(User::class);
+});
+
+// test the model implements the SoftDeletes trait
+test('the model implements the SoftDeletes trait', function () {
+    $model = Budget::factory()->create();
+
+    expect(Arr::has(class_uses($model), SoftDeletes::class))->toBeTrue();
 });
 
 // test it has many invitations
@@ -177,4 +186,35 @@ test('it can remove a user', function () {
 
     // check if the user is a member
     expect($budget->hasUser($user))->toBeFalse();
+});
+
+// it can determine if any users have the budget set as their current budget
+test('it can determine if any users have the budget set as their current budget', function () {
+    $user = User::factory()->create();
+
+    $budget = Budget::factory()->create([
+        'owner_id' => $user->id,
+    ]);
+
+    $user->switchCurrentBudget($budget);
+
+    expect($user->currentBudgetIs($budget))->toBeTrue();
+
+    expect($budget->hasCurrentUsers())->toBeTrue();
+    
+    $user->switchCurrentBudget($user->personalBudget());
+
+    expect($budget->hasCurrentUsers())->toBeFalse();
+});
+
+test('it can determine if any users have the budget set as their current budget, excluding the given user', function () {
+    $user = User::factory()->create();
+
+    $budget = Budget::factory()->create([
+        'owner_id' => $user->id,
+    ]);
+
+    $user->switchCurrentBudget($budget);
+
+    expect($budget->hasCurrentUsers(exclude: $user))->toBeFalse();
 });

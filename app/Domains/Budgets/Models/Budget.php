@@ -13,10 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Budget extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasUlids, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -100,14 +101,14 @@ class Budget extends Model
         return $this->hasMany(BudgetInvitation::class, 'budget_id');
     }
 
-    public function owner(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'owner_id');
-    }
-
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'budget_users', 'budget_id', 'user_id')->withTimestamps();
+    }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     /*
@@ -145,11 +146,11 @@ class Budget extends Model
      * i.e. users that have the budget set as their current budget.
      * And optionally, exclude the given user.
      */
-    public function hasCurrentUsers(User $user = null): bool
+    public function hasCurrentUsers(User $exclude = null): bool
     {
         return $this->members()
             ->where('current_budget_id', $this->id)
-            ->when($user, function ($query, $user) {
+            ->when($exclude, function ($query, $user) {
                 $query->where('user_id', '!=', $user->id);
             })->exists();
     }
