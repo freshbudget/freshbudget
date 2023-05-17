@@ -20,7 +20,7 @@ class CreateBudgetAction
         ];
     }
 
-    public function execute(array $data, User $owner): Budget
+    public function execute(User $owner, array $data): Budget
     {
         return $owner->ownedBudgets()->create($data);
     }

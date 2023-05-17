@@ -30,7 +30,7 @@ class CreateIncomeForm extends Component
     {
         $this->validate();
 
-        $owner = currentBudget()->users()->where('ulid', $this->user_ulid)->first();
+        $owner = currentBudget()->members()->where('ulid', $this->user_ulid)->first();
 
         $income = currentBudget()->incomes()->create([
             'user_id' => $owner->id ?: null,
@@ -49,7 +49,7 @@ class CreateIncomeForm extends Component
     public function render()
     {
         return view('livewire.forms.incomes.create-income-form', [
-            'users' => currentBudget()->users()->orderBy('name')->select(['users.ulid', 'name'])->get(),
+            'users' => currentBudget()->members()->orderBy('name')->select(['users.ulid', 'name'])->get(),
             'types' => IncomeType::orderBy('name')->select(['id', 'name'])->get(),
             'frequencies' => IncomeFrequency::orderBy('name')->select(['id', 'name'])->get(),
         ]);

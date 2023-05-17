@@ -88,7 +88,7 @@ class BudgetsController extends Controller
 
         $validated = $this->validate($request, $action::rules());
 
-        $budget = $action->execute($validated, user());
+        $budget = $action->execute(user(), $validated);
 
         user()->switchCurrentBudget($budget);
 

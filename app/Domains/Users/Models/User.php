@@ -85,10 +85,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static function booted(): void
     {
         static::created(function (User $user) {
-            app(CreateBudgetAction::class)->execute([
+            app(CreateBudgetAction::class)->execute($user, [
                 'name' => 'Personal Budget',
                 'personal' => true,
-            ], $user);
+            ]);
         });
     }
 

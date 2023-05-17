@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Support\Arr;
-use App\Domains\Users\Models\User;
-use Illuminate\Support\Facades\Event;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\Income;
 use App\Domains\Budgets\Events\BudgetCreated;
 use App\Domains\Budgets\Events\BudgetDeleted;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Incomes\Models\Income;
+use App\Domains\Users\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Event;
 
 // test when a model is created, a ulid is generated
 test('when model is created, a ulid is generated', function () {
@@ -201,7 +201,7 @@ test('it can determine if any users have the budget set as their current budget'
     expect($user->currentBudgetIs($budget))->toBeTrue();
 
     expect($budget->hasCurrentUsers())->toBeTrue();
-    
+
     $user->switchCurrentBudget($user->personalBudget());
 
     expect($budget->hasCurrentUsers())->toBeFalse();
