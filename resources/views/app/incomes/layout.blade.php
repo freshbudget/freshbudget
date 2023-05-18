@@ -44,7 +44,10 @@
                                 'hidden' : ! (search == '' || '{{ $income->name }}'.toLowerCase().includes(search.toLowerCase()))
                             }">
                                     
-                                <div class="py-2.5 px-3 space-y-1 rounded-lg border hover:bg-gray-100/80 {{ active(route('app.incomes.show', $income), 'bg-gray-100/60 border-gray-100', 'border-transparent') }}">
+                                <div 
+                                    class="py-2.5 px-3 space-y-1 rounded-lg border hover:bg-gray-100/80 {{ active([
+                                        route('app.incomes.show', $income),
+                                    ], 'bg-gray-100/60 border-gray-100', 'border-transparent') }}">
 
                                     <h3 class="font-semibold">{{ $income->name }}</h3>
                                     

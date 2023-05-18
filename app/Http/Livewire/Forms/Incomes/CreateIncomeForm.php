@@ -41,9 +41,7 @@ class CreateIncomeForm extends Component
 
         $this->emit('incomeCreated');
 
-        // go to next step, but for now just redirect to incomes index
-
-        return redirect()->route('app.incomes.show', $income);
+        return redirect()->route('app.incomes.entitlements.create', $income);
     }
 
     public function render()

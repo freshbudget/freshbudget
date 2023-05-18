@@ -58,3 +58,11 @@ Route::get('/incomes/create', [IncomesController::class, 'create'])
 Route::get('/incomes/{income}', [IncomesController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.incomes.show');
+
+Route::get('/incomes/{income}/entitlements/create', function () {
+    return view('app.incomes.entitlements.create', [
+        'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
+    ]);
+})
+    ->middleware(['auth'])
+    ->name('app.incomes.entitlements.create');
