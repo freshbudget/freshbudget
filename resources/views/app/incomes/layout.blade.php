@@ -36,7 +36,11 @@
 
                         @foreach ($incomes as $income)
                             
-                            <a href="{{ route('app.incomes.show', $income) }}" class="block w-full" x-bind:class="{
+                            <a 
+                                href="{{ route('app.incomes.show', $income) }}" 
+                                class="block w-full" 
+                                x-on:contextmenu="event.preventDefault(); console.log('right click')"
+                                x-bind:class="{
                                 'hidden' : ! (search == '' || '{{ $income->name }}'.toLowerCase().includes(search.toLowerCase()))
                             }">
                                     

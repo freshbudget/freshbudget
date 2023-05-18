@@ -75,6 +75,10 @@
             @svg('home', 'w-5 h-5 mr-2.5') Home
         </a>
 
+        <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.calendar.*', 'font-semibold text-gray-900') }}">
+            @svg('calendar', 'w-5 h-5 mr-2.5') Calendar
+        </a>
+
         <a href="{{ route('app.incomes.index') }}" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.incomes.*', 'font-semibold text-gray-900') }}">
             @svg('banknotes', 'w-5 h-5 mr-2.5') Incomes
         </a>
@@ -84,7 +88,7 @@
         </a>
 
         <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
-            @svg('envelope', 'w-5 h-5 mr-2.5') Accounts
+            @svg('bank', 'w-5 h-5 mr-2.5') Accounts
         </a>
 
         <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">

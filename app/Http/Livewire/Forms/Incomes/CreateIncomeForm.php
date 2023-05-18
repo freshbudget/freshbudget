@@ -22,7 +22,7 @@ class CreateIncomeForm extends Component
             'name' => ['required', 'string', 'max:255'],
             'type_id' => ['required', 'exists:income_types,id'],
             'frequency_id' => ['required', 'exists:income_frequencies,id'],
-            'user_ulid' => ['required', 'exists:users,ulid'],
+            'user_ulid' => ['nullable', 'exists:users,ulid'],
         ];
     }
 

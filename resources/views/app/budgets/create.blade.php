@@ -18,6 +18,8 @@
                 </x-forms.label>
         
                 <x-forms.input type="text" name="name" id="name" autofocus />
+                
+                <x-forms.validation-error for="name" />
             </div>
             
             <div class="flex items-center justify-end">  
