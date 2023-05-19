@@ -13,6 +13,21 @@ class IncomePolicy
         return $budget->members->contains($user);
     }
 
+    public function delete(User $user, Income $income, Budget $budget): bool
+    {
+        // check that the income belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+        
+        // check that the user is a member of the budget
+        if (! $budget->hasUser($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function show(User $user, Income $income, Budget $budget): bool
     {
         // check that the income belongs to the budget

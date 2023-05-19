@@ -39,6 +39,10 @@ class CreateIncomeForm extends Component
             'frequency_id' => $this->frequency_id,
         ]);
 
+        if ($income->frequency->abbr === 'one-time') {
+            $income->update(['active' => false]);
+        }
+
         $this->emit('incomeCreated');
 
         return redirect()->route('app.incomes.entitlements.create', $income);

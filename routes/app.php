@@ -60,6 +60,10 @@ Route::get('/incomes/{income}', [IncomesController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.incomes.show');
 
+Route::delete('/incomes/{income}', [IncomesController::class, 'destroy'])
+    ->middleware(['auth'])
+    ->name('app.incomes.destroy');
+
 Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsController::class, 'create'])
     ->middleware(['auth'])
     ->name('app.incomes.entitlements.create');
