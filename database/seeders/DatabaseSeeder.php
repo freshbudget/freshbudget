@@ -22,17 +22,14 @@ class DatabaseSeeder extends Seeder
         // create an income for the personal budget
         $user->personalBudget()->incomes()->create([
             'name' => 'Wyatt Salary',
-            'start_date' => now()->subWeek(),
         ]);
 
         $user->personalBudget()->incomes()->create([
             'name' => 'Side hustle',
-            'start_date' => now()->subMonth(),
         ]);
 
         $user->personalBudget()->incomes()->create([
             'name' => 'Amber Salary',
-            'start_date' => now()->subMonth(),
         ]);
     }
 }

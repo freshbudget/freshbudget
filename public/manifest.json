@@ -19,8 +19,5 @@
     "display": "fullscreen",
     "display_override": ["fullscreen", "standalone"],
     "categories": ["finance", "budget", "money", "budgeting"],
-    "launch_handler": {
-        "client_mode": ["focus-existing, auto"]
-    },
     "orientation": "portrait"
 }

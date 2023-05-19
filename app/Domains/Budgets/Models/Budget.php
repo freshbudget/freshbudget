@@ -154,4 +154,17 @@ class Budget extends Model
                 $query->where('user_id', '!=', $user->id);
             })->exists();
     }
+
+    public function estimatedIncomePerPeriod(): string
+    {
+        $incomes = $this->incomes()->get();
+
+        $total = $incomes->reduce(function ($carry, $income) {
+            return $carry + $income->entitlements()->where('active', true)->sum('amount');
+        }, 0);
+
+        // TODO: refactor this to remove duplicate queries from the incomes model
+
+        return number_format($total / 100, 2);
+    }
 }

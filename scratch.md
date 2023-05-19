@@ -38,3 +38,5 @@ So when I want to update a income entitlement, I set the new amount(s) and "clic
 Why can't i just store the amount in laravel stats again? Maybe I will need to anyways, because I need to be able to plot estimated montly income over time anyways?
 
 - How to handle incomes that are assigned to a user that are attached to a budget, if the user leaves the budget?
+
+- When a user creates a one time budget, don't show it in the incomes list. Also show a form to say where the income went, i.e. to which account. My thought is maybe like a cash birthday present from grandma, I don't need care about tracking that income, but I need somewhere to log the income.

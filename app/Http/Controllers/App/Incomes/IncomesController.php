@@ -20,7 +20,7 @@ class IncomesController extends Controller
     {
         $this->authorize('show', [$income, currentBudget()]);
 
-        return view('app.incomes.show', [
+        return view('app.incomes.show.index', [
             'income' => $income,
             'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
         ]);

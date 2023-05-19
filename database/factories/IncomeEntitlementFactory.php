@@ -26,7 +26,6 @@ class IncomeEntitlementFactory extends Factory
         return [
             'income_id' => Income::factory(),
             'name' => $this->faker->name,
-            'description' => $this->faker->text,
             'amount' => $this->faker->numberBetween(0, 10000),
             'start_date' => $startDate,
             'end_date' => $endDate,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\App\Budgets\BudgetsController;
 use App\Http\Controllers\App\Budgets\CurrentBudgetController;
+use App\Http\Controllers\App\Incomes\IncomeEntitlementsController;
 use App\Http\Controllers\App\Incomes\IncomesController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,10 +60,10 @@ Route::get('/incomes/{income}', [IncomesController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.incomes.show');
 
-Route::get('/incomes/{income}/entitlements/create', function () {
-    return view('app.incomes.entitlements.create', [
-        'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
-    ]);
-})
+Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsController::class, 'create'])
     ->middleware(['auth'])
     ->name('app.incomes.entitlements.create');
+
+Route::post('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('app.incomes.entitlements.store');

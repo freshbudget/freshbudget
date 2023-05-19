@@ -52,7 +52,7 @@
                                     <h3 class="font-semibold">{{ $income->name }}</h3>
                                     
                                     <p class="text-sm italic">
-                                        <span class="text-gray-500">Estimated</span> ${{ random_int(200, 3002) }}.00
+                                        <span class="text-gray-500">Estimated</span> ${{ $income->estimatedAmountPerPeriod() }}
                                     </p>
                                     
                                 </div>
