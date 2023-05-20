@@ -8,6 +8,51 @@ use App\Domains\Users\Models\User;
 
 class IncomePolicy
 {
+    public function addDeductions(User $user, Income $income, Budget $budget): bool
+    {
+        // check that the income belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        // check that the user is a member of the budget
+        if (! $budget->hasUser($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function addEntitlements(User $user, Income $income, Budget $budget): bool
+    {
+        // check that the income belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        // check that the user is a member of the budget
+        if (! $budget->hasUser($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function addTaxes(User $user, Income $income, Budget $budget): bool
+    {
+        // check that the income belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        // check that the user is a member of the budget
+        if (! $budget->hasUser($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function create(User $user, Budget $budget): bool
     {
         return $budget->members->contains($user);
@@ -19,7 +64,7 @@ class IncomePolicy
         if ($income->budget_id !== $budget->id) {
             return false;
         }
-        
+
         // check that the user is a member of the budget
         if (! $budget->hasUser($user)) {
             return false;

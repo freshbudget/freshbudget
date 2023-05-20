@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\App\Budgets\BudgetsController;
 use App\Http\Controllers\App\Budgets\CurrentBudgetController;
+use App\Http\Controllers\App\Incomes\IncomeDeductionsController;
 use App\Http\Controllers\App\Incomes\IncomeEntitlementsController;
 use App\Http\Controllers\App\Incomes\IncomesController;
+use App\Http\Controllers\App\Incomes\IncomeTaxesController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'app.index')
@@ -64,6 +66,11 @@ Route::delete('/incomes/{income}', [IncomesController::class, 'destroy'])
     ->middleware(['auth'])
     ->name('app.incomes.destroy');
 
+/*
+|--------------------------------------------------------------------------
+| Income Entitlements
+|--------------------------------------------------------------------------
+*/
 Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsController::class, 'create'])
     ->middleware(['auth'])
     ->name('app.incomes.entitlements.create');
@@ -71,3 +78,29 @@ Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsControlle
 Route::post('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'store'])
     ->middleware(['auth'])
     ->name('app.incomes.entitlements.store');
+
+/*
+|--------------------------------------------------------------------------
+| Income Taxes
+|--------------------------------------------------------------------------
+*/
+Route::get('/incomes/{income}/taxes/create', [IncomeTaxesController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('app.incomes.taxes.create');
+
+Route::post('/incomes/{income}/taxes', [IncomeTaxesController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('app.incomes.taxes.store');
+
+/*
+|--------------------------------------------------------------------------
+| Income Deductions
+|--------------------------------------------------------------------------
+*/
+Route::get('/incomes/{income}/deductions/create', [IncomeDeductionsController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('app.incomes.deductions.create');
+
+Route::post('/incomes/{income}/deductions', [IncomeDeductionsController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('app.incomes.deductions.store');

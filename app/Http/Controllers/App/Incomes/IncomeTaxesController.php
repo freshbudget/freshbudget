@@ -3,34 +3,35 @@
 namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeEntitlement;
+use App\Domains\Incomes\Models\IncomeTax;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
-class IncomeEntitlementsController extends Controller
+class IncomeTaxesController extends Controller
 {
     public function create(Income $income)
     {
-        $this->authorize('addEntitlements', [$income, currentBudget()]);
+        $this->authorize('addTaxes', [$income, currentBudget()]);
 
-        return view('app.incomes.show.entitlements.create', [
-            'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
+        return view('app.incomes.show.taxes.create', [
+            'incomes' => $this->incomes(),
             'income' => currentBudget()->incomes()->findOrFail($income->id),
         ]);
     }
 
     public function store(Income $income, Request $request)
     {
-        $this->authorize('addEntitlements', [$income, currentBudget()]);
+        $this->authorize('addTaxes', [$income, currentBudget()]);
 
         // TODO: validate the request
 
         // loop over each entitlement and create it
-        $entitlements = $request->entitlements;
+        $taxes = $request->taxes;
 
-        foreach ($entitlements as $entitlement) {
+        foreach ($taxes as $tax) {
 
-            $amount = $entitlement['amount'];
+            $amount = $tax['amount'];
 
             // need to strip any commas from the amount
             $amount = str_replace(',', '', $amount);
@@ -47,9 +48,9 @@ class IncomeEntitlementsController extends Controller
             // need to convert to an integer
             $amount = (int) $amount;
 
-            IncomeEntitlement::create([
+            IncomeTax::create([
                 'income_id' => $income->id,
-                'name' => $entitlement['name'],
+                'name' => $tax['name'],
                 'amount' => $amount,
                 'start_date' => now(),
                 'end_date' => null,
@@ -57,5 +58,10 @@ class IncomeEntitlementsController extends Controller
         }
 
         return redirect()->route('app.incomes.show', $income);
+    }
+
+    private function incomes(): Collection
+    {
+        return currentBudget()->incomes()->where('active', true)->orderBy('name')->get();
     }
 }

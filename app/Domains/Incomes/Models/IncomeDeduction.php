@@ -21,7 +21,6 @@ class IncomeDeduction extends Model
         'ulid',
         'income_id',
         'name',
-        'description',
         'amount',
         'start_date',
         'end_date',

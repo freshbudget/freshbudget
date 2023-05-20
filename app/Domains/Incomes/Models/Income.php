@@ -81,6 +81,11 @@ class Income extends Model
         return $this->belongsTo(Budget::class, 'budget_id');
     }
 
+    public function deductions(): HasMany
+    {
+        return $this->hasMany(IncomeDeduction::class, 'income_id')->where('active', true);
+    }
+
     public function entitlements(): HasMany
     {
         return $this->hasMany(IncomeEntitlement::class, 'income_id')->where('active', true);
@@ -101,12 +106,23 @@ class Income extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function estimatedAmountPerPeriod(): string
+    public function estimatedNetAmountPerPeriod(): string
     {
         $entitlements = $this->entitlements()->where('active', true)->sum('amount');
 
-        return number_format($entitlements / 100, 2);
+        $taxes = $this->taxes()->where('active', true)->sum('amount');
+
+        $deductions = $this->deductions()->where('active', true)->sum('amount');
+
+        $estimated = $entitlements - $taxes - $deductions;
+
+        return number_format($estimated / 100, 2);
     }
 
-    // TODO: Need to add a method to get the estimated amount per month, week, etc. based on the frequency and the amount
+    public function taxes(): HasMany
+    {
+        return $this->hasMany(IncomeTax::class, 'income_id')->where('active', true);
+    }
+
+    // TODO: Need to add a method to get the estimated amount per given period (month, week, etc.) based on the frequency and the amount
 }

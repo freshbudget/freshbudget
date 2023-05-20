@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeEntitlement;
+use App\Domains\Incomes\Models\IncomeDeduction;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class IncomeEntitlementsController extends Controller
+class IncomeDeductionsController extends Controller
 {
     public function create(Income $income)
     {
-        $this->authorize('addEntitlements', [$income, currentBudget()]);
+        $this->authorize('addDeductions', [$income, currentBudget()]);
 
-        return view('app.incomes.show.entitlements.create', [
+        return view('app.incomes.show.deductions.create', [
             'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
             'income' => currentBudget()->incomes()->findOrFail($income->id),
         ]);
@@ -21,16 +21,16 @@ class IncomeEntitlementsController extends Controller
 
     public function store(Income $income, Request $request)
     {
-        $this->authorize('addEntitlements', [$income, currentBudget()]);
+        $this->authorize('addDeductions', [$income, currentBudget()]);
 
         // TODO: validate the request
 
         // loop over each entitlement and create it
-        $entitlements = $request->entitlements;
+        $deductions = $request->deductions;
 
-        foreach ($entitlements as $entitlement) {
+        foreach ($deductions as $deduction) {
 
-            $amount = $entitlement['amount'];
+            $amount = $deduction['amount'];
 
             // need to strip any commas from the amount
             $amount = str_replace(',', '', $amount);
@@ -47,9 +47,9 @@ class IncomeEntitlementsController extends Controller
             // need to convert to an integer
             $amount = (int) $amount;
 
-            IncomeEntitlement::create([
+            IncomeDeduction::create([
                 'income_id' => $income->id,
-                'name' => $entitlement['name'],
+                'name' => $deduction['name'],
                 'amount' => $amount,
                 'start_date' => now(),
                 'end_date' => null,

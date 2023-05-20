@@ -16,9 +16,8 @@ return new class extends Migration
             $table->ulid('ulid')->index()->unique();
             $table->unsignedBigInteger('income_id')->index();
             $table->string('name');
-            $table->string('description');
             $table->integer('amount');
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->unsignedBigInteger('previous_id')->nullable();
             $table->string('change_reason')->nullable();

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\App\Incomes;
 
-use App\Http\Controllers\Controller;
 use App\Domains\Incomes\Models\Income;
+use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Collection;
 
 class IncomesController extends Controller
