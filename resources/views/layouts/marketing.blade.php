@@ -47,7 +47,7 @@
         @yield('page')
     </div>
     
-    <footer class="mt-20 bg-gray-100 py-14">
+    <footer class="mt-20 bg-gray-100 sm:py-14 py-10">
     
         <div class="max-w-3xl px-4 mx-auto">
             
@@ -67,6 +67,8 @@
                     <a href="{{ route('terms') }}" class="hover:underline">Terms of Service</a>
                     &mdash; 
                     <a href="{{ route('privacy') }}" class="hover:underline">Privacy Policy</a>
+                    &mdash; 
+                    <a href="{{ route('blog') }}" class="hover:underline">Blog</a>
                 </p>
     
             </div>

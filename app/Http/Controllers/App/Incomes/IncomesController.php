@@ -4,16 +4,24 @@ namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Models\Income;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Collection;
 
 class IncomesController extends Controller
 {
+    public function edit(Income $income)
+    {
+        $this->authorize('update', [$income, currentBudget()]);
+
+        return view('app.incomes.show.edit', [
+            'income' => $income,
+        ]);
+    }
+
     public function index()
     {
         $this->authorize('viewAny', [Income::class, currentBudget()]);
 
         return view('app.incomes.index', [
-            'incomes' => $this->incomes(),
+            'incomes' => currentBudget()->incomes()->where('active', true)->orderBy('name')->get(),
         ]);
     }
 
@@ -23,7 +31,6 @@ class IncomesController extends Controller
 
         return view('app.incomes.show.index', [
             'income' => $income,
-            'incomes' => $this->incomes(),
         ]);
     }
 
@@ -31,9 +38,7 @@ class IncomesController extends Controller
     {
         $this->authorize('create', [Income::class, currentBudget()]);
 
-        return view('app.incomes.create', [
-            'incomes' => $this->incomes(),
-        ]);
+        return view('app.incomes.create');
     }
 
     public function destroy(Income $income)
@@ -43,10 +48,5 @@ class IncomesController extends Controller
         $income->delete();
 
         return redirect()->route('app.incomes.index');
-    }
-
-    private function incomes(): Collection
-    {
-        return currentBudget()->incomes()->where('active', true)->orderBy('name')->get();
     }
 }

@@ -156,10 +156,6 @@
                     return;
                 }
 
-                // remove the x-model bindings from the inputs
-                this.deductions[index].name = '';
-                this.deductions[index].amount = '';
-
                 this.deductions.splice(index, 1);
             },
 

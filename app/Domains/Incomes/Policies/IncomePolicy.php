@@ -88,6 +88,21 @@ class IncomePolicy
         return true;
     }
 
+    public function update(User $user, Income $income, Budget $budget): bool
+    {
+        // check that the income belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        // check that the user is a member of the budget
+        if (! $budget->hasUser($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function viewAny(User $user, Budget $budget): bool
     {
         return $budget->members->contains($user);

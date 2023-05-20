@@ -37,6 +37,10 @@
                 <button type="submit" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center mt-2 disabled:opacity-75 disabled:bg-gray-200">
                     Login
                 </button>
+                
+                <div class="my-5 text-center prose prose-green">
+                    <a href="#">Need to reset your password?</a>
+                </div>
         
             </form>
 
