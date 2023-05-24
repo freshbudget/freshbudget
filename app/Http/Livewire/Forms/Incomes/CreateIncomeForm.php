@@ -40,7 +40,7 @@ class CreateIncomeForm extends Component
             'frequency' => $this->frequency,
         ]);
 
-        if ($income->frequency->value === IncomeFrequency::ONE_TIME) {
+        if ($income->frequency->value === IncomeFrequency::ONE_TIME->value) {
             $income->update(['active' => false]);
         }
 

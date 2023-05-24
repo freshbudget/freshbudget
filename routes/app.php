@@ -108,3 +108,12 @@ Route::get('/incomes/{income}/deductions/create', [IncomeDeductionsController::c
 Route::post('/incomes/{income}/deductions', [IncomeDeductionsController::class, 'store'])
     ->middleware(['auth'])
     ->name('app.incomes.deductions.store');
+
+/*
+|--------------------------------------------------------------------------
+| Budget Files Explorer
+|--------------------------------------------------------------------------
+*/
+Route::view('/files', 'app.files.index')
+    ->middleware(['auth'])
+    ->name('app.files.index');
