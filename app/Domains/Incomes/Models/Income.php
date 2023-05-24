@@ -2,15 +2,17 @@
 
 namespace App\Domains\Incomes\Models;
 
-use App\Domains\Budgets\Models\Budget;
 use App\Domains\Users\Models\User;
 use Database\Factories\IncomeFactory;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Domains\Budgets\Models\Budget;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Domains\Incomes\Models\IncomeType;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\Incomes\Enums\IncomeFrequency;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Income extends Model
 {
@@ -31,7 +33,7 @@ class Income extends Model
         'url',
         'username',
         'currency',
-        'frequency_id',
+        'frequency', 
         'meta',
         'active',
     ];
@@ -46,7 +48,7 @@ class Income extends Model
         'budget_id' => 'integer',
         'user_id' => 'integer',
         'type_id' => 'integer',
-        'frequency_id' => 'integer',
+        'frequency' => IncomeFrequency::class,
         'meta' => 'array',
         'active' => 'boolean',
     ];
@@ -89,11 +91,6 @@ class Income extends Model
     public function entitlements(): HasMany
     {
         return $this->hasMany(IncomeEntitlement::class, 'income_id')->where('active', true);
-    }
-
-    public function frequency(): BelongsTo
-    {
-        return $this->belongsTo(IncomeFrequency::class, 'frequency_id');
     }
 
     public function type(): BelongsTo

@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Incomes\Enums\IncomeFrequency;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,8 +26,7 @@ return new class extends Migration
             $table->text('url')->nullable();
             $table->string('username')->nullable();
             $table->string('currency')->nullable()->default('USD');
-            $table->unsignedBigInteger('frequency_id')->nullable();
-            $table->foreign('frequency_id')->references('id')->on('income_frequencies')->onDelete('set null');
+            $table->string('frequency')->nullable()->default(IncomeFrequency::MONTHLY->value);
             $table->json('meta')->nullable();
             $table->boolean('active')->default(true);
             $table->softDeletes();

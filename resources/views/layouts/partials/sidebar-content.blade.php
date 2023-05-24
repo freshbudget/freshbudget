@@ -34,25 +34,29 @@
                     </a>
                             
                 </div>
-    
-                <p class="px-2.5 pt-2 pb-1 text-sm text-gray-500">
-                    Switch to a recent budget
-                </p>
-    
-                <div class="px-2">
-                    
-                    @foreach (auth()->user()->joinedBudgets->take(3) as $budget)
-                        <form action="{{ route('app.budgets.current', $budget) }}" method="post">
 
-                            @csrf
-
-                            <button type="submit" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 truncate focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed w-full" x-on:mouseenter="$focus.focus($el)">
-                                {{ $budget->name }}
-                            </button>
-                        </form>
-                    @endforeach
+                @if(auth()->user()->joinedBudgets->count() > 1)
     
-                </div>
+                    <p class="px-2.5 pt-2 pb-1 text-sm text-gray-500">
+                        Switch to a recent budget
+                    </p>
+        
+                    <div class="px-2">
+                        
+                        @foreach (auth()->user()->joinedBudgets->take(3) as $budget)
+                            <form action="{{ route('app.budgets.current', $budget) }}" method="post">
+
+                                @csrf
+
+                                <button type="submit" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 truncate focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed w-full" x-on:mouseenter="$focus.focus($el)">
+                                    {{ $budget->name }}
+                                </button>
+                            </form>
+                        @endforeach
+        
+                    </div>
+
+                @endif
     
                 <div class="p-2 mt-1.5 border-t border-gray-200">
     

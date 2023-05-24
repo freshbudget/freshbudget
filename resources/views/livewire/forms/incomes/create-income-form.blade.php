@@ -25,18 +25,18 @@
     </div>
 
     <div class="space-y-2">
-        <x-forms.label for="frequency_id" required>
+        <x-forms.label for="frequency" required>
             How often do you recieve installments of this income?
         </x-forms.label>
 
-        <x-forms.select name="frequency_id" id="frequency_id" wire:model.defer="frequency_id">
+        <x-forms.select name="frequency" id="frequency" wire:model.defer="frequency">
             <option value="">Select a frequency</option>
             @foreach ($frequencies as $frequency)
-                <option value="{{ $frequency->id }}">{{ $frequency->name }}</option>
+                <option value="{{ $frequency->value }}">{{ $frequency->value }}</option>
             @endforeach
         </x-forms.select>
 
-        <x-forms.validation-error for="frequency_id" />
+        <x-forms.validation-error for="frequency/v" />
     </div>
 
     <div class="space-y-2">

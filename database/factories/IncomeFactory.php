@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Enums\IncomeFrequency as IncomeFrequencyEnum;
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeFrequency;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,7 +32,7 @@ class IncomeFactory extends Factory
             'url' => $this->faker->url,
             'username' => $this->faker->userName,
             'currency' => null,
-            'frequency_id' => IncomeFrequency::factory(),
+            'frequency' => IncomeFrequencyEnum::MONTHLY,
             'meta' => null,
             'active' => true,
         ];
@@ -101,11 +101,11 @@ class IncomeFactory extends Factory
     /**
      * Indicate the income frequency.
      */
-    public function withFrequency(IncomeFrequency $frequency): self
+    public function withFrequency(IncomeFrequencyEnum $frequency): self
     {
         return $this->state(function (array $attributes) use ($frequency) {
             return [
-                'frequency_id' => $frequency->id,
+                'frequency' => $frequency->value,
             ];
         });
     }

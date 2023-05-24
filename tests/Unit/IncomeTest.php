@@ -2,7 +2,6 @@
 
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeFrequency;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -27,13 +26,6 @@ test('the model belongs to a budget', function () {
     $model = Income::factory()->create();
 
     expect($model->budget)->toBeInstanceOf(Budget::class);
-});
-
-// test the model belongs to an income frequency
-test('the model belongs to an income frequency', function () {
-    $model = Income::factory()->create();
-
-    expect($model->frequency)->toBeInstanceOf(IncomeFrequency::class);
 });
 
 // the the model belongs to an income type

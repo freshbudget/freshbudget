@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Forms\Incomes;
 
-use App\Domains\Incomes\Models\IncomeFrequency;
-use App\Domains\Incomes\Models\IncomeType;
 use Livewire\Component;
+use Illuminate\Validation\Rules\Enum;
+use App\Domains\Incomes\Models\IncomeType;
+use App\Domains\Incomes\Enums\IncomeFrequency;
 
 class CreateIncomeForm extends Component
 {
@@ -12,7 +13,7 @@ class CreateIncomeForm extends Component
 
     public $type_id = null;
 
-    public $frequency_id = null;
+    public $frequency = null;
 
     public $user_ulid;
 
@@ -21,7 +22,7 @@ class CreateIncomeForm extends Component
         return [
             'name' => ['required', 'string', 'max:255'],
             'type_id' => ['required', 'exists:income_types,id'],
-            'frequency_id' => ['required', 'exists:income_frequencies,id'],
+            'frequency' => ['required', new Enum(IncomeFrequency::class)],
             'user_ulid' => ['nullable', 'exists:users,ulid'],
         ];
     }
@@ -36,10 +37,10 @@ class CreateIncomeForm extends Component
             'user_id' => $owner->id ?: null,
             'name' => $this->name,
             'type_id' => $this->type_id,
-            'frequency_id' => $this->frequency_id,
+            'frequency' => $this->frequency,
         ]);
 
-        if ($income->frequency->abbr === 'one-time') {
+        if ($income->frequency->value === IncomeFrequency::ONE_TIME) {
             $income->update(['active' => false]);
         }
 
@@ -53,7 +54,7 @@ class CreateIncomeForm extends Component
         return view('livewire.forms.incomes.create-income-form', [
             'users' => currentBudget()->members()->orderBy('name')->select(['users.ulid', 'name'])->get(),
             'types' => IncomeType::orderBy('name')->select(['id', 'name'])->get(),
-            'frequencies' => IncomeFrequency::orderBy('name')->select(['id', 'name'])->get(),
+            'frequencies' => IncomeFrequency::cases(),
         ]);
     }
 }
