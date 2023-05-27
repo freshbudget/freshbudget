@@ -1,3 +1,5 @@
+https://flareapp.io/blog/20-collecting-metrics-for-flare-using-event-sourcing-and-laravel-stats
+
 # Income Notes
 
 - The things I care about for an income

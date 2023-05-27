@@ -27,7 +27,7 @@ class IncomesController extends Controller
 
     public function show(Income $income)
     {
-        $this->authorize('show', [$income, currentBudget()]);
+        $this->authorize('view', [$income, currentBudget()]);
 
         return view('app.incomes.show.index', [
             'income' => $income,

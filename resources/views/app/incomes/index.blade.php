@@ -12,7 +12,7 @@
 
     <div class="p-6 prose prose-green">
 
-        <p>You currently have active {{ $incomes->count() }} {{ str('income')->plural($incomes->count()) }}, bringing in a estimated monthly amount of ${{ currentBudget()->estimatedIncomePerPeriod() }}.</p>
+        <p>You currently have active {{ $incomes->count() }} {{ str('income')->plural($incomes->count()) }}, bringing in a estimated monthly amount of ${{ $incomes->sum('estimated_net_per_period') }}.</p>
 
         <blockquote>
             Show a bar chart of how each income contributes to the total monthly income.

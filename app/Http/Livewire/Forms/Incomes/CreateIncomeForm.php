@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Forms\Incomes;
 
-use Livewire\Component;
-use Illuminate\Validation\Rules\Enum;
-use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Incomes\Enums\IncomeFrequency;
+use App\Domains\Incomes\Models\IncomeType;
+use Illuminate\Validation\Rules\Enum;
+use Livewire\Component;
 
 class CreateIncomeForm extends Component
 {

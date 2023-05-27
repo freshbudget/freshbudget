@@ -6,8 +6,6 @@
 
         <div class="prose select-none prose-green">
 
-            <h2>Create entitlements</h2>
-
             <p>
                 Entitlements are basic groups of income that you expect to earn during a pay period. For example, you may have a base pay, this is one entitlement. On the same pay stub you may have overtime pay, this is another entitlement. You can add as many entitlements as you need to represent your expected income per pay period. Remember, this is just an estimate, when you log your income you will be able to input how much you actually earned for each item.
             </p>
@@ -83,7 +81,7 @@
                         <button 
                             type="button" 
                             x-on:click.thottle="addEntitlement" 
-                            class="inline-block px-3 py-1 text-sm font-semibold text-gray-700 border border-gray-300 rounded-lg shadow-sm bg-gray-50 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900">
+                            class="inline-block px-3 py-1 text-sm font-semibold text-gray-700 border border-gray-300 rounded-lg shadow-sm select-none bg-gray-50 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900">
                             Add another entitlement
                         </button>
     

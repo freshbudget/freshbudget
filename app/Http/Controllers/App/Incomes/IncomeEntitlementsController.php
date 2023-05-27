@@ -14,8 +14,32 @@ class IncomeEntitlementsController extends Controller
         $this->authorize('addEntitlements', [$income, currentBudget()]);
 
         return view('app.incomes.show.entitlements.create', [
-            'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
-            'income' => currentBudget()->incomes()->findOrFail($income->id),
+            'income' => $income,
+        ]);
+    }
+
+    public function edit(Income $income, IncomeEntitlement $entitlement)
+    {
+        $this->authorize('editEntitlements', [$income, currentBudget()]);
+
+        return view('app.incomes.show.entitlements.edit', [
+            'income' => $income,
+            'entitlement' => $entitlement,
+        ]);
+    }
+
+    public function show(Income $income)
+    {
+        $this->authorize('view', [$income, currentBudget()]);
+
+        $income->load(['entitlements']);
+
+        if ($income->entitlements->count() === 0) {
+            return redirect()->route('app.incomes.entitlements.create', $income);
+        }
+
+        return view('app.incomes.show.entitlements.show', [
+            'income' => $income,
         ]);
     }
 
@@ -24,6 +48,11 @@ class IncomeEntitlementsController extends Controller
         $this->authorize('addEntitlements', [$income, currentBudget()]);
 
         // TODO: validate the request
+        $this->validate($request, [
+            'entitlements' => ['required', 'array'],
+            'entitlements.*.name' => ['required', 'string'],
+            'entitlements.*.amount' => ['required', 'string'],
+        ]);
 
         // loop over each entitlement and create it
         $entitlements = $request->entitlements;
@@ -55,6 +84,8 @@ class IncomeEntitlementsController extends Controller
                 'end_date' => null,
             ]);
         }
+
+        $income->forget('estimated_net_per_period');
 
         return redirect()->route('app.incomes.show', $income);
     }

@@ -1,10 +1,13 @@
 <?php
 
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Enums\IncomeFrequency;
 use App\Domains\Incomes\Models\Income;
+use App\Domains\Incomes\Models\IncomeDeduction;
+use App\Domains\Incomes\Models\IncomeEntitlement;
+use App\Domains\Incomes\Models\IncomeTax;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Users\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 
 test('when model is created, a ulid is generated', function () {
     $model = Income::factory()->create();
@@ -48,5 +51,48 @@ test('the model belongs to a user via the owner, optionally', function () {
 test('an income can have many entitlements', function () {
     $model = Income::factory()->create();
 
-    expect($model->entitlements)->toBeInstanceOf(Collection::class);
+    $entitlement = $model->entitlements()->create([
+        'name' => 'Test Entitlement',
+        'amount' => 100,
+        'active' => true,
+    ]);
+
+    expect($model->entitlements->count())->toBe(1);
+    expect($model->entitlements->first())->toBeInstanceOf(IncomeEntitlement::class);
+});
+
+// test an income can have many deductions
+test('an income can have many deductions', function () {
+    $model = Income::factory()->create();
+
+    $deduction = $model->deductions()->create([
+        'name' => 'Test Deduction',
+        'amount' => 100,
+        'active' => true,
+    ]);
+
+    expect($model->deductions->count())->toBe(1);
+    expect($model->deductions->first())->toBeInstanceOf(IncomeDeduction::class);
+});
+
+// test an income can have many taxes
+test('an income can have many taxes', function () {
+    $model = Income::factory()->create();
+
+    $tax = $model->taxes()->create([
+        'name' => 'Test Tax',
+        'amount' => 100,
+        'active' => true,
+    ]);
+
+    expect($model->taxes->count())->toBe(1);
+    expect($model->taxes->first())->toBeInstanceOf(IncomeTax::class);
+});
+
+// test the income frequency is an enum
+test('the income frequency is an enum', function () {
+    $model = Income::factory()->create();
+
+    expect($model->frequency)->toBeInstanceOf(IncomeFrequency::class);
+    expect($model->frequency->value)->toBeString();
 });

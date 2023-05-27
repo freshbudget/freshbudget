@@ -2,15 +2,25 @@
 
 use App\Http\Controllers\App\Budgets\BudgetsController;
 use App\Http\Controllers\App\Budgets\CurrentBudgetController;
+use App\Http\Controllers\App\CookiesController;
 use App\Http\Controllers\App\Incomes\IncomeDeductionsController;
 use App\Http\Controllers\App\Incomes\IncomeEntitlementsController;
 use App\Http\Controllers\App\Incomes\IncomesController;
 use App\Http\Controllers\App\Incomes\IncomeTaxesController;
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Application Dashboard
+|--------------------------------------------------------------------------
+*/
 Route::view('/', 'app.index')
     ->middleware(['auth'])
     ->name('app.index');
+
+Route::view('/settings', 'app.settings.personal')
+    ->middleware(['auth'])
+    ->name('app.settings.personal');
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +85,10 @@ Route::get('/incomes/{income}/edit', [IncomesController::class, 'edit'])
 | Income Entitlements
 |--------------------------------------------------------------------------
 */
+Route::get('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('app.incomes.entitlements.show');
+
 Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsController::class, 'create'])
     ->middleware(['auth'])
     ->name('app.incomes.entitlements.create');
@@ -82,6 +96,11 @@ Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsControlle
 Route::post('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'store'])
     ->middleware(['auth'])
     ->name('app.incomes.entitlements.store');
+
+Route::get('/incomes/{income}/entitlements/{entitlement}/edit', [IncomeEntitlementsController::class, 'edit'])
+    ->middleware(['auth'])
+    ->name('app.incomes.entitlements.edit')
+    ->scopeBindings();
 
 /*
 |--------------------------------------------------------------------------
@@ -117,3 +136,12 @@ Route::post('/incomes/{income}/deductions', [IncomeDeductionsController::class, 
 Route::view('/files', 'app.files.index')
     ->middleware(['auth'])
     ->name('app.files.index');
+
+/*
+|--------------------------------------------------------------------------
+| UI State Management
+|--------------------------------------------------------------------------
+*/
+Route::post('/cookies/{cookie}', CookiesController::class)
+    ->middleware(['auth'])
+    ->name('app.cookies.update');

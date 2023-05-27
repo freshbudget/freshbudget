@@ -141,11 +141,6 @@ class Budget extends Model
         $this->members()->detach($user->id);
     }
 
-    /**
-     * Determine if the budget has any current users.
-     * i.e. users that have the budget set as their current budget.
-     * And optionally, exclude the given user.
-     */
     public function hasCurrentUsers(User $exclude = null): bool
     {
         return $this->members()
@@ -160,10 +155,8 @@ class Budget extends Model
         $incomes = $this->incomes()->get();
 
         $total = $incomes->reduce(function ($carry, $income) {
-            return $carry + $income->entitlements()->where('active', true)->sum('amount');
+            return $carry + $income->estimatedNetPerPeriod;
         }, 0);
-
-        // TODO: refactor this to remove duplicate queries from the incomes model
 
         return number_format($total / 100, 2);
     }

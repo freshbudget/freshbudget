@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full h-full select-none">
 
     <!-- Budget selector -->
-    <div class="p-4">
+    <div class="hidden p-4 sm:block">
 
         <div x-data="{ open: false }" x-on:keydown.escape.window="open=false" class="relative">
     
@@ -73,40 +73,44 @@
     </div>
 
     <!-- Main sidebar links -->
-    <div class="flex-1 p-4 space-y-1 text-gray-600">
+    <div class="flex-1 p-2 space-y-1 text-gray-600 sm:p-4" x-data="{}">
 
-        <a href="{{ route('app.index') }}" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active('app.index', 'font-semibold text-gray-900') }}">
-            @svg('home', 'w-5 h-5 mr-2.5') Home
+        <a href="{{ route('app.index') }}" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active('app.index', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('home', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Home</p>
         </a>
 
-        <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.calendar.*', 'font-semibold text-gray-900') }}">
-            @svg('calendar', 'w-5 h-5 mr-2.5') Calendar
+        <a href="#" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.calendar.*', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('calendar', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Calendar</p>
         </a>
 
-        <a href="{{ route('app.incomes.index') }}" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.incomes.*', 'font-semibold text-gray-900') }}">
-            @svg('banknotes', 'w-5 h-5 mr-2.5') Incomes
+        <a href="{{ route('app.incomes.index') }}" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.incomes.*', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('banknotes', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Incomes</p>
         </a>
 
-        <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
-            @svg('creditcard', 'w-5 h-5 mr-2.5') Expenses
+        <a href="#" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('creditcard', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Expenses</p>
         </a>
 
-        <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
-            @svg('bank', 'w-5 h-5 mr-2.5') Accounts
+        <a href="#" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('bank', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Accounts</p>
         </a>
 
-        <a href="#" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed">
-            @svg('pencilsquare', 'w-5 h-5 mr-2.5') Transactions
+        <a href="#" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('pencilsquare', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Transactions</p>
         </a>
 
-        <a href="{{ route('app.files.index') }}" class="flex items-center px-2.5 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.files.*', 'font-semibold text-gray-900') }}">
-            @svg('files', 'w-5 h-5 mr-2.5') Files
+        <a href="{{ route('app.files.index') }}" class="flex items-center justify-center sm:justify-normal sm:px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.files.*', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()">
+            <div class="flex items-center">@svg('files', 'w-5 h-5 sm:mr-2.5')</div> <p class="hidden sm:block">Files</p>
         </a>
-        
+
     </div>
 
     <!-- User profile menu -->  
     <div class="p-4">   
+
+        <button x-on:click="desktopSidebarExpanded=false" class="flex items-center pl-2.5 pr-3 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed truncate max-w-full">
+            @svg('chevron-double-left', 'w-5 h-5')
+        </button>
 
         <div x-data="{ open: false }" x-on:keydown.escape.window="open=false" class="relative">
             
@@ -121,7 +125,7 @@
 
             <div x-cloak x-show="open" x-trap="open" x-on:click.outside="open=false" class="absolute z-20 bottom-[110%] space-y-1 border border-gray-300 bg-white rounded-lg shadow-sm p-2 focus:outline-none" tabindex="-1">
 
-                <a href="#" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                <a href="{{ route('app.settings.personal') }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
                     @svg('cog', 'w-5 h-5 mr-2.5') Account settings
                 </a>
 

@@ -14,7 +14,6 @@ class IncomeDeductionsController extends Controller
         $this->authorize('addDeductions', [$income, currentBudget()]);
 
         return view('app.incomes.show.deductions.create', [
-            'incomes' => currentBudget()->incomes()->orderBy('name')->get(),
             'income' => currentBudget()->incomes()->findOrFail($income->id),
         ]);
     }

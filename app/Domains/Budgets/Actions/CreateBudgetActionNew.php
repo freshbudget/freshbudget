@@ -53,21 +53,3 @@ class CreateBudgetActionNew
         return $owner->ownedBudgets()->create($this->data);
     }
 }
-
-// $action = CreateBudgetActionNew::fromRequest(request());
-
-// $action->validate(fail: function ($validator) {
-//     return response()->json([
-//         'errors' => $validator->errors(),
-//     ], 422);
-// });
-
-// $budget = $action->execute(user());
-
-// return response()->json([
-//     'budget' => $budget,
-// ]);
-
-// (new CreateBudgetActionNew([
-//     'name' => 'My Budget',
-// ]))->execute(user());

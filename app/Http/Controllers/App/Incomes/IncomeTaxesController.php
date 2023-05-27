@@ -5,7 +5,6 @@ namespace App\Http\Controllers\App\Incomes;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeTax;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class IncomeTaxesController extends Controller
@@ -15,7 +14,6 @@ class IncomeTaxesController extends Controller
         $this->authorize('addTaxes', [$income, currentBudget()]);
 
         return view('app.incomes.show.taxes.create', [
-            'incomes' => $this->incomes(),
             'income' => currentBudget()->incomes()->findOrFail($income->id),
         ]);
     }
@@ -58,10 +56,5 @@ class IncomeTaxesController extends Controller
         }
 
         return redirect()->route('app.incomes.show', $income);
-    }
-
-    private function incomes(): Collection
-    {
-        return currentBudget()->incomes()->where('active', true)->orderBy('name')->get();
     }
 }

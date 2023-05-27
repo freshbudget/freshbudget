@@ -11,7 +11,7 @@ class CurrentBudgetSwitched
 {
     use Dispatchable, SerializesModels;
 
-    public function __construct(User $user, public Budget $budget)
+    public function __construct(public User $user, public Budget $budget)
     {
         //
     }

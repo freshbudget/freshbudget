@@ -20,7 +20,7 @@ class ResourcesSidebar extends Component
         $incomes = currentBudget()->incomes()->select(['ulid', 'name'])->get();
 
         $accounts = collect();
-        
+
         $this->resources = $accounts->merge($incomes);
     }
 

@@ -2,21 +2,21 @@
 
 namespace App\Domains\Incomes\Models;
 
-use App\Domains\Users\Models\User;
-use Database\Factories\IncomeFactory;
 use App\Domains\Budgets\Models\Budget;
-use Illuminate\Database\Eloquent\Model;
-use App\Domains\Incomes\Models\IncomeType;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Domains\Incomes\Enums\IncomeFrequency;
+use App\Domains\Users\Models\User;
+use Astrotomic\CachableAttributes\CachesAttributes;
+use Database\Factories\IncomeFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Income extends Model
 {
-    use HasFactory, HasUlids, SoftDeletes;
+    use HasFactory, HasUlids, SoftDeletes, CachesAttributes;
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +33,7 @@ class Income extends Model
         'url',
         'username',
         'currency',
-        'frequency', 
+        'frequency',
         'meta',
         'active',
     ];
@@ -51,6 +51,14 @@ class Income extends Model
         'frequency' => IncomeFrequency::class,
         'meta' => 'array',
         'active' => 'boolean',
+    ];
+
+    protected $appends = [
+        'estimated_net_per_period',
+    ];
+
+    protected $cachableAttributes = [
+        'estimated_net_per_period',
     ];
 
     /*
@@ -75,6 +83,28 @@ class Income extends Model
 
     /*
     |----------------------------------
+    | Accessors and Mutators
+    |----------------------------------
+    */
+    protected function getEstimatedNetPerPeriodAttribute(): float
+    {
+        return $this->remember('estimated_net_per_period', 60, function (): float {
+
+            $entitlements = $this->entitlements()->where('active', true)->sum('amount');
+
+            $deductions = $this->deductions()->where('active', true)->sum('amount');
+
+            $taxes = $this->taxes()->where('active', true)->sum('amount');
+
+            $estimated = $entitlements - $taxes - $deductions;
+
+            return round($estimated / 100, 2);
+
+        });
+    }
+
+    /*
+    |----------------------------------
     | Relationships
     |----------------------------------
     */
@@ -85,12 +115,12 @@ class Income extends Model
 
     public function deductions(): HasMany
     {
-        return $this->hasMany(IncomeDeduction::class, 'income_id')->where('active', true);
+        return $this->hasMany(IncomeDeduction::class, 'income_id');
     }
 
     public function entitlements(): HasMany
     {
-        return $this->hasMany(IncomeEntitlement::class, 'income_id')->where('active', true);
+        return $this->hasMany(IncomeEntitlement::class, 'income_id');
     }
 
     public function type(): BelongsTo
@@ -103,23 +133,8 @@ class Income extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function estimatedNetAmountPerPeriod(): string
-    {
-        $entitlements = $this->entitlements()->where('active', true)->sum('amount');
-
-        $taxes = $this->taxes()->where('active', true)->sum('amount');
-
-        $deductions = $this->deductions()->where('active', true)->sum('amount');
-
-        $estimated = $entitlements - $taxes - $deductions;
-
-        return number_format($estimated / 100, 2);
-    }
-
     public function taxes(): HasMany
     {
-        return $this->hasMany(IncomeTax::class, 'income_id')->where('active', true);
+        return $this->hasMany(IncomeTax::class, 'income_id');
     }
-
-    // TODO: Need to add a method to get the estimated amount per given period (month, week, etc.) based on the frequency and the amount
 }

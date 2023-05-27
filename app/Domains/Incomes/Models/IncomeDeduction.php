@@ -65,6 +65,16 @@ class IncomeDeduction extends Model
 
     /*
     |----------------------------------
+    | Scopes
+    |----------------------------------
+    */
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
+
+    /*
+    |----------------------------------
     | Relationships
     |----------------------------------
     */
