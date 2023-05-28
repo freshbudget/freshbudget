@@ -11,7 +11,7 @@
         <div class="flex items-center px-6 py-2.5 space-x-4 text-gray-700 select-none">
 
             <div class="flex items-center space-x-2">
-                @svg('banknotes', 'w-4 h-4 text-gray-500') <p>${{ number_format($income->estimated_net_per_period, 2) }}/{{ $income->frequency }}</p>
+                @svg('banknotes', 'w-4 h-4 text-gray-500') <p>{{ NumberFormatter::create('en_US', NumberFormatter::CURRENCY)->format($income->estimated_net_per_period) }}/{{ $income->frequency }}</p>
             </div>
 
             @if($income->url)

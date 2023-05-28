@@ -106,11 +106,7 @@
     </div>
 
     <!-- User profile menu -->  
-    <div class="p-4">   
-
-        <button x-on:click="desktopSidebarExpanded=false" class="flex items-center pl-2.5 pr-3 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed truncate max-w-full">
-            @svg('chevron-double-left', 'w-5 h-5')
-        </button>
+    <div class="flex items-center justify-between p-4">   
 
         <div x-data="{ open: false }" x-on:keydown.escape.window="open=false" class="relative">
             
@@ -147,6 +143,9 @@
 
         </div>
 
+        <button x-on:click="desktopSidebarExpanded=false" class="flex items-center pl-2.5 pr-3 py-1.5 hover:bg-gray-100/90 relative focus:outline-none hover:shadow-sm hover:border-gray-300 border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed truncate max-w-full">
+            @svg('chevron-double-left', 'w-5 h-5')
+        </button>
 
     </div>
 

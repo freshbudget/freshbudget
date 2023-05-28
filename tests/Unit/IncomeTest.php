@@ -1,12 +1,12 @@
 <?php
 
 use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Enums\IncomeFrequency;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeDeduction;
 use App\Domains\Incomes\Models\IncomeEntitlement;
 use App\Domains\Incomes\Models\IncomeTax;
 use App\Domains\Incomes\Models\IncomeType;
+use App\Domains\Shared\Enums\Frequency;
 use App\Domains\Users\Models\User;
 
 test('when model is created, a ulid is generated', function () {
@@ -93,6 +93,6 @@ test('an income can have many taxes', function () {
 test('the income frequency is an enum', function () {
     $model = Income::factory()->create();
 
-    expect($model->frequency)->toBeInstanceOf(IncomeFrequency::class);
+    expect($model->frequency)->toBeInstanceOf(Frequency::class);
     expect($model->frequency->value)->toBeString();
 });

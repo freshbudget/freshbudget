@@ -6,6 +6,7 @@
         </x-forms.label>
 
         <x-forms.input type="text" name="name" id="name" wire:model.defer="name" autofocus />
+        
         <x-forms.validation-error for="name" />
     </div>
 
@@ -36,23 +37,27 @@
             @endforeach
         </x-forms.select>
 
-        <x-forms.validation-error for="frequency/v" />
+        <x-forms.validation-error for="frequency" />
     </div>
 
-    <div class="space-y-2">
-        <x-forms.label for="user_ulid">
-            Who, in your budget, would you say this income is associated with?
-        </x-forms.label>
+    @if(currentBudget()->member_count > 1) 
 
-        <x-forms.select name="user_ulid" id="user_ulid" wire:model.defer="user_ulid">
-            <option value="">Select a user</option>
-            @foreach ($users as $user)
-                <option value="{{ $user->ulid }}">{{ $user->name }}</option>
-            @endforeach
-        </x-forms.select>
+        <div class="space-y-2">
+            <x-forms.label for="user_ulid">
+                Who, in your budget, would you say this income is associated with?
+            </x-forms.label>
 
-        <x-forms.validation-error for="user_ulid" />
-    </div>
+            <x-forms.select name="user_ulid" id="user_ulid" wire:model.defer="user_ulid">
+                <option value="">Select a user</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->ulid }}">{{ $user->name }}</option>
+                @endforeach
+            </x-forms.select>
+
+            <x-forms.validation-error for="user_ulid" />
+        </div>
+        
+    @endif
 
     <div class="flex items-center justify-end">
         <x-forms.buttons.primary type="submit">

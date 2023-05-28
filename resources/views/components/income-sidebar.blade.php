@@ -18,6 +18,10 @@
                 @svg('home', 'w-5 h-5 text-gray-500')
             </a>
 
+            <button type="button" class="flex items-center justify-center p-2.5 text-gray-700 bg-gray-100 border border-gray-300 rounded-lg shadow-sm select-none hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900 active:shadow-inner" title="Adjust incomes filter">
+                @svg('funnel', 'w-5 h-5 text-gray-500')
+            </button>
+
             <a href="{{ route('app.incomes.create') }}" class="flex items-center justify-center p-2.5 text-gray-700 bg-gray-100 border border-gray-300 rounded-lg shadow-sm select-none hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900 active:shadow-inner" title="Add income">
                 @svg('plus', 'w-5 h-5 text-gray-500')
             </a>
@@ -49,7 +53,7 @@
                             <h3 class="font-semibold">{{ $income->name }}</h3>
                             
                             <p class="text-sm italic">
-                                <span class="text-gray-500">Estimated</span> ${{ $income->estimatedNetPerPeriod }}
+                                <span class="text-gray-500">Estimated</span> ${{ $income->estimated_net_per_period }}/{{ $income->frequency }}
                             </p>
                             
                         </div>

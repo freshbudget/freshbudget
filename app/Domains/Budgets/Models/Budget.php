@@ -20,6 +20,15 @@ class Budget extends Model
     use HasFactory, HasUlids, SoftDeletes;
 
     /**
+     * The attributes that should be appended to model arrays.
+     *
+     * @var array<string>
+     */
+    protected $appends = [
+        'member_count',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -79,6 +88,16 @@ class Budget extends Model
     public function uniqueIds(): array
     {
         return ['ulid'];
+    }
+
+    /*
+    |----------------------------------
+    | Accessors
+    |----------------------------------
+    */
+    public function getMemberCountAttribute(): int
+    {
+        return $this->members()->count();
     }
 
     /*
@@ -148,16 +167,5 @@ class Budget extends Model
             ->when($exclude, function ($query, $user) {
                 $query->where('user_id', '!=', $user->id);
             })->exists();
-    }
-
-    public function estimatedIncomePerPeriod(): string
-    {
-        $incomes = $this->incomes()->get();
-
-        $total = $incomes->reduce(function ($carry, $income) {
-            return $carry + $income->estimatedNetPerPeriod;
-        }, 0);
-
-        return number_format($total / 100, 2);
     }
 }

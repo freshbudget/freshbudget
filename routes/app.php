@@ -18,6 +18,11 @@ Route::view('/', 'app.index')
     ->middleware(['auth'])
     ->name('app.index');
 
+/*
+|--------------------------------------------------------------------------
+| Account Settings
+|--------------------------------------------------------------------------
+*/
 Route::view('/settings', 'app.settings.personal')
     ->middleware(['auth'])
     ->name('app.settings.personal');

@@ -3,7 +3,9 @@
 namespace App\Domains\Incomes\Models;
 
 use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Enums\IncomeFrequency;
+use App\Domains\Incomes\Events\IncomeCreated;
+use App\Domains\Incomes\Events\IncomeDeleted;
+use App\Domains\Shared\Enums\Frequency;
 use App\Domains\Users\Models\User;
 use Astrotomic\CachableAttributes\CachesAttributes;
 use Database\Factories\IncomeFactory;
@@ -17,6 +19,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Income extends Model
 {
     use HasFactory, HasUlids, SoftDeletes, CachesAttributes;
+
+    /**
+     * The attributes that should be appended to the model.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'estimated_net_per_period',
+        'estimated_net_per_month',
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => IncomeCreated::class,
+        'deleted' => IncomeDeleted::class,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +61,16 @@ class Income extends Model
     ];
 
     /**
+     * The attributes that should be cached.
+     *
+     * @var array
+     */
+    protected $cachableAttributes = [
+        'estimated_net_per_period',
+        'estimated_net_per_month',
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -48,17 +80,9 @@ class Income extends Model
         'budget_id' => 'integer',
         'user_id' => 'integer',
         'type_id' => 'integer',
-        'frequency' => IncomeFrequency::class,
+        'frequency' => Frequency::class,
         'meta' => 'array',
         'active' => 'boolean',
-    ];
-
-    protected $appends = [
-        'estimated_net_per_period',
-    ];
-
-    protected $cachableAttributes = [
-        'estimated_net_per_period',
     ];
 
     /*
@@ -83,12 +107,12 @@ class Income extends Model
 
     /*
     |----------------------------------
-    | Accessors and Mutators
+    | Accessors
     |----------------------------------
     */
     protected function getEstimatedNetPerPeriodAttribute(): float
     {
-        return $this->remember('estimated_net_per_period', 60, function (): float {
+        return $this->remember('estimated_net_per_period', 15, function (): float {
 
             $entitlements = $this->entitlements()->where('active', true)->sum('amount');
 
@@ -97,6 +121,36 @@ class Income extends Model
             $taxes = $this->taxes()->where('active', true)->sum('amount');
 
             $estimated = $entitlements - $taxes - $deductions;
+
+            return round($estimated / 100, 2);
+
+        });
+    }
+
+    protected function getEstimatedNetPerMonthAttribute(): float
+    {
+        return $this->remember('estimated_net_per_month', 15, function (): float {
+
+            $totalEntitlements = 0;
+
+            $entitlements = $this->entitlements()->where('active', true);
+
+            // loop through each entitlement and calculate the monthly amount
+            $entitlements->each(function ($entitlement) use (&$totalEntitlements) {
+
+                // get the number of occurances in a month
+                $occurances = $this->frequency->numberOfOccurancesInMonth();
+
+                $entitlement->amount = $entitlement->amount * $occurances;
+
+                $totalEntitlements += $entitlement->amount;
+            });
+
+            $deductions = $this->deductions()->where('active', true)->sum('amount');
+
+            $taxes = $this->taxes()->where('active', true)->sum('amount');
+
+            $estimated = $totalEntitlements - $taxes - $deductions;
 
             return round($estimated / 100, 2);
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\App\Incomes;
 
+use App\Domains\Budgets\Models\BudgetStatistic;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeEntitlement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Stats\StatsWriter;
 
 class IncomeEntitlementsController extends Controller
 {
@@ -47,17 +49,13 @@ class IncomeEntitlementsController extends Controller
     {
         $this->authorize('addEntitlements', [$income, currentBudget()]);
 
-        // TODO: validate the request
         $this->validate($request, [
             'entitlements' => ['required', 'array'],
             'entitlements.*.name' => ['required', 'string'],
             'entitlements.*.amount' => ['required', 'string'],
         ]);
 
-        // loop over each entitlement and create it
-        $entitlements = $request->entitlements;
-
-        foreach ($entitlements as $entitlement) {
+        foreach ($request->entitlements as $entitlement) {
 
             $amount = $entitlement['amount'];
 
@@ -85,8 +83,19 @@ class IncomeEntitlementsController extends Controller
             ]);
         }
 
-        $income->forget('estimated_net_per_period');
+        $income->flush();
 
-        return redirect()->route('app.incomes.show', $income);
+        $income->load(['entitlements']);
+
+        foreach ($income->entitlements as $entitlement) {
+            StatsWriter::for(BudgetStatistic::class, [
+                'budget_id' => currentBudget()->id,
+                'model_type' => IncomeEntitlement::class,
+                'model_id' => $entitlement->id,
+                'name' => $entitlement->name,
+            ])->set($entitlement->amount);
+        }
+
+        return redirect()->route('app.incomes.entitlements.show', $income);
     }
 }

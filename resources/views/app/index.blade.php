@@ -5,7 +5,5 @@
     <h3 class="p-6 text-3xl font-bold">
         Dashboard
     </h3>
-
-    {{ session('desktopSidebarOpen', 'true') }}
     
 @endsection
