@@ -24,12 +24,12 @@ class BudgetPolicy
 
     public function setAsCurrent(User $user, Budget $budget): bool
     {
-        return $budget->hasUser($user);
+        return $budget->hasMember($user);
     }
 
     public function view(User $user, Budget $budget): bool
     {
-        return $budget->hasUser($user);
+        return $budget->hasMember($user);
     }
 
     public function viewAny(User $user): bool

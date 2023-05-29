@@ -45,12 +45,12 @@ class AcceptBudgetInvitationAction
         // ensure the recipient doesn't already belong to the budget
         // if so we can just return because the end state
         // has already been achieved
-        if ($invitation->budget->hasUser($recipient)) {
+        if ($invitation->budget->hasMember($recipient)) {
             return;
         }
 
         // add the recipient to the budget
-        $invitation->budget->addUser($recipient);
+        $invitation->budget->addMember($recipient);
 
         // mark the invitation as accepted
         $invitation->markAsAccepted();

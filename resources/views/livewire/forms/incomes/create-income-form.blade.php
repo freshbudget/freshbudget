@@ -40,7 +40,7 @@
         <x-forms.validation-error for="frequency" />
     </div>
 
-    @if(currentBudget()->member_count > 1) 
+    @if($users->count() > 1) 
 
         <div class="space-y-2">
             <x-forms.label for="user_ulid">

@@ -1,10 +1,6 @@
-@extends('layouts.app')
+@extends('app.settings.layout')
 
-@section('content')
-
-    <h3 class="p-6 text-3xl font-bold">
-        Settings
-    </h3>
+@section('section')
 
     <div class="p-6">
 

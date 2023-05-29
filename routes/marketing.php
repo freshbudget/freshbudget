@@ -12,6 +12,9 @@ Route::view('/terms', 'marketing.terms')
 Route::view('/privacy', 'marketing.privacy')
     ->name('privacy');
 
+Route::view('/faq', 'marketing.faq')
+    ->name('faq');
+
 Route::view('/blog', 'blog.index')
     ->name('blog');
 

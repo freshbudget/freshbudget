@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\App\Incomes;
 
+use App\Domains\Incomes\Actions\CreateIncomeTaxAction;
+use App\Domains\Incomes\Actions\UpdateIncomeTaxEstimate;
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeTax;
+use App\Domains\Incomes\Models\IncomeStatistic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Stats\StatsWriter;
 
 class IncomeTaxesController extends Controller
 {
@@ -14,7 +17,7 @@ class IncomeTaxesController extends Controller
         $this->authorize('addTaxes', [$income, currentBudget()]);
 
         return view('app.incomes.show.taxes.create', [
-            'income' => currentBudget()->incomes()->findOrFail($income->id),
+            'income' => $income,
         ]);
     }
 
@@ -22,38 +25,25 @@ class IncomeTaxesController extends Controller
     {
         $this->authorize('addTaxes', [$income, currentBudget()]);
 
-        // TODO: validate the request
+        $this->validate($request, [
+            'taxes' => ['required', 'array'],
+            'taxes.*.name' => ['required', 'string'],
+            'taxes.*.amount' => ['required', 'string'],
+        ]);
 
-        // loop over each entitlement and create it
-        $taxes = $request->taxes;
-
-        foreach ($taxes as $tax) {
-
-            $amount = $tax['amount'];
-
-            // need to strip any commas from the amount
-            $amount = str_replace(',', '', $amount);
-
-            // need to strip any dollar signs from the amount
-            $amount = str_replace('$', '', $amount);
-
-            // need to convert to a php float
-            $amount = (float) $amount;
-
-            // need to convert to cents
-            $amount = $amount * 100;
-
-            // need to convert to an integer
-            $amount = (int) $amount;
-
-            IncomeTax::create([
-                'income_id' => $income->id,
-                'name' => $tax['name'],
-                'amount' => $amount,
-                'start_date' => now(),
-                'end_date' => null,
-            ]);
+        foreach ($request->taxes as $tax) {
+            $tax = (new CreateIncomeTaxAction(
+                income: $income,
+                data: $tax,
+            ))->execute();
         }
+
+        (new UpdateIncomeTaxEstimate($income))->execute();
+
+        StatsWriter::for(IncomeStatistic::class, [
+            'income_id' => $income->id,
+            'name' => 'estimated_taxes_per_period',
+        ])->set($income->estimated_taxes_per_period);
 
         return redirect()->route('app.incomes.show', $income);
     }

@@ -179,7 +179,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function belongsToBudget(Budget $budget): bool
     {
-        return $this->ownsBudget($budget) || $budget->hasUser($this);
+        return $this->ownsBudget($budget) || $budget->hasMember($this);
     }
 
     public function currentBudgetIs(Budget $budget): bool

@@ -88,6 +88,18 @@ return new class extends Migration
                 'tagline' => 'Cash Income',
                 'description' => 'An income that is received as cash.',
             ],
+            [
+                'name' => 'Royalty',
+                'abbr' => 'ROY',
+                'tagline' => 'Royalty Income',
+                'description' => 'An income that is received as royalty.',
+            ],
+            [
+                'name' => 'Other',
+                'abbr' => 'OTH',
+                'tagline' => 'Other Income',
+                'description' => 'An income that is received as other.',
+            ],
         ];
 
         foreach ($types as $type) {

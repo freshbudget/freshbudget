@@ -102,7 +102,7 @@ test('it can retrive owned budgets', function () {
     $budget2 = Budget::factory()->create();
 
     // invite the user to the budget
-    $budget2->addUser($user);
+    $budget2->addMember($user);
 
     // refresh the user
     $user->refresh();
@@ -123,7 +123,7 @@ test('it can retrieve all budgets it belongs to', function () {
 
     // given a budget, the user is invited to and accepts
     $budget = Budget::factory()->create();
-    $budget->addUser($user);
+    $budget->addMember($user);
 
     // refresh the user
     $user->refresh();
@@ -199,7 +199,7 @@ test('it can accept an invitation to a budget', function () {
 
     $user->acceptBudgetInvitation($invitation);
 
-    expect($budget->hasUser($user))->toBeTrue();
+    expect($budget->hasMember($user))->toBeTrue();
     expect($invitation->isAccepted())->toBeTrue();
 
     Event::assertDispatched(BudgetInvitationAccepted::class, function ($event) use ($invitation) {

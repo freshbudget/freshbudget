@@ -9,7 +9,7 @@
         </h2>
 
         <p class="my-10 text-lg text-gray-700">
-            Last updated on May 1st, 2023
+            Last updated on {{ carbon()->createFromTimestamp(filemtime(resource_path('views/marketing/terms.blade.php')))->format('F j, Y') }}.
         </p>
 
     </main>

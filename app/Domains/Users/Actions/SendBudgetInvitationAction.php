@@ -20,7 +20,7 @@ class SendBudgetInvitationAction
         }
 
         // ensure the recipient isn't already a member of the budget
-        if ($budget->hasUserWithEmail($email)) {
+        if ($budget->hasMemberWithEmail($email)) {
             throw new \Exception('The user you are inviting is already a member of the budget.');
         }
 

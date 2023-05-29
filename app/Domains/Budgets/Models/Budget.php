@@ -25,7 +25,7 @@ class Budget extends Model
      * @var array<string>
      */
     protected $appends = [
-        'member_count',
+        //
     ];
 
     /**
@@ -92,16 +92,6 @@ class Budget extends Model
 
     /*
     |----------------------------------
-    | Accessors
-    |----------------------------------
-    */
-    public function getMemberCountAttribute(): int
-    {
-        return $this->members()->count();
-    }
-
-    /*
-    |----------------------------------
     | Relationships
     |----------------------------------
     */
@@ -135,17 +125,17 @@ class Budget extends Model
     | Team Budget Functionality
     |--------------------------------------------------------------------------
     */
-    public function addUser(User $user): void
+    public function addMember(User $user): void
     {
         $this->members()->attach($user->id);
     }
 
-    public function hasUser(User $user): bool
+    public function hasMember(User $user): bool
     {
         return $this->members->contains($user) || $this->owner->is($user);
     }
 
-    public function hasUserWithEmail(string $email): bool
+    public function hasMemberWithEmail(string $email): bool
     {
         return $this->members()->where('email', $email)->exists();
     }
@@ -155,12 +145,12 @@ class Budget extends Model
         return $this->owner->is($user);
     }
 
-    public function removeUser(User $user): void
+    public function removeMember(User $user): void
     {
         $this->members()->detach($user->id);
     }
 
-    public function hasCurrentUsers(User $exclude = null): bool
+    public function hasCurrentMembers(User $exclude = null): bool
     {
         return $this->members()
             ->where('current_budget_id', $this->id)

@@ -60,13 +60,13 @@ class MakeDomainCommand extends Command
 
         $directories = [
             'Actions',
+            'Enums',
             'Events',
             'Exceptions',
             'Models',
             'Notifications',
             'Policies',
             'Jobs',
-            'Support',
         ];
 
         foreach ($directories as $directory) {

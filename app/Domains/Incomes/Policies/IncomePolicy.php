@@ -16,7 +16,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->hasUser($user)) {
+        if (! $budget->hasMember($user)) {
             return false;
         }
 
@@ -31,7 +31,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->hasUser($user)) {
+        if (! $budget->hasMember($user)) {
             return false;
         }
 
@@ -46,7 +46,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->hasUser($user)) {
+        if (! $budget->hasMember($user)) {
             return false;
         }
 
@@ -61,7 +61,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->hasUser($user)) {
+        if (! $budget->hasMember($user)) {
             return false;
         }
 
@@ -81,7 +81,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->hasUser($user)) {
+        if (! $budget->hasMember($user)) {
             return false;
         }
 
@@ -111,7 +111,7 @@ class IncomePolicy
         }
 
         // check that the user is a member of the budget
-        if (! $budget->hasUser($user)) {
+        if (! $budget->hasMember($user)) {
             return false;
         }
 

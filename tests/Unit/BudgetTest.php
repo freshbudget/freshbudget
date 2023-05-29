@@ -89,10 +89,10 @@ test('it can check if a user is a member', function () {
     $user = User::factory()->create();
 
     // check if the owner is a member
-    expect($budget->hasUser($budget->owner))->toBeTrue();
+    expect($budget->hasMember($budget->owner))->toBeTrue();
 
     // check if the first user is a member
-    expect($budget->hasUser($user))->toBeFalse();
+    expect($budget->hasMember($user))->toBeFalse();
 });
 
 // test it can check if a user is an owner
@@ -117,10 +117,10 @@ test('it can check if a user exists with a given email', function () {
     $user = User::factory()->create();
 
     // check if the owner is an owner
-    expect($budget->hasUserWithEmail($budget->owner->email))->toBeTrue();
+    expect($budget->hasMemberWithEmail($budget->owner->email))->toBeTrue();
 
     // check if the first user is an owner
-    expect($budget->hasUserWithEmail($user->email))->toBeFalse();
+    expect($budget->hasMemberWithEmail($user->email))->toBeFalse();
 });
 
 // test it has many incomes
@@ -159,10 +159,10 @@ test('it can add a user', function () {
     $user = User::factory()->create();
 
     // add the user
-    $budget->addUser($user);
+    $budget->addMember($user);
 
     // check if the user is a member
-    expect($budget->hasUser($user))->toBeTrue();
+    expect($budget->hasMember($user))->toBeTrue();
 });
 
 // test it can remove a user
@@ -173,19 +173,19 @@ test('it can remove a user', function () {
     $user = User::factory()->create();
 
     // add the user
-    $budget->addUser($user);
+    $budget->addMember($user);
 
     // check if the user is a member
-    expect($budget->hasUser($user))->toBeTrue();
+    expect($budget->hasMember($user))->toBeTrue();
 
     // remove the user
-    $budget->removeUser($user);
+    $budget->removeMember($user);
 
     // refresh the model
     $budget->refresh();
 
     // check if the user is a member
-    expect($budget->hasUser($user))->toBeFalse();
+    expect($budget->hasMember($user))->toBeFalse();
 });
 
 // it can determine if any users have the budget set as their current budget
@@ -200,11 +200,11 @@ test('it can determine if any users have the budget set as their current budget'
 
     expect($user->currentBudgetIs($budget))->toBeTrue();
 
-    expect($budget->hasCurrentUsers())->toBeTrue();
+    expect($budget->hasCurrentMembers())->toBeTrue();
 
     $user->switchCurrentBudget($user->personalBudget());
 
-    expect($budget->hasCurrentUsers())->toBeFalse();
+    expect($budget->hasCurrentMembers())->toBeFalse();
 });
 
 test('it can determine if any users have the budget set as their current budget, excluding the given user', function () {
@@ -216,5 +216,5 @@ test('it can determine if any users have the budget set as their current budget,
 
     $user->switchCurrentBudget($budget);
 
-    expect($budget->hasCurrentUsers(exclude: $user))->toBeFalse();
+    expect($budget->hasCurrentMembers(exclude: $user))->toBeFalse();
 });

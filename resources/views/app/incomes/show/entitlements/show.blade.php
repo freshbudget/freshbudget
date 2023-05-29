@@ -19,7 +19,7 @@
                     </td>
                 </thead>
                 <tbody>
-                    @foreach ($income->entitlements as $entitlement)
+                    @foreach ($entitlements as $entitlement)
                         <tr>
                             <td>
                                 {{ $entitlement->name }}
@@ -40,7 +40,7 @@
                     </td>
                     <td class="text-right">
                         <span class="select-none">$</span>
-                        <span class="select-all">{{ number_format($income->entitlements->sum('amount') / 100, 2) }}</span>
+                        <span class="select-all">{{ number_format($income->estimated_entitlements_per_period / 100, 2) }}</span>
                     </td>
                     <td>
                         &nbsp;

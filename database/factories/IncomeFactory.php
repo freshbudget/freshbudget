@@ -35,6 +35,8 @@ class IncomeFactory extends Factory
             'frequency' => FrequencyEnum::MONTHLY,
             'meta' => null,
             'active' => true,
+            'estimated_entitlements_per_period' => 0,
+            'estimated_taxes_per_period' => 0,
         ];
     }
 

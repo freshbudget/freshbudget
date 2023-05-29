@@ -58,6 +58,8 @@ class Income extends Model
         'frequency',
         'meta',
         'active',
+        'estimated_entitlements_per_period',
+        'estimated_taxes_per_period',
     ];
 
     /**

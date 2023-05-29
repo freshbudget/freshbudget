@@ -47,11 +47,11 @@
         @yield('page')
     </div>
     
-    <footer class="mt-20 bg-gray-100 sm:py-14 py-10">
+    <footer class="py-10 mt-20 bg-gray-100 sm:py-14">
     
         <div class="max-w-3xl px-4 mx-auto">
             
-            <div class="space-y-3 text-gray-500">
+            <div class="space-y-3 text-gray-500 select-none">
     
                 <div class="flex items-center space-x-3">
                     <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" class="w-8 h-8 select-none"> 
@@ -64,9 +64,11 @@
     
                 <p class="text-sm">
                     &copy; {{ date('Y') }} {{ config('app.name') }} &mdash; 
-                    <a href="{{ route('terms') }}" class="hover:underline">Terms of Service</a>
+                    <a href="{{ route('terms') }}" class="hover:underline">Terms of Use</a>
                     &mdash; 
                     <a href="{{ route('privacy') }}" class="hover:underline">Privacy Policy</a>
+                    &mdash; 
+                    <a href="{{ route('faq') }}" class="hover:underline">FAQ</a>
                     &mdash; 
                     <a href="{{ route('blog') }}" class="hover:underline">Blog</a>
                 </p>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\App\Incomes;
 
-use App\Domains\Budgets\Models\BudgetStatistic;
+use App\Domains\Incomes\Actions\CreateIncomeEntitlementAction;
+use App\Domains\Incomes\Actions\UpdateIncomeEntitlementEstimate;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeEntitlement;
+use App\Domains\Incomes\Models\IncomeStatistic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Stats\StatsWriter;
@@ -34,14 +36,15 @@ class IncomeEntitlementsController extends Controller
     {
         $this->authorize('view', [$income, currentBudget()]);
 
-        $income->load(['entitlements']);
+        $entitlements = $income->entitlements()->where('active', true)->orderBy('name')->get();
 
-        if ($income->entitlements->count() === 0) {
+        if ($entitlements->count() === 0) {
             return redirect()->route('app.incomes.entitlements.create', $income);
         }
 
         return view('app.incomes.show.entitlements.show', [
             'income' => $income,
+            'entitlements' => $entitlements,
         ]);
     }
 
@@ -56,45 +59,18 @@ class IncomeEntitlementsController extends Controller
         ]);
 
         foreach ($request->entitlements as $entitlement) {
-
-            $amount = $entitlement['amount'];
-
-            // need to strip any commas from the amount
-            $amount = str_replace(',', '', $amount);
-
-            // need to strip any dollar signs from the amount
-            $amount = str_replace('$', '', $amount);
-
-            // need to convert to a php float
-            $amount = (float) $amount;
-
-            // need to convert to cents
-            $amount = $amount * 100;
-
-            // need to convert to an integer
-            $amount = (int) $amount;
-
-            IncomeEntitlement::create([
-                'income_id' => $income->id,
-                'name' => $entitlement['name'],
-                'amount' => $amount,
-                'start_date' => now(),
-                'end_date' => null,
-            ]);
+            $entitlement = (new CreateIncomeEntitlementAction(
+                income: $income,
+                data: $entitlement,
+            ))->execute();
         }
 
-        $income->flush();
+        (new UpdateIncomeEntitlementEstimate($income))->execute();
 
-        $income->load(['entitlements']);
-
-        foreach ($income->entitlements as $entitlement) {
-            StatsWriter::for(BudgetStatistic::class, [
-                'budget_id' => currentBudget()->id,
-                'model_type' => IncomeEntitlement::class,
-                'model_id' => $entitlement->id,
-                'name' => $entitlement->name,
-            ])->set($entitlement->amount);
-        }
+        StatsWriter::for(IncomeStatistic::class, [
+            'income_id' => $income->id,
+            'name' => 'estimated_entitlements_per_period',
+        ])->set($income->estimated_entitlements_per_period);
 
         return redirect()->route('app.incomes.entitlements.show', $income);
     }
