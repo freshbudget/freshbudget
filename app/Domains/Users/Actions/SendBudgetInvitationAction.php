@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Notification;
 class SendBudgetInvitationAction
 {
     public function __construct(
-        public Budget $budget, 
-        public User $sender, 
-        public string $email, 
-        public string $name, 
+        public Budget $budget,
+        public User $sender,
+        public string $email,
+        public string $name,
         public string|null $nickname = null)
     {
         //

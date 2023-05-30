@@ -1,12 +1,12 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\App\Budgets;
 
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Users\Actions\SendBudgetInvitationAction;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class BudgetInvitationsController extends Controller
 {
@@ -37,7 +37,7 @@ class BudgetInvitationsController extends Controller
             name: $validated['name'],
             nickname: Arr::get($validated, 'nickname', null),
         ))->execute();
-        
+
         return redirect()->route('app.budgets.show', $budget);
     }
 }

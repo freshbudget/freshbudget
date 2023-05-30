@@ -31,13 +31,14 @@ class IncomeFactory extends Factory
             'type_id' => IncomeType::factory(),
             'url' => $this->faker->url,
             'username' => $this->faker->userName,
-            'currency' => null,
+            'currency' => 'USD',
             'frequency' => FrequencyEnum::MONTHLY,
             'meta' => null,
             'active' => true,
             'estimated_entitlements_per_period' => 0,
             'estimated_taxes_per_period' => 0,
             'estimated_deductions_per_period' => 0,
+            'estimated_net_per_period' => 0,
         ];
     }
 

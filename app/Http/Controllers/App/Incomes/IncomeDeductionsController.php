@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Actions\CreateIncomeDeductionAction;
 use App\Domains\Incomes\Actions\UpdateIncomeDeductionEstimate;
+use App\Domains\Incomes\Actions\UpdateIncomeNetEstimate;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeStatistic;
 use App\Http\Controllers\Controller;
@@ -39,6 +40,8 @@ class IncomeDeductionsController extends Controller
         }
 
         (new UpdateIncomeDeductionEstimate($income))->execute();
+
+        (new UpdateIncomeNetEstimate($income))->execute();
 
         StatsWriter::for(IncomeStatistic::class, [
             'income_id' => $income->id,

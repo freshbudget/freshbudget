@@ -5,7 +5,6 @@ namespace App\Domains\Users\Actions;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
-use App\Domains\Users\Exceptions\CannotSendInvitationsForBudgetYouDontOwn;
 use App\Domains\Users\Exceptions\InvitationFailedToSend;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Notification;

@@ -5,6 +5,7 @@ namespace App\Domains\Incomes\Models;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Events\IncomeCreated;
 use App\Domains\Incomes\Events\IncomeDeleted;
+use App\Domains\Incomes\Presenters\IncomePresenter;
 use App\Domains\Shared\Enums\Frequency;
 use App\Domains\Users\Models\User;
 use Astrotomic\CachableAttributes\CachesAttributes;
@@ -26,7 +27,6 @@ class Income extends Model
      * @var array
      */
     protected $appends = [
-        'estimated_net_per_period',
         'estimated_net_per_month',
     ];
 
@@ -61,6 +61,7 @@ class Income extends Model
         'estimated_entitlements_per_period',
         'estimated_taxes_per_period',
         'estimated_deductions_per_period',
+        'estimated_net_per_period',
     ];
 
     /**
@@ -69,7 +70,6 @@ class Income extends Model
      * @var array
      */
     protected $cachableAttributes = [
-        'estimated_net_per_period',
         'estimated_net_per_month',
     ];
 
@@ -106,6 +106,11 @@ class Income extends Model
         return IncomeFactory::new();
     }
 
+    public function presenter(): IncomePresenter
+    {
+        return new IncomePresenter($this);
+    }
+
     public function uniqueIds(): array
     {
         return ['ulid'];
@@ -116,23 +121,6 @@ class Income extends Model
     | Accessors
     |----------------------------------
     */
-    protected function getEstimatedNetPerPeriodAttribute(): float
-    {
-        return $this->remember('estimated_net_per_period', 15, function (): float {
-
-            $entitlements = $this->entitlements()->where('active', true)->sum('amount');
-
-            $deductions = $this->deductions()->where('active', true)->sum('amount');
-
-            $taxes = $this->taxes()->where('active', true)->sum('amount');
-
-            $estimated = $entitlements - $taxes - $deductions;
-
-            return round($estimated / 100, 2);
-
-        });
-    }
-
     protected function getEstimatedNetPerMonthAttribute(): float
     {
         return $this->remember('estimated_net_per_month', 15, function (): float {

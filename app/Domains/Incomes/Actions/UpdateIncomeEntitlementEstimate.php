@@ -3,7 +3,6 @@
 namespace App\Domains\Incomes\Actions;
 
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeEntitlement;
 
 class UpdateIncomeEntitlementEstimate
 {
@@ -14,15 +13,7 @@ class UpdateIncomeEntitlementEstimate
 
     public function execute(): void
     {
-        $total = 0;
-
-        $entitlements = $this->income->entitlements()
-            ->where('active', true)
-            ->get();
-
-        $entitlements->each(function (IncomeEntitlement $entitlement) use (&$total) {
-            $total += $entitlement->amount;
-        });
+        $total = $this->income->activeEntitlements()->sum('amount');
 
         $this->income->update([
             'estimated_entitlements_per_period' => $total,

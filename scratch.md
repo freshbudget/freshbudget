@@ -29,16 +29,10 @@ https://flareapp.io/blog/20-collecting-metrics-for-flare-using-event-sourcing-an
     - they need to be configurable / searchable / chartable
     - possibly event sourced to support the input of past data that will stick allow for the same context to be built
 
-- an income has many entitlements, the sum of which is the net amount
-- an income has many taxes, the sum of which the taxed amount
-- an imcome has many deductions, the sum which is the deducted amount
-- an incomes estimated amount is the following  (net amount) - (taxed amount) - (deducted amount)
-- each on an incomes entitlements can be changed over time, thus need to be versioned??? event sourced??? active flag???
-
-Before firing off an event, an aggregate will first check if it is allowed to fire off that particular event. Using our example again, the aggregate will first loop through all previous events of that income and calculate the current estimated amount.
-
-okay so i want to get the incomes estimated mountly amount, I will ask the model to retieve the estimated_amount, this estimated amount be written to the income model(?) for ease of retrival. However it is actually a projection of all the incomes history of entitlements, taxes, and deductions.
-
-So when I want to update a income entitlement, I set the new amount(s) and "click save". this will `make` a new income entitlment record, which will be handled by the projector. The projector will take that unsaved record, and do the calculation to determine the incomes new estimated monthly income.
+- an income has many entitlements, the sum of which is the est entitlements amount
+- an income has many taxes, the sum of which the est taxes amount
+- an imcome has many deductions, the sum which is the est deducted amount
+- an incomes estimated net amount is the following  (est entitlements) - (est taxes) - (est deductions)
+- each of an incomes entitlements can be changed over time, thus need to be versioned??? event sourced??? active flag???
 
 - When a user creates a one time budget, don't show it in the incomes list. Also show a form to say where the income went, i.e. to which account. My thought is maybe like a cash birthday present from grandma, I don't need care about tracking that income, but I need somewhere to log the income.

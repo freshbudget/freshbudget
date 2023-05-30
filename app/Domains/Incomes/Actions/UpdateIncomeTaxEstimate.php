@@ -3,7 +3,6 @@
 namespace App\Domains\Incomes\Actions;
 
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeTax;
 
 class UpdateIncomeTaxEstimate
 {
@@ -14,15 +13,7 @@ class UpdateIncomeTaxEstimate
 
     public function execute(): void
     {
-        $total = 0;
-
-        $taxes = $this->income->taxes()
-            ->where('active', true)
-            ->get();
-
-        $taxes->each(function (IncomeTax $tax) use (&$total) {
-            $total += $tax->amount;
-        });
+        $total = $this->income->activeTaxes()->sum('amount');
 
         $this->income->update([
             'estimated_taxes_per_period' => $total,

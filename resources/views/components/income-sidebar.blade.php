@@ -53,7 +53,7 @@
                             <h3 class="font-semibold">{{ $income->name }}</h3>
                             
                             <p class="text-sm italic">
-                                <span class="text-gray-500">Estimated</span> ${{ $income->estimated_net_per_period }}/{{ $income->frequency }}
+                                <span class="text-gray-500">Est:</span> {{ $income->presenter()->estimatedNetPerPeriod() }}/{{ $income->frequency }}
                             </p>
                             
                         </div>
