@@ -17,8 +17,8 @@ class IncomePresenter
     {
         $amount = $this->income->estimated_net_per_period;
 
-        if(! $amount) {
-            return new Money(0, new Currency($this->income->currency));;
+        if (! $amount) {
+            return new Money(0, new Currency($this->income->currency));
         }
 
         return new Money($this->income->estimated_net_per_period, new Currency($this->income->currency));

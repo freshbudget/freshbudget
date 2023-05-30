@@ -19,6 +19,7 @@
         "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.12",
+        "spatie/laravel-health": "^1.22",
         "spatie/laravel-stats": "^2.1",
         "watson/active": "^7.0"
     },

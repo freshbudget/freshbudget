@@ -4,7 +4,7 @@
 
     <div class="max-w-xl mb-8">
 
-        <div class="prose select-none prose-green">
+        <div class="prose-sm prose select-none prose-green">
 
             <p>
                 Entitlements are basic groups of income that you expect to earn during a pay period. For example, you may have a base pay, this is one entitlement. On the same pay stub you may have overtime pay, this is another entitlement. You can add as many entitlements as you need to represent your expected income per pay period. Remember, this is just an estimate, when you log your income you will be able to input how much you actually earned for each item.

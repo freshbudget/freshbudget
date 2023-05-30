@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Invitations\BudgetInvitationsController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
 Route::view('/', 'marketing.index')
     ->name('welcome');
@@ -30,3 +31,10 @@ Route::get('/invitations/{invitation}', [BudgetInvitationsController::class, 'sh
 Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::class, 'accept'])
     ->middleware(['auth'])
     ->name('invitations.accept');
+
+/*
+|--------------------------------------------------------------------------
+| Application Health Check
+|--------------------------------------------------------------------------|
+*/
+Route::get('/health', HealthCheckResultsController::class);

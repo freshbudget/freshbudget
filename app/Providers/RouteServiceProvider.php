@@ -34,7 +34,6 @@ class RouteServiceProvider extends ServiceProvider
 
             // api.domain.tld
             Route::middleware('api')
-                ->prefix('api')
                 ->domain(config('app.api_domain'))
                 ->group(base_path('routes/api.php'));
 
