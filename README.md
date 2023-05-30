@@ -10,10 +10,12 @@ Because the codebase for Fresh Budget is open-source, you can see exactly how yo
 
 ## Local Installation
 
-#### Server Requirements
-- PHP 8
-- MySQL 8
+#### Requirements
 - Standard [Laravel Requirments](https://laravel.com/docs/10.x/deployment#server-requirements)
+- Composer 2+
+- PHP 8+
+- MySQL 8+
+- Node (if working on frontend assets)
 
 #### Clone repo
 
