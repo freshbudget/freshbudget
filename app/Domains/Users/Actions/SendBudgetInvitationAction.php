@@ -5,37 +5,43 @@ namespace App\Domains\Users\Actions;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
-use App\Domains\Users\Exceptions\CannotSendInvitationsForBudgetYouDontOwn;
 use App\Domains\Users\Exceptions\InvitationFailedToSend;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Notification;
 
 class SendBudgetInvitationAction
 {
-    public function execute(User $sender, Budget $budget, string $email, $name, $nickname): BudgetInvitation
+    public function __construct(
+        public Budget $budget, 
+        public User $sender, 
+        public string $email, 
+        public string $name, 
+        public string|null $nickname = null)
     {
-        // ensure the sender is the owner of the budget
-        if (! $budget->isOwnedBy($sender)) {
-            throw new CannotSendInvitationsForBudgetYouDontOwn();
+        //
+    }
+
+    public function execute(): BudgetInvitation
+    {
+        if ($this->budget->hasMemberWithEmail($this->email)) {
+            $invitation = $this->budget->invitations()
+                ->where('email', $this->email)
+                ->where('budget_id', $this->budget->id)
+                ->firstOrFail();
+
+            return $invitation;
         }
 
-        // ensure the recipient isn't already a member of the budget
-        if ($budget->hasMemberWithEmail($email)) {
-            throw new \Exception('The user you are inviting is already a member of the budget.');
-        }
-
-        // create the invitation
-        $invitation = $budget->invitations()->create([
-            'email' => $email,
-            'name' => $name,
-            'nickname' => $nickname,
-            'sender_id' => $sender->id,
+        $invitation = $this->budget->invitations()->create([
+            'email' => $this->email,
+            'name' => $this->name,
+            'nickname' => $this->nickname,
+            'sender_id' => $this->sender->id,
             'state' => BudgetInvitation::STATE_PENDING,
         ]);
 
-        // route an email notification to the recipient
         try {
-            Notification::route('mail', $email)
+            Notification::route('mail', $this->email)
                 ->notify(new InvitedToBudgetNotification($invitation));
         } catch (\Exception $e) {
             report($e);

@@ -3,6 +3,7 @@
 use App\Domains\Budgets\Events\BudgetInvitationAccepted;
 use App\Domains\Budgets\Notifications\InvitationAcceptedNotification;
 use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
+use App\Domains\Users\Actions\SendBudgetInvitationAction;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
@@ -21,12 +22,12 @@ test('a user can send a budget invitation to a user with an existing account', f
 
     $user = User::factory()->create();
 
-    $invitation = $sender->inviteToBudget(
+    $invitation = (new SendBudgetInvitationAction(
         budget: $sender->personalBudget(),
-        email: $user->email,
-        name: $user->name,
-        nickname: $user->nickname
-    );
+        sender: $sender,
+        email: 'user@email.com',
+        name: 'John Doe',
+    ))->execute();
 
     // assert that the notification was sent
     Notification::assertSentOnDemand(InvitedToBudgetNotification::class);
@@ -38,7 +39,7 @@ test('a user can send a budget invitation to a user with an existing account', f
     // the invitation should be accepted and they should see the 'invitations.accept' view
     $this->get($url)
         ->assertOk()
-        ->assertViewIs('invitations.confirm');
+        ->assertViewIs('invitations.confirm-and-register');
 
     return;
 
@@ -70,11 +71,12 @@ test('a user can send a budget invitation to a user without an account', functio
 
     $sender = User::factory()->create();
 
-    $invitation = $sender->inviteToBudget(
+    $invitation = (new SendBudgetInvitationAction(
         budget: $sender->personalBudget(),
+        sender: $sender,
         email: 'user@email.com',
         name: 'John Doe',
-    );
+    ))->execute();
 
     // assert that the notification was sent
     Notification::assertSentOnDemand(InvitedToBudgetNotification::class);

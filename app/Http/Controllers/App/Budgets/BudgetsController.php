@@ -23,8 +23,9 @@ class BudgetsController extends Controller
         $this->authorize('delete', $budget);
 
         if ($budget->personal) {
-            // throw an error
-            dd('You cannot delete a personal budget');
+            return back(fallback: route('app.budgets.edit', $budget))->withErrors([
+                'budget' => 'You cannot delete your personal budget, you must either transfer ownership or delete your account.',
+            ]);
         }
 
         if ($budget->hasCurrentMembers(user())) {
@@ -63,7 +64,6 @@ class BudgetsController extends Controller
         $this->authorize('viewAny', Budget::class);
 
         $budgets = user()->joinedBudgets()->orderBy('name')->get();
-        $budgets = $budgets->merge(user()->ownedBudgets()->orderBy('name')->get());
 
         return view('app.budgets.index', [
             'budgets' => $budgets,

@@ -24,7 +24,6 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
         "fakerphp/faker": "^1.9.1",
-        "laravel-shift/blueprint": "^2.7",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
@@ -34,7 +33,6 @@
         "pestphp/pest-plugin-livewire": "^2.0",
         "pestphp/pest-plugin-watch": "^2.0",
         "phpunit/phpunit": "^10.1",
-        "plannr/laravel-fast-refresh-database": "^1.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

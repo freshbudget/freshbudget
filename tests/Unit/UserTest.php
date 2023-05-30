@@ -206,15 +206,3 @@ test('it can accept an invitation to a budget', function () {
         return $event->invitation->is($invitation);
     });
 });
-
-test('when it invites a user to a budget, a budget invitation is created', function () {
-    $budget = Budget::factory()->create();
-
-    $owner = $budget->owner;
-
-    $user = User::factory()->create();
-
-    $invitation = $owner->inviteToBudget($budget, $user->email, $user->name, $user->nickname);
-
-    expect($invitation)->toBeInstanceOf(BudgetInvitation::class);
-});

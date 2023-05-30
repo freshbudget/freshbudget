@@ -2,14 +2,14 @@
 
 namespace App\Domains\Budgets\Models;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use App\Domains\Users\Models\User;
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Database\Factories\BudgetInvitationFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BudgetInvitation extends Model
 {

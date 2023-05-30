@@ -13,7 +13,7 @@ Because the codebase for Fresh Budget is open-source, you can see exactly how yo
 #### Requirements
 - Standard [Laravel Requirments](https://laravel.com/docs/10.x/deployment#server-requirements)
 - Composer 2+
-- PHP 8+
+- PHP 8.1+
 - MySQL 8+
 - Node (if working on frontend assets)
 
@@ -37,8 +37,8 @@ yarn install
 
 #### Create databases
 
-- `freshbudget`
-- `freshbudgettest` (for tests, optional change database name in `.env.testing` if required)
+- `freshbudgetapp`
+- `freshbudgetapp_testing` (local only, for automated tests)
 
 #### Copy `.env.example` to `.env`
 

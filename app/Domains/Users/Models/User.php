@@ -6,7 +6,6 @@ use App\Domains\Budgets\Actions\CreateBudgetAction;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
-use App\Domains\Users\Actions\SendBudgetInvitationAction;
 use App\Domains\Users\Actions\SwitchCurrentBudgetAction;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -185,11 +184,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function currentBudgetIs(Budget $budget): bool
     {
         return $budget->id === $this->currentBudget->id;
-    }
-
-    public function inviteToBudget(Budget $budget, string $email, string $name, string $nickname = ''): BudgetInvitation
-    {
-        return app(SendBudgetInvitationAction::class)->execute($this, $budget, $email, $name, $nickname);
     }
 
     public function ownsBudget(Budget $budget): bool

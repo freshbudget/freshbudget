@@ -21,8 +21,10 @@
                 <x-forms.buttons.primary type="submit">
                     Delete Budget
                 </x-forms.buttons.primary>
-        
+                
             </form>
+            
+            <x-forms.validation-error for="budget" class="my-5" />
     
         </div>
         

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\App\Budgets\BudgetInvitationsController;
 use App\Http\Controllers\App\Budgets\BudgetsController;
 use App\Http\Controllers\App\Budgets\CurrentBudgetController;
 use App\Http\Controllers\App\CookiesController;
@@ -51,6 +52,14 @@ Route::post('/budgets/{budget}/current', CurrentBudgetController::class)
 Route::get('/budgets/{budget}', [BudgetsController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.budgets.show');
+
+Route::get('/budgets/{budget}/members/invite', [BudgetInvitationsController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('app.budgets.members.invite');
+
+Route::post('/budgets/{budget}/members', [BudgetInvitationsController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('app.budgets.members.store');
 
 Route::get('/budgets/{budget}/settings', [BudgetsController::class, 'edit'])
     ->middleware(['auth'])

@@ -22,6 +22,11 @@ class BudgetPolicy
         return $budget->isOwnedBy($user);
     }
 
+    public function inviteMember(User $user, Budget $budget): bool
+    {
+        return $budget->isOwnedBy($user);
+    }
+
     public function setAsCurrent(User $user, Budget $budget): bool
     {
         return $budget->hasMember($user);
