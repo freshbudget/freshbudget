@@ -21,6 +21,23 @@ test('the action creates an entitlement', function () {
     expect($entitlement->active)->toBe(true);
 });
 
+// test the amount is stripped of commas and dollar signs and converted to cents
+test('the amount is stripped of commas and dollar signs and converted to cents', function () {
+    $income = Income::factory()->create();
+
+    $data = [
+        'name' => 'Test Entitlement',
+        'amount' => '$1,000.00',
+    ];
+
+    $entitlement = (new CreateIncomeEntitlementAction($income, $data))->execute();
+    (new UpdateIncomeEntitlementEstimate($income))->execute();
+
+    expect($entitlement->name)->toBe('Test Entitlement');
+    expect($entitlement->amount)->toBe(100000);
+    expect($entitlement->active)->toBe(true);
+});
+
 // test the action when given data with a name that already exists, it creates a new entitlement and deactivates the existing one
 test('the action when given data with a name that already exists, it updates the existing entitlement', function () {
     $income = Income::factory()->create();

@@ -3,6 +3,7 @@
 namespace App\Domains\Incomes\Models;
 
 use Database\Factories\IncomeDeductionFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -68,9 +69,9 @@ class IncomeDeduction extends Model
     | Scopes
     |----------------------------------
     */
-    public function scopeActive($query)
+    public function scopeActive(Builder $query): void
     {
-        return $query->where('active', true);
+        $query->where('active', true);
     }
 
     /*

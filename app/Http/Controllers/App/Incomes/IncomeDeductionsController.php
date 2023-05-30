@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\App\Incomes;
 
+use App\Domains\Incomes\Actions\CreateIncomeDeductionAction;
+use App\Domains\Incomes\Actions\UpdateIncomeDeductionEstimate;
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeDeduction;
+use App\Domains\Incomes\Models\IncomeStatistic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Stats\StatsWriter;
 
 class IncomeDeductionsController extends Controller
 {
@@ -22,38 +25,25 @@ class IncomeDeductionsController extends Controller
     {
         $this->authorize('addDeductions', [$income, currentBudget()]);
 
-        // TODO: validate the request
+        $this->validate($request, [
+            'deductions' => ['required', 'array'],
+            'deductions.*.name' => ['required', 'string'],
+            'deductions.*.amount' => ['required', 'string'],
+        ]);
 
-        // loop over each entitlement and create it
-        $deductions = $request->deductions;
-
-        foreach ($deductions as $deduction) {
-
-            $amount = $deduction['amount'];
-
-            // need to strip any commas from the amount
-            $amount = str_replace(',', '', $amount);
-
-            // need to strip any dollar signs from the amount
-            $amount = str_replace('$', '', $amount);
-
-            // need to convert to a php float
-            $amount = (float) $amount;
-
-            // need to convert to cents
-            $amount = $amount * 100;
-
-            // need to convert to an integer
-            $amount = (int) $amount;
-
-            IncomeDeduction::create([
-                'income_id' => $income->id,
-                'name' => $deduction['name'],
-                'amount' => $amount,
-                'start_date' => now(),
-                'end_date' => null,
-            ]);
+        foreach ($request->deductions as $deduction) {
+            (new CreateIncomeDeductionAction(
+                income: $income,
+                data: $deduction,
+            ))->execute();
         }
+
+        (new UpdateIncomeDeductionEstimate($income))->execute();
+
+        StatsWriter::for(IncomeStatistic::class, [
+            'income_id' => $income->id,
+            'name' => 'estimated_deductions_per_period',
+        ])->set($income->estimated_deductions_per_period);
 
         return redirect()->route('app.incomes.show', $income);
     }

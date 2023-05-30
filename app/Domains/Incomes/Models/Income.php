@@ -60,6 +60,7 @@ class Income extends Model
         'active',
         'estimated_entitlements_per_period',
         'estimated_taxes_per_period',
+        'estimated_deductions_per_period',
     ];
 
     /**
@@ -85,6 +86,9 @@ class Income extends Model
         'frequency' => Frequency::class,
         'meta' => 'array',
         'active' => 'boolean',
+        'estimated_entitlements_per_period' => 'integer',
+        'estimated_taxes_per_period' => 'integer',
+        'estimated_deductions_per_period' => 'integer',
     ];
 
     /*
@@ -164,6 +168,21 @@ class Income extends Model
     | Relationships
     |----------------------------------
     */
+    public function activeDeductions(): HasMany
+    {
+        return $this->deductions()->where('active', true);
+    }
+
+    public function activeEntitlements(): HasMany
+    {
+        return $this->entitlements()->where('active', true);
+    }
+
+    public function activeTaxes(): HasMany
+    {
+        return $this->taxes()->where('active', true);
+    }
+
     public function budget(): BelongsTo
     {
         return $this->belongsTo(Budget::class, 'budget_id');

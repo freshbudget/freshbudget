@@ -2,7 +2,7 @@
 
 namespace App\Domains\Incomes\Jobs;
 
-use App\Domains\Incomes\Actions\UpdateIncomeEntitlementEstimate;
+use App\Domains\Incomes\Actions\UpdateIncomeTaxEstimate;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeStatistic;
 use Illuminate\Bus\Queueable;
@@ -13,7 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Spatie\Stats\StatsWriter;
 
-class SyncIncomeEstimatedEntitlementsEstimate implements ShouldQueue, ShouldBeUnique
+class SyncIncomeEstimatedTaxes implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,12 +22,12 @@ class SyncIncomeEstimatedEntitlementsEstimate implements ShouldQueue, ShouldBeUn
         Income::query()->chunk(100, function ($incomes) {
 
             foreach ($incomes as $income) {
-                (new UpdateIncomeEntitlementEstimate($income))->execute();
+                (new UpdateIncomeTaxEstimate($income))->execute();
 
                 StatsWriter::for(IncomeStatistic::class, [
                     'income_id' => $income->id,
-                    'name' => 'estimated_entitlements_per_period',
-                ])->set($income->estimated_entitlements_per_period);
+                    'name' => 'estimated_taxes_per_period',
+                ])->set($income->estimated_taxes_per_period);
             }
 
         });

@@ -2,11 +2,18 @@
 
 A family-friendly way to manage your money and stay on top of your budget.
 
-## Requirements
-- PHP 8
-- MySQL 8
+## Features
+
+### Open-Source
+
+Because the codebase for Fresh Budget is open-source, you can see exactly how your infomation is being used. Additionally, you could even contribute and help shape the platform.
 
 ## Local Installation
+
+#### Server Requirements
+- PHP 8
+- MySQL 8
+- Standard [Laravel Requirments](https://laravel.com/docs/10.x/deployment#server-requirements)
 
 #### Clone repo
 

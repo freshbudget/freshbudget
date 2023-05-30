@@ -95,6 +95,11 @@ class Budget extends Model
     | Relationships
     |----------------------------------
     */
+    public function activeIncomes(): HasMany
+    {
+        return $this->incomes()->where('active', true);
+    }
+
     public function deleter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'deleted_by');

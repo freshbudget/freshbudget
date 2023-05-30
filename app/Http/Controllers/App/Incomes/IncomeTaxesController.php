@@ -32,7 +32,7 @@ class IncomeTaxesController extends Controller
         ]);
 
         foreach ($request->taxes as $tax) {
-            $tax = (new CreateIncomeTaxAction(
+            (new CreateIncomeTaxAction(
                 income: $income,
                 data: $tax,
             ))->execute();

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->integer('estimated_entitlements_per_period')->nullable()->default(0);
             $table->integer('estimated_taxes_per_period')->nullable()->default(0);
-            // $table->integer('estimated_deductions_per_period')->nullable()->default(0);
+            $table->integer('estimated_deductions_per_period')->nullable()->default(0);
             // $table->integer('estimated_net_per_period')->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();

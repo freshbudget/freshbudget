@@ -59,7 +59,7 @@ class IncomeEntitlementsController extends Controller
         ]);
 
         foreach ($request->entitlements as $entitlement) {
-            $entitlement = (new CreateIncomeEntitlementAction(
+            (new CreateIncomeEntitlementAction(
                 income: $income,
                 data: $entitlement,
             ))->execute();
