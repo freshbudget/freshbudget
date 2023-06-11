@@ -18,7 +18,6 @@ test('the action creates an entitlement', function () {
 
     expect($entitlement->name)->toBe('Test Entitlement');
     expect($entitlement->amount)->toBe(10000);
-    expect($entitlement->active)->toBe(true);
 });
 
 // test the amount is stripped of commas and dollar signs and converted to cents
@@ -35,7 +34,6 @@ test('the amount is stripped of commas and dollar signs and converted to cents',
 
     expect($entitlement->name)->toBe('Test Entitlement');
     expect($entitlement->amount)->toBe(100000);
-    expect($entitlement->active)->toBe(true);
 });
 
 // test the action when given data with a name that already exists, it creates a new entitlement and deactivates the existing one
@@ -52,12 +50,10 @@ test('the action when given data with a name that already exists, it updates the
 
     expect($original->name)->toBe('Test Entitlement');
     expect($original->amount)->toBe(10000);
-    expect($original->active)->toBe(true);
 
     $data = [
         'name' => 'Test Entitlement',
         'amount' => '200.00',
-        'change_reason' => 'Test Reason',
     ];
 
     $new = (new CreateIncomeEntitlementAction($income, $data))->execute();
@@ -65,12 +61,6 @@ test('the action when given data with a name that already exists, it updates the
 
     expect($new->name)->toBe('Test Entitlement');
     expect($new->amount)->toBe(20000);
-    expect($new->active)->toBe(true);
-    expect($new->previous_id)->toBe($original->id);
-    expect($new->change_reason)->toBe('Test Reason');
-
-    expect($original->fresh()->active)->toBe(false);
-    expect($original->fresh()->end_date)->not()->toBeNull();
 });
 
 // test that when the active flag is set to false, the entitlement is not active
@@ -80,7 +70,6 @@ test('when the active flag is set to false, the entitlement is not active', func
     $data = [
         'name' => 'Test Entitlement',
         'amount' => '100.00',
-        'active' => false,
     ];
 
     $entitlement = (new CreateIncomeEntitlementAction($income, $data))->execute();
@@ -88,7 +77,6 @@ test('when the active flag is set to false, the entitlement is not active', func
 
     expect($entitlement->name)->toBe('Test Entitlement');
     expect($entitlement->amount)->toBe(10000);
-    expect($entitlement->active)->toBe(false);
 });
 
 // test that when the active flag is not set, the entitlement is active
@@ -105,7 +93,6 @@ test('when the active flag is not set, the entitlement is active', function () {
 
     expect($entitlement->name)->toBe('Test Entitlement');
     expect($entitlement->amount)->toBe(10000);
-    expect($entitlement->active)->toBe(true);
 });
 
 test('when the action is executed, it updates the income\'s estimated_entitlements_per_period', function () {
@@ -157,9 +144,7 @@ test('when an entitlement with the same name already exists, the existing entitl
     (new CreateIncomeEntitlementAction($income, $data))->execute();
     (new UpdateIncomeEntitlementEstimate($income))->execute();
 
-    expect($income->estimated_entitlements_per_period)->toBe(20000);
+    expect($income->estimated_entitlements_per_period)->toBe(30000);
 
     expect($income->entitlements()->count())->toBe(2);
-    expect($income->entitlements()->where('active', true)->count())->toBe(1);
-    expect($income->entitlements()->where('active', false)->count())->toBe(1);
 });

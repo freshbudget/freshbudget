@@ -22,6 +22,22 @@ class IncomeTaxesController extends Controller
         ]);
     }
 
+    public function show(Income $income)
+    {
+        $this->authorize('view', [$income, currentBudget()]);
+
+        $taxes = $income->taxes()->orderBy('name')->get();
+
+        if ($taxes->count() === 0) {
+            return redirect()->route('app.incomes.taxes.create', $income);
+        }
+
+        return view('app.incomes.show.taxes.show', [
+            'income' => $income,
+            'taxes' => $taxes,
+        ]);
+    }
+
     public function store(Income $income, Request $request)
     {
         $this->authorize('addTaxes', [$income, currentBudget()]);

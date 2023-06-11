@@ -13,7 +13,7 @@
 
             <!-- collapsed desktop sidebar -->
             <div 
-                {{ session('desktopSidebarExpanded') ? 'x-cloak' : '' }}
+                {{ session('desktopSidebarExpanded', true) ? 'x-cloak' : '' }}
                 x-show="!desktopSidebarExpanded" 
                 class="flex flex-shrink-0 w-16 h-full bg-white border-r border-gray-300">
                 @include('layouts.partials.collapsed-desktop-sidebar')
@@ -21,7 +21,7 @@
 
             <!-- expanded desktop sidebar -->
             <div 
-                {{ session('desktopSidebarExpanded') ? '' : 'x-cloak' }}
+                {{ session('desktopSidebarExpanded', true) ? '' : 'x-cloak' }}
                 x-show="desktopSidebarExpanded" 
                 class="flex flex-shrink-0 hidden w-12 h-full bg-white border-r border-gray-300 sm:block sm:w-72">
                 @include('layouts.partials.expanded-desktop-sidebar')

@@ -44,7 +44,7 @@ class CreateIncomeDeductionAction
             'amount' => $amount,
             'start_date' => Arr::get($this->data, 'start_date', now()),
             'active' => Arr::get($this->data, 'active', true),
-            'previous_id' => $existing?->id,
+            //'previous_id' => $existing?->id,
             'change_reason' => $existing ? Arr::get($this->data, 'change_reason', '') : null,
         ]);
 

@@ -38,8 +38,8 @@
                     Login
                 </button>
                 
-                <div class="my-5 text-center prose prose-green">
-                    <a href="#">Need to reset your password?</a>
+                <div class="my-5 prose text-center prose-green">
+                    <a href="{{ route('password.request') }}">Need to reset your password?</a>
                 </div>
         
             </form>

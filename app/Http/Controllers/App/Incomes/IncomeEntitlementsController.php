@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Actions\CreateIncomeEntitlementAction;
+use App\Domains\Incomes\Actions\UpdateIncomeEntitlementAction;
 use App\Domains\Incomes\Actions\UpdateIncomeEntitlementEstimate;
 use App\Domains\Incomes\Actions\UpdateIncomeNetEstimate;
 use App\Domains\Incomes\Models\Income;
@@ -33,11 +34,37 @@ class IncomeEntitlementsController extends Controller
         ]);
     }
 
+    public function update(Income $income, IncomeEntitlement $entitlement, Request $request)
+    {
+        $this->authorize('update', [$income, currentBudget()]);
+
+        $validated = $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'amount' => ['required', 'numeric'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['nullable', 'date'],
+            'reason' => ['nullable', 'string'],
+        ]);
+
+        (new UpdateIncomeEntitlementAction($entitlement, $validated))->execute();
+
+        (new UpdateIncomeEntitlementEstimate($income))->execute();
+
+        (new UpdateIncomeNetEstimate($income))->execute();
+
+        StatsWriter::for(IncomeStatistic::class, [
+            'income_id' => $income->id,
+            'name' => 'estimated_entitlements_per_period',
+        ])->set($income->estimated_entitlements_per_period);
+
+        return redirect()->route('app.incomes.show', $income);
+    }
+
     public function show(Income $income)
     {
         $this->authorize('view', [$income, currentBudget()]);
 
-        $entitlements = $income->entitlements()->where('active', true)->orderBy('name')->get();
+        $entitlements = $income->entitlements()->orderBy('name')->get();
 
         if ($entitlements->count() === 0) {
             return redirect()->route('app.incomes.entitlements.create', $income);

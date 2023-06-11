@@ -5,7 +5,7 @@
     <main class="max-w-3xl px-4 mx-auto">
 
         <h2 class="text-4xl font-black tracking-tight text-gray-800 sm:text-6xl selection:text-green-600 selection:bg-transparent">
-            Personal finance and budgeting doesn't have to be complicated. 
+            Personal finance and budgeting doesn't have to be hard. 
         </h2>
 
         <p class="my-10 text-lg text-gray-700">

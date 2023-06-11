@@ -13,14 +13,27 @@ class IncomePresenter
         //
     }
 
+    public function estimatedEntitlementsPerPeriod(): string
+    {
+        return $this->getFormattedAmount($this->income->estimated_entitlements_per_period);
+    }
+
     public function estimatedNetPerPeriod(): string
     {
-        $amount = $this->income->estimated_net_per_period;
+        return $this->getFormattedAmount($this->income->estimated_net_per_period);
+    }
 
+    public function estimatedTaxesPerPeriod(): string
+    {
+        return $this->getFormattedAmount($this->income->estimated_taxes_per_period);
+    }
+
+    public function getFormattedAmount($amount): string
+    {
         if (! $amount) {
             return new Money(0, new Currency($this->income->currency));
         }
 
-        return new Money($this->income->estimated_net_per_period, new Currency($this->income->currency));
+        return new Money($amount, new Currency($this->income->currency));
     }
 }

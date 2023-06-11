@@ -14,7 +14,6 @@ class DeactivateIncomeEntitlementAction
     public function execute($timestamp = null): void
     {
         $this->entitlement->update([
-            'active' => false,
             'end_date' => $timestamp ?? now(),
         ]);
     }

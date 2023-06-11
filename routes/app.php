@@ -116,11 +116,20 @@ Route::get('/incomes/{income}/entitlements/{entitlement}/edit', [IncomeEntitleme
     ->name('app.incomes.entitlements.edit')
     ->scopeBindings();
 
+Route::put('/incomes/{income}/entitlements/{entitlement}', [IncomeEntitlementsController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('app.incomes.entitlements.update')
+    ->scopeBindings();
+
 /*
 |--------------------------------------------------------------------------
 | Income Taxes
 |--------------------------------------------------------------------------
 */
+Route::get('/incomes/{income}/taxes', [IncomeTaxesController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('app.incomes.taxes.show');
+    
 Route::get('/incomes/{income}/taxes/create', [IncomeTaxesController::class, 'create'])
     ->middleware(['auth'])
     ->name('app.incomes.taxes.create');

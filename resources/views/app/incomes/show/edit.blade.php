@@ -4,7 +4,11 @@
 
 <div class="prose prose-green">
 
-    todo...
+    <form action="{{ route('app.incomes.destroy', $income) }}" method="post">
+        @csrf
+        @method('delete')
+        <button type="submit">Delete</button>
+    </form>
     
 </div>
 

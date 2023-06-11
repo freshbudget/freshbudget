@@ -13,7 +13,7 @@ class UpdateIncomeNetEstimate
 
     public function execute(): void
     {
-        $entitlements = $this->income->activeEntitlements()->sum('amount');
+        $entitlements = $this->income->entitlements()->sum('amount');
 
         $taxes = $this->income->activeTaxes()->sum('amount');
 

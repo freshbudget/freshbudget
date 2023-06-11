@@ -24,21 +24,31 @@
 
         <nav class="flex w-full px-6 -mx-2 -mb-px space-x-0 select-none">
 
-            <a href="{{ route('app.incomes.show', $income) }}" class="block px-3 py-3 border-b-2 {{ active('app.incomes.show', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                Overview
-            </a>
+            @php
+                $links = [
+                    [
+                        'label' => 'Overview',
+                        'route' => route('app.incomes.show', $income),
+                        'active' => 'app.incomes.show'
+                    ],
+                    [
+                        'label' => 'Entitlements',
+                        'route' => route('app.incomes.entitlements.show', $income),
+                        'active' => 'app.incomes.entitlements.*'
+                    ],
+                    [
+                        'label' => 'Taxes',
+                        'route' => route('app.incomes.taxes.show', $income),
+                        'active' => 'app.incomes.taxes.*'
+                    ],
+                ]
+            @endphp
 
-            <a href="#" class="block px-3 py-3 border-b-2 {{ active('app.incomes.files', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                Transactions
-            </a>
-
-            <a href="{{ route('app.incomes.entitlements.show', $income) }}" class="block px-3 py-3 border-b-2 {{ active('app.incomes.entitlements.*', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                Entitlements
-            </a>
-
-            <a href="#" class="block px-3 py-3 border-b-2 {{ active('app.incomes.files', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                Taxes
-            </a>
+            @foreach ($links as $link)
+                <a href="{!! $link['route'] !!}" class="block px-3 py-3 border-b-2 {{ active($link['active'], 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
+                    {!! $link['label'] !!}
+                </a>                
+            @endforeach
 
             <a href="#" class="block px-3 py-3 border-b-2 {{ active('app.incomes.files', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
                 Deductions

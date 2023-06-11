@@ -127,7 +127,7 @@ class Income extends Model
 
             $totalEntitlements = 0;
 
-            $entitlements = $this->entitlements()->where('active', true);
+            $entitlements = $this->entitlements();
 
             // loop through each entitlement and calculate the monthly amount
             $entitlements->each(function ($entitlement) use (&$totalEntitlements) {
@@ -159,11 +159,6 @@ class Income extends Model
     public function activeDeductions(): HasMany
     {
         return $this->deductions()->where('active', true);
-    }
-
-    public function activeEntitlements(): HasMany
-    {
-        return $this->entitlements()->where('active', true);
     }
 
     public function activeTaxes(): HasMany

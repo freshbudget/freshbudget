@@ -2,15 +2,12 @@
 
 namespace App\Domains\Incomes\Actions;
 
-use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeEntitlement;
 use Illuminate\Support\Arr;
 
-class CreateIncomeEntitlementAction
+class UpdateIncomeEntitlementAction
 {
-    public IncomeEntitlement $entitlement;
-
-    public function __construct(public Income $income, public array $data)
+    public function __construct(public IncomeEntitlement $entitlement, public array $data)
     {
         //
     }
@@ -27,12 +24,12 @@ class CreateIncomeEntitlementAction
         // clean up the name
         $name = str($this->data['name'])->trim()->toString();
 
-        $this->entitlement = $this->income->entitlements()->create([
+        $this->entitlement->update([
             'name' => $name,
             'amount' => $amount,
-            'start_date' => Arr::get($this->data, 'start_date', now()),
-            'end_date' => Arr::get($this->data, 'end_date', null),
-            'reason' => Arr::get($this->data, 'reason', 'Initial entitlement'),
+            'start_date' => Arr::get($this->data, 'start_date', $this->entitlement->start_date),
+            'end_date' => Arr::get($this->data, 'end_date', $this->entitlement->end_date),
+            'reason' => Arr::get($this->data, 'reason', ''),
         ]);
 
         return $this->entitlement;

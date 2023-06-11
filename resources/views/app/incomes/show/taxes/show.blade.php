@@ -7,7 +7,7 @@
         <div class="prose prose-green">
 
             <p>
-                Eventually, I'd like to show a graph of the entitlements over time.
+                Eventually, I'd like to show a graph of the taxes over time.
             </p>
 
             <table>
@@ -23,17 +23,16 @@
                     </td>
                 </thead>
                 <tbody>
-                    @foreach ($entitlements as $entitlement)
+                    @foreach ($taxes as $tax)
                         <tr>
                             <td>
-                                {{ $entitlement->name }}
+                                {{ $tax->name }}
                             </td>
                             <td class="text-right">
-                                <span class="select-none">$</span>
-                                <span class="select-all">{{ number_format($entitlement->amount / 100, 2) }}</span>
+                                <span class="select-all">{{ $tax->presenter()->amount() }}</span>
                             </td>
                             <td>
-                                <a href="{{ route('app.incomes.entitlements.edit', [$income, $entitlement]) }}">Update</a>
+                                <a href="#">Update</a>
                             </td>
                         </tr>
                     @endforeach
@@ -43,7 +42,7 @@
                         Total
                     </td>
                     <td class="text-right">
-                        <span class="select-all">{{ $income->presenter()->estimatedEntitlementsPerPeriod() }}</span>
+                        <span class="select-all">{{ $income->presenter()->estimatedTaxesPerPeriod() }}</span>
                     </td>
                     <td>
                         &nbsp;

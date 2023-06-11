@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
+        $schedule->command('auth:clear-resets')->everyFourHours();
 
         // TODO: Refactor this to use a parent job that does chaining and batching as required.
         $schedule->job(SyncIncomeEstimatedEntitlements::class)->dailyAt('00:00');

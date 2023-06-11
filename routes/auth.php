@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationRequestController;
 use App\Http\Livewire\Auth\EmailVerificationRequestForm;
 use App\Http\Livewire\Auth\LoginForm;
+use App\Http\Livewire\Auth\PasswordResetForm;
+use App\Http\Livewire\Auth\PasswordResetRequestForm;
 use App\Http\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +29,13 @@ Route::get('/email/verification/{id}/{hash}', [EmailVerificationRequestControlle
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
 
-// Route::get('/password/reset', PasswordResetRequestForm::class)
-//     ->middleware(['guest'])
-//     ->name('password.request');
+Route::get('/password/forgot', PasswordResetRequestForm::class)
+    ->middleware(['guest'])
+    ->name('password.request');
+
+Route::get('/password/reset', PasswordResetForm::class)
+    ->middleware(['guest'])
+    ->name('password.reset');
 
 // Route::get('/password/confirm', PasswordConfirmForm::class)
 //     ->middleware(['auth'])

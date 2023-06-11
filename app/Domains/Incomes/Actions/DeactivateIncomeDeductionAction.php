@@ -14,7 +14,6 @@ class DeactivateIncomeDeductionAction
     public function execute($timestamp = null): void
     {
         $this->deduction->update([
-            'active' => false,
             'end_date' => $timestamp ?? now(),
         ]);
     }

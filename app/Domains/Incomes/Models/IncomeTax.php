@@ -2,11 +2,12 @@
 
 namespace App\Domains\Incomes\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Database\Factories\IncomeTaxFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domains\Incomes\Presenters\IncomeTaxPresenter;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class IncomeTax extends Model
 {
@@ -56,6 +57,11 @@ class IncomeTax extends Model
     public static function newFactory()
     {
         return IncomeTaxFactory::new();
+    }
+
+    public function presenter()
+    {
+        return new IncomeTaxPresenter($this);
     }
 
     public function uniqueIds(): array

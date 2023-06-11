@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Mpociot\Versionable\VersionableTrait;
 
 class IncomeEntitlement extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasUlids, VersionableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +25,7 @@ class IncomeEntitlement extends Model
         'amount',
         'start_date',
         'end_date',
-        'previous_id',
-        'change_reason',
-        'active',
+        'reason',
     ];
 
     /**
@@ -39,8 +38,6 @@ class IncomeEntitlement extends Model
         'income_id' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
-        'previous_id' => 'integer',
-        'active' => 'boolean',
     ];
 
     /*
@@ -71,10 +68,5 @@ class IncomeEntitlement extends Model
     public function income(): BelongsTo
     {
         return $this->belongsTo(Income::class);
-    }
-
-    public function previous(): BelongsTo
-    {
-        return $this->belongsTo(self::class, 'previous_id');
     }
 }

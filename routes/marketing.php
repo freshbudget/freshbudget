@@ -22,7 +22,7 @@ Route::view('/blog', 'blog.index')
 /*
 |--------------------------------------------------------------------------
 | Invitation Routes
-|--------------------------------------------------------------------------|
+|--------------------------------------------------------------------------
 */
 Route::get('/invitations/{invitation}', [BudgetInvitationsController::class, 'show'])
     ->middleware(['throttle:50,1'])
@@ -35,6 +35,6 @@ Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::cl
 /*
 |--------------------------------------------------------------------------
 | Application Health Check
-|--------------------------------------------------------------------------|
+|--------------------------------------------------------------------------
 */
 Route::get('/health', HealthCheckResultsController::class);
