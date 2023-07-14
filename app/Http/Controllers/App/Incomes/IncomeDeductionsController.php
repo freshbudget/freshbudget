@@ -22,6 +22,22 @@ class IncomeDeductionsController extends Controller
         ]);
     }
 
+    public function show(Income $income)
+    {
+        $this->authorize('view', [$income, currentBudget()]);
+
+        $deductions = $income->deductions()->orderBy('name')->get();
+
+        if ($deductions->count() === 0) {
+            return redirect()->route('app.incomes.deductions.create', $income);
+        }
+
+        return view('app.incomes.show.deductions.show', [
+            'income' => $income,
+            'deductions' => $deductions,
+        ]);
+    }
+
     public function store(Income $income, Request $request)
     {
         $this->authorize('addDeductions', [$income, currentBudget()]);

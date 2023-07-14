@@ -16,7 +16,7 @@ class SendBudgetInvitationAction
         public User $sender,
         public string $email,
         public string $name,
-        public string|null $nickname = null)
+        public ?string $nickname = null)
     {
         //
     }

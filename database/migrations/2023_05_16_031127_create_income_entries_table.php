@@ -23,6 +23,9 @@ return new class extends Migration
             $table->integer('taxes_total');
             $table->integer('deductions_total');
             $table->integer('net_income');
+            $table->text('notes')->nullable();
+            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

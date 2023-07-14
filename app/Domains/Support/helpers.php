@@ -9,12 +9,12 @@ function carbon(): Carbon
     return new Carbon();
 }
 
-function currentBudget(): Budget|null
+function currentBudget(): ?Budget
 {
     return user()?->currentBudget;
 }
 
-function user(): User|null
+function user(): ?User
 {
     return auth()->user();
 }

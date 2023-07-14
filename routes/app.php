@@ -6,6 +6,7 @@ use App\Http\Controllers\App\Budgets\CurrentBudgetController;
 use App\Http\Controllers\App\CookiesController;
 use App\Http\Controllers\App\Incomes\IncomeDeductionsController;
 use App\Http\Controllers\App\Incomes\IncomeEntitlementsController;
+use App\Http\Controllers\App\Incomes\IncomeEntriesController;
 use App\Http\Controllers\App\Incomes\IncomesController;
 use App\Http\Controllers\App\Incomes\IncomeTaxesController;
 use Illuminate\Support\Facades\Route;
@@ -94,6 +95,19 @@ Route::get('/incomes/{income}/edit', [IncomesController::class, 'edit'])
     ->middleware(['auth'])
     ->name('app.incomes.edit');
 
+Route::put('/incomes/{income}', [IncomesController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('app.incomes.update');
+
+/*
+|--------------------------------------------------------------------------
+| Incomes Entries
+|--------------------------------------------------------------------------
+*/
+Route::get('/incomes/{income}/entries/create', [IncomeEntriesController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('app.incomes.entries.create');
+
 /*
 |--------------------------------------------------------------------------
 | Income Entitlements
@@ -129,7 +143,7 @@ Route::put('/incomes/{income}/entitlements/{entitlement}', [IncomeEntitlementsCo
 Route::get('/incomes/{income}/taxes', [IncomeTaxesController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.incomes.taxes.show');
-    
+
 Route::get('/incomes/{income}/taxes/create', [IncomeTaxesController::class, 'create'])
     ->middleware(['auth'])
     ->name('app.incomes.taxes.create');
@@ -151,8 +165,12 @@ Route::post('/incomes/{income}/deductions', [IncomeDeductionsController::class, 
     ->middleware(['auth'])
     ->name('app.incomes.deductions.store');
 
+Route::get('/incomes/{income}/deductions', [IncomeDeductionsController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('app.incomes.deductions.show');
+
 /*
-|--------------------------------------------------------------------------
+|--------------------------------w----------------------------------------
 | Budget Files Explorer
 |--------------------------------------------------------------------------
 */

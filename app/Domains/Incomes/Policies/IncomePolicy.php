@@ -38,6 +38,21 @@ class IncomePolicy
         return true;
     }
 
+    public function addEntry(User $user, Income $income, Budget $budget)
+    {
+        // check that the income belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        // check that the user is a member of the budget
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function editEntitlements(User $user, Income $income, Budget $budget): bool
     {
         // check that the income belongs to the budget

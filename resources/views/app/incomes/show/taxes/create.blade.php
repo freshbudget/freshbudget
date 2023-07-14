@@ -4,9 +4,7 @@
 
     <div class="max-w-xl mb-8">
 
-        <div class="prose select-none prose-green">
-
-            <h2>Create taxes</h2>
+        <div class="prose-sm prose select-none prose-green">
 
             <p>
                 Taxes are any sort of taxes that are taken from your income. For example, you may have federal income tax, this is one tax. On the same pay stub you may have state income tax, this is another tax. You can add as many taxes as you need to represent your expected taxes per pay period. Remember, this is just an estimate, when you log your income you will be able to input how much you actually paid for each item.

@@ -16,7 +16,7 @@ class CreateBudgetAction
                 if (Str::of($value)->ascii()->trim()->length() < 3) {
                     $fail("The {$attribute} must contain at least three ascii characters.");
                 }
-            },],
+            }, ],
         ];
     }
 

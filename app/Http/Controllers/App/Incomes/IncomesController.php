@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\App\Incomes;
 
 use App\Domains\Incomes\Models\Income;
+use App\Domains\Incomes\Models\IncomeType;
+use App\Domains\Shared\Enums\Frequency;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 
 class IncomesController extends Controller
 {
@@ -29,6 +33,8 @@ class IncomesController extends Controller
 
         return view('app.incomes.show.edit', [
             'income' => $income,
+            'types' => IncomeType::orderBy('name')->get(['id', 'name']),
+            'frequencies' => Frequency::cases(),
         ]);
     }
 
@@ -39,6 +45,22 @@ class IncomesController extends Controller
         return view('app.incomes.index', [
             'incomes' => currentBudget()->incomes()->where('active', true)->orderBy('name')->get(),
         ]);
+    }
+
+    public function update(Income $income, Request $request)
+    {
+        $this->authorize('update', [$income, currentBudget()]);
+
+        $validated = $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'type_id' => ['required', 'exists:income_types,id'],
+            'frequency' => ['required', new Enum(Frequency::class)],
+            'url' => ['nullable', 'url'],
+        ]);
+
+        $income->update($validated);
+
+        return redirect()->back(fallback: route('app.incomes.show', $income));
     }
 
     public function show(Income $income)

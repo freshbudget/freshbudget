@@ -4,9 +4,7 @@
 
     <div class="max-w-xl mb-8">
 
-        <div class="prose select-none prose-green">
-
-            <h2>Create deductions</h2>
+        <div class="prose-sm prose select-none prose-green">
 
             <p>
                 Deductions are any sort of deductions that are taken from your income. For example, you may have a 401k deduction, this is one deduction. On the same pay stub you may have a health insurance deduction, this is another deduction. You can add as many deductions as you need to represent your expected deductions per pay period. Remember, this is just an estimate, when you log your income you will be able to input how much you actually paid for each item.
