@@ -1,16 +1,23 @@
-@extends('app.budgets.layout')
+@extends('layouts.app')
 
-@section('section')
+@section('page::title', $budget->name)
+@section('breadcrumbs', Breadcrumbs::render('app.budgets.index'))
 
-    <div class="w-full max-w-3xl mx-auto border-b border-gray-300">
+@section('content')
 
-        <nav class="flex w-full px-6 -mb-px space-x-0">
+    <div class="sticky top-0 w-full bg-white border-b border-gray-300 select-none">
 
-            <a href="{{ route('app.budgets.show', $budget) }}" class="block px-3 py-3 border-b-2 {{ active('app.budgets.show', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
+        <nav class="flex w-full px-4 -mb-px space-x-3">
+
+            <a href="{{ route('app.budgets.show', $budget) }}" class="block px-1 text-sm py-3 border-b-2 {{ active('app.budgets.show', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
+                General
+            </a>
+
+            <a href="{{ route('app.budgets.show', $budget) }}" class="block px-1 text-sm py-3 border-b-2 {{ active('app.budgets.sshow', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
                 Members
             </a>
 
-            <a href="{{ route('app.budgets.edit', $budget) }}" class="block px-3 py-3 font-semibold border-b-2 {{ active('app.budgets.edit', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
+            <a href="{{ route('app.budgets.edit', $budget) }}" class="block px-1 text-sm py-3 font-semibold border-b-2 {{ active('app.budgets.edit', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
                 Settings
             </a>
 
@@ -18,7 +25,7 @@
 
     </div>
 
-    <div class="max-w-3xl mx-auto">        
+    <div class="max-w-3xl mx-auto h-[9000px]">        
         @yield('tab')
     </div>
 

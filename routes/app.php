@@ -70,6 +70,9 @@ Route::delete('/budgets/{budget}', [BudgetsController::class, 'destroy'])
     ->middleware(['auth'])
     ->name('app.budgets.destroy');
 
+Route::view('/calendar', 'app.calendar.index')
+    ->middleware(['auth'])
+    ->name('app.calendar.index');
 /*
 |--------------------------------------------------------------------------
 | Incomes

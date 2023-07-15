@@ -73,7 +73,7 @@
                 @endif
                 
                 @hasSection ('page::title')
-                    <h1 class="text-xl font-bold sm:text-2xl">
+                    <h1 class="text-xl font-bold leading-none sm:text-2xl">
                         @yield('page::title')
                     </h1>    
                 @endif

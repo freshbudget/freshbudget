@@ -13,7 +13,7 @@
                 ],
                 [
                     'label' => 'Calendar',
-                    'route' => '#',
+                    'route' => route('app.calendar.index'),
                     'icon' => 'calendar',
                     'active' => 'app.calendar.*'
                 ],

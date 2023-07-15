@@ -17,7 +17,7 @@
                 <div x-cloak x-show="open" class="absolute inset-0 z-10 bg-gray-900/50"></div>
             </template>
     
-            <nav x-cloak x-show="open" x-trap="open" x-on:click.outside="open=false" class="absolute left-0 z-50 w-full bg-white rounded-lg shadow-lg top-12 focus:outline-none" tabindex="-1">
+            <nav x-cloak x-show="open" x-trap="open" x-on:click.outside="open=false" class="absolute left-0 z-50 w-full text-sm bg-white rounded-lg shadow-lg top-12 focus:outline-none" tabindex="-1">
     
                 <p class="px-2.5 pt-2 pb-1 text-sm text-gray-500 truncate">
                     {{ user()->currentBudget->name }}
@@ -85,7 +85,7 @@
                 ],
                 [
                     'label' => 'Calendar',
-                    'route' => '#',
+                    'route' => route('app.calendar.index'),
                     'icon' => 'calendar',
                     'active' => 'app.calendar.*'
                 ],

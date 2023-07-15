@@ -1,16 +1,10 @@
-@extends('app.incomes.layout')
+@extends('layouts.app')
 
-@push('body::end')
-    <script src="https://code.highcharts.com/highcharts.js"></script>    
-@endpush
+@section('page::title', 'Incomes')
 
-@section('section')
+{{-- @section('content')
 
-    <h3 class="p-6 text-3xl font-bold tracking-tight select-none">
-        Income Overview
-    </h3>
-
-    <div class="p-6 prose prose-green">
+    <div class="max-w-4xl p-6 px-4 mx-auto prose prose-green">
 
         <p>You currently have active {{ $incomes->count() }} {{ str('income')->plural($incomes->count()) }}, bringing in a estimated monthly amount of ${{ $incomes->sum('estimated_net_per_month') }}.</p>
 
@@ -44,4 +38,54 @@
 
     </div>
 
+@endsection --}}
+
+@section('content')
+
+    <div class="max-w-5xl px-4 py-8 mx-auto" x-data="{ search: '' }">
+
+        <div class="flex items-center justify-between mb-8">
+            
+            <div>
+                <x-forms.input type="search" x-model="search" placeholder="Search..."  />
+            </div>
+
+            <x-forms.buttons.secondary 
+                as="a" 
+                class="flex items-center"
+                href="{{ route('app.incomes.create') }}">
+                @svg('banknotes', 'w-4 h-4 mr-1.5') Create Income
+            </x-forms.buttons.secondary>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+            @foreach ($incomes as $income)
+
+                <div
+                    class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow" 
+                    x-bind:class="{
+                        'hidden' : ! (search == '' || '{{ $income->name }}'.toLowerCase().includes(search.toLowerCase()))
+                    }">
+                    <a href="{{ route('app.incomes.show', $income) }}" class="absolute inset-0 rounded focus:outline-none">
+                        <span class="sr-only">View income</span>
+                    </a>
+                    <h2 class="text-lg font-semibold truncate">{{ $income->name }}</h2>
+                    <div class="flex items-center mt-1.5 space-x-2.5 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            @svg('info', 'w-4 h-4 mr-1') {{ $income->type->name }}
+                        </div>
+                        <div class="flex items-center">
+                            @svg('calendar', 'w-4 h-4 mr-1') {{ $income->frequency }}
+                        </div>
+                        <div class="flex items-center">
+                            @svg('banknotes', 'w-4 h-4 mr-1') {{ $income->presenter()->estimatedNetPerPeriod() }}
+                        </div>
+                    </div>
+                </div>
+                
+            @endforeach
+        </div>
+        
+    </div>
+    
 @endsection

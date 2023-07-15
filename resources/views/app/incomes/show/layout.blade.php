@@ -1,13 +1,12 @@
-@extends('app.incomes.layout')
+@extends('layouts.app')
 
-@section('section')
+@section('page::title', $income->name)
+@section('breadcrumbs', Breadcrumbs::render('app.incomes.index'))
+
+@section('content')
 
     <div class="w-full border-b border-gray-300">
-            
-        <h3 class="px-6 pt-6 pb-4 text-3xl font-bold tracking-tight select-none">
-            {{ $income->name }}
-        </h3>
-        
+{{--         
         <div class="flex items-center px-6 py-2.5 space-x-4 text-gray-700 select-none">
 
             <div class="flex items-center space-x-1.5">
@@ -28,7 +27,7 @@
                 </div>
             @endif
             
-        </div>
+        </div> --}}
 
         <nav class="flex w-full px-6 -mx-2 -mb-px space-x-0 select-none">
 
