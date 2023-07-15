@@ -1,4 +1,5 @@
 https://flareapp.io/blog/20-collecting-metrics-for-flare-using-event-sourcing-and-laravel-stats
+https://www.auxnet.de/en/blog/make-your-text-collection-searchable-with-python-and-meilisearch/
 
 # Todo
 
