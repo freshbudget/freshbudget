@@ -60,7 +60,7 @@ php artisan migrate
 
 #### Add subdomains to etc\hosts file
 
-We are currently using subdomains for the authentication and application routes. You should configure your local `etc\hosts` file to point `api.domain.test`, `app.domain.test` and `domain.test` to this application. You can also reconfigure this behavior by modifiying the `.env` file.
+We are currently using subdomains for the authentication and application routes. You should configure your local `etc\hosts` file to point `api.domain.test`, `app.domain.test` and `domain.test` to this application.
 
 ## Testing
 
@@ -78,8 +78,19 @@ We use Laravel Pint to automatically standardize code styling, before pushing ch
 ./vendor/bin/pint
 ```
 
-# Deployment Script Considerations
+# Production Deployment Script
 
 ```bash
-php artisan icons:cache
+$FORGE_PHP artisan down --refresh=30
+$FORGE_PHP artisan storage:link
+$FORGE_PHP artisan migrate --force
+
+$FORGE_PHP artisan optimize:clear 
+$FORGE_PHP artisan responsecache:clear
+$FORGE_PHP artisan icons:clear
+
+$FORGE_PHP artisan optimize
+$FORGE_PHP artisan icons:cache
+
+$FORGE_PHP artisan up
 ```
