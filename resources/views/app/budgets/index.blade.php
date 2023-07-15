@@ -15,11 +15,7 @@
         <p>
             As a reminder, budgets are a way to group your resources and collaborate with others. You can create as many budgets as you like and invite as many people as you like to each budget. 
         </p>
-
-        <p>
-            If you want to try running various financial scenarios, you can create a budget for each scenario. For example, you could create a budget for your current financial situation, a budget for your financial situation if you get a raise, and a budget for your financial situation if you get a new job.
-        </p>
-
+        
     </div>
 
 @endsection

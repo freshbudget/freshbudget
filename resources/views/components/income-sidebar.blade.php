@@ -1,14 +1,6 @@
 <div x-data="{ search: '', open: true }" class="flex flex-col flex-shrink-0 bg-white border-r border-gray-300 select-none w-96">
 
     <div class="sticky top-0 px-5 py-4 space-y-4 border-gray-300 backdrop-blur-sm">
-
-        <div class="flex items-center justify-between">
-
-            <p class="flex items-center text-xl font-bold text-gray-700">
-                Incomes
-            </p>
-
-        </div>
         
         <div class="flex items-center space-x-2.5 !z-0">
 

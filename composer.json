@@ -10,9 +10,7 @@
         "astrotomic/laravel-cachable-attributes": "^0.5.0",
         "blade-ui-kit/blade-icons": "^1.5",
         "danharrin/livewire-rate-limiting": "^1.1",
-        "filament/filament": "^2.0",
-        "filament/forms": "^2.0",
-        "filament/tables": "^2.0",
+        "diglactic/laravel-breadcrumbs": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.8",
         "laravel/sanctum": "^3.2",
@@ -60,8 +58,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan filament:upgrade"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

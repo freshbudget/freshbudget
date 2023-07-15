@@ -2,7 +2,7 @@
 
 @push('body::classes', 'selection:bg-gray-300')
 
-@section('page')
+@section('body')
 
     <div class="absolute inset-0 flex items-center justify-center w-full h-full bg-white">
 

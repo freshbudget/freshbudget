@@ -8,17 +8,17 @@
             Personal finance and budgeting doesn't have to be hard. 
         </h2>
 
-        <p class="my-10 text-lg text-gray-700">
+        <p class="my-8 text-base text-gray-700 sm:my-10 sm:text-lg">
             Budgeting software has gotten too complex. With Fresh Budget we are going back to basics, oh and we are making it work for couples / families.
         </p>
 
-        <div class="flex items-center space-x-4 select-none">
+        <div class="flex flex-col items-center space-y-2 select-none sm:space-x-4 sm:flex-row sm:space-y-0">
 
-            <a href="{{ route('register') }}" class="px-5 font-semibold inline-block py-2.5 bg-green-600 hover:bg-gradient-to-br hover:from-green-500 hover:to-green-600 border border-green-700 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-green-700 focus:outline-none focus:shadow text-green-50/100 shadow-sm hover:shadow-md hover:text-green-50 active:shadow-inner">
+            <a href="{{ route('register') }}" class="px-5 font-semibold inline-block py-2.5 bg-green-600 hover:bg-gradient-to-br hover:from-green-500 hover:to-green-600 border border-green-700 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-green-700 focus:outline-none focus:shadow text-green-50/100 shadow-sm hover:shadow-md hover:text-green-50 active:shadow-inner w-full text-center sm:text-left sm:w-auto">
                 Get started for free
             </a>
 
-            <a href="#" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner">
+            <a href="#" class="px-5 font-semibold inline-block py-2.5 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full text-center sm:text-left sm:w-auto">
                 Check out live demo
             </a>
 

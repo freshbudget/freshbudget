@@ -1,5 +1,7 @@
 @extends('app.incomes.layout')
 
+@section('breadcrumbs', Breadcrumbs::render('home'))
+
 @push('body::end')
     <script src="https://code.highcharts.com/highcharts.js"></script>    
 @endpush

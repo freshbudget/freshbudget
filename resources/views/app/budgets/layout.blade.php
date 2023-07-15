@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page::title', 'Budgets')
+@section('breadcrumbs', Breadcrumbs::render('home'))
+
 @section('content')
 
     <section class="flex h-screen overflow-hidden">

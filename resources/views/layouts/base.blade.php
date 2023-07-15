@@ -14,7 +14,6 @@
     @stack('body::start')
     
     @yield('body')
-
     
     @stack('body::end')
 </body>

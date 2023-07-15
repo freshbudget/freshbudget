@@ -10,7 +10,3 @@
     @livewireScripts
     @vite(['resources/js/app.js'])
 @endpush
-
-@section('body')
-    @yield('page')
-@endsection

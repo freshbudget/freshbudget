@@ -2,22 +2,26 @@
 
 use App\Http\Controllers\Invitations\BudgetInvitationsController;
 use Illuminate\Support\Facades\Route;
-use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
 Route::view('/', 'marketing.index')
+    ->middleware(['cache.headers:public;max_age=86400;etag'])
     ->name('welcome');
 
 Route::view('/terms', 'marketing.terms')
-    ->name('terms');
+        ->middleware(['cache.headers:public;max_age=86400;etag'])
+        ->name('terms');
 
 Route::view('/privacy', 'marketing.privacy')
-    ->name('privacy');
+        ->middleware(['cache.headers:public;max_age=86400;etag'])
+        ->name('privacy');
 
 Route::view('/faq', 'marketing.faq')
-    ->name('faq');
+        ->middleware(['cache.headers:public;max_age=86400;etag'])
+        ->name('faq');
 
 Route::view('/blog', 'blog.index')
-    ->name('blog');
+        ->middleware(['cache.headers:public;max_age=86400;etag'])
+        ->name('blog');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +41,4 @@ Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::cl
 | Application Health Check
 |--------------------------------------------------------------------------
 */
-Route::get('/health', HealthCheckResultsController::class);
+// Route::get('/health', HealthCheckResultsController::class);

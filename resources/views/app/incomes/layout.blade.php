@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page::title', 'Incomes')
+
 @section('content')
 
     <section class="flex h-screen overflow-hidden">
