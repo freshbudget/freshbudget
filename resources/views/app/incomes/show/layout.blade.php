@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="w-full border-b border-gray-300">
+    <div class="sticky top-0 w-full bg-white border-b border-gray-300 select-none">
 {{--         
         <div class="flex items-center px-6 py-2.5 space-x-4 text-gray-700 select-none">
 
@@ -29,7 +29,7 @@
             
         </div> --}}
 
-        <nav class="flex w-full px-6 -mx-2 -mb-px space-x-0 select-none">
+        <nav class="flex w-full px-4 -mb-px space-x-3">
 
             @php
                 $links = [
@@ -72,7 +72,7 @@
             @endphp
 
             @foreach ($links as $link)
-                <a href="{!! $link['route'] !!}" class="block px-3 py-3 border-b-2 {{ active($link['active'], 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
+                <a href="{!! $link['route'] !!}" class="block px-1 text-sm py-3 border-b-2 {{ active($link['active'], 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
                     {!! $link['label'] !!}
                 </a>                
             @endforeach

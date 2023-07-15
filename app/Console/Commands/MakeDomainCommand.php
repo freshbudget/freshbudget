@@ -27,7 +27,7 @@ class MakeDomainCommand extends Command
     public function handle()
     {
         if (! app()->isLocal()) {
-            $this->error('This command can only be run in local environment!');
+            $this->error('The environment is not local, aborting.');
 
             return;
         }
@@ -51,7 +51,7 @@ class MakeDomainCommand extends Command
         $path = app_path('Domains'.DIRECTORY_SEPARATOR.$domain);
 
         if (is_dir($path)) {
-            $this->error('Domain already exists!');
+            $this->error('The domain already exists, aborting.');
 
             return;
         }

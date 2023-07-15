@@ -1,6 +1,8 @@
-@extends('app.settings.layout')
+@extends('layouts.app')
 
-@section('section')
+@section('page::title', 'Account Settings')
+
+@section('content')
 
     <div class="p-6">
 
