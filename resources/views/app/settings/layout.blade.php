@@ -19,7 +19,7 @@
                 
             </div>
         
-            <aside class="flex-1 overflow-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-300">
+            <aside class="flex-1 overflow-auto">
             
                 <div class="p-2.5 mb-4 space-y-1.5">
         

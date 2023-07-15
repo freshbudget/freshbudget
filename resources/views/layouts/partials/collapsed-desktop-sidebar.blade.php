@@ -3,29 +3,71 @@
     <!-- Main sidebar links -->
     <div class="flex flex-col items-center flex-1 py-3 space-y-1 text-gray-600" x-data="{}">
 
-        <a href="{{ route('app.index') }}" class="flex items-center justify-center w-10 h-10 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active('app.index', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()" title="Dashboard">
-            @svg('home', 'w-5 h-5')
-        </a>
+        @php
+            $links = [
+                [
+                    'label' => 'Home',
+                    'route' => route('app.index'),
+                    'icon' => 'home',
+                    'active' => 'app.index'
+                ],
+                [
+                    'label' => 'Calendar',
+                    'route' => '#',
+                    'icon' => 'calendar',
+                    'active' => 'app.calendar.*'
+                ],
+                [
+                    'label' => 'Incomes',
+                    'route' => route('app.incomes.index'),
+                    'icon' => 'banknotes',
+                    'active' => 'app.incomes.*'
+                ],
+                [
+                    'label' => 'Expenses',
+                    'route' => "#",
+                    'icon' => 'creditcard',
+                    'active' => 'app.expenses.*'
+                ],
+                [
+                    'label' => 'Accounts',
+                    'route' => "#",
+                    'icon' => 'bank',
+                    'active' => 'app.accounts.*'
+                ],
+                [
+                    'label' => 'Transactions',
+                    'route' => "#",
+                    'icon' => 'pencilsquare',
+                    'active' => 'app.transactions.*'
+                ],
+                [
+                    'label' => 'Files',
+                    'route' => route('app.files.index'),
+                    'icon' => 'files',
+                    'active' => 'app.files.*'
+                ],
+                [
+                    'label' => 'Budgets',
+                    'route' => route('app.budgets.index'),
+                    'icon' => 'stack',
+                    'active' => 'app.budgets.*'
+                ],
+            ]
+        @endphp
 
-        <a href="#" class="flex w-10 h-10 justify-center p-2 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.calendar.*', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()" title="Calendar">
-            @svg('calendar', 'w-5 h-5')
-        </a>
+        @foreach($links as $link)
 
-        <a href="{{ route('app.incomes.index') }}" class="flex items-center w-10 h-10 justify-center p-2 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed  {{ active('app.incomes.*', 'font-semibold text-gray-900') }}" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()" title="Incomes">
-            @svg('banknotes', 'w-5 h-5')
-        </a>
+            <a 
+                href="{{ $link['route'] }}" 
+                title="{{ $link['label'] }}"
+                class="flex items-center justify-center w-10 h-10 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active($link['active'], 'font-semibold text-gray-900') }}" 
+                x-on:mouseenter="$focus.focus($el)" 
+                x-on:mouseleave="$el.blur()">
+                @svg($link['icon'], 'w-5 h-5')
+            </a>
 
-        <a href="#" class="relative flex items-center justify-center w-10 h-10 p-2 leading-relaxed tracking-tight border border-transparent rounded-lg focus:outline-none focus:border-gray-300 focus:bg-gray-100" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()" title="Expenses">
-            @svg('creditcard', 'w-5 h-5')
-        </a>
-
-        <a href="#" class="relative flex items-center justify-center w-10 h-10 p-2 leading-relaxed tracking-tight border border-transparent rounded-lg focus:outline-none focus:border-gray-300 focus:bg-gray-100" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()" title="Accounts">
-            @svg('bank', 'w-5 h-5')
-        </a>
-
-        <a href="#" class="relative flex items-center justify-center w-10 h-10 p-2 leading-relaxed tracking-tight border border-transparent rounded-lg focus:outline-none focus:border-gray-300 focus:bg-gray-100" x-on:mouseenter="$focus.focus($el)" x-on:mouseleave="$el.blur()" title="Transactions">
-            @svg('pencilsquare', 'w-5 h-5')
-        </a>
+        @endforeach
 
     </div>
 

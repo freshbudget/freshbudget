@@ -2,11 +2,7 @@
 
 @section('section')
 
-    <div class="w-full border-b border-gray-300">
-        
-        <h3 class="px-6 pt-6 pb-4 text-3xl font-bold tracking-tight select-none">
-            {{ $budget->name }}
-        </h3>
+    <div class="w-full max-w-3xl mx-auto border-b border-gray-300">
 
         <nav class="flex w-full px-6 -mb-px space-x-0">
 
@@ -22,7 +18,7 @@
 
     </div>
 
-    <div>        
+    <div class="max-w-3xl mx-auto">        
         @yield('tab')
     </div>
 

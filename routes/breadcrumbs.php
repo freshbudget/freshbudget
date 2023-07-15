@@ -11,3 +11,8 @@ Breadcrumbs::for('app.budgets.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Budgets', route('app.budgets.index'));
 });
+
+Breadcrumbs::for('app.incomes.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Incomes', route('app.incomes.index'));
+});

@@ -1,21 +1,39 @@
-@extends('app.budgets.layout')
+@extends('layouts.app')
 
-@section('section')
+@section('page::title', 'Budgets')
 
-    <h3 class="px-6 pt-6 text-3xl font-bold tracking-tight select-none">
-        Your Budgets
-    </h3>
+@section('content')
 
-    <div class="max-w-xl p-6 mb-8 prose prose-green">
+<div class="max-w-4xl px-4 py-8 mx-auto" x-data="{
+    search: '',
+}">
+
+    <div class="flex items-center justify-between mb-8">
         
-        <p>
-            You are currently a member of {{ $budgets->count() }} budgets, you can select a budget from the sidebar to view its details.
-        </p>
+        <div>
+            <x-forms.input type="search" x-model="search" placeholder="Search..."  />
+        </div>
 
-        <p>
-            As a reminder, budgets are a way to group your resources and collaborate with others. You can create as many budgets as you like and invite as many people as you like to each budget. 
-        </p>
-        
+        <x-forms.buttons.secondary 
+            as="a" 
+            class="flex items-center"
+            href="{{ route('app.budgets.create') }}">
+            @svg('stack', 'w-4 h-4 mr-1.5') Create Budget
+        </x-forms.buttons.secondary>
     </div>
 
-@endsection
+    <div class="grid grid-cols-3 gap-4">
+        @foreach ($budgets as $budget)
+            <a href="{{ route('app.budgets.show', $budget) }}"
+                class="flex items-center p-4 bg-white border border-gray-300 rounded shadow-sm" 
+                x-bind:class="{
+                    'hidden' : ! (search == '' || '{{ $budget->name }}'.toLowerCase().includes(search.toLowerCase()))
+                }">
+                {{ $budget->name }}
+            </a>
+        @endforeach
+    </div>
+    
+</div>
+    
+    @endsection

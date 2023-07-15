@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('page::title', 'Add Income')
+@section('breadcrumbs', Breadcrumbs::render('app.incomes.index'))
 
 @section('content')
 
