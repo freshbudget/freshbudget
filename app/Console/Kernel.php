@@ -2,13 +2,13 @@
 
 namespace App\Console;
 
-use Illuminate\Console\Scheduling\Schedule;
 use App\Domains\Budgets\Models\BudgetInvitation;
-use Spatie\Health\Commands\RunHealthChecksCommand;
-use App\Domains\Incomes\Jobs\SyncIncomeEstimatedTaxes;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedDeductions;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedEntitlements;
+use App\Domains\Incomes\Jobs\SyncIncomeEstimatedTaxes;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Spatie\Health\Commands\RunHealthChecksCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune', [
             '--model' => BudgetInvitation::class,
         ])->daily();
-        
+
         $schedule->command('auth:clear-resets')->everyFourHours();
 
         // TODO: Refactor this to use a parent job that does chaining and batching as required.

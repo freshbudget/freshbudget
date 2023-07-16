@@ -98,5 +98,3 @@ $FORGE_PHP artisan up
 ## Design 
 
 - Breadcrumbs should be included if greater than 1 page away from the dashboard, for example the incomes index would not require breadcrumbs because it is one page away from the dashboard in hierachy. The incomes create page would require breadcrumbs because it is a child of the incomes index and thus further than one page away.
-
-aafc3ca8-1437-4888-a14c-4dacc4a199e7
