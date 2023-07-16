@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/marketing.css',
                 'resources/js/marketing.js',
+                'resources/js/highcharts.js',
+                'resources/css/highcharts.css',
                 'resources/css/app.css', 
                 'resources/js/app.js'
             ],

@@ -5,6 +5,12 @@ https://www.auxnet.de/en/blog/make-your-text-collection-searchable-with-python-a
 
 - add the ability to allow a invitation to a user who will never have an actual accout, i.e spouse or child
 
+# Income Overview
+
+- Lifetime earnings
+- Estimated earnings for the year
+- 
+
 # Income Notes
 
 - The things I care about for an income

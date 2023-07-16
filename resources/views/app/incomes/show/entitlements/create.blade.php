@@ -2,9 +2,11 @@
 
 @section('tab')
 
-    <div class="max-w-xl mb-8">
+    <div class="max-w-xl mx-auto px-4 my-10">
 
-        <div class="prose-sm prose select-none prose-green">
+        <div class="prose select-none prose-green">
+
+            <h2>Create income entitlements</h2>
 
             <p>
                 Entitlements are basic groups of income that you expect to earn during a pay period. For example, you may have a base pay, this is one entitlement. On the same pay stub you may have overtime pay, this is another entitlement. You can add as many entitlements as you need to represent your expected income per pay period. Remember, this is just an estimate, when you log your income you will be able to input how much you actually earned for each item.
@@ -91,7 +93,7 @@
 
                 <div class="flex items-center justify-between py-3 mr-6 text-lg text-gray-500 border-gray-300 select-none border-y">
 
-                    <p>Estimated entitlements per income period</p>
+                    <p>Estimated entitlements per income period ({{ $income->frequency }})</p>
 
                     <p>
                         $<span x-text="totalAmount">0.00</span>

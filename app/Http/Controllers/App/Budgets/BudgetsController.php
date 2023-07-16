@@ -53,7 +53,7 @@ class BudgetsController extends Controller
     {
         $this->authorize('edit', $budget);
 
-        return view('app.budgets.show.settings', [
+        return view('app.budgets.show.settings.general', [
             'budget' => $budget,
             'budgets' => user()->joinedBudgets()->orderBy('name')->get(),
         ]);

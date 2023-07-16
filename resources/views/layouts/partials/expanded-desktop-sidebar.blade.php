@@ -43,7 +43,7 @@
         
                     <div class="px-2">
                         
-                        @foreach (user()->joinedBudgets->take(3) as $budget)
+                        @foreach (user()->joinedBudgets->take(1) as $budget)
                             <form action="{{ route('app.budgets.current', $budget) }}" method="post">
 
                                 @csrf

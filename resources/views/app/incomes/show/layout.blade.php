@@ -6,7 +6,8 @@
 @section('content')
 
     <div class="sticky top-0 w-full bg-white border-b border-gray-300 select-none">
-{{--         
+    
+    {{--         
         <div class="flex items-center px-6 py-2.5 space-x-4 text-gray-700 select-none">
 
             <div class="flex items-center space-x-1.5">
@@ -81,10 +82,8 @@
 
     </div>
 
-    <div class="p-6">
-
+    <div>
         @yield('tab')
-
     </div>
 
 @endsection

@@ -1,0 +1,206 @@
+.wep-spotlight {
+    @apply relative;
+}
+
+.wep-spotlight-outer-container {
+    @apply fixed inset-0 overflow-y-auto p-4 sm:p-6 md:p-20;
+    z-index: 900;
+}
+
+.wep-spotlight-inner-container {
+    @apply mx-auto max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-4xl bg-white rounded shadow overflow-hidden divide-y divide-gray-100 antialiased;
+    z-index: 999;
+}
+
+/* .wep-spotlight-inner-container.enter {
+    @apply ease-out duration-300;
+} */
+
+.wep-spotlight-inner-container.enter.start,
+.wep-spotlight-inner-container.leave.end{
+    @apply opacity-0 scale-95;
+}
+
+.wep-spotlight-inner-container.enter.end,
+.wep-spotlight-inner-container.leave.start{
+    @apply opacity-100 scale-100;
+}
+
+/* .wep-spotlight-inner-container.leave {
+    @apply ease-in duration-200;
+} */
+
+.wep-spotlight-input-container {
+    @apply relative flex items-center space-x-0.5;
+}
+
+.wep-spotlight-input-icon {
+    @apply ml-4 flex items-center w-6;
+}
+
+.wep-spotlight-input-loading-icon {
+    @apply animate-spin h-4 w-4;
+}
+
+.wep-spotlight-input-search-icon {
+    @apply pointer-events-none h-5 w-5 text-gray-400;
+}
+
+.wep-spotlight-token-container {
+    @apply flex space-x-1 text-sm text-gray-800;
+}
+
+.wep-spotlight-input {
+    @apply rounded pl-1 py-3 text-gray-800 text-sm border-0 block w-full focus:outline-none focus:ring-0 !important;
+}
+
+.wep-spotlight-input-inner-container {
+    @apply w-full relative;
+}
+
+.wep-spotlight-input-escape {
+    @apply absolute top-0 right-3 h-full flex items-center;
+}
+
+.wep-spotlight-input-escape-icon {
+    @apply w-5 h-5 text-gray-400;
+}
+
+.wep-spotlight-token-divider {
+    @apply text-gray-600;
+}
+
+.wep-spotlight-token {
+    @apply font-medium whitespace-nowrap;
+}
+
+.wep-spotlight-backdrop {
+    @apply fixed inset-0 bg-gray-900/50 transition-opacity;
+    z-index: 888;
+}
+
+/* .wep-spotlight-backdrop.enter {
+    @apply ease-out duration-300;
+} */
+
+.wep-spotlight-backdrop.enter.start,
+.wep-spotlight-backdrop.leave.end{
+    @apply opacity-0;
+}
+
+.wep-spotlight-backdrop.enter.end,
+.wep-spotlight-backdrop.leave.start{
+    @apply opacity-100;
+}
+
+/* .wep-spotlight-backdrop.leave
+{
+    @apply ease-in duration-200;
+} */
+
+.wep-spotlight-footer {
+    @apply flex flex-wrap items-center justify-between bg-gray-50 py-2.5 px-4 text-xs text-gray-700;
+}
+
+.wep-spotlight-footer-tip {
+    @apply flex items-center;
+}
+
+.wep-spotlight-footer-tip-label {
+    @apply font-semibold mr-1;
+}
+
+.wep-spotlight-footer-tip kbd {
+    @apply mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white sm:mx-2 border-gray-400 text-gray-400;
+}
+
+.wep-spotlight-footer-helper {
+    @apply flex items-center;
+}
+
+.wep-spotlight-footer-helper {
+    @apply flex items-center;
+}
+
+.wep-spotlight-footer-helper-key {
+    @apply mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white sm:mx-2 border-gray-400 text-gray-400;
+}
+
+.wep-spotlight-groups {
+    @apply pt-4 pb-2 space-y-2 max-h-96 overflow-y-auto;
+}
+
+.wep-spotlight-group {
+    @apply border-b border-gray-100 px-2.5 pb-2 mb-4;
+}
+
+.wep-spotlight-groups .wep-spotlight-group:last-child {
+    @apply pb-0 mb-0 border-0;
+}
+
+.wep-spotlight-group-title {
+    @apply text-xs font-semibold text-gray-900 px-2 pb-2;
+}
+
+.wep-spotlight-item {
+    @apply flex px-3 py-2 items-center text-sm rounded relative cursor-pointer;
+}
+
+.wep-spotlight-item.wep-spotlight-item-active {
+    @apply text-white bg-indigo-500;
+}
+
+.wep-spotlight-item-icon {
+    @apply h-5 w-5 mr-2 flex-none text-gray-400 shrink-0;
+}
+
+.wep-spotlight-item-icon img {
+    @apply rounded-full;
+}
+
+.wep-spotlight-item.wep-spotlight-item-active .wep-spotlight-item-icon {
+    @apply text-white;
+}
+
+.wep-spotlight-item-title {
+    @apply text-gray-800 truncate whitespace-nowrap;
+}
+
+.wep-spotlight-item.wep-spotlight-item-active .wep-spotlight-item-title {
+    @apply font-semibold text-white;
+}
+
+.wep-spotlight-item-instructions {
+    @apply hidden ml-auto text-xs space-x-2 shrink-0;
+}
+
+.wep-spotlight-item.wep-spotlight-item-active .wep-spotlight-item-instructions {
+    @apply flex text-indigo-200;
+}
+
+.wep-spotlight-item-action,
+.wep-spotlight-item-token {
+    @apply flex space-x-2;
+}
+
+.wep-spotlight-item-action-key,
+.wep-spotlight-item-token-key {
+    @apply px-1 border border-indigo-300 rounded-sm text-xs;
+}
+
+.wep-spotlight-item-action-description {
+    @apply lowercase;
+}
+
+.wep-spotlight-no-results {
+    @apply py-10 px-6 text-center text-sm sm:px-10;
+}
+.wep-spotlight-no-results-icon {
+    @apply mx-auto h-6 w-6 text-gray-400;
+}
+.wep-spotlight-no-results-heading {
+    @apply mt-4 font-semibold text-gray-900;
+}
+.wep-spotlight-no-results-message {
+    @apply mt-2 text-gray-500;
+}

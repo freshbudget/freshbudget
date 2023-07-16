@@ -1,5 +1,8 @@
 @extends('app.budgets.show.layout')
 
+@section('page::title', $budget->name)
+@section('breadcrumbs', Breadcrumbs::render('app.budgets.index'))
+
 @section('tab')
 
     <section class="border border-gray-300 bg-white rounded my-8">

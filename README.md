@@ -4,6 +4,8 @@ A family-friendly way to manage your money and stay on top of your budget.
 
 ## Features
 
+- https://www.reddit.com/r/selfhosted/comments/11ja1k3/recommendations_for_easy_financial_management/
+
 ### Open-Source
 
 Because the codebase for Fresh Budget is open-source, you can see exactly how your infomation is being used. Additionally, you could even contribute and help shape the platform.
