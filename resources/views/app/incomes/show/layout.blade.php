@@ -38,11 +38,11 @@
                         'route' => route('app.incomes.show', $income),
                         'active' => 'app.incomes.show'
                     ],
-                    [
-                        'label' => 'Transactions',
-                        'route' => '#',
-                        'active' => 'app.incomes.transactions.*'
-                    ],
+                    // [
+                    //     'label' => 'Transactions',
+                    //     'route' => '#',
+                    //     'active' => 'app.incomes.transactions.*'
+                    // ],
                     [
                         'label' => 'Entitlements',
                         'route' => route('app.incomes.entitlements.show', $income),

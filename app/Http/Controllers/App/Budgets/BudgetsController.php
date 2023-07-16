@@ -59,6 +59,19 @@ class BudgetsController extends Controller
         ]);
     }
 
+    public function update(Budget $budget)
+    {
+        $this->authorize('edit', $budget);
+
+        $validated = $this->validate(request(), [
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $budget->update($validated);
+
+        return redirect()->back(fallback: route('app.budgets.edit', $budget));
+    }
+
     public function index()
     {
         $this->authorize('viewAny', Budget::class);

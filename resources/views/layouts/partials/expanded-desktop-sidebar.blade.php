@@ -29,8 +29,8 @@
                         @svg('cog', 'w-5 h-5 mr-2.5') Settings
                     </a>
     
-                    <a href="#" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
-                        @svg('userplus', 'w-5 h-5 mr-2.5') Invite a friend
+                    <a href="{{ route('app.budgets.members.index', currentBudget()) }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                        @svg('userplus', 'w-5 h-5 mr-2.5') Invite a member
                     </a>
                             
                 </div>

@@ -13,6 +13,11 @@ class IncomePresenter
         //
     }
 
+    public function estimatedDeductionsPerPeriod(): string
+    {
+        return $this->getFormattedAmount($this->income->estimated_deductions_per_period);
+    }
+
     public function estimatedEntitlementsPerPeriod(): string
     {
         return $this->getFormattedAmount($this->income->estimated_entitlements_per_period);

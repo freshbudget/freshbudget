@@ -1,4 +1,4 @@
-<div x-data="contextMenu()" x-on:contextmenu="contextMenuToggle(event)">
+<div x-data="contextMenu()" x-on:contextmenu="contextMenuToggle(event)" {{ $attributes }}>
 
     {{ $slot }}
 
@@ -11,8 +11,10 @@
             x-trap.inert="contextMenuOpen"
             x-on:keydown.escape.window="contextMenuOpen=false"
             class="z-50 min-w-[8rem] text-gray-800 rounded-md border border-gray-300/70 bg-white text-sm fixed p-1 shadow-md w-64">
+
+            {{ $options }}
             
-            <div tabindex="0" x-on:click="contextMenuOpen=false" class="relative flex cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-gray-100 outline-none pl-8  data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
+            {{-- <div tabindex="0" x-on:click="contextMenuOpen=false" class="relative flex cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-gray-100 outline-none pl-8  data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
                 <span>New Folder</span>
                 <span class="ml-auto text-xs tracking-widest text-gray-400 group-hover:text-gray-600">⌘N</span>
             </div>
@@ -48,7 +50,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> --}}
 
         </div>
     </template>

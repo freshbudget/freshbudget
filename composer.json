@@ -22,7 +22,8 @@
         "spatie/laravel-health": "^1.22",
         "spatie/laravel-permission": "^5.10",
         "spatie/laravel-stats": "^2.1",
-        "watson/active": "^7.0"
+        "watson/active": "^7.0",
+        "wire-elements/pro": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
@@ -53,6 +54,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+          "type": "composer",
+          "url": "https://wire-elements-pro.composer.sh"
+        }
+      ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

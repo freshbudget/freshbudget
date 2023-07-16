@@ -23,12 +23,12 @@
         <div class="grid grid-cols-3 gap-4">
             @foreach ($budgets as $budget)
 
-                <x-context-menu>
+                <x-context-menu x-bind:class="{
+                    'hidden' : ! (search == '' || '{{ e($budget->name) }}'.toLowerCase().includes(search.toLowerCase()))
+                }">
+                    
                     <div
-                        class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow" 
-                        x-bind:class="{
-                            'hidden' : ! (search == '' || '{{ $budget->name }}'.toLowerCase().includes(search.toLowerCase()))
-                        }">
+                        class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow">
                         <a href="{{ route('app.budgets.show', $budget) }}" class="absolute inset-0 rounded focus:outline-none">
                             <span class="sr-only">View budget</span>
                         </a>
@@ -39,6 +39,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <x-slot:options>
+                        <x-context-menu.option as="a" href="{{ route('app.budgets.edit', $budget) }}">
+                            Edit
+                        </x-context-menu.option>
+                        <x-context-menu.option as="a" href="{{ route('app.budgets.members.index', $budget) }}">
+                            Invite Member
+                        </x-context-menu.option>
+                    </x-slot:options>
+
                 </x-context-menu>
                 
             @endforeach

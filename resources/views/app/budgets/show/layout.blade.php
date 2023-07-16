@@ -9,23 +9,39 @@
 
         <nav class="flex w-full px-4 -mb-px space-x-3">
 
-            <a href="{{ route('app.budgets.show', $budget) }}" class="block px-1 text-sm py-3 border-b-2 {{ active('app.budgets.show', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                General
-            </a>
+            @php
+                $links = [
+                    [
+                        'label' => 'General',
+                        'route' => route('app.budgets.show', $budget),
+                        'active' => 'app.budgets.show'
+                    ],
+                    [
+                        'label' => 'Members',
+                        'route' => route('app.budgets.members.index', $budget),
+                        'active' => 'app.budgets.members.index'
+                    ],
+                    [
+                        'label' => 'Settings',
+                        'route' => route('app.budgets.edit', $budget),
+                        'active' => 'app.budgets.edit'
+                    ]
+                ]
+            @endphp
 
-            <a href="{{ route('app.budgets.show', $budget) }}" class="block px-1 text-sm py-3 border-b-2 {{ active('app.budgets.sshow', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                Members
-            </a>
+            @foreach ($links as $link)
+                
+                <a href="{{ $link['route'] }}" class="block px-1 text-sm py-3 border-b-2 {{ active($link['active'], 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
+                    {{ $link['label'] }}
+                </a>
 
-            <a href="{{ route('app.budgets.edit', $budget) }}" class="block px-1 text-sm py-3 font-semibold border-b-2 {{ active('app.budgets.edit', 'font-semibold border-gray-400', 'border-transparent hover:border-gray-300') }}">
-                Settings
-            </a>
+            @endforeach
 
         </nav>
 
     </div>
 
-    <div class="max-w-3xl mx-auto h-[9000px]">        
+    <div class="max-w-3xl mx-auto">        
         @yield('tab')
     </div>
 

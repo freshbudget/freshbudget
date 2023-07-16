@@ -14,22 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         // create a test user
         $user = User::factory()->verified()->create([
-            'name' => 'Wyatt',
+            'name' => 'Wyatt Castaneda',
             'nickname' => 'Wyatt',
             'email' => 'user@email.com',
-        ]);
-
-        // create an income for the personal budget
-        $user->personalBudget()->incomes()->create([
-            'name' => 'Wyatt Salary',
-        ]);
-
-        $user->personalBudget()->incomes()->create([
-            'name' => 'Side hustle',
-        ]);
-
-        $user->personalBudget()->incomes()->create([
-            'name' => 'Amber Salary',
         ]);
     }
 }

@@ -4,16 +4,18 @@ namespace App\Domains\Budgets\Models;
 
 use App\Domains\Users\Models\User;
 use Database\Factories\BudgetInvitationFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class BudgetInvitation extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasUlids, Prunable;
 
     const STATE_ACCEPTED = 'accepted';
 
@@ -79,6 +81,11 @@ class BudgetInvitation extends Model
     public function getRouteKeyName()
     {
         return 'ulid';
+    }
+
+    public function prunable(): Builder
+    {
+        return static::where('expires_at', '<=', now());
     }
 
     public static function newFactory()

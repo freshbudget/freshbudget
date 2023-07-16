@@ -64,7 +64,7 @@
                 <div
                     class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow" 
                     x-bind:class="{
-                        'hidden' : ! (search == '' || '{{ $income->name }}'.toLowerCase().includes(search.toLowerCase()))
+                        'hidden' : ! (search == '' || '{{ e($income->name) }}'.toLowerCase().includes(search.toLowerCase()))
                     }">
                     <a href="{{ route('app.incomes.show', $income) }}" class="absolute inset-0 rounded focus:outline-none">
                         <span class="sr-only">View income</span>

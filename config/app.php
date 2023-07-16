@@ -163,6 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
+        WireElements\Pro\Components\Spotlight\SpotlightServiceProvider::class,
 
         /*
          * Application Service Providers...

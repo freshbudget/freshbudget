@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f164ac96ad82ed3e7b7df8ef3cf6bbb1",
+    "content-hash": "7dbe51b9f9fe594f3c2835b5c7b0c67d",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -6778,6 +6778,67 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wire-elements/pro",
+            "version": "3.0.11",
+            "dist": {
+                "type": "zip",
+                "url": "https://wire-elements-pro.composer.sh/download/993b1b23-f551-48b4-a58a-c6013132fc46/wire-elements-pro-3.0.11.zip",
+                "reference": "896ec7a76a1b5f865316647838851753e047dc88",
+                "shasum": "c5a2137d26a481909eec81217f12c1be45d8ab98"
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0|^10.0",
+                "livewire/livewire": "^v2.10.5",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.1",
+                "nunomaduro/collision": "^6.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "WireElements\\Pro\\WireElementsProServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "WireElements\\Pro\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "WireElements\\Pro\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Philo Hermans",
+                    "role": "Developer",
+                    "email": "support@wire-elements.dev"
+                }
+            ],
+            "description": "Beautiful components crafted with Livewire",
+            "homepage": "https://github.com/wire-elements/pro",
+            "keywords": [
+                "components",
+                "laravel",
+                "livewire",
+                "wire-elements"
+            ],
+            "time": "2023-05-22T21:36:23+00:00"
         }
     ],
     "packages-dev": [
