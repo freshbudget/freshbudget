@@ -2,13 +2,55 @@
 
 @section('tab')
 
-    <div class="max-w-lg mb-8 mx-auto px-4 my-10">
+    <div class="max-w-xl mb-8 mx-auto px-4 my-10">
 
         <div class="prose prose-green">
 
-            <p>
-                Eventually, I'd like to show a graph of the entitlements over time.
-            </p>
+            <div
+                x-data="{
+                    chart: null, 
+                }"
+                x-init="
+                    chart = Highcharts.chart($el, {
+                        chart: {
+                            type: 'bar'
+                        },
+                        title: {
+                            text: '{{ e($income->name) }} Entitlements (per period)'
+                        },
+                        xAxis: {
+                            categories: ['Total']
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Amount'
+                            }
+                        },
+                        legend: {
+                            reversed: true
+                        },
+                        plotOptions: {
+                            series: {
+                                stacking: 'normal',
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }
+                        },
+                        series: [
+                            @foreach ($entitlements->sortBy('amount') as $entitlement)
+                                {
+                                    name: '{{ e($entitlement->name) }}',
+                                    data: [{{ $entitlement->amount / 100 }}]
+                                },
+                            @endforeach
+                        ]
+                    });
+                "
+                class="bg-white rounded border border-gray-300 aspect-video w-full">
+
+            </div>
 
             <table>
                 <thead class="select-none">

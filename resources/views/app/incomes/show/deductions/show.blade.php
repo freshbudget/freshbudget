@@ -16,7 +16,7 @@
                             type: 'bar'
                         },
                         title: {
-                            text: '{{ e($income->name) }} Taxes (per period)'
+                            text: '{{ e($income->name) }} Deductions (per period)'
                         },
                         xAxis: {
                             categories: ['Total']
@@ -39,10 +39,10 @@
                             }
                         },
                         series: [
-                            @foreach ($taxes->sortBy('amount') as $tax)
+                            @foreach ($deductions->sortBy('amount') as $deduction)
                                 {
-                                    name: '{{ e($tax->name) }}',
-                                    data: [{{ $tax->amount / 100 }}]
+                                    name: '{{ e($deduction->name) }}',
+                                    data: [{{ $deduction->amount / 100 }}]
                                 },
                             @endforeach
                         ]
@@ -65,13 +65,14 @@
                     </td>
                 </thead>
                 <tbody>
-                    @foreach ($taxes as $tax)
+                    @foreach ($deductions as $deduction)
                         <tr>
                             <td>
-                                {{ $tax->name }}
+                                {{ $deduction->name }}
                             </td>
                             <td class="text-right">
-                                <span class="select-all">{{ $tax->presenter()->amount() }}</span>
+                                <span class="select-none">$</span>
+                                <span class="select-all">{{ number_format($deduction->amount / 100, 2) }}</span>
                             </td>
                             <td>
                                 <a href="#">Update</a>
@@ -84,7 +85,7 @@
                         Total
                     </td>
                     <td class="text-right">
-                        <span class="select-all">{{ $income->presenter()->estimatedTaxesPerPeriod() }}</span>
+                        <span class="select-all">{{ $income->presenter()->estimatedDeductionsPerPeriod() }}</span>
                     </td>
                     <td>
                         &nbsp;

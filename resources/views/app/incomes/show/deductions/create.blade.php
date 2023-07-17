@@ -2,7 +2,7 @@
 
 @section('tab')
 
-    <div class="max-w-xl mb-8">
+    <div class="max-w-xl mx-auto px-4 my-10">
 
         <div class="prose-sm prose select-none prose-green">
 

@@ -103,7 +103,7 @@ Route::delete('/incomes/{income}', [IncomesController::class, 'destroy'])
     ->middleware(['auth'])
     ->name('app.incomes.destroy');
 
-Route::get('/incomes/{income}/edit', [IncomesController::class, 'edit'])
+Route::get('/incomes/{income}/settings', [IncomesController::class, 'edit'])
     ->middleware(['auth'])
     ->name('app.incomes.edit');
 

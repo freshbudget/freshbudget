@@ -4,6 +4,28 @@
 
 @section('content')
 
+    @php
+        $links = [
+            [
+                'label' => 'General',
+                'route' => route('app.settings.personal'),
+                'active' => 'app.settings.personal'
+            ],
+            [
+                'label' => 'Security',
+                'route' => '#',
+                'active' => 'app.settings.security'
+            ],
+            [
+                'label' => 'Notifications',
+                'route' => '#',
+                'active' => 'app.settings.notifications'
+            ],
+        ];
+    @endphp
+
+    <x-navbar :links="$links" />
+
     <div class="p-6">
 
         <section class="max-w-2xl bg-white border rounded-lg">
