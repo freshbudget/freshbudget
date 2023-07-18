@@ -22,7 +22,15 @@ class UpdateIncomeEntitlementAction
             * 100);
 
         // clean up the name
-        $name = str($this->data['name'])->trim()->toString();
+        $name = str($this->data['name'] ?? $this->entitlement->name)->trim()->toString();
+
+        $this->entitlement->disableVersioning();
+
+        $this->entitlement->update([
+            'end_date' => Arr::get($this->data, 'end_date', $this->entitlement->end_date),
+        ]);
+
+        $this->entitlement->enableVersioning();
 
         $this->entitlement->update([
             'name' => $name,

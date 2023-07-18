@@ -174,6 +174,7 @@ return [
         App\Providers\HealthCheckServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        App\Providers\SpotlightServiceProvider::class,
     ])->toArray(),
 
     /*

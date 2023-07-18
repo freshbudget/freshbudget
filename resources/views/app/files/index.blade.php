@@ -1,15 +1,11 @@
 @extends('layouts.app')
 
+@section('page::title', 'Files')
+
 @section('content')
 
-    <section class="flex h-screen overflow-hidden">
-
-        <x-file-explorer.resources-sidebar />
-        
-        <main class="w-full h-full overflow-auto">
-           Cool stuff here
-        </main>
-
-    </section>
+    <div class="max-w-5xl mx-auto px-4 my-10">
+        Todo...
+    </div>
     
 @endsection

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->ulid('ulid')->index()->unique();
             $table->unsignedBigInteger('income_id')->index();
+            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
             $table->string('name');
             $table->integer('amount');
             $table->date('start_date')->nullable();

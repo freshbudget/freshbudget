@@ -2,26 +2,13 @@
 
 @section('tab')
 
-    <div class="max-w-xl mb-8">
+    <div class="max-w-xl mx-auto px-4 my-10">
 
-        <form class="space-y-4">
+        <form class="space-y-4" action="{{ route('app.incomes.entitlements.update', ['income' => $income, 'entitlement' => $entitlement]) }}" method="POST">
 
-            <div class="space-y-2">
-                
-                <x-forms.label for="name">
-                    Name
-                </x-forms.label>
-
-                <x-forms.input 
-                    type="text" 
-                    name="name" 
-                    id="name" 
-                    value="{{ $entitlement->name }}" />
-
-                <x-forms.validation-error for="name" />
-
-            </div>
-
+            @csrf
+            @method('PUT')
+        
             <div class="space-y-2">
                 
                 <x-forms.label for="amount">
@@ -72,54 +59,30 @@
 
             </div>
 
+            <div class="space-y-2">
+                
+                <x-forms.label for="reason" required>
+                    Reason for change
+                </x-forms.label>
+
+                <x-forms.input 
+                    type="text" 
+                    name="reason" 
+                    id="reason"
+                    placeholder="Raise, Promotion, etc."
+                    required />
+
+                <x-forms.validation-error for="reason" />
+
+            </div>
+
+            <div class="flex items-center justify-end">
+                <x-forms.buttons.primary type="submit">
+                    Update Entitlement
+                </x-forms.buttons.primary>
+            </div>
+
         </form>
-
-        <div class="my-8 prose prose-green">
-
-            <table>
-                <thead class="select-none">
-                    <td>
-                        Name
-                    </td>
-                    <td>
-                        Amount
-                    </td>
-                    <td>
-                        Start Date
-                    </td>
-                    <td>
-                        End Date
-                    </td>
-                    <td>
-                        Last Updated
-                    </td>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            {{ $entitlement->name }}
-                        </td>
-                        <td>
-                            ${{ number_format($entitlement->amount / 100, 2) }}
-                        </td>
-                        <td>
-                            {{ $entitlement->start_date->format('d-M-Y') }}
-                        </td>
-                        <td>
-                            @if ($entitlement->end_date)
-                                {{ $entitlement->end_date->format('d-M-Y') }}
-                            @else
-                                &nbsp;
-                            @endif
-                        </td>
-                        <td>
-                            {{ $entitlement->updated_at->diffForHumans() }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
 
     </div>
 

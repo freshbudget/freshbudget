@@ -39,8 +39,7 @@ class IncomeEntitlementsController extends Controller
         $this->authorize('update', [$income, currentBudget()]);
 
         $validated = $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'amount' => ['required', 'numeric'],
+            'amount' => ['required', 'string', 'min:0'],
             'start_date' => ['required', 'date'],
             'end_date' => ['nullable', 'date'],
             'reason' => ['nullable', 'string'],

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->ulid('ulid')->index()->unique();
             $table->unsignedBigInteger('income_id')->index();
+            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
             $table->date('date');
             $table->json('entitlements');
             $table->json('taxes');
@@ -24,7 +25,6 @@ return new class extends Migration
             $table->integer('deductions_total');
             $table->integer('net_income');
             $table->text('notes')->nullable();
-            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

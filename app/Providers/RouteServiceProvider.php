@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
             // domain.tld
             Route::middleware('web')
                 ->domain(config('app.url'))
-                ->group(base_path('routes/marketing.php'));
+                ->group(base_path('routes/web.php'));
 
             // api.domain.tld
             Route::middleware('api')
