@@ -4,27 +4,23 @@
 
 @section('content')
 
-    @php
-        $links = [
-            [
-                'label' => 'General',
-                'route' => route('app.settings.personal'),
-                'active' => 'app.settings.personal'
-            ],
-            [
-                'label' => 'Security',
-                'route' => '#',
-                'active' => 'app.settings.security'
-            ],
-            [
-                'label' => 'Notifications',
-                'route' => '#',
-                'active' => 'app.settings.notifications'
-            ],
-        ];
-    @endphp
-
-    <x-navbar :links="$links" />
+    <x-navbar :links="[
+        [
+            'label' => 'General',
+            'route' => route('app.settings.personal'),
+            'active' => 'app.settings.personal'
+        ],
+        [
+            'label' => 'Security',
+            'route' => '#',
+            'active' => 'app.settings.security'
+        ],
+        [
+            'label' => 'Notifications',
+            'route' => '#',
+            'active' => 'app.settings.notifications'
+        ],
+    ]" />
 
     <div class="p-6">
 

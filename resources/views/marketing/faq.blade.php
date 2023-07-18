@@ -14,14 +14,6 @@ $questions = [
         'title' => 'Do you ever store my credit card information?',
         'answer' => 'No, we never store your credit card information. We use Stripe to process all payments. Stripe is a PCI Service Provider Level 1 which is the highest grade of payment processing security. You can rest assured that your information is safe and secure.',
     ],
-    // [
-    //     'title' => 'How do I cancel my subscription?',
-    //     'answer' => 'You can cancel your subscription at any time by going to your account page and clicking the "Cancel Subscription" button. Once you cancel your subscription, you will still have access to your account until the end of your billing period.',
-    // ],
-    // [
-    //     'title' => 'Can I change my plan later on?',
-    //     'answer' => 'Yes, you can upgrade or downgrade your plan at any time. If you upgrade, you will be charged a prorated amount for the remainder of the month. If you downgrade, you will be credited on your next billing cycle.',
-    // ],
     [
         'title' => 'Can I get a refund?',
         'answer' => 'Yes, we offer a 30-day money back guarantee. If you are not satisfied with your purchase, you can contact us within 30 days of your purchase for a full refund.',

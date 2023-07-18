@@ -6,22 +6,18 @@
 
 <div class="sticky top-0">
 
-    @php
-        $links = [
-            [
-                'label' => 'Feed',
-                'route' => route('app.index'),
-                'active' => 'app.index'
-            ],
-            [
-                'label' => 'Charts &amp; Graphs',
-                'route' => '#',
-                'active' => 'app.index2'
-            ]
-        ];    
-    @endphp
-
-    <x-navbar :links="$links" />
+    <x-navbar :links="[
+        [
+            'label' => 'Feed',
+            'route' => route('app.index'),
+            'active' => 'app.index'
+        ],
+        [
+            'label' => 'Charts &amp; Graphs',
+            'route' => '#',
+            'active' => 'app.index2'
+        ]
+    ]" />
 
 </div>
 

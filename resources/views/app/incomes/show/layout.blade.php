@@ -38,39 +38,33 @@
 @section('content')
 
     <div class="sticky top-0">
-
-        @php
-            $links = [
-                [
-                    'label' => 'Overview',
-                    'route' => route('app.incomes.show', $income),
-                    'active' => 'app.incomes.show'
-                ],
-                [
-                    'label' => 'Entitlements',
-                    'route' => route('app.incomes.entitlements.show', $income),
-                    'active' => 'app.incomes.entitlements.*'
-                ],
-                [
-                    'label' => 'Taxes',
-                    'route' => route('app.incomes.taxes.show', $income),
-                    'active' => 'app.incomes.taxes.*'
-                ],
-                [
-                    'label' => 'Deductions',
-                    'route' => route('app.incomes.deductions.show', $income),
-                    'active' => 'app.incomes.deductions.*'
-                ],
-                [
-                    'label' => 'Settings',
-                    'route' => route('app.incomes.edit', $income),
-                    'active' => 'app.incomes.edit'
-                ],
-            ]
-        @endphp
-
-        <x-navbar :links="$links" />
-
+        <x-navbar :links="[
+            [
+                'label' => 'Overview',
+                'route' => route('app.incomes.show', $income),
+                'active' => 'app.incomes.show'
+            ],
+            [
+                'label' => 'Entitlements',
+                'route' => route('app.incomes.entitlements.show', $income),
+                'active' => 'app.incomes.entitlements.*'
+            ],
+            [
+                'label' => 'Taxes',
+                'route' => route('app.incomes.taxes.show', $income),
+                'active' => 'app.incomes.taxes.*'
+            ],
+            [
+                'label' => 'Deductions',
+                'route' => route('app.incomes.deductions.show', $income),
+                'active' => 'app.incomes.deductions.*'
+            ],
+            [
+                'label' => 'Settings',
+                'route' => route('app.incomes.edit', $income),
+                'active' => 'app.incomes.edit'
+            ],
+        ]" />
     </div>
 
     <div>
