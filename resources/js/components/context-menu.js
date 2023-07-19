@@ -1,3 +1,7 @@
+/**
+ * Context menu component.
+ * Reference: https://devdojo.com/pines/docs/context-menu
+ */
 export default () => ({
     /*
      * Open state of the context menu
