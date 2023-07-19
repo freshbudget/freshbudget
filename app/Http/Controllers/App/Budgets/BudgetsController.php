@@ -13,9 +13,7 @@ class BudgetsController extends Controller
     {
         $this->authorize('create', Budget::class);
 
-        return view('app.budgets.create', [
-            'budgets' => user()->joinedBudgets()->orderBy('name')->get(),
-        ]);
+        return view('app.budgets.create');
     }
 
     public function destroy(Budget $budget)
@@ -55,7 +53,6 @@ class BudgetsController extends Controller
 
         return view('app.budgets.show.settings.general', [
             'budget' => $budget,
-            'budgets' => user()->joinedBudgets()->orderBy('name')->get(),
         ]);
     }
 
@@ -76,7 +73,7 @@ class BudgetsController extends Controller
     {
         $this->authorize('viewAny', Budget::class);
 
-        $budgets = user()->joinedBudgets()->orderBy('name')->get();
+        $budgets = user()->joinedBudgets()->withCount('members')->orderBy('name')->get();
 
         return view('app.budgets.index', [
             'budgets' => $budgets,
@@ -89,7 +86,6 @@ class BudgetsController extends Controller
 
         return view('app.budgets.show.index', [
             'budget' => $budget,
-            'budgets' => user()->joinedBudgets()->orderBy('name')->get(),
         ]);
     }
 

@@ -9,7 +9,7 @@ class BudgetMembersController extends Controller
 {
     public function index(Budget $budget)
     {
-        $budget->load('members');
+        $budget->load(['members', 'invitations.sender']);
 
         return view('app.budgets.show.members', [
             'budget' => $budget,

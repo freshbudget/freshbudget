@@ -12,7 +12,7 @@
         </header>
     
     
-        <form id="edit-form" action={{ route('app.incomes.update', $income) }} method="post" class="p-4">
+        <form id="edit-form" action="{{ route('app.incomes.update', $income) }}" method="post" class="p-4">
             
             @csrf
             @method('PUT')
@@ -80,7 +80,7 @@
             <h2 class="font-semibold text-gray-700">Delete Income</h2>
         </header>
     
-        <form id="delete-form" action={{ route('app.incomes.destroy', $income) }} method="post" class="p-4 select-none">
+        <form id="delete-form" action="{{ route('app.incomes.destroy', $income) }}" method="post" class="p-4 select-none">
             
             @csrf
             @method('DELETE')

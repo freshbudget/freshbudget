@@ -7,7 +7,7 @@
     
             <button x-on:click="open = !open" type="button" class="px-2.5 font-semibold py-2 bg-gray-100 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 border border-gray-300 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus:outline-none focus:shadow text-gray-700 shadow-sm hover:shadow hover:text-gray-900 active:shadow-inner w-full flex items-center justify-between">
     
-                <span class="truncate">{{ user()->currentBudget->name }}</span>  
+                <span class="truncate">{{ currentBudget()->name }}</span>  
     
                 <span class="flex items-center justify-center w-5 h-5">@svg('chevron-down', 'w-full h-full text-gray-500')</span>
                 
@@ -20,7 +20,7 @@
             <nav x-cloak x-show="open" x-trap="open" x-on:click.outside="open=false" class="absolute left-0 z-50 w-full text-sm bg-white rounded-lg shadow-lg top-12 focus:outline-none" tabindex="-1">
     
                 <p class="px-2.5 pt-2 pb-1 text-sm text-gray-500 truncate">
-                    {{ user()->currentBudget->name }}
+                    {{ currentBudget()->name }}
                 </p>
     
                 <div class="px-2">

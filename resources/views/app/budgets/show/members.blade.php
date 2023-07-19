@@ -11,7 +11,6 @@
             <h2 class="font-semibold text-gray-700">Invite Member</h2>
         </header>
 
-
         <form id="invite-form" action="{{ route('app.budgets.members.store', $budget) }}" method="post" class="p-4">
 
             @csrf
@@ -45,7 +44,8 @@
             
                     <x-forms.select name="role" id="role">
                         <option value="admin">Admin</option>
-                        <option value="member">Member</option>
+                        <option value="member" selected>Member</option>
+                        <option value="persona">Persona</option>
                     </x-forms.select>
                     
                     <x-forms.validation-error for="role" />
@@ -61,6 +61,84 @@
                 Send Invite
             </x-forms.buttons.primary>
         </footer>
+
+    </section>
+
+    <section class="border border-gray-300 bg-white rounded my-8" x-data="{ search: '' }">
+        
+        <header class="border-b rounded-t border-gray-300 px-4 py-3 select-none flex items-center justify-between">
+            <h2 class="font-semibold text-gray-700 text-lg">Members</h2>
+
+            <div>
+                <x-forms.input type="text" placeholder="Search" x-model="search" x-on:keydown.escape.window="search=''" />
+            </div>
+        </header>
+
+        <main class=" bg-white rounded-b">
+
+            <ul class="divide-y">
+
+                @foreach ($budget->members as $member)
+    
+                    <li x-search="search" class="px-4 flex items-center justify-between py-3">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-700">
+                                {{ $member->name }} @if($member->nickname) <span class="text-sm">({{ $member->nickname }})</span> @endif
+                            </h3>
+                            <p class="text-gray-500">{{ $member->email }}</p>
+                        </div>
+                        <div>
+                            <x-forms.buttons.secondary>
+                                Menu
+                            </x-forms.buttons.secondary>
+                        </div>
+                    </li>
+                    
+                @endforeach
+
+            </ul>
+
+        </main>
+
+    </section>
+
+    <section class="border border-gray-300 bg-white rounded my-8" x-data="{ search: '' }">
+        
+        <header class="border-b rounded-t border-gray-300 px-4 py-3 select-none flex items-center justify-between">
+            <h2 class="font-semibold text-gray-700 text-lg">Invited Members</h2>
+
+            <div>
+                <x-forms.input type="text" placeholder="Search" x-model="search" x-on:keydown.escape.window="search=''" />
+            </div>
+        </header>
+
+        <main class=" bg-white rounded-b">
+
+            <ul class="divide-y">
+
+                @foreach ($budget->pendingInvitations as $member)
+    
+                    <li x-search="search" class="px-4 flex items-center justify-between py-3">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-700">
+                                {{ $member->name }} @if($member->nickname) <span class="text-sm">({{ $member->nickname }})</span> @endif
+                            </h3>
+                            <p class="text-gray-500">{{ $member->email }}</p>
+                            <p class="text-gray-500">Expires: {{ $member->expires_at->diffForHumans() }}</p>
+                            <p class="text-gray-500">Invited by: {{ $member->sender->name }}</p>
+                        </div>
+                        <div>
+                            <x-forms.buttons.danger>
+                                Cancel Invite
+                            </x-forms.buttons.danger>
+                        </div>
+                    </li>
+                    
+                @endforeach
+
+            </ul>
+
+        </main>
 
     </section>
     

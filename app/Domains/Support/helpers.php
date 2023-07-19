@@ -16,5 +16,9 @@ function currentBudget(): ?Budget
 
 function user(): ?User
 {
-    return auth()->user();
+    $user = auth()->user();
+
+    $user->loadMissing('currentBudget');
+
+    return $user;
 }

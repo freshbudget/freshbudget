@@ -9,7 +9,7 @@
         </header>
 
 
-        <form id="edit-form" action={{ route('app.budgets.update', $budget) }} method="post" class="p-4">
+        <form id="edit-form" action="{{ route('app.budgets.update', $budget) }}" method="post" class="p-4">
             
             @csrf
             @method('PUT')

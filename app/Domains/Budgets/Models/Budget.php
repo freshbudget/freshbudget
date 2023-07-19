@@ -115,6 +115,11 @@ class Budget extends Model
         return $this->hasMany(BudgetInvitation::class, 'budget_id');
     }
 
+    public function pendingInvitations(): HasMany
+    {
+        return $this->invitations()->where('state', BudgetInvitation::STATE_PENDING);
+    }
+
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'budget_users', 'budget_id', 'user_id')->withTimestamps();

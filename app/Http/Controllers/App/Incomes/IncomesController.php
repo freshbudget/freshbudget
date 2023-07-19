@@ -43,7 +43,7 @@ class IncomesController extends Controller
         $this->authorize('viewAny', [Income::class, currentBudget()]);
 
         return view('app.incomes.index', [
-            'incomes' => currentBudget()->incomes()->where('active', true)->orderBy('name')->get(),
+            'incomes' => currentBudget()->incomes()->where('active', true)->with(['type'])->orderBy('name')->get(),
         ]);
     }
 

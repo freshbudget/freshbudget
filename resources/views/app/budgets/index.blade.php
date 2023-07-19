@@ -39,7 +39,7 @@
                         <div class="flex items-center mt-1 space-x-2 text-sm text-gray-500">
                             
                             <div class="flex items-center">
-                                @svg('users', 'w-4 h-4 mr-1') {{ $budget->members->count() }}
+                                @svg('users', 'w-4 h-4 mr-1') {{ $budget->members_count }}
                             </div>
 
                             @if(currentBudget()->is($budget))
