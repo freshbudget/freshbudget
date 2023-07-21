@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Forms\Incomes;
+namespace App\Livewire\Forms\Incomes;
 
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\Frequency;

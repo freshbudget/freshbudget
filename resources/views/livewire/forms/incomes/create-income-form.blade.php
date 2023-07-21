@@ -1,11 +1,11 @@
-<form wire:submit.prevent="attempt" class="space-y-6">
+<form wire:submit="attempt" class="space-y-6">
 
     <div class="space-y-2">
         <x-forms.label for="name" required>
             What should we call this income?
         </x-forms.label>
 
-        <x-forms.input type="text" name="name" id="name" wire:model.defer="name" autofocus />
+        <x-forms.input type="text" name="name" id="name" wire:model="name" autofocus />
         
         <x-forms.validation-error for="name" />
     </div>
@@ -15,7 +15,7 @@
             What type of income is this?
         </x-forms.label>
 
-        <x-forms.select name="type_id" id="type_id" wire:model.defer="type_id">
+        <x-forms.select name="type_id" id="type_id" wire:model="type_id">
             <option value="">Select a type</option>
             @foreach ($types as $type)
                 <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -30,7 +30,7 @@
             How often do you recieve installments of this income?
         </x-forms.label>
 
-        <x-forms.select name="frequency" id="frequency" wire:model.defer="frequency">
+        <x-forms.select name="frequency" id="frequency" wire:model="frequency">
             <option value="">Select a frequency</option>
             @foreach ($frequencies as $frequency)
                 <option value="{{ $frequency->value }}">{{ $frequency->value }}</option>
@@ -47,7 +47,7 @@
                 Who, in your budget, would you say this income is associated with?
             </x-forms.label>
 
-            <x-forms.select name="user_ulid" id="user_ulid" wire:model.defer="user_ulid">
+            <x-forms.select name="user_ulid" id="user_ulid" wire:model="user_ulid">
                 <option value="">Select a user</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->ulid }}">{{ $user->name }}</option>

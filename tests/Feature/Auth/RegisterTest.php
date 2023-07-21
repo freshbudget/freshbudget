@@ -3,7 +3,7 @@
 // test the register page is accessible
 
 use App\Domains\Users\Models\User;
-use App\Http\Livewire\Auth\RegisterForm;
+use App\Livewire\Auth\RegisterForm;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 use function Pest\Livewire\livewire;

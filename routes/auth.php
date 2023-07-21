@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationRequestController;
-use App\Http\Livewire\Auth\EmailVerificationRequestForm;
-use App\Http\Livewire\Auth\LoginForm;
-use App\Http\Livewire\Auth\PasswordResetForm;
-use App\Http\Livewire\Auth\PasswordResetRequestForm;
-use App\Http\Livewire\Auth\RegisterForm;
+use App\Livewire\Auth\EmailVerificationRequestForm;
+use App\Livewire\Auth\LoginForm;
+use App\Livewire\Auth\PasswordResetForm;
+use App\Livewire\Auth\PasswordResetRequestForm;
+use App\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', LoginForm::class)

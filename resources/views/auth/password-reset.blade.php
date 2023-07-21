@@ -2,7 +2,7 @@
 
     <h2 class="text-2xl font-semibold text-center select-none text-gray-800/70">Reset Your Password</h2>
 
-    <form wire:submit.prevent="attempt" class="py-4 space-y-5">
+    <form wire:submit="attempt" class="py-4 space-y-5">
 
         @error('status')
             <div class="text-xs text-center text-red-400">
@@ -15,7 +15,7 @@
                 Email Address
             </x-forms.label>
 
-            <x-forms.input type="email" id="email" wire:model.defer="email" readonly />
+            <x-forms.input type="email" id="email" wire:model="email" readonly />
             
             <x-forms.validation-error for="email" />
         </div>
@@ -25,7 +25,7 @@
                 Enter your new password
             </x-forms.label>
 
-            <x-forms.input type="password" id="password" wire:model.defer="password" autofocus />
+            <x-forms.input type="password" id="password" wire:model="password" autofocus />
             
             <x-forms.validation-error for="password" />
         </div>

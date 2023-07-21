@@ -2,7 +2,7 @@
 
     <h2 class="text-2xl font-semibold text-center select-none text-gray-800/70">Reset Your Password</h2>
 
-    <form wire:submit.prevent="attempt" class="py-4 space-y-3">
+    <form wire:submit="attempt" class="py-4 space-y-3">
 
         <div class="prose-sm prose select-none">
             <p>
@@ -24,7 +24,7 @@
 
         <div>
             <x-forms.label for="email" required class="block mb-1 text-gray-800">Email address</x-forms.label>
-            <x-forms.input type="email" id="email" x-ref="email" wire:model.defer="email" autofocus />
+            <x-forms.input type="email" id="email" x-ref="email" wire:model="email" autofocus />
             <x-forms.validation-error for="email" />
         </div>
 

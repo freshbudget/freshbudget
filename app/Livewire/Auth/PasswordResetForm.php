@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Auth;
+namespace App\Livewire\Auth;
 
 use App\Domains\Users\Models\User;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
