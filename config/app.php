@@ -163,7 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
-        WireElements\Pro\Components\Spotlight\SpotlightServiceProvider::class,
+        // WireElements\Pro\Components\Spotlight\SpotlightServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -174,7 +174,7 @@ return [
         App\Providers\HealthCheckServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        App\Providers\SpotlightServiceProvider::class,
+        // App\Providers\SpotlightServiceProvider::class,
     ])->toArray(),
 
     /*

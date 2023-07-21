@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\App\Budgets;
 
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\SendBudgetInvitationAction;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\Builder;
@@ -49,6 +50,15 @@ class BudgetInvitationsController extends Controller
             name: $validated['name'],
             nickname: Arr::get($validated, 'nickname', null),
         ))->execute();
+
+        return redirect()->route('app.budgets.members.index', $budget);
+    }
+
+    public function destroy(Budget $budget, BudgetInvitation $invitation)
+    {
+        $this->authorize('inviteMember', $budget);
+
+        $invitation->delete();
 
         return redirect()->route('app.budgets.members.index', $budget);
     }

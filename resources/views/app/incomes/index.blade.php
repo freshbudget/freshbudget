@@ -73,6 +73,12 @@
                             Settings
                         </x-context-menu.option>
 
+                        @if($income->url)
+                            <x-context-menu.option as="a" href="{{ $income->url }}" target="_blank">
+                                Visit URL
+                            </x-context-menu.option>
+                        @endif
+
                     </x-slot:options>
                 
                 </x-context-menu>

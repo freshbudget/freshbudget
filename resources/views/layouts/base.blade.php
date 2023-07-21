@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @stack('html::tag')>
+<html 
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"  
+    class="@if(session()->has('theme')){{ session('theme') }}@else light @endif @stack('html::classes')"
+    @stack('html::tag')>
 <head>
     @stack('head::start')
     <meta charset="UTF-8">

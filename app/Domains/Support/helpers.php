@@ -11,7 +11,18 @@ function carbon(): Carbon
 
 function currentBudget(): ?Budget
 {
-    return user()?->currentBudget;
+    if (! auth()->check()) {
+        return null;
+    }
+
+    $budget = user()?->currentBudget;
+
+    if (! $budget) {
+        // get the first budget
+        $budget = user()?->ownedBudgets()->first();
+    }
+
+    return $budget;
 }
 
 function user(): ?User

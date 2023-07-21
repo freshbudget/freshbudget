@@ -67,6 +67,11 @@ Route::get('/budgets/{budget}/members/invite', [BudgetInvitationsController::cla
     ->middleware(['auth'])
     ->name('app.budgets.members.invite');
 
+Route::delete('/budgets/{budget}/invitations/{invitation}', [BudgetInvitationsController::class, 'destroy'])
+    ->scopeBindings()
+    ->middleware(['auth'])
+    ->name('app.budgets.invitations.destroy');
+
 Route::post('/budgets/{budget}/members', [BudgetInvitationsController::class, 'store'])
     ->middleware(['auth'])
     ->name('app.budgets.members.store');

@@ -42,6 +42,10 @@
                                 @svg('users', 'w-4 h-4 mr-1') {{ $budget->members_count }}
                             </div>
 
+                            <div class="flex items-center">
+                                @svg('profile', 'w-4 h-4 mr-1') {{ $budget->owner->display_name }}
+                            </div>
+
                             @if(currentBudget()->is($budget))
                                 <div class="flex items-center">
                                     @svg('check-circle', 'w-4 h-4 mr-1 text-green-600') Current
@@ -62,7 +66,7 @@
                         </form>
 
                         <x-context-menu.option as="a" href="{{ route('app.budgets.edit', $budget) }}">
-                            Edit
+                            Settings
                         </x-context-menu.option>
                         
                         <x-context-menu.option as="a" href="{{ route('app.budgets.members.index', $budget) }}">

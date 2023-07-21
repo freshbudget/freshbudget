@@ -46,11 +46,13 @@ class BudgetInvitationsController extends Controller
         // okay so the invitation is pending, let's check if the user already has an account
         $user = User::where('email', $invitation->email)->first();
 
-        // if(auth()->check() && auth()->user() != $user) {
-        //     auth()->logout();
-        // }
-
         if ($user) {
+            // we need to check if the user is already logged in and if they are not the user that the invitation was sent to
+            if (user() && user()->id != $user->id) {
+                // okay, the user is logged in but they are not the user that the invitation was sent to, something is wrong, let's show them an error
+                return view('invitations.not-found');
+            }
+
             // user already has an account, let's confirm that they want to accept the invitation
             return view('invitations.confirm', [
                 'invitation' => $invitation,
@@ -124,8 +126,6 @@ class BudgetInvitationsController extends Controller
             return view('invitations.not-found');
         }
 
-        // okay the invitation is pending, let's accept it
-
         // first we need to check if the user already has an account
         $user = User::where('email', $invitation->email)->first();
 
@@ -140,6 +140,8 @@ class BudgetInvitationsController extends Controller
 
             // okay, now we need to redirect the user to the budget they were invited to
             return redirect()->route('app.index');
+        } else {
+            dd('the user does not have an account, we need to create one and then accept the invitation.');
         }
     }
 }

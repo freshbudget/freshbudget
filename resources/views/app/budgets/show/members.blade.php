@@ -114,8 +114,13 @@
 
         <main class=" bg-white rounded-b">
 
-            <ul class="divide-y">
+            <ul class="divide-y select-none">
 
+                @if($budget->pendingInvitations->count() == 0)
+                    <li class="p-6 text-center">
+                        <p class="text-gray-500">No pending invitations.</p>
+                    </li>
+                @endif
                 @foreach ($budget->pendingInvitations as $member)
     
                     <li x-search="search" class="px-4 flex items-center justify-between py-3">
@@ -128,9 +133,13 @@
                             <p class="text-gray-500">Invited by: {{ $member->sender->name }}</p>
                         </div>
                         <div>
-                            <x-forms.buttons.danger>
-                                Cancel Invite
-                            </x-forms.buttons.danger>
+                            <form action="{{ route('app.budgets.invitations.destroy', ['budget' => $budget, 'invitation' => $member]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <x-forms.buttons.danger type="submit">
+                                    Cancel Invite
+                                </x-forms.buttons.danger>
+                            </form>
                         </div>
                     </li>
                     
