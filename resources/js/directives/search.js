@@ -1,4 +1,4 @@
-import { Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import { Alpine } from '../../../vendor/livewire/livewire/dist/livewire.esm';
 
 Alpine.directive("search", (el, { expression }, { evaluateLater, effect }) => {
     let getSearch = evaluateLater(expression);

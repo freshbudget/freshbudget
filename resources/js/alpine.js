@@ -4,7 +4,6 @@ import './directives/search.js'
 
 window.Alpine = Alpine
 
-Alpine.plugin(yourCustomPlugin);
 Alpine.data('contextMenu', contextMenu)
 
 Livewire.start();
