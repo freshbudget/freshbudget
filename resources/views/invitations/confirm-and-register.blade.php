@@ -24,15 +24,20 @@
             If you do not want to join the budget, you can reject this invitation by clicking the <strong>Reject</strong> button below. By rejecting this invitation, you will not be able to view or edit the budget. However, you are free to create your own budget by registering for an account &mdash; and you can request the sender to invite you to their budget again at a later date.
         </p>
 
-        <div class="mt-6 space-x-2 select-none">
+        <div class="mt-6 space-x-2 select-none flex items-center">
 
-            <a href="#" class="inline-block px-3 py-2 text-base font-semibold text-gray-700 no-underline border border-gray-300 rounded-lg shadow-sm bg-gray-50 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-green-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900">
+            <x-forms.buttons.secondary>
                 Accept and Register
-            </a>
+            </x-forms.buttons.secondary>
 
-            <a href="#" class="inline-block px-3 py-2 text-base font-semibold text-gray-700 no-underline border border-gray-300 rounded-lg shadow-sm bg-gray-50 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-red-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900">
-                Reject Invitation
-            </a>
+
+            <form method="POST" action="{{ route('invitations.reject', $invitation) . '?token=' . $invitation->token }}">
+                @csrf
+
+                <x-forms.buttons.danger type="submit">
+                    Decline Invitation
+                </x-forms.buttons.danger>
+            </form>
 
         </div>
 

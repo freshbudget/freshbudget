@@ -11,6 +11,9 @@ class SwitchCurrentBudgetAction
 {
     public function execute(User $user, Budget $budget): User
     {
+        $user->refresh();
+        $budget->refresh();
+
         // ensure the user is a member of the budget
         if (! $user->belongsToBudget($budget)) {
             throw new CannotAccessABudgetYouDontBelongTo();

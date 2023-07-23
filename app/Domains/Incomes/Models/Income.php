@@ -106,6 +106,16 @@ class Income extends Model
 
     /*
     |----------------------------------
+    | Scopes
+    |----------------------------------
+    */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('active', true);
+    }
+
+    /*
+    |----------------------------------
     | Relationships
     |----------------------------------
     */

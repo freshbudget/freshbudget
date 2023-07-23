@@ -23,70 +23,13 @@ Route::view('/', 'app.index')
 
 /*
 |--------------------------------------------------------------------------
-| Account Settings
+| Calendar
 |--------------------------------------------------------------------------
 */
-Route::view('/settings', 'app.settings.personal')
-    ->middleware(['auth'])
-    ->name('app.settings.personal');
-
-/*
-|--------------------------------------------------------------------------
-| Budgets
-|--------------------------------------------------------------------------
-*/
-Route::get('/budgets', [BudgetsController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.budgets.index');
-
-Route::post('/budgets', [BudgetsController::class, 'store'])
-    ->middleware(['auth'])
-    ->name('app.budgets.store');
-
-Route::get('/budgets/create', [BudgetsController::class, 'create'])
-    ->middleware(['auth'])
-    ->name('app.budgets.create');
-
-Route::post('/budgets/{budget}/current', CurrentBudgetController::class)
-    ->middleware(['auth'])
-    ->name('app.budgets.current');
-
-Route::get('/budgets/{budget}', [BudgetsController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('app.budgets.show');
-
-Route::put('/budgets/{budget}', [BudgetsController::class, 'update'])
-    ->middleware(['auth'])
-    ->name('app.budgets.update');
-
-Route::get('/budgets/{budget}/members', [BudgetMembersController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('app.budgets.members.index');
-
-Route::get('/budgets/{budget}/members/invite', [BudgetInvitationsController::class, 'create'])
-    ->middleware(['auth'])
-    ->name('app.budgets.members.invite');
-
-Route::delete('/budgets/{budget}/invitations/{invitation}', [BudgetInvitationsController::class, 'destroy'])
-    ->scopeBindings()
-    ->middleware(['auth'])
-    ->name('app.budgets.invitations.destroy');
-
-Route::post('/budgets/{budget}/members', [BudgetInvitationsController::class, 'store'])
-    ->middleware(['auth'])
-    ->name('app.budgets.members.store');
-
-Route::get('/budgets/{budget}/settings', [BudgetsController::class, 'edit'])
-    ->middleware(['auth'])
-    ->name('app.budgets.edit');
-
-Route::delete('/budgets/{budget}', [BudgetsController::class, 'destroy'])
-    ->middleware(['auth'])
-    ->name('app.budgets.destroy');
-
 Route::view('/calendar', 'app.calendar.index')
     ->middleware(['auth'])
     ->name('app.calendar.index');
+
 /*
 |--------------------------------------------------------------------------
 | Incomes
@@ -185,6 +128,69 @@ Route::post('/incomes/{income}/deductions', [IncomeDeductionsController::class, 
 Route::get('/incomes/{income}/deductions', [IncomeDeductionsController::class, 'show'])
     ->middleware(['auth'])
     ->name('app.incomes.deductions.show');
+
+/*
+|--------------------------------------------------------------------------
+| Account Settings
+|--------------------------------------------------------------------------
+*/
+Route::view('/settings', 'app.settings.personal')
+    ->middleware(['auth'])
+    ->name('app.settings.personal');
+
+/*
+|--------------------------------------------------------------------------
+| Budgets
+|--------------------------------------------------------------------------
+*/
+Route::get('/budgets', [BudgetsController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('app.budgets.index');
+
+Route::post('/budgets', [BudgetsController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('app.budgets.store');
+
+Route::get('/budgets/create', [BudgetsController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('app.budgets.create');
+
+Route::post('/budgets/{budget}/current', CurrentBudgetController::class)
+    ->middleware(['auth'])
+    ->name('app.budgets.current');
+
+Route::get('/budgets/{budget}', [BudgetsController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('app.budgets.show');
+
+Route::put('/budgets/{budget}', [BudgetsController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('app.budgets.update');
+
+Route::get('/budgets/{budget}/members', [BudgetMembersController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('app.budgets.members.index');
+
+Route::get('/budgets/{budget}/members/invite', [BudgetInvitationsController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('app.budgets.members.invite');
+
+Route::delete('/budgets/{budget}/invitations/{invitation}', [BudgetInvitationsController::class, 'destroy'])
+    ->scopeBindings()
+    ->middleware(['auth'])
+    ->name('app.budgets.invitations.destroy');
+
+Route::post('/budgets/{budget}/members', [BudgetInvitationsController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('app.budgets.members.store');
+
+Route::get('/budgets/{budget}/settings', [BudgetsController::class, 'edit'])
+    ->middleware(['auth'])
+    ->name('app.budgets.edit');
+
+Route::delete('/budgets/{budget}', [BudgetsController::class, 'destroy'])
+    ->middleware(['auth'])
+    ->name('app.budgets.destroy');
 
 /*
 |--------------------------------w----------------------------------------

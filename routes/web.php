@@ -38,5 +38,7 @@ Route::get('/invitations/{invitation}', [BudgetInvitationsController::class, 'sh
     ->name('invitations.show');
 
 Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::class, 'accept'])
-    ->middleware(['auth'])
     ->name('invitations.accept');
+
+Route::post('/invitations/{invitation}/decline', [BudgetInvitationsController::class, 'reject'])
+    ->name('invitations.reject');

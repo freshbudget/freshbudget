@@ -89,3 +89,69 @@ test('a user can send a budget invitation to a user without an account', functio
     $this->get($url)
         ->assertOk();
 });
+
+// test a user can reject a budget invitation
+test('a non-registered user can reject a budget invitation', function () {
+
+    Notification::fake([
+        InvitedToBudgetNotification::class,
+    ]);
+
+    $sender = User::factory()->create();
+
+    $action = (new SendBudgetInvitationAction(
+        budget: $sender->personalBudget(),
+        sender: $sender,
+        email: 'user2@email.com',
+        name: 'John Doe',
+    ));
+
+    $invitation = $action->execute();
+
+    $this->assertTrue($invitation->fresh()->isPending());
+
+    $response = $this->get($invitation->getUrl());
+
+    $response->assertOk();
+    $response->assertViewIs('invitations.confirm-and-register');
+    $response = $this->post(route('invitations.reject', $invitation).'?token='.$invitation->token);
+
+    $response->assertRedirect(route('welcome'));
+
+    $this->assertTrue($invitation->fresh()->isRejected());
+});
+
+// test a registered user can accept a budget invitation, even if they aren't logged in
+test('a registered user can accept a budget invitation, even if they aren\'t logged in', function () {
+
+    Notification::fake([
+        InvitedToBudgetNotification::class,
+    ]);
+
+    $sender = User::factory()->create();
+
+    $recipient = User::factory()->create();
+
+    $action = (new SendBudgetInvitationAction(
+        budget: $sender->personalBudget(),
+        sender: $sender,
+        email: $recipient->email,
+        name: $recipient->name,
+    ));
+
+    $invitation = $action->execute();
+
+    $this->assertTrue($invitation->fresh()->isPending());
+
+    $response = $this->get(route('invitations.show', $invitation).'?token='.$invitation->token);
+
+    $response->assertOk();
+
+    $response = $this->post(route('invitations.accept', $invitation).'?token='.$invitation->token);
+
+    $this->assertTrue($invitation->fresh()->isAccepted());
+    $this->assertTrue($sender->personalBudget()->fresh()->hasMember($recipient));
+
+    $response->assertOk();
+    $response->assertViewIs('invitations.accepted');
+});

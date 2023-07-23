@@ -170,6 +170,11 @@ class BudgetInvitation extends Model
         ]);
     }
 
+    public function getUrl()
+    {
+        return route('invitations.show', $this).'?token='.$this->token;
+    }
+
     /*
     |----------------------------------
     | Relationships

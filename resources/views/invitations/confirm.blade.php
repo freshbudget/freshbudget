@@ -29,14 +29,18 @@
             <form action="{{ route('invitations.accept', $invitation) }}?token={{ $invitation->token }}" method="post">
                 @csrf
 
-                <button type="submit" class="inline-block px-3 py-2 text-base font-semibold text-gray-700 no-underline border border-gray-300 rounded-lg shadow-sm bg-gray-50 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-green-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900">
+                <x-forms.buttons.secondary type="submit">
                     Accept Invitation
-                </button>
+                </x-forms.buttons.secondary>
             </form>
 
-            <a href="#" class="inline-block px-3 py-2 text-base font-semibold text-gray-700 no-underline border border-gray-300 rounded-lg shadow-sm bg-gray-50 hover:bg-gradient-to-br hover:from-white hover:to-gray-100 focus:ring-2 ring-offset-2 ring-offset-white ring-red-400 focus:outline-none focus:shadow hover:shadow hover:text-gray-900">
-                Reject Invitation
-            </a>
+            <form action="{{ route('invitations.reject', $invitation) }}?token={{ $invitation->token }}" method="post">
+                @csrf
+
+                <x-forms.buttons.secondary type="submit">
+                    Decline Invitation
+                </x-forms.buttons.secondary>
+            </form>
 
         </div>
 

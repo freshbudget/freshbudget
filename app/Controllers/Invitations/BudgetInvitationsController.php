@@ -48,7 +48,7 @@ class BudgetInvitationsController extends Controller
 
         if ($user) {
             // we need to check if the user is already logged in and if they are not the user that the invitation was sent to
-            if (user() && user()->id != $user->id) {
+            if (auth()->check() && user()->id != $user->id) {
                 // okay, the user is logged in but they are not the user that the invitation was sent to, something is wrong, let's show them an error
                 return view('invitations.not-found');
             }
@@ -111,7 +111,19 @@ class BudgetInvitationsController extends Controller
 
     public function reject(BudgetInvitation $invitation, Request $request)
     {
-        //
+        // check if the token matches the invitation token
+        if ($invitation->token != $request->token) {
+            return view('invitations.not-found');
+        }
+
+        // okay need to check if the invitation is still pending
+        if (! $invitation->isPending()) {
+            return view('invitations.not-found');
+        }
+
+        $invitation->markAsRejected();
+
+        return redirect()->route('welcome');
     }
 
     public function accept(BudgetInvitation $invitation, Request $request)
@@ -133,13 +145,14 @@ class BudgetInvitationsController extends Controller
             // okay, the user already has an account, let's accept the invitation
             $user->acceptBudgetInvitation($invitation);
 
-            // switch the users current budget to the budget they were invited to
-            $user->switchCurrentBudget($invitation->budget);
+            if (auth()->check()) {
 
-            // maybe flash a message to the user?
+                $user->switchCurrentBudget($invitation->budget);
 
-            // okay, now we need to redirect the user to the budget they were invited to
-            return redirect()->route('app.index');
+                return redirect()->route('app.index');
+            }
+            // maybe flash a message to the user
+            return view('invitations.accepted');
         } else {
             dd('the user does not have an account, we need to create one and then accept the invitation.');
         }
