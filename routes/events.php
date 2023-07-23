@@ -10,7 +10,3 @@ use Illuminate\Support\Facades\Event;
 |--------------------------------------------------------------------------
 */
 Event::listen(Registered::class, SendEmailVerificationNotification::class);
-
-// Event::listen(IncomeDeleted::class, function (IncomeDeleted $event) {
-//     //
-// });

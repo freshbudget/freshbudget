@@ -96,3 +96,54 @@ test('the income frequency is an enum', function () {
     expect($model->frequency)->toBeInstanceOf(Frequency::class);
     expect($model->frequency->value)->toBeString();
 });
+
+// test if the income is assigned to a user who is removed from the budget, the user_id is set to null
+test('if the income is assigned to a user who is removed from the budget, the user_id is set to null', function () {
+    $budget = Budget::factory()->create();
+
+    $user = User::factory()->create();
+
+    $budget->addMember($user);
+
+    $income = Income::factory()->create([
+        'budget_id' => $budget->id,
+        'user_id' => $user->id,
+    ]);
+
+    expect($income->user_id)->toBe($user->id);
+
+    $budget->removeMember($user);
+
+    $income->refresh();
+
+    expect($income->user_id)->toBeNull();
+});
+
+// test soft deletes
+test('soft deletes', function () {
+    $model = Income::factory()->create();
+
+    $model->delete();
+
+    expect($model->deleted_at)->not()->toBeNull();
+});
+
+// test soft deleted models are pruned after 30 days
+test('soft deleted models are pruned after 30 days', function () {
+    $model = Income::factory()->create();
+
+    $model->delete();
+
+    expect($model->deleted_at)->not()->toBeNull();
+
+    $model->deleted_at = now()->subDays(31);
+
+    $model->save();
+
+    // run the prune command
+    $this->artisan('model:prune', [
+        '--model' => Income::class,
+    ]);
+
+    expect(Income::count())->toBe(0);
+});

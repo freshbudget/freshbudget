@@ -29,7 +29,7 @@
         <!-- incomes grid -->
         <div class="grid grid-cols-3 gap-4">
 
-            @foreach ($incomes as $income)
+            @forelse ($incomes as $income)
 
                 <x-context-menu x-bind:class="{ 'hidden' : ! (search == '' || '{{ e($income->name) }}'.toLowerCase().includes(search.toLowerCase())) }">
 
@@ -83,7 +83,14 @@
                 
                 </x-context-menu>
 
-            @endforeach
+            @empty
+
+                <div class="rounded bg-white select-none flex flex-col items-center justify-center w-full col-span-3 p-8 space-y-3 border border-gray-300">
+                    @svg('plus-circle', 'w-12 h-12 mx-auto text-gray-300')
+                    <p class="text-gray-500">You haven't added any incomes yet</p>
+                </div>
+
+            @endif
 
         </div>
         

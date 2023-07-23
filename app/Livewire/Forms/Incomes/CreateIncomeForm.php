@@ -44,8 +44,6 @@ class CreateIncomeForm extends Component
             $income->update(['active' => false]);
         }
 
-        $this->dispatch('incomeCreated');
-
         return $this->redirect(route('app.incomes.entitlements.create', $income), true);
     }
 

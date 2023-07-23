@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('income_statistics', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('income_id')->references('id')->on('incomes')->onDelete('cascade');
+            $table->unsignedBigInteger('income_id')->index();
+            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
             $table->string('name')->index()->nullable();
             $table->string('type')->index()->nullable();
             $table->bigInteger('value')->index()->nullable();

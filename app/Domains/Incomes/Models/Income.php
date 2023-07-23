@@ -8,27 +8,19 @@ use App\Domains\Incomes\Events\IncomeDeleted;
 use App\Domains\Incomes\Presenters\IncomePresenter;
 use App\Domains\Shared\Enums\Frequency;
 use App\Domains\Users\Models\User;
-use Astrotomic\CachableAttributes\CachesAttributes;
 use Database\Factories\IncomeFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Income extends Model
 {
-    use HasFactory, HasUlids, SoftDeletes, CachesAttributes;
-
-    /**
-     * The attributes that should be appended to the model.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'estimated_net_per_month',
-    ];
+    use HasFactory, HasUlids, SoftDeletes, Prunable;
 
     /**
      * The event map for the model.
@@ -62,15 +54,6 @@ class Income extends Model
         'estimated_taxes_per_period',
         'estimated_deductions_per_period',
         'estimated_net_per_period',
-    ];
-
-    /**
-     * The attributes that should be cached.
-     *
-     * @var array
-     */
-    protected $cachableAttributes = [
-        'estimated_net_per_month',
     ];
 
     /**
@@ -111,6 +94,11 @@ class Income extends Model
         return new IncomePresenter($this);
     }
 
+    public function prunable(): Builder
+    {
+        return self::where('deleted_at', '<', now()->subDays(30));
+    }
+
     public function uniqueIds(): array
     {
         return ['ulid'];
@@ -118,81 +106,77 @@ class Income extends Model
 
     /*
     |----------------------------------
-    | Accessors
-    |----------------------------------
-    */
-    protected function getEstimatedNetPerMonthAttribute(): float
-    {
-        return $this->remember('estimated_net_per_month', 15, function (): float {
-
-            $totalEntitlements = 0;
-
-            $entitlements = $this->entitlements();
-
-            // loop through each entitlement and calculate the monthly amount
-            $entitlements->each(function ($entitlement) use (&$totalEntitlements) {
-
-                // get the number of occurances in a month
-                $occurances = $this->frequency->numberOfOccurancesInMonth();
-
-                $entitlement->amount = $entitlement->amount * $occurances;
-
-                $totalEntitlements += $entitlement->amount;
-            });
-
-            $deductions = $this->deductions()->where('active', true)->sum('amount');
-
-            $taxes = $this->taxes()->where('active', true)->sum('amount');
-
-            $estimated = $totalEntitlements - $taxes - $deductions;
-
-            return round($estimated / 100, 2);
-
-        });
-    }
-
-    /*
-    |----------------------------------
     | Relationships
     |----------------------------------
     */
-    public function activeDeductions(): HasMany
-    {
-        return $this->deductions()->where('active', true);
-    }
 
-    public function activeTaxes(): HasMany
-    {
-        return $this->taxes()->where('active', true);
-    }
-
+    /**
+     * Cascade deletes when deleting a budget.
+     */
     public function budget(): BelongsTo
     {
         return $this->belongsTo(Budget::class, 'budget_id');
     }
 
-    public function deductions(): HasMany
-    {
-        return $this->hasMany(IncomeDeduction::class, 'income_id');
-    }
-
-    public function entitlements(): HasMany
-    {
-        return $this->hasMany(IncomeEntitlement::class, 'income_id');
-    }
-
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(IncomeType::class, 'type_id');
-    }
-
+    /**
+     * Goes to null if the user is deleted.
+     * If the user is removed from the budget, goes to null.
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Cascade deletes when deleting an income.
+     */
+    public function activeDeductions(): HasMany
+    {
+        return $this->deductions()->where('active', true);
+    }
+
+    /**
+     * Cascade deletes when deleting an income.
+     */
+    public function deductions(): HasMany
+    {
+        return $this->hasMany(IncomeDeduction::class, 'income_id');
+    }
+
+    /**
+     * Cascade deletes when deleting an income.
+     */
+    public function activeTaxes(): HasMany
+    {
+        return $this->taxes()->where('active', true);
+    }
+
+    /**
+     * Cascade deletes when deleting an income.
+     */
     public function taxes(): HasMany
     {
         return $this->hasMany(IncomeTax::class, 'income_id');
+    }
+
+    /**
+     * Cascade deletes when deleting an income.
+     */
+    public function entitlements(): HasMany
+    {
+        return $this->hasMany(IncomeEntitlement::class, 'income_id');
+    }
+
+    public function statistics(): HasMany
+    {
+        return $this->hasMany(IncomeStatistic::class, 'income_id');
+    }
+
+    /**
+     * Goes to null if the income type is deleted.
+     */
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(IncomeType::class, 'type_id');
     }
 }

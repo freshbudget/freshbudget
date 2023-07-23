@@ -37,7 +37,7 @@ class Login extends Component
             return;
         }
 
-        if(!$this->form->attempt()) {
+        if (! $this->form->attempt()) {
             $this->addError('status', 'Please check your credentials and try again.');
 
             return;

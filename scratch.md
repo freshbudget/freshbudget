@@ -45,3 +45,11 @@ https://www.auxnet.de/en/blog/make-your-text-collection-searchable-with-python-a
 - When a user creates a one time budget, don't show it in the incomes list. Also show a form to say where the income went, i.e. to which account. My thought is maybe like a cash birthday present from grandma, I don't need care about tracking that income, but I need somewhere to log the income.
 
 - What to call someone added to the budget but is just for tracking purposes, for example a childs name. Other roles: Member, Admin, Observer (tax planner, etc. basically read-only, persona), 
+
+# Lifecycle of an Income
+
+- Show the income create form
+- via the current budget -> incomes relationship, save the income
+- If the user id is set, set the user id
+- If it the income is a one-time frequency, set it to inactive
+- Redirect to income show overview page
