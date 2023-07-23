@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\App\Budgets;
+namespace App\Controllers\App\Budgets;
 
+use App\Controllers\Controller;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\SendBudgetInvitationAction;
-use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;

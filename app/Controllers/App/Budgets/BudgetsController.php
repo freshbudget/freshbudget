@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\App\Budgets;
+namespace App\Controllers\App\Budgets;
 
+use App\Controllers\Controller;
 use App\Domains\Budgets\Actions\CreateBudgetAction;
 use App\Domains\Budgets\Models\Budget;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BudgetsController extends Controller

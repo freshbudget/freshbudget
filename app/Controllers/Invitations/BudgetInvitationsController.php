@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Invitations;
+namespace App\Controllers\Invitations;
 
+use App\Controllers\Controller;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Models\User;
-use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\App\Incomes;
+namespace App\Controllers\App\Incomes;
 
+use App\Controllers\Controller;
 use App\Domains\Incomes\Models\Income;
-use App\Http\Controllers\Controller;
 
 class IncomeEntriesController extends Controller
 {

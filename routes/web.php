@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Invitations\BudgetInvitationsController;
+use App\Controllers\Invitations\BudgetInvitationsController;
 use Illuminate\Support\Facades\Route;
 
 /*

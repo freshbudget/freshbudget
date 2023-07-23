@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Controllers\App;
 
-use App\Http\Controllers\Controller;
+use App\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 

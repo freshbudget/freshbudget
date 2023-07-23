@@ -24,13 +24,13 @@
         
                 <div>
                     <x-forms.label for="email" required class="block mb-1 text-gray-800">Email address</x-forms.label>
-                    <x-forms.input type="email" id="email" x-ref="email" wire:model="email" />
+                    <x-forms.input type="email" id="email" x-ref="email" wire:model="form.email" />
                     <x-forms.validation-error for="email" />
                 </div>
         
                 <div>
                     <x-forms.label for="password" required class="block mb-1 text-gray-800">Password</x-forms.label>
-                    <x-forms.input type="password" id="password" wire:model="password" />
+                    <x-forms.input type="password" id="password" wire:model="form.password" />
                     <x-forms.validation-error for="password" />
                 </div>
         

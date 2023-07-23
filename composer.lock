@@ -2379,16 +2379,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.0.0-beta.2",
+            "version": "v3.0.0-beta.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "19832b8687d8393b79666e850bfee6b5cc7d3c24"
+                "reference": "04298292a365841879d64c13881d5499517bb597"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/19832b8687d8393b79666e850bfee6b5cc7d3c24",
-                "reference": "19832b8687d8393b79666e850bfee6b5cc7d3c24",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/04298292a365841879d64c13881d5499517bb597",
+                "reference": "04298292a365841879d64c13881d5499517bb597",
                 "shasum": ""
             },
             "require": {
@@ -2415,7 +2415,7 @@
                         "Livewire\\LivewireServiceProvider"
                     ],
                     "aliases": {
-                        "Livewire": "Livewire\\LivewireManager"
+                        "Livewire": "Livewire\\Livewire"
                     }
                 }
             },
@@ -2440,9 +2440,15 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.0.0-beta.2"
+                "source": "https://github.com/livewire/livewire/tree/v3.0.0-beta.3"
             },
-            "time": "2023-07-20T22:42:56+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/livewire",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-07-21T23:02:51+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3822,16 +3828,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.22.7",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "1268c60470e22a6aa33fca8c478aab44c89ebbdc"
+                "reference": "2e5ea91c0e5f957a436cc6ddc1796bdf5baace2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/1268c60470e22a6aa33fca8c478aab44c89ebbdc",
-                "reference": "1268c60470e22a6aa33fca8c478aab44c89ebbdc",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/2e5ea91c0e5f957a436cc6ddc1796bdf5baace2f",
+                "reference": "2e5ea91c0e5f957a436cc6ddc1796bdf5baace2f",
                 "shasum": ""
             },
             "require": {
@@ -3902,7 +3908,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.22.7"
+                "source": "https://github.com/spatie/laravel-health/tree/1.23.0"
             },
             "funding": [
                 {
@@ -3910,7 +3916,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-28T07:11:37+00:00"
+            "time": "2023-07-21T03:32:38+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -7797,16 +7803,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v2.9.3",
+            "version": "v2.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "cf5275293fe693ec2cf4dbadbadae01daaa08169"
+                "reference": "705f19dd87caf16de4c24f5cfb7eff2e4aab3e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/cf5275293fe693ec2cf4dbadbadae01daaa08169",
-                "reference": "cf5275293fe693ec2cf4dbadbadae01daaa08169",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/705f19dd87caf16de4c24f5cfb7eff2e4aab3e3f",
+                "reference": "705f19dd87caf16de4c24f5cfb7eff2e4aab3e3f",
                 "shasum": ""
             },
             "require": {
@@ -7882,7 +7888,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v2.9.3"
+                "source": "https://github.com/pestphp/pest/tree/v2.9.4"
             },
             "funding": [
                 {
@@ -7894,7 +7900,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-20T18:47:23+00:00"
+            "time": "2023-07-22T14:42:37+00:00"
         },
         {
             "name": "pestphp/pest-plugin",

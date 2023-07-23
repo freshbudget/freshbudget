@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\App\Budgets\BudgetInvitationsController;
-use App\Http\Controllers\App\Budgets\BudgetMembersController;
-use App\Http\Controllers\App\Budgets\BudgetsController;
-use App\Http\Controllers\App\Budgets\CurrentBudgetController;
-use App\Http\Controllers\App\CookiesController;
-use App\Http\Controllers\App\Incomes\IncomeDeductionsController;
-use App\Http\Controllers\App\Incomes\IncomeEntitlementsController;
-use App\Http\Controllers\App\Incomes\IncomeEntriesController;
-use App\Http\Controllers\App\Incomes\IncomesController;
-use App\Http\Controllers\App\Incomes\IncomeTaxesController;
+use App\Controllers\App\Budgets\BudgetInvitationsController;
+use App\Controllers\App\Budgets\BudgetMembersController;
+use App\Controllers\App\Budgets\BudgetsController;
+use App\Controllers\App\Budgets\CurrentBudgetController;
+use App\Controllers\App\CookiesController;
+use App\Controllers\App\Incomes\IncomeDeductionsController;
+use App\Controllers\App\Incomes\IncomeEntitlementsController;
+use App\Controllers\App\Incomes\IncomeEntriesController;
+use App\Controllers\App\Incomes\IncomesController;
+use App\Controllers\App\Incomes\IncomeTaxesController;
 use Illuminate\Support\Facades\Route;
 
 /*

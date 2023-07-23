@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\App\Incomes;
+namespace App\Controllers\App\Incomes;
 
+use App\Controllers\Controller;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\Frequency;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\App\Budgets;
+namespace App\Controllers\App\Budgets;
 
+use App\Controllers\Controller;
 use App\Domains\Budgets\Models\Budget;
-use App\Http\Controllers\Controller;
 
 class BudgetMembersController extends Controller
 {

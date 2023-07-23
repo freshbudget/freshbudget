@@ -8,7 +8,6 @@ use App\Domains\Incomes\Jobs\SyncIncomeEstimatedEntitlements;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedTaxes;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Spatie\Health\Commands\RunHealthChecksCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -30,6 +29,5 @@ class Kernel extends ConsoleKernel
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
-
     }
 }

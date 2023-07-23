@@ -78,7 +78,7 @@
     ),
     'aliases' => 
     array (
-      'Livewire' => 'Livewire\\LivewireManager',
+      'Livewire' => 'Livewire\\Livewire',
     ),
   ),
   'mpociot/versionable' => 

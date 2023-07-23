@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\EmailVerificationRequestController;
+use App\Controllers\Auth\AuthenticatedSessionController;
+use App\Controllers\Auth\EmailVerificationRequestController;
 use App\Livewire\Auth\EmailVerificationRequestForm;
-use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\PasswordResetForm;
 use App\Livewire\Auth\PasswordResetRequestForm;
 use App\Livewire\Auth\RegisterForm;
+use App\Livewire\Pages\Auth\Login;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', LoginForm::class)
+Route::get('/login', Login::class)
     ->middleware(['guest', 'throttle:50,1'])
     ->name('login');
 

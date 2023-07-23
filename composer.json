@@ -1,8 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "freshbudget/freshbudget",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": ["laravel", "personal-finance", "budget", "budgeting"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -45,7 +44,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Domains/Support/helpers.php"
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

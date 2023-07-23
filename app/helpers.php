@@ -9,6 +9,9 @@ function carbon(): Carbon
     return new Carbon();
 }
 
+/**
+ * Get the authenticated user's current budget.
+ */
 function currentBudget(): ?Budget
 {
     if (! auth()->check()) {
@@ -18,15 +21,18 @@ function currentBudget(): ?Budget
     $budget = user()?->currentBudget;
 
     if (! $budget) {
-        // get the first budget
         $budget = user()?->ownedBudgets()->first();
     }
 
     return $budget;
 }
 
+/**
+ * Get the current authenticated user.
+ */
 function user(): ?User
 {
+    /** @var User $user */
     $user = auth()->user();
 
     $user->loadMissing('currentBudget');

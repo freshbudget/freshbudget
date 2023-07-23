@@ -33,9 +33,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             // api.domain.tld
-            Route::middleware('api')
-                ->domain(config('app.api_domain'))
-                ->group(base_path('routes/api.php'));
+            // Route::middleware('api')
+            //     ->domain(config('app.api_domain'))
+            //     ->group(base_path('routes/api.php'));
 
             // app.domain.tld/{login|register|etc}
             Route::middleware('web')

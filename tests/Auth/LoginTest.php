@@ -3,7 +3,7 @@
 // test the login page is accessible
 
 use App\Domains\Users\Models\User;
-use App\Livewire\Auth\LoginForm;
+use App\Livewire\Pages\Auth\Login;
 use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Event;
 use function Pest\Livewire\livewire;
@@ -18,7 +18,7 @@ test('login page is accessible', function () {
 test('login page contains livewire component', function () {
     $response = $this->get(route('login'));
 
-    $response->assertSeeLivewire(LoginForm::class);
+    $response->assertSeeLivewire(Login::class);
 });
 
 // test authenticated users are redirected to the welcome page
@@ -32,36 +32,36 @@ test('authenticated users are redirected to the app dashboard', function () {
 
 // tes email is required
 test('email is required', function () {
-    livewire(LoginForm::class)
-        ->set('email', '')
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', '')
+        ->set('form.password', 'password')
         ->call('attempt')
-        ->assertHasErrors(['email' => 'required']);
+        ->assertHasErrors(['form.email' => 'required']);
 });
 
 // test password is required
 test('password is required', function () {
-    livewire(LoginForm::class)
-        ->set('email', 'user@email.com')
-        ->set('password', '')
+    livewire(Login::class)
+        ->set('form.email', 'user@email.com')
+        ->set('form.password', '')
         ->call('attempt')
-        ->assertHasErrors(['password' => 'required']);
+        ->assertHasErrors(['form.password' => 'required']);
 });
 
 // test the email must be a valid email address
 test('email must be a valid email address', function () {
-    livewire(LoginForm::class)
-        ->set('email', 'not-a-valid-email')
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', 'not-a-valid-email')
+        ->set('form.password', 'password')
         ->call('attempt')
-        ->assertHasErrors(['email' => 'email']);
+        ->assertHasErrors(['form.email' => 'email']);
 });
 
 // test if the email does not exist in the database a status error is returned
 test('if the email does not exist in the database a status error is returned', function () {
-    livewire(LoginForm::class)
-        ->set('email', 'user@email.com')
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', 'user@email.com')
+        ->set('form.password', 'password')
         ->call('attempt')
         ->assertHasErrors(['status']);
 });
@@ -70,9 +70,9 @@ test('if the email does not exist in the database a status error is returned', f
 test('valid credentials are authenticated', function () {
     $user = User::factory()->create();
 
-    livewire(LoginForm::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', $user->email)
+        ->set('form.password', 'password')
         ->call('attempt')
         ->assertHasNoErrors()
         ->assertRedirect(route('app.index'));
@@ -88,9 +88,9 @@ test('an authenticated event is fired', function () {
 
     $user = User::factory()->create();
 
-    livewire(LoginForm::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', $user->email)
+        ->set('form.password', 'password')
         ->call('attempt')
         ->assertHasNoErrors()
         ->assertRedirect(route('app.index'));
@@ -106,16 +106,16 @@ test('an authenticated event is fired', function () {
 test('the component is rate limited to 10 attempts in 1 minute', function () {
 
     for ($i = 0; $i < 10; $i++) {
-        livewire(LoginForm::class)
-            ->set('email', 'not-a-valid-email')
-            ->set('password', 'password')
+        livewire(Login::class)
+            ->set('form.email', 'not-a-valid-email')
+            ->set('form.password', 'password')
             ->call('attempt');
     }
 
     // the 11th attempt should be rate limited
-    livewire(LoginForm::class)
-        ->set('email', 'user@email.com')
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', 'user@email.com')
+        ->set('form.password', 'password')
         ->call('attempt')
         ->assertHasErrors(['status']);
 });
@@ -124,9 +124,9 @@ test('the component is rate limited to 10 attempts in 1 minute', function () {
 test('if user has 2FA enabled they are redirected to the 2FA challenge after authenticating', function () {
     $user = User::factory()->withTwoFactorAuth()->create();
 
-    livewire(LoginForm::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', $user->email)
+        ->set('form.password', 'password')
         ->call('attempt')
         ->assertRedirect(route('app.index'));
 });
@@ -135,9 +135,9 @@ test('if user has 2FA enabled they are redirected to the 2FA challenge after aut
 test('if user has 2FA enabled they are redirected to the 2FA challenge and the session is flashed', function () {
     $user = User::factory()->withTwoFactorAuth()->create();
 
-    livewire(LoginForm::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
+    livewire(Login::class)
+        ->set('form.email', $user->email)
+        ->set('form.password', 'password')
         ->call('attempt')
         ->assertRedirect(route('app.index'))
         ->assertSessionHas('two_factor');
@@ -145,7 +145,7 @@ test('if user has 2FA enabled they are redirected to the 2FA challenge and the s
 
 // test that the wire:model is set for email and password
 test('wire:model is set for email and password', function () {
-    livewire(LoginForm::class)
-        ->assertSeeHtml('wire:model="email"')
-        ->assertSeeHtml('wire:model="password"');
+    livewire(Login::class)
+        ->assertSeeHtml('wire:model="form.email"')
+        ->assertSeeHtml('wire:model="form.password"');
 });

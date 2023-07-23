@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
-
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Policies\BudgetPolicy;
 use App\Domains\Incomes\Models\Income;
@@ -23,9 +21,6 @@ class AuthServiceProvider extends ServiceProvider
         Budget::class => BudgetPolicy::class,
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     */
     public function boot(): void
     {
         Password::defaults(function () {

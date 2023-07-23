@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\App\Incomes;
+namespace App\Controllers\App\Incomes;
 
+use App\Controllers\Controller;
 use App\Domains\Incomes\Actions\CreateIncomeTaxAction;
 use App\Domains\Incomes\Actions\UpdateIncomeNetEstimate;
 use App\Domains\Incomes\Actions\UpdateIncomeTaxEstimate;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeStatistic;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Stats\StatsWriter;
 
