@@ -38,7 +38,9 @@ Route::get('/invitations/{invitation}', [BudgetInvitationsController::class, 'sh
     ->name('invitations.show');
 
 Route::post('/invitations/{invitation}/accept', [BudgetInvitationsController::class, 'accept'])
+    ->middleware(['throttle:50,1'])
     ->name('invitations.accept');
 
 Route::post('/invitations/{invitation}/decline', [BudgetInvitationsController::class, 'reject'])
+    ->middleware(['throttle:50,1'])
     ->name('invitations.reject');

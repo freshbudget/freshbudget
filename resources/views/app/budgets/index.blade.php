@@ -64,16 +64,16 @@
                                 Switch to Budget
                             </x-context-menu.option>
                         </form>
+                        
+                        <x-context-menu.option as="a" href="{{ route('app.budgets.members.index', $budget) }}">
+                            Invite Member
+                        </x-context-menu.option>
 
                         @can('edit', $budget)
                             <x-context-menu.option as="a" href="{{ route('app.budgets.edit', $budget) }}">
                                 Settings
                             </x-context-menu.option>
                         @endcan
-                        
-                        <x-context-menu.option as="a" href="{{ route('app.budgets.members.index', $budget) }}">
-                            Invite Member
-                        </x-context-menu.option>
 
                     </x-slot:options>
 

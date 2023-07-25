@@ -70,7 +70,7 @@
             <h2 class="font-semibold text-gray-700 text-lg">Members</h2>
 
             <div>
-                <x-forms.input type="text" placeholder="Search" x-model="search" x-on:keydown.escape.window="search=''" />
+                <x-forms.input type="search" placeholder="Search" x-model="search" x-on:keydown.escape.window="search=''" />
             </div>
         </header>
 
@@ -80,16 +80,25 @@
 
                 @foreach ($budget->members as $member)
     
-                    <li x-search="search" class="px-4 flex items-center justify-between py-3">
+                    <li x-search="search" class="px-4 flex items-center justify-between py-3 select-none">
                         <div>
-                            <h3 class="font-semibold text-lg text-gray-700">
-                                {{ $member->name }} @if($member->nickname) <span class="text-sm">({{ $member->nickname }})</span> @endif
+                            <h3 class="font-semibold text-lg text-gray-700 truncate">
+                                {{ $member->name }} @if($member->nickname) <span class="text-sm truncate">({{ $member->nickname }})</span> @endif
                             </h3>
-                            <p class="text-gray-500">{{ $member->email }}</p>
+                            <div class="flex items-center space-x-2 my-1">
+                                <p class="text-gray-500 border rounded-full border-gray-300 text-xs px-2 py-0.5 w-16 text-center">
+                                    Admin
+                                </p>
+                                @if($member->email)
+                                    <p class="text-gray-500 flex items-center">
+                                        {{ $member->email }}
+                                    </p>
+                                @endif
+                            </div>
                         </div>
                         <div>
-                            <x-forms.buttons.secondary>
-                                Menu
+                            <x-forms.buttons.secondary class="p-1.5 flex items-center justify-center">
+                                @svg('more-vertical', 'w-5 h-5 text-gray-500')
                             </x-forms.buttons.secondary>
                         </div>
                     </li>
@@ -108,7 +117,7 @@
             <h2 class="font-semibold text-gray-700 text-lg">Invited Members</h2>
 
             <div>
-                <x-forms.input type="text" placeholder="Search" x-model="search" x-on:keydown.escape.window="search=''" />
+                <x-forms.input type="search" placeholder="Search" x-model="search" x-on:keydown.escape.window="search=''" />
             </div>
         </header>
 
