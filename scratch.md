@@ -53,3 +53,11 @@ https://www.auxnet.de/en/blog/make-your-text-collection-searchable-with-python-a
 - If the user id is set, set the user id
 - If it the income is a one-time frequency, set it to inactive
 - Redirect to income show overview page
+
+- account settings
+    - add a theme selector (readonly)
+    - add a sidebar preference 
+    - add a default currency when creating new budgets
+    - add description text to the inputs (below)
+    - remove required on nickname
+    - 

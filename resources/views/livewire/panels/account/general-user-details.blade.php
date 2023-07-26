@@ -19,7 +19,7 @@
             </div>
 
             <div class="space-y-2">
-                <x-forms.label for="nickname" required>
+                <x-forms.label for="nickname">
                     Your Nickname
                 </x-forms.label>
         

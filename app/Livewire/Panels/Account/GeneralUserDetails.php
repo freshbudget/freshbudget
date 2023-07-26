@@ -24,18 +24,24 @@ class GeneralUserDetails extends Component
     {
         $this->validate();
 
-        // check if anything has changed
+        if ($this->isDirty()) {
+            user()->update([
+                'name' => $this->name,
+                'nickname' => $this->nickname,
+            ]);
+    
+            $this->dispatch('user-display-name-updated', name: user()->displayName);
+        }
 
-        user()->update([
-            'name' => $this->name,
-            'nickname' => $this->nickname,
-        ]);
-
-        $this->dispatch('user-display-name-updated', name: user()->displayName);
     }
 
     public function render()
     {
         return view('livewire.panels.account.general-user-details');
+    }
+
+    protected function isDirty()
+    {
+        return $this->name != user()->name || $this->nickname != user()->nickname;
     }
 }

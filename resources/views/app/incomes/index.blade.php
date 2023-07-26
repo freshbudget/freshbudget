@@ -69,15 +69,15 @@
                             Log Entry
                         </x-context-menu.option>
 
-                        <x-context-menu.option as="a" href="{{ route('app.incomes.edit', $income) }}">
-                            Settings
-                        </x-context-menu.option>
-
                         @if($income->url)
                             <x-context-menu.option as="a" href="{{ $income->url }}" target="_blank">
                                 Visit URL
                             </x-context-menu.option>
                         @endif
+
+                        <x-context-menu.option as="a" href="{{ route('app.incomes.edit', $income) }}">
+                            Settings
+                        </x-context-menu.option>
 
                     </x-slot:options>
                 
