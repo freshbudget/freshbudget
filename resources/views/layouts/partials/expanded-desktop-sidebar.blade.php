@@ -90,16 +90,16 @@
                     'active' => 'app.incomes.*'
                 ],
                 [
-                    'label' => 'Expenses',
-                    'route' => "#",
-                    'icon' => 'creditcard',
-                    'active' => 'app.expenses.*'
-                ],
-                [
                     'label' => 'Accounts',
                     'route' => "#",
                     'icon' => 'bank',
                     'active' => 'app.accounts.*'
+                ],
+                [
+                    'label' => 'Expenses',
+                    'route' => "#",
+                    'icon' => 'creditcard',
+                    'active' => 'app.expenses.*'
                 ],
                 [
                     'label' => 'Transactions',

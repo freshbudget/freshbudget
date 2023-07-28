@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_confirmed_at',
         'current_budget_id',
         'registration_source',
+        'finished_onboarding',
     ];
 
     /**
@@ -74,6 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_enabled' => 'boolean',
         'two_factor_confirmed_at' => 'datetime',
         'current_budget_id' => 'integer',
+        'finished_onboarding' => 'boolean',
     ];
 
     /*

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->timestamp('two_factor_confirmed_at')->nullable();
             $table->foreignId('current_budget_id')->nullable()->index();
             $table->string('registration_source')->default(User::SELF_REGISTERED)->nullable();
+            $table->boolean('finished_onboarding')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

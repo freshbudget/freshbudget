@@ -19,20 +19,6 @@ class Budget extends Model
 {
     use HasFactory, HasUlids, SoftDeletes;
 
-    /**
-     * The attributes that should be appended to model arrays.
-     *
-     * @var array<string>
-     */
-    protected $appends = [
-        //
-    ];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'ulid',
         'name',
@@ -41,11 +27,6 @@ class Budget extends Model
         'deleted_by',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
         'owner_id' => 'integer',
@@ -53,11 +34,6 @@ class Budget extends Model
         'deleted_by' => 'integer',
     ];
 
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
     protected $dispatchesEvents = [
         'created' => BudgetCreated::class,
         'deleted' => BudgetDeleted::class,

@@ -33,6 +33,7 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => null,
             'two_factor_confirmed_at' => null,
             'current_budget_id' => null,
+            'finished_onboarding' => false,
             'remember_token' => Str::random(10),
         ];
     }
@@ -54,6 +55,20 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => now(),
+        ]);
+    }
+
+    public function onboarded(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'finished_onboarding' => true,
+        ]);
+    }
+
+    public function needsOnboarding(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'finished_onboarding' => false,
         ]);
     }
 
