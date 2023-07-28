@@ -2,13 +2,13 @@
 
 @push('head::end')
     <style>[x-cloak] { display: none !important; }</style>
-    {{-- @livewireStyles --}}
+    @filamentStyles
     @vite(['resources/css/app.css'])
 @endpush
 
 @push('body::end')
     {{-- @livewire('spotlight-pro')     --}}
-    {{-- @livewireScripts --}}
+    @filamentScripts
     @livewireScriptConfig
     @vite(['resources/js/app.js'])
 @endpush

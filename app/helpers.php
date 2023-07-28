@@ -3,7 +3,6 @@
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Carbon;
-use Illuminate\View\View;
 
 function carbon(): Carbon
 {

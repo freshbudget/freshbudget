@@ -133,11 +133,6 @@ class Budget extends Model
 
     public function removeMember(User $user): void
     {
-        // check if they are the owner of any incomes in the budget, if so set to null
-        $this->incomes()->where('user_id', $user->id)->update([
-            'user_id' => null,
-        ]);
-
         $this->members()->detach($user->id);
     }
 

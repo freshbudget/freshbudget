@@ -117,7 +117,9 @@ class User extends Authenticatable implements MustVerifyEmail
     */
     public function getAvatarAttribute(): string
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode(str()->ascii($this->name)).'&color=c084fc&background=cbd5e1';
+        return 'https://ui-avatars.com/api/?name='.
+            urlencode(str()->ascii($this->displayName)).
+            '&color=c084fc&background=cbd5e1';
     }
 
     public function getDisplayNameAttribute(): string

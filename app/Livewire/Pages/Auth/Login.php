@@ -29,7 +29,7 @@ class Login extends Component
             remember: $this->remember
         );
 
-        if(!$successful) {
+        if (! $successful) {
             $this->addError('status', 'Please check your credentials and try again.');
 
             return;

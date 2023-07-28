@@ -15,11 +15,11 @@
             'route' => route('app.settings.security'),
             'active' => 'app.settings.security'
         ],
-        [
-            'label' => 'Notifications',
-            'route' => '#',
-            'active' => 'app.settings.notifications'
-        ],
+        // [
+        //     'label' => 'Notifications',
+        //     'route' => '#',
+        //     'active' => 'app.settings.notifications'
+        // ],
     ]" />
 
     <div class="max-w-3xl mx-auto px-4 my-10">

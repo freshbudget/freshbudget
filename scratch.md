@@ -61,3 +61,9 @@ https://www.auxnet.de/en/blog/make-your-text-collection-searchable-with-python-a
     - add description text to the inputs (below)
     - remove required on nickname
     - 
+
+# Budget Integrations
+
+- Inbound emails / parsing / attachments
+- Zapier
+- API tokens
