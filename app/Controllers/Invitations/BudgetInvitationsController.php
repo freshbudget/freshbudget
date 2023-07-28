@@ -2,16 +2,19 @@
 
 namespace App\Controllers\Invitations;
 
-use App\Controllers\Controller;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Models\User;
 use Exception;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 
-class BudgetInvitationsController extends Controller
+class BudgetInvitationsController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function show(string $invitation, Request $request)
     {
         $invitation = BudgetInvitation::where('ulid', $invitation)->first();

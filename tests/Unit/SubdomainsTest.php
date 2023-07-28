@@ -20,4 +20,6 @@ test('app pages are at the app subdomain', function () {
     expect(route('app.index'))->toBe('http://app.freshbudgetapp.test');
 });
 
-// test the api pages are at the api subdomain - TODO
+test('api routes are at the api subdomain', function () {
+    expect(route('api.budgets.index'))->toBe('http://api.freshbudgetapp.test/budgets');
+})->todo()->skip('Not implemented yet');

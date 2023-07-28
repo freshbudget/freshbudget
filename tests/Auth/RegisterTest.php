@@ -99,15 +99,6 @@ test('password is required, must be at least 8 chars, and confirmed', function (
         ->call('attempt')
         ->assertHasErrors(['password' => 'required']);
 
-    // dont know how to test this yet when using Password::defaults()
-    // livewire(RegisterForm::class)
-    //     ->set('name', 'John Doe')
-    //     ->set('email', 'user@email.com')
-    //     ->set('password', 'pass')
-    //     ->set('password_confirmation', 'pass')
-    //     ->call('attempt')
-    //     ->assertHasErrors(['password' => 'min']);
-
     livewire(RegisterForm::class)
         ->set('name', 'John Doe')
         ->set('email', 'user@email.com')

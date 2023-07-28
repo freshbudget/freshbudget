@@ -2,17 +2,20 @@
 
 namespace App\Controllers\App\Budgets;
 
-use App\Controllers\Controller;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\SendBudgetInvitationAction;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
-class BudgetInvitationsController extends Controller
+class BudgetInvitationsController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function create(Budget $budget)
     {
         $this->authorize('inviteMember', $budget);

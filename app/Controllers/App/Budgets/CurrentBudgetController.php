@@ -2,11 +2,14 @@
 
 namespace App\Controllers\App\Budgets;
 
-use App\Controllers\Controller;
 use App\Domains\Budgets\Models\Budget;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class CurrentBudgetController extends Controller
+class CurrentBudgetController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function __invoke(Budget $budget)
     {
         $this->authorize('setAsCurrent', $budget);

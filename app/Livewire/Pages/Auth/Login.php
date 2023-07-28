@@ -2,42 +2,34 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use App\Livewire\Forms\Login as LoginForm;
-use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
-use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Auth\Events\Authenticated;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class Login extends Component
 {
-    use WithRateLimiting;
+    #[Rule(['required', 'email'])]
+    public string $email = '';
 
-    public LoginForm $form;
+    #[Rule(['required'])]
+    public string $password = '';
 
     #[Rule(['boolean'])]
-    public bool $usingEmail = false;
-
-    protected function checkRateLimit(): bool
-    {
-        try {
-            $this->rateLimit(maxAttempts: 10, decaySeconds: 60);
-
-            return true;
-        } catch (TooManyRequestsException $e) {
-            $this->addError('status', "Too many attempts, please wait {$e->secondsUntilAvailable} seconds before next attempt.");
-
-            return false;
-        }
-    }
+    public bool $remember = true;
 
     public function attempt()
     {
-        if (! $this->checkRateLimit()) {
-            return;
-        }
+        $this->validate();
 
-        if (! $this->form->attempt()) {
+        $successful = auth()->attempt(
+            credentials: [
+                'email' => $this->email,
+                'password' => $this->password,
+            ],
+            remember: $this->remember
+        );
+
+        if(!$successful) {
             $this->addError('status', 'Please check your credentials and try again.');
 
             return;
@@ -45,18 +37,7 @@ class Login extends Component
 
         event(new Authenticated('web', user()));
 
-        if (user()->twoFactorAuthEnabledAndConfirmed()) {
-
-            session()->put('two_factor', [
-                'login.id' => user()->ulid,
-                'login.remember' => $this->form->remember,
-            ]);
-
-            // TODO: redirect to two factor challenge
-            return $this->redirect(route('app.index'), true);
-        } else {
-            return $this->redirect(route('app.index'), true);
-        }
+        return $this->redirect(route('app.index'), true);
     }
 
     public function render()

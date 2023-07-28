@@ -3,47 +3,28 @@
 namespace App\Livewire\Auth;
 
 use App\Domains\Users\Models\User;
-use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
-use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Validation\Rules\Password;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class RegisterForm extends Component
 {
-    use WithRateLimiting;
-
+    #[Rule(['required', 'string', 'min:2', 'max:255'])]
     public $name = '';
 
+    #[Rule(['required', 'email', 'unique:users,email'])]
     public $email = '';
 
+    #[Rule(['required', 'string', 'confirmed'])]
     public $password = '';
 
+    #[Rule(['required', 'string'])]
     public $password_confirmation = '';
 
-    public $usingEmail = false;
-
-    public function rules(): array
-    {
-        return [
-            'name' => ['required', 'string', 'min:2', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-        ];
-    }
+    public bool $usingEmail = false;
 
     public function attempt()
     {
-        try {
-            $this->rateLimit(maxAttempts: 10, decaySeconds: 60);
-        } catch (TooManyRequestsException $exception) {
-            $this->addError(
-                'status',
-                "Too many attempts, please wait {$exception->secondsUntilAvailable} seconds before next attempt.");
-
-            return;
-        }
-
         $this->validate();
 
         $user = User::create([

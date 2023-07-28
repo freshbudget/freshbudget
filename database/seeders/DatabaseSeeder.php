@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->verified()->create([
             'name' => 'Wyatt Castaneda',
             'nickname' => 'Wyatt',
-            'email' => 'user@email.com',
+            'email' => 'admin@email.com',
         ]);
 
         $budget = $user->currentBudget;

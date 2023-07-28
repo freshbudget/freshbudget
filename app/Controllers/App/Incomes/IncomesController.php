@@ -2,15 +2,18 @@
 
 namespace App\Controllers\App\Incomes;
 
-use App\Controllers\Controller;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\Frequency;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 
-class IncomesController extends Controller
+class IncomesController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function create()
     {
         $this->authorize('create', [Income::class, currentBudget()]);

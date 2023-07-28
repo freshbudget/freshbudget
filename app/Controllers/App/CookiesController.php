@@ -2,11 +2,10 @@
 
 namespace App\Controllers\App;
 
-use App\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 
-class CookiesController extends Controller
+class CookiesController
 {
     public function __invoke(string $cookie)
     {

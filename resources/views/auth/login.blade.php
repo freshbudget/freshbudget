@@ -2,7 +2,7 @@
 
     <h2 class="text-2xl font-semibold text-center select-none text-gray-800/70">Login to your account</h2>
 
-    <div x-data="{ usingEmail: @entangle('usingEmail').live }" class="flex flex-col items-center mt-6 select-none">
+    <div x-data="{ usingEmail: false }" class="flex flex-col items-center mt-6 select-none">
         
         <a x-show="!usingEmail" href="{{ route('register') }}" class="px-5 font-semibold inline-block py-2.5 bg-green-600 hover:bg-gradient-to-br hover:from-green-500 hover:to-green-600 border border-green-700 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-green-700 focus:outline-none focus:shadow text-green-50/100 shadow-sm hover:shadow-md hover:text-green-50 active:shadow-inner w-full text-center">
             Login with your Google account
@@ -24,13 +24,13 @@
         
                 <div>
                     <x-forms.label for="email" required class="block mb-1 text-gray-800">Email address</x-forms.label>
-                    <x-forms.input type="email" id="email" x-ref="email" wire:model="form.email" />
+                    <x-forms.input type="email" id="email" x-ref="email" wire:model="email" />
                     <x-forms.validation-error for="email" />
                 </div>
         
                 <div>
                     <x-forms.label for="password" required class="block mb-1 text-gray-800">Password</x-forms.label>
-                    <x-forms.input type="password" id="password" wire:model="form.password" />
+                    <x-forms.input type="password" id="password" wire:model="password" />
                     <x-forms.validation-error for="password" />
                 </div>
         

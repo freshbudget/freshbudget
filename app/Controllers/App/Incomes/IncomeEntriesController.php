@@ -2,11 +2,14 @@
 
 namespace App\Controllers\App\Incomes;
 
-use App\Controllers\Controller;
 use App\Domains\Incomes\Models\Income;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class IncomeEntriesController extends Controller
+class IncomeEntriesController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function create(Income $income)
     {
         $this->authorize('addEntry', [$income, currentBudget()]);

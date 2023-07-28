@@ -2,11 +2,14 @@
 
 namespace App\Controllers\App\Budgets;
 
-use App\Controllers\Controller;
 use App\Domains\Budgets\Models\Budget;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class BudgetMembersController extends Controller
+class BudgetMembersController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function index(Budget $budget)
     {
         $budget->load(['members', 'invitations.sender']);

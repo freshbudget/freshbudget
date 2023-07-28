@@ -2,17 +2,20 @@
 
 namespace App\Controllers\App\Incomes;
 
-use App\Controllers\Controller;
 use App\Domains\Incomes\Actions\CreateIncomeTaxAction;
 use App\Domains\Incomes\Actions\UpdateIncomeNetEstimate;
 use App\Domains\Incomes\Actions\UpdateIncomeTaxEstimate;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeStatistic;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Spatie\Stats\StatsWriter;
 
-class IncomeTaxesController extends Controller
+class IncomeTaxesController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function create(Income $income)
     {
         $this->authorize('addTaxes', [$income, currentBudget()]);

@@ -2,13 +2,16 @@
 
 namespace App\Controllers\App\Budgets;
 
-use App\Controllers\Controller;
 use App\Domains\Budgets\Actions\CreateBudgetAction;
 use App\Domains\Budgets\Models\Budget;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
-class BudgetsController extends Controller
+class BudgetsController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function create()
     {
         $this->authorize('create', Budget::class);

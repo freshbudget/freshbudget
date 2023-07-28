@@ -2,10 +2,9 @@
 
 namespace App\Controllers\Auth;
 
-use App\Controllers\Controller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest as EmailVerificationFormRequest;
 
-class EmailVerificationRequestController extends Controller
+class EmailVerificationRequestController
 {
     public function attempt(EmailVerificationFormRequest $request)
     {

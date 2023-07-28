@@ -2,10 +2,9 @@
 
 namespace App\Controllers\Auth;
 
-use App\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AuthenticatedSessionController extends Controller
+class AuthenticatedSessionController
 {
     public function destroy(Request $request)
     {

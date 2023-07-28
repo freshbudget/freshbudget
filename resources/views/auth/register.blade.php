@@ -2,7 +2,7 @@
 
     <h2 class="text-2xl font-semibold text-center select-none text-gray-800/70">Create your {{ config('app.name') }} account</h2>
 
-    <div x-data="{ usingEmail: @entangle('usingEmail').live }" class="flex flex-col items-center mt-6 select-none">
+    <div x-data="{ usingEmail: false }" class="flex flex-col items-center mt-6 select-none">
         
         <a x-show="!usingEmail" href="{{ route('register') }}" class="px-5 font-semibold inline-block py-2.5 bg-green-600 hover:bg-gradient-to-br hover:from-green-500 hover:to-green-600 border border-green-700 rounded-lg focus:ring-2 ring-offset-2 ring-offset-white ring-green-700 focus:outline-none focus:shadow text-green-50/100 shadow-sm hover:shadow-md hover:text-green-50 active:shadow-inner w-full text-center">
             Sign up with your Google account
