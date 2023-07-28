@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <div class="max-w-xl p-6 mx-auto mb-8">
-        @livewire('forms.incomes.create-income-form')
+    <div class="max-w-3xl px-4 mx-auto mb-8">
+        @livewire('panels.incomes.create-income-panel')
     </div>
 
 @endsection

@@ -40,7 +40,7 @@
             <h2 class="font-semibold text-gray-700">Delete Budget</h2>
         </header>
 
-        <form id="delete-form" action={{ route('app.budgets.destroy', $budget) }} method="post" class="p-4">
+        <form id="delete-form" action={{ route('app.budgets.destroy', $budget) }} method="post" class="p-4 select-none">
             @csrf
             @method('DELETE')
 

@@ -82,25 +82,43 @@
     
                     <li x-search="search" class="px-4 flex items-center justify-between py-3 select-none">
                         <div>
+                            
                             <h3 class="font-semibold text-lg text-gray-700 truncate">
                                 {{ $member->name }} @if($member->nickname) <span class="text-sm truncate">({{ $member->nickname }})</span> @endif
                             </h3>
+
                             <div class="flex items-center space-x-2 my-1">
-                                <p class="text-gray-500 border rounded-full border-gray-300 text-xs px-2 py-0.5 w-16 text-center">
-                                    Admin
-                                </p>
+                                
+                                @if($budget->isOwnedBy($member))
+
+                                    <p class="text-gray-500 border rounded-full border-gray-300 text-xs px-2 py-0.5 w-14 text-center">
+                                        Owner
+                                    </p>
+
+                                @else
+
+                                    <p class="text-gray-500 border rounded-full border-gray-300 text-xs px-2 py-0.5 w-16 text-center">
+                                        Admin
+                                    </p>
+
+                                @endif
+
                                 @if($member->email)
                                     <p class="text-gray-500 flex items-center">
                                         {{ $member->email }}
                                     </p>
                                 @endif
+
                             </div>
+
                         </div>
+
                         <div>
                             <x-forms.buttons.secondary class="p-1.5 flex items-center justify-center">
                                 @svg('more-vertical', 'w-5 h-5 text-gray-500')
                             </x-forms.buttons.secondary>
                         </div>
+                        
                     </li>
                     
                 @endforeach

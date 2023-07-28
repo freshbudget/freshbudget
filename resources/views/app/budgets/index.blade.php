@@ -58,12 +58,14 @@
 
                     <x-slot:options>
                         
-                        <form action="{{ route('app.budgets.current', $budget) }}" method="post" class="w-full">
-                            @csrf
-                            <x-context-menu.option as="button" type="submit" class="w-full">
-                                Switch to Budget
-                            </x-context-menu.option>
-                        </form>
+                        @if(currentBudget()->id != $budget->id)
+                            <form action="{{ route('app.budgets.current', $budget) }}" method="post" class="w-full">
+                                @csrf
+                                <x-context-menu.option as="button" type="submit" class="w-full">
+                                    Switch to Budget
+                                </x-context-menu.option>
+                            </form>
+                        @endif
                         
                         <x-context-menu.option as="a" href="{{ route('app.budgets.members.index', $budget) }}">
                             Invite Member

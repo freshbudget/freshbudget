@@ -17,7 +17,7 @@ class GeneralUserDetails extends Component
     {
         $this->name = user()->name;
 
-        $this->nickname = user()->nickname;
+        $this->nickname = user()->nickname ?? '';
     }
 
     public function attempt()
@@ -27,9 +27,9 @@ class GeneralUserDetails extends Component
         if ($this->isDirty()) {
             user()->update([
                 'name' => $this->name,
-                'nickname' => $this->nickname,
+                'nickname' => $this->nickname ? $this->nickname : null,
             ]);
-    
+
             $this->dispatch('user-display-name-updated', name: user()->displayName);
         }
 

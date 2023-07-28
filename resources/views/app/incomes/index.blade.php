@@ -4,7 +4,15 @@
 
 @section('content')
 
-    <div class="max-w-5xl px-4 py-8 mx-auto" x-data="{ search: '' }">
+    <div class="max-w-6xl px-4 py-8 mx-auto" x-data="{ search: '' }">
+
+        <div class="grid grid-cols-3 gap-4 select-none mb-8">
+            <div class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow h-32"></div>
+            <div class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow h-32"></div>
+            <div class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow h-32"></div>
+        </div>
+
+        <div class="bg-gray-300 h-[1.5px] rounded my-8"></div>
 
         <!-- header, search and create -->
         <div class="flex items-center justify-between mb-8">
@@ -27,7 +35,7 @@
         </div>
 
         <!-- incomes grid -->
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-3 gap-4 select-none">
 
             @forelse ($incomes as $income)
 

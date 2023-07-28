@@ -2,6 +2,9 @@
 
 @section('page::title', 'Dashboard')
 
+@push('body::end')
+    @vite(['resources/js/highcharts.js'])
+@endpush
 @section('content')
 
 <div class="sticky top-0">
@@ -16,9 +19,19 @@
             'label' => 'Charts &amp; Graphs',
             'route' => '#',
             'active' => 'app.index2'
+        ],
+        [
+            'label' => 'Custom',
+            'route' => '#',
+            'active' => 'app.index2',
+            // 'icon' => 'plus-circle'
         ]
     ]" />
 
+</div>
+
+<div class="max-w-3xl px-4 mx-auto">
+    <x-chart />
 </div>
 
 <div class="max-w-3xl px-4 mx-auto my-10">
