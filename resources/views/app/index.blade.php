@@ -41,7 +41,7 @@
             <h2>Hello {{ user()->name }} 👋</h2>
 
             <p>
-                Thank you for giving us a try. We are excited to have you here. Here is a quick list of items you might want to setup to get started.
+                Thank you for giving us a try. We are excited to have you here. Here is a quick list of items you might want to setup to get started. You can always come back to this onboarding page by clicking the <strong>Onboarding</strong> link in the sidebar.
             </p>
 
             <ul>

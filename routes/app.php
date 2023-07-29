@@ -35,9 +35,13 @@ Route::view('/calendar', 'app.calendar.index')
 | Incomes
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes', [IncomesController::class, 'index'])
+Route::get('/incomes', [IncomesController::class, 'overview'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.index');
+
+Route::get('/incomes/list', [IncomesController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('app.incomes.list');
 
 Route::get('/incomes/create', [IncomesController::class, 'create'])
     ->middleware(['auth', 'verified'])

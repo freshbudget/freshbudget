@@ -41,13 +41,24 @@ class IncomesController
         ]);
     }
 
-    public function index()
+    public function overview()
     {
         $this->authorize('viewAny', [Income::class, currentBudget()]);
 
         $incomes = currentBudget()->activeIncomes()->with(['type'])->orderBy('name')->get();
 
         return view('app.incomes.index', [
+            'incomes' => $incomes,
+        ]);
+    }
+
+    public function index()
+    {
+        $this->authorize('viewAny', [Income::class, currentBudget()]);
+
+        $incomes = currentBudget()->activeIncomes()->with(['type'])->orderBy('name')->get();
+
+        return view('app.incomes.list', [
             'incomes' => $incomes,
         ]);
     }
