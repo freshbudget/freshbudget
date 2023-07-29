@@ -15,6 +15,50 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Domains\Budgets\Models\Budget
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property string $name
+ * @property string|null $currency
+ * @property int $owner_id
+ * @property bool $personal
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Income> $activeIncomes
+ * @property-read int|null $active_incomes_count
+ * @property-read User|null $deleter
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Income> $incomes
+ * @property-read int|null $incomes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $invitations
+ * @property-read int|null $invitations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $members
+ * @property-read int|null $members_count
+ * @property-read User $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $pendingInvitations
+ * @property-read int|null $pending_invitations_count
+ * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget wherePersonal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Budget extends Model
 {
     use HasFactory, HasUlids, SoftDeletes;

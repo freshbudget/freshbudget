@@ -7,6 +7,31 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Domains\Incomes\Models\IncomeType
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property string $name
+ * @property string $abbr
+ * @property string|null $tagline
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\IncomeTypeFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereAbbr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereTagline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class IncomeType extends Model
 {
     use HasFactory, HasUlids;

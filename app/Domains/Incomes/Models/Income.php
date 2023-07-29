@@ -18,6 +18,74 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Domains\Incomes\Models\Income
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $budget_id
+ * @property int|null $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property int|null $type_id
+ * @property string|null $url
+ * @property string|null $username
+ * @property string|null $currency
+ * @property Frequency|null $frequency
+ * @property array|null $meta
+ * @property bool $active
+ * @property int|null $estimated_entitlements_per_period
+ * @property int|null $estimated_taxes_per_period
+ * @property int|null $estimated_deductions_per_period
+ * @property int|null $estimated_net_per_period
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $activeDeductions
+ * @property-read int|null $active_deductions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $activeTaxes
+ * @property-read int|null $active_taxes_count
+ * @property-read Budget $budget
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $deductions
+ * @property-read int|null $deductions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $entitlements
+ * @property-read int|null $entitlements_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeStatistic> $statistics
+ * @property-read int|null $statistics_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
+ * @property-read int|null $taxes_count
+ * @property-read \App\Domains\Incomes\Models\IncomeType|null $type
+ * @property-read User|null $user
+ * @method static Builder|Income active()
+ * @method static \Database\Factories\IncomeFactory factory($count = null, $state = [])
+ * @method static Builder|Income newModelQuery()
+ * @method static Builder|Income newQuery()
+ * @method static Builder|Income onlyTrashed()
+ * @method static Builder|Income query()
+ * @method static Builder|Income whereActive($value)
+ * @method static Builder|Income whereBudgetId($value)
+ * @method static Builder|Income whereCreatedAt($value)
+ * @method static Builder|Income whereCurrency($value)
+ * @method static Builder|Income whereDeletedAt($value)
+ * @method static Builder|Income whereDescription($value)
+ * @method static Builder|Income whereEstimatedDeductionsPerPeriod($value)
+ * @method static Builder|Income whereEstimatedEntitlementsPerPeriod($value)
+ * @method static Builder|Income whereEstimatedNetPerPeriod($value)
+ * @method static Builder|Income whereEstimatedTaxesPerPeriod($value)
+ * @method static Builder|Income whereFrequency($value)
+ * @method static Builder|Income whereId($value)
+ * @method static Builder|Income whereMeta($value)
+ * @method static Builder|Income whereName($value)
+ * @method static Builder|Income whereTypeId($value)
+ * @method static Builder|Income whereUlid($value)
+ * @method static Builder|Income whereUpdatedAt($value)
+ * @method static Builder|Income whereUrl($value)
+ * @method static Builder|Income whereUserId($value)
+ * @method static Builder|Income whereUsername($value)
+ * @method static Builder|Income withTrashed()
+ * @method static Builder|Income withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Income extends Model
 {
     use HasFactory, HasUlids, SoftDeletes, Prunable;

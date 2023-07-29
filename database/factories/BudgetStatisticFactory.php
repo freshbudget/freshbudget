@@ -13,7 +13,7 @@ class BudgetStatisticFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      */
-    protected string $model = BudgetStatistic::class;
+    protected $model = BudgetStatistic::class;
 
     /**
      * Define the model's default state.

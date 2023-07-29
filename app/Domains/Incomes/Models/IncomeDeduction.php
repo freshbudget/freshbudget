@@ -9,6 +9,42 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * App\Domains\Incomes\Models\IncomeDeduction
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $income_id
+ * @property string $name
+ * @property int $amount
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property int|null $previous_id
+ * @property string|null $change_reason
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domains\Incomes\Models\Income $income
+ * @property-read IncomeDeduction|null $previous
+ * @method static Builder|IncomeDeduction active()
+ * @method static \Database\Factories\IncomeDeductionFactory factory($count = null, $state = [])
+ * @method static Builder|IncomeDeduction newModelQuery()
+ * @method static Builder|IncomeDeduction newQuery()
+ * @method static Builder|IncomeDeduction query()
+ * @method static Builder|IncomeDeduction whereActive($value)
+ * @method static Builder|IncomeDeduction whereAmount($value)
+ * @method static Builder|IncomeDeduction whereChangeReason($value)
+ * @method static Builder|IncomeDeduction whereCreatedAt($value)
+ * @method static Builder|IncomeDeduction whereEndDate($value)
+ * @method static Builder|IncomeDeduction whereId($value)
+ * @method static Builder|IncomeDeduction whereIncomeId($value)
+ * @method static Builder|IncomeDeduction whereName($value)
+ * @method static Builder|IncomeDeduction wherePreviousId($value)
+ * @method static Builder|IncomeDeduction whereStartDate($value)
+ * @method static Builder|IncomeDeduction whereUlid($value)
+ * @method static Builder|IncomeDeduction whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class IncomeDeduction extends Model
 {
     use HasFactory, HasUlids;

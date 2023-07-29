@@ -13,6 +13,43 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
+/**
+ * App\Domains\Budgets\Models\BudgetInvitation
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property string $token
+ * @property string $name
+ * @property string|null $nickname
+ * @property string|null $email
+ * @property Carbon $expires_at
+ * @property string $state
+ * @property int|null $budget_id
+ * @property int|null $sender_id
+ * @property Carbon|null $sent_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read \App\Domains\Budgets\Models\Budget|null $budget
+ * @property-read User|null $sender
+ * @method static \Database\Factories\BudgetInvitationFactory factory($count = null, $state = [])
+ * @method static Builder|BudgetInvitation newModelQuery()
+ * @method static Builder|BudgetInvitation newQuery()
+ * @method static Builder|BudgetInvitation query()
+ * @method static Builder|BudgetInvitation whereBudgetId($value)
+ * @method static Builder|BudgetInvitation whereCreatedAt($value)
+ * @method static Builder|BudgetInvitation whereEmail($value)
+ * @method static Builder|BudgetInvitation whereExpiresAt($value)
+ * @method static Builder|BudgetInvitation whereId($value)
+ * @method static Builder|BudgetInvitation whereName($value)
+ * @method static Builder|BudgetInvitation whereNickname($value)
+ * @method static Builder|BudgetInvitation whereSenderId($value)
+ * @method static Builder|BudgetInvitation whereSentAt($value)
+ * @method static Builder|BudgetInvitation whereState($value)
+ * @method static Builder|BudgetInvitation whereToken($value)
+ * @method static Builder|BudgetInvitation whereUlid($value)
+ * @method static Builder|BudgetInvitation whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class BudgetInvitation extends Model
 {
     use HasFactory, HasUlids, Prunable;
