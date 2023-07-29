@@ -10,22 +10,11 @@ module.exports = {
         // Wire UI
         './vendor/wire-elements/pro/config/wire-elements-pro.php',
         './vendor/wire-elements/pro/**/*.blade.php',
-
-        // Filament PHP
-        './vendor/filament/**/*.blade.php',
     ],
     darkMode: "class",
     theme: {
         extend: {
-            backgroundImage: {
-                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-            },
-            colors: {
-                primary: colors.green,
-                success: colors.emerald,
-                warning: colors.yellow,
-                danger: colors.rose,
-            },
+            //
         },
     },
     plugins: [

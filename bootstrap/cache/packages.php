@@ -17,13 +17,6 @@
       'Debugbar' => 'Barryvdh\\Debugbar\\Facades\\Debugbar',
     ),
   ),
-  'blade-ui-kit/blade-heroicons' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'BladeUI\\Heroicons\\BladeHeroiconsServiceProvider',
-    ),
-  ),
   'blade-ui-kit/blade-icons' => 
   array (
     'providers' => 
@@ -40,48 +33,6 @@
     'aliases' => 
     array (
       'Breadcrumbs' => 'Diglactic\\Breadcrumbs\\Breadcrumbs',
-    ),
-  ),
-  'filament/actions' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\Actions\\ActionsServiceProvider',
-    ),
-  ),
-  'filament/forms' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\Forms\\FormsServiceProvider',
-    ),
-  ),
-  'filament/infolists' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\Infolists\\InfolistsServiceProvider',
-    ),
-  ),
-  'filament/notifications' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\Notifications\\NotificationsServiceProvider',
-    ),
-  ),
-  'filament/support' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\Support\\SupportServiceProvider',
-    ),
-  ),
-  'filament/widgets' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\Widgets\\WidgetsServiceProvider',
     ),
   ),
   'gehrisandro/tailwind-merge-laravel' => 
@@ -163,17 +114,6 @@
     'providers' => 
     array (
       0 => 'Pest\\Laravel\\PestServiceProvider',
-    ),
-  ),
-  'ryangjchandler/blade-capture-directive' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'BladeCaptureDirective' => 'RyanChandler\\BladeCaptureDirective\\Facades\\BladeCaptureDirective',
     ),
   ),
   'spatie/laravel-health' => 

@@ -14,6 +14,7 @@ export default defineConfig({
             ],
             refresh: [
                 ...refreshPaths,
+                'resources/css/**',
                 'app/Livewire/**',
                 'app/Controllers/**',
             ],

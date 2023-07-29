@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Budgets\Actions\RemoveUserFromBudgetAction;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeDeduction;
@@ -112,7 +113,7 @@ test('if the income is assigned to a user who is removed from the budget, the us
 
     expect($income->user_id)->toBe($user->id);
 
-    $budget->removeMember($user);
+    (new RemoveUserFromBudgetAction($budget, $user))->execute();
 
     $income->refresh();
 

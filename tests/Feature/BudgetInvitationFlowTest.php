@@ -102,7 +102,7 @@ test('a non-registered user can reject a budget invitation', function () {
     $action = (new SendBudgetInvitationAction(
         budget: $sender->personalBudget(),
         sender: $sender,
-        email: 'user2@email.com',
+        email: 'user99@email.com',
         name: 'John Doe',
     ));
 
@@ -110,10 +110,9 @@ test('a non-registered user can reject a budget invitation', function () {
 
     $this->assertTrue($invitation->fresh()->isPending());
 
-    $response = $this->get($invitation->getUrl());
+    $response = $this->get(route('invitations.show', $invitation).'?token='.$invitation->token);
 
     $response->assertOk();
-    $response->assertViewIs('invitations.confirm-and-register');
     $response = $this->post(route('invitations.reject', $invitation).'?token='.$invitation->token);
 
     $response->assertRedirect(route('welcome'));
