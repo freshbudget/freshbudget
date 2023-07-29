@@ -20,6 +20,7 @@ use Spatie\Stats\Traits\HasStats;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Domains\Budgets\Models\Budget $budget
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetStatistic decrements()
  * @method static \Database\Factories\BudgetStatisticFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetStatistic groupByPeriod(string $period)
@@ -36,6 +37,7 @@ use Spatie\Stats\Traits\HasStats;
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetStatistic whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetStatistic whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetStatistic whereValue($value)
+ *
  * @mixin \Eloquent
  */
 class BudgetStatistic extends Model

@@ -26,6 +26,7 @@ class BudgetInvitationFactory extends Factory
             'name' => $this->faker->name,
             'nickname' => $this->faker->name,
             'email' => $this->faker->safeEmail,
+            'role' => 'member', // member, admin, persona
             'expires_at' => now()->addDays(7),
             'state' => BudgetInvitation::STATE_PENDING,
             'budget_id' => Budget::factory(),

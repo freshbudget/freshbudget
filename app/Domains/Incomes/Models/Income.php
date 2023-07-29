@@ -56,6 +56,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $taxes_count
  * @property-read \App\Domains\Incomes\Models\IncomeType|null $type
  * @property-read User|null $user
+ *
  * @method static Builder|Income active()
  * @method static \Database\Factories\IncomeFactory factory($count = null, $state = [])
  * @method static Builder|Income newModelQuery()
@@ -84,6 +85,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Income whereUsername($value)
  * @method static Builder|Income withTrashed()
  * @method static Builder|Income withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Income extends Model

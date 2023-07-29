@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Domains\Incomes\Models\Income $income
+ *
  * @method static \Database\Factories\IncomeEntryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry newQuery()
@@ -46,6 +47,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereTaxesTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class IncomeEntry extends Model

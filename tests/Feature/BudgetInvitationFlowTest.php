@@ -27,6 +27,7 @@ test('a user can send a budget invitation to a user with an existing account', f
         sender: $sender,
         email: 'user@email.com',
         name: 'John Doe',
+        role: 'member',
     ))->execute();
 
     // assert that the notification was sent
@@ -76,6 +77,7 @@ test('a user can send a budget invitation to a user without an account', functio
         sender: $sender,
         email: 'user@email.com',
         name: 'John Doe',
+        role: 'member',
     ))->execute();
 
     // assert that the notification was sent
@@ -104,6 +106,7 @@ test('a non-registered user can reject a budget invitation', function () {
         sender: $sender,
         email: 'user99@email.com',
         name: 'John Doe',
+        role: 'member',
     ));
 
     $invitation = $action->execute();
@@ -136,6 +139,7 @@ test('a registered user can accept a budget invitation, even if they aren\'t log
         sender: $sender,
         email: $recipient->email,
         name: $recipient->name,
+        role: 'member',
     ));
 
     $invitation = $action->execute();

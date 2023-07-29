@@ -40,6 +40,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read User $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
+ *
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
@@ -57,6 +58,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Budget extends Model

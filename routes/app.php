@@ -179,18 +179,10 @@ Route::get('/budgets/{budget}/members', [BudgetMembersController::class, 'index'
     ->middleware(['auth', 'verified'])
     ->name('app.budgets.members.index');
 
-Route::get('/budgets/{budget}/members/invite', [BudgetInvitationsController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.budgets.members.invite');
-
 Route::delete('/budgets/{budget}/invitations/{invitation}', [BudgetInvitationsController::class, 'destroy'])
     ->scopeBindings()
     ->middleware(['auth', 'verified'])
     ->name('app.budgets.invitations.destroy');
-
-Route::post('/budgets/{budget}/members', [BudgetInvitationsController::class, 'store'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.budgets.members.store');
 
 Route::get('/budgets/{budget}/settings', [BudgetsController::class, 'edit'])
     ->middleware(['auth', 'verified'])

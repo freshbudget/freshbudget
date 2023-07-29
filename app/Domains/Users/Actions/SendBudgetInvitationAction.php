@@ -16,6 +16,7 @@ class SendBudgetInvitationAction
         public User $sender,
         public string $email,
         public string $name,
+        public string $role,
         public ?string $nickname = null)
     {
         //
@@ -38,6 +39,7 @@ class SendBudgetInvitationAction
             'nickname' => $this->nickname,
             'sender_id' => $this->sender->id,
             'state' => BudgetInvitation::STATE_PENDING,
+            'role' => str($this->role)->lower(),
         ]);
 
         try {

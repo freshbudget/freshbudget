@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

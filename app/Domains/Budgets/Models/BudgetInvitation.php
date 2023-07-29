@@ -31,6 +31,7 @@ use Illuminate\Support\Str;
  * @property Carbon|null $updated_at
  * @property-read \App\Domains\Budgets\Models\Budget|null $budget
  * @property-read User|null $sender
+ *
  * @method static \Database\Factories\BudgetInvitationFactory factory($count = null, $state = [])
  * @method static Builder|BudgetInvitation newModelQuery()
  * @method static Builder|BudgetInvitation newQuery()
@@ -48,6 +49,7 @@ use Illuminate\Support\Str;
  * @method static Builder|BudgetInvitation whereToken($value)
  * @method static Builder|BudgetInvitation whereUlid($value)
  * @method static Builder|BudgetInvitation whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class BudgetInvitation extends Model
@@ -75,6 +77,7 @@ class BudgetInvitation extends Model
         'name',
         'nickname',
         'email',
+        'role',
         'expires_at',
         'state',
         'budget_id',
@@ -133,6 +136,16 @@ class BudgetInvitation extends Model
     public function uniqueIds(): array
     {
         return ['ulid'];
+    }
+
+    /*
+    |----------------------------------
+    | Scopes
+    |----------------------------------
+    */
+    public function scopePending(Builder $query): Builder
+    {
+        return $query->where('state', self::STATE_PENDING);
     }
 
     /*
@@ -205,11 +218,6 @@ class BudgetInvitation extends Model
         $this->update([
             'sent_at' => Carbon::parse($time ?? now()),
         ]);
-    }
-
-    public function getUrl()
-    {
-        return route('invitations.show', $this).'?token='.$this->token;
     }
 
     /*

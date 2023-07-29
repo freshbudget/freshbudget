@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nickname')->nullable();
             $table->string('email')->nullable();
+            $table->string('role')->nullable();
             $table->timestamp('expires_at');
             $table->string('state');
             $table->unsignedBigInteger('budget_id')->nullable();
