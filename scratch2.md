@@ -1,3 +1,4 @@
+
 - An income can be modeled as a "Revenue" account
 - A transaction need to be drawn from an "account" and be deposited to another "account"
 
@@ -19,6 +20,12 @@ Types of Accounts:
 - Equity (paid-in equity (funds from investors), retained earnings and common stock | increased via debits)
 - Revenue (product sales, service fees and interest income | increased via credits)
 - Expenses (inventory purchases, salaries and depreciation | increased via debits)
+
+- Assets
+- Liabilities
+- Equity 
+- Revenue
+- Expenses 
 
 Class Income extends Account
 {

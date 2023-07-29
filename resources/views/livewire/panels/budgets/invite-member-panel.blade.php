@@ -1,11 +1,7 @@
 <form class="border border-gray-300 bg-white rounded my-8" wire:submit="attempt">
 
-    <header class="border-b rounded-t border-gray-300 px-4 py-3 select-none flex items-center justify-between">
+    <header class="border-b rounded-t border-gray-300 px-4 py-3 select-none">
         <h2 class="font-semibold text-gray-700">Invite Member</h2>
-
-        <a href="#" title="Learn more about this" class="flex items-center justify-center">
-            @svg('info', 'h-6 w-6 text-gray-500')
-        </a>
     </header>
 
     <main class="p-4">
@@ -38,8 +34,8 @@
                 </x-forms.label>
         
                 <x-forms.select name="role" id="role" wire:model="role">
-                    <option value="member">Member</option>
                     <option value="admin">Admin</option>
+                    <option value="member">Member</option>
                     <option value="persona">Persona</option>
                 </x-forms.select>
                 

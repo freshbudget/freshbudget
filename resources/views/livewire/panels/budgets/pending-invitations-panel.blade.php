@@ -1,7 +1,7 @@
 <div class="border border-gray-300 bg-white rounded my-8">
 
     <header class="border-b rounded-t border-gray-300 px-4 py-3 select-none flex items-center justify-between">
-        <h2 class="font-semibold text-gray-700 text-lg">Invited Members</h2>
+        <h2 class="font-semibold text-gray-700 text-lg">Pending Invitations</h2>
 
         <div>
             <x-forms.input type="search" placeholder="Search" wire:model.live="search" />
