@@ -20,7 +20,7 @@
 
             @foreach ($invitations as $member)
 
-                <li x-search="search" class="px-4 flex items-center justify-between py-3">
+                <li class="px-4 flex items-center justify-between py-3">
                     <div>
                         <h3 class="font-semibold text-lg text-gray-700">
                             {{ $member->name }} @if($member->nickname) <span class="text-sm">({{ $member->nickname }})</span> @endif
