@@ -22,12 +22,19 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
             'budget_id' => Budget::factory(),
             'user_id' => null,
+            'name' => $this->faker->name,
+            'description' => null,
             'type' => AccountType::ASSET,
-            'active' => true,
             'currency' => 'USD',
+            'frequency' => null,
+            'url' => $this->faker->url,
+            'username' => null,
+            'institution' => null,
+            'color' => null,
+            'meta' => null,
+            'active' => true,
         ];
     }
 }

@@ -60,7 +60,6 @@ https://www.auxnet.de/en/blog/make-your-text-collection-searchable-with-python-a
     - add a default currency when creating new budgets
     - add description text to the inputs (below)
     - remove required on nickname
-    - 
 
 # Budget Integrations
 

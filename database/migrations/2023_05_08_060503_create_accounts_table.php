@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Shared\Enums\Currency;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,16 +15,25 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->ulid('ulid')->index();
-            $table->string('name')->index();
             $table->unsignedBigInteger('budget_id')->index();
-            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->index()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->string('type')->index()->nullable();
+            $table->string('name')->index();
+            $table->text('description')->nullable();
+            $table->string('type')->index()->nullable(); // AccountType::class
+            $table->string('currency')->index()->nullable()->default(Currency::USD);
+            $table->string('frequency')->index()->nullable(); // Frequency::class
+            $table->text('url')->nullable();
+            $table->string('username')->nullable();
+            $table->string('institution')->nullable();
+            $table->string('color')->nullable();
+            $table->json('meta')->nullable();
             $table->boolean('active')->default(true);
-            $table->string('currency')->index()->nullable()->default('USD');
             $table->softDeletes();
             $table->timestamps();
+
+            // Foreign Keys
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
