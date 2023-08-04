@@ -28,7 +28,7 @@ class IncomeFactory extends Factory
             'user_id' => User::factory(),
             'name' => $this->faker->company,
             'description' => $this->faker->text,
-            'type_id' => IncomeType::factory(),
+            'type_id' => IncomeType::first(),
             'url' => $this->faker->url,
             'username' => $this->faker->userName,
             'currency' => 'USD',
