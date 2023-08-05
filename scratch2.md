@@ -35,4 +35,4 @@ Class Income extends Account
             $income->type = AccountTypes::revenue,
         });
     }
-}
+}   

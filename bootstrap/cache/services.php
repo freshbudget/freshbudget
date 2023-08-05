@@ -39,17 +39,19 @@
     35 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     36 => 'Termwind\\Laravel\\TermwindServiceProvider',
     37 => 'Pest\\Laravel\\PestServiceProvider',
-    38 => 'Spatie\\Health\\HealthServiceProvider',
-    39 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    40 => 'Spatie\\Permission\\PermissionServiceProvider',
-    41 => 'Spatie\\Stats\\StatsServiceProvider',
-    42 => 'Watson\\Active\\ActiveServiceProvider',
-    43 => 'App\\Providers\\AppServiceProvider',
-    44 => 'App\\Providers\\AuthServiceProvider',
-    45 => 'App\\Providers\\EventServiceProvider',
-    46 => 'App\\Providers\\HealthCheckServiceProvider',
-    47 => 'App\\Providers\\RouteServiceProvider',
-    48 => 'App\\Providers\\TelescopeServiceProvider',
+    38 => 'Spatie\\LaravelData\\LaravelDataServiceProvider',
+    39 => 'Spatie\\Health\\HealthServiceProvider',
+    40 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    41 => 'Spatie\\Permission\\PermissionServiceProvider',
+    42 => 'Spatie\\QueueableAction\\QueueableActionServiceProvider',
+    43 => 'Spatie\\Stats\\StatsServiceProvider',
+    44 => 'Watson\\Active\\ActiveServiceProvider',
+    45 => 'App\\Providers\\AppServiceProvider',
+    46 => 'App\\Providers\\AuthServiceProvider',
+    47 => 'App\\Providers\\EventServiceProvider',
+    48 => 'App\\Providers\\HealthCheckServiceProvider',
+    49 => 'App\\Providers\\RouteServiceProvider',
+    50 => 'App\\Providers\\TelescopeServiceProvider',
   ),
   'eager' => 
   array (
@@ -75,17 +77,18 @@
     19 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     20 => 'Termwind\\Laravel\\TermwindServiceProvider',
     21 => 'Pest\\Laravel\\PestServiceProvider',
-    22 => 'Spatie\\Health\\HealthServiceProvider',
-    23 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    24 => 'Spatie\\Permission\\PermissionServiceProvider',
-    25 => 'Spatie\\Stats\\StatsServiceProvider',
-    26 => 'Watson\\Active\\ActiveServiceProvider',
-    27 => 'App\\Providers\\AppServiceProvider',
-    28 => 'App\\Providers\\AuthServiceProvider',
-    29 => 'App\\Providers\\EventServiceProvider',
-    30 => 'App\\Providers\\HealthCheckServiceProvider',
-    31 => 'App\\Providers\\RouteServiceProvider',
-    32 => 'App\\Providers\\TelescopeServiceProvider',
+    22 => 'Spatie\\LaravelData\\LaravelDataServiceProvider',
+    23 => 'Spatie\\Health\\HealthServiceProvider',
+    24 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+    25 => 'Spatie\\Permission\\PermissionServiceProvider',
+    26 => 'Spatie\\Stats\\StatsServiceProvider',
+    27 => 'Watson\\Active\\ActiveServiceProvider',
+    28 => 'App\\Providers\\AppServiceProvider',
+    29 => 'App\\Providers\\AuthServiceProvider',
+    30 => 'App\\Providers\\EventServiceProvider',
+    31 => 'App\\Providers\\HealthCheckServiceProvider',
+    32 => 'App\\Providers\\RouteServiceProvider',
+    33 => 'App\\Providers\\TelescopeServiceProvider',
   ),
   'deferred' => 
   array (
@@ -232,6 +235,7 @@
     'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'Spatie\\QueueableAction\\ActionMakeCommand' => 'Spatie\\QueueableAction\\QueueableActionServiceProvider',
   ),
   'when' => 
   array (
@@ -281,6 +285,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Spatie\\QueueableAction\\QueueableActionServiceProvider' => 
     array (
     ),
   ),

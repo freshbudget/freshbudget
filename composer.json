@@ -23,8 +23,10 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0@beta",
         "mpociot/versionable": "^4.4",
+        "spatie/laravel-data": "^3.7",
         "spatie/laravel-health": "^1.22",
         "spatie/laravel-permission": "^5.10",
+        "spatie/laravel-queueable-action": "^2.14",
         "spatie/laravel-stats": "^2.1",
         "watson/active": "^7.0"
     },

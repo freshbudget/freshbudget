@@ -3,8 +3,10 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Budgets\Actions\CreateBudgetAction;
+use App\Domains\Budgets\Data\BudgetData;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Shared\Enums\Currency;
 use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
 use App\Domains\Users\Actions\SwitchCurrentBudgetAction;
 use Database\Factories\UserFactory;
@@ -140,10 +142,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static function booted(): void
     {
         static::created(function (User $user) {
-            $budget = app(CreateBudgetAction::class)->execute($user, [
-                'name' => 'Personal Budget',
-                'personal' => true,
-            ]);
+            $data = new BudgetData(
+                name: 'Personal Budget',
+                currency: Currency::USD,
+                owner: $user,
+                personal: true,
+            );
+
+            $budget = app(CreateBudgetAction::class)->execute($data);
 
             $user->update(['current_budget_id' => $budget->id]);
         });

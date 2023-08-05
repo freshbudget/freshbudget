@@ -123,6 +123,13 @@
       0 => 'Pest\\Laravel\\PestServiceProvider',
     ),
   ),
+  'spatie/laravel-data' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\LaravelData\\LaravelDataServiceProvider',
+    ),
+  ),
   'spatie/laravel-health' => 
   array (
     'providers' => 
@@ -150,6 +157,13 @@
     'providers' => 
     array (
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
+    ),
+  ),
+  'spatie/laravel-queueable-action' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\QueueableAction\\QueueableActionServiceProvider',
     ),
   ),
   'spatie/laravel-stats' => 
