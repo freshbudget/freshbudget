@@ -3,9 +3,7 @@
 namespace App\Controllers\App\Budgets;
 
 use App\Domains\Budgets\Actions\CreateBudgetAction;
-use App\Domains\Budgets\Data\BudgetData;
 use App\Domains\Budgets\Models\Budget;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -98,9 +96,7 @@ class BudgetsController
     {
         $this->authorize('create', Budget::class);
 
-        $data = CreateBudgetAction::from($request);
-
-        // $action = new CreateBudgetAction();
+        $action = new CreateBudgetAction();
 
         $validated = $this->validate($request, $action::rules());
 

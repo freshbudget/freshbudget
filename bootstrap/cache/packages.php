@@ -88,6 +88,28 @@
       'Livewire' => 'Livewire\\Livewire',
     ),
   ),
+  'lorisleiva/laravel-actions' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Lorisleiva\\Actions\\ActionServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Action' => 'Lorisleiva\\Actions\\Facades\\Actions',
+    ),
+  ),
+  'lorisleiva/lody' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Lorisleiva\\Lody\\LodyServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Lody' => 'Lorisleiva\\Lody\\Lody',
+    ),
+  ),
   'mpociot/versionable' => 
   array (
     'providers' => 
@@ -123,13 +145,6 @@
       0 => 'Pest\\Laravel\\PestServiceProvider',
     ),
   ),
-  'spatie/laravel-data' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\LaravelData\\LaravelDataServiceProvider',
-    ),
-  ),
   'spatie/laravel-health' => 
   array (
     'providers' => 
@@ -159,13 +174,6 @@
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
-  'spatie/laravel-queueable-action' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\QueueableAction\\QueueableActionServiceProvider',
-    ),
-  ),
   'spatie/laravel-stats' => 
   array (
     'providers' => 
@@ -182,6 +190,17 @@
     'aliases' => 
     array (
       'Active' => 'Watson\\Watson\\Facades\\Active',
+    ),
+  ),
+  'wulfheart/laravel-actions-ide-helper' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Wulfheart\\LaravelActionsIdeHelper\\LaravelActionsIdeHelperServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaravelActionsIdeHelper' => 'Wulfheart\\LaravelActionsIdeHelper\\LaravelActionsIdeHelperFacade',
     ),
   ),
 );

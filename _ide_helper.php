@@ -19327,6 +19327,16 @@
          *
          * @static 
          */ 
+        public static function withUrlParams($params)
+        {
+                        /** @var \Livewire\LivewireManager $instance */
+                        return $instance->withUrlParams($params);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
         public static function withQueryParams($params)
         {
                         /** @var \Livewire\LivewireManager $instance */
@@ -19461,6 +19471,310 @@
         {
                         /** @var \Livewire\LivewireManager $instance */
                         return $instance->originalMethod();
+        }
+         
+    }
+     
+}
+
+    namespace Lorisleiva\Actions\Facades { 
+            /**
+     * 
+     *
+     * @see ActionManager
+     */ 
+        class Actions {
+                    /**
+         * 
+         *
+         * @param \Lorisleiva\Actions\class-string<JobDecorator> $jobDecoratorClass
+         * @static 
+         */ 
+        public static function useJobDecorator($jobDecoratorClass)
+        {
+                        return \Lorisleiva\Actions\ActionManager::useJobDecorator($jobDecoratorClass);
+        }
+                    /**
+         * 
+         *
+         * @param \Lorisleiva\Actions\class-string<JobDecorator&ShouldBeUnique> $uniqueJobDecoratorClass
+         * @static 
+         */ 
+        public static function useUniqueJobDecorator($uniqueJobDecoratorClass)
+        {
+                        return \Lorisleiva\Actions\ActionManager::useUniqueJobDecorator($uniqueJobDecoratorClass);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBacktraceLimit($backtraceLimit)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->setBacktraceLimit($backtraceLimit);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setDesignPatterns($designPatterns)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->setDesignPatterns($designPatterns);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getDesignPatterns()
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->getDesignPatterns();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function registerDesignPattern($designPattern)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->registerDesignPattern($designPattern);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getDesignPatternsMatching($usedTraits)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->getDesignPatternsMatching($usedTraits);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function extend($app, $abstract)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->extend($app, $abstract);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isExtending($abstract)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->isExtending($abstract);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function shouldExtend($abstract)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->shouldExtend($abstract);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function identifyAndDecorate($instance)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->identifyAndDecorate($instance);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function identifyFromBacktrace($usedTraits, $frame = null)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->identifyFromBacktrace($usedTraits, $frame);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function registerRoutes($paths = 'app/Actions')
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->registerRoutes($paths);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function registerCommands($paths = 'app/Actions')
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->registerCommands($paths);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function registerRoutesForAction($className)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->registerRoutesForAction($className);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function registerCommandsForAction($className)
+        {
+                        /** @var \Lorisleiva\Actions\ActionManager $instance */
+                        return $instance->registerCommandsForAction($className);
+        }
+         
+    }
+     
+}
+
+    namespace Lorisleiva\Lody { 
+            /**
+     * 
+     *
+     * @see LodyManager
+     */ 
+        class Lody {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function classes($paths, $recursive = true)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->classes($paths, $recursive);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function classesFromFinder($finder)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->classesFromFinder($finder);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function files($paths, $recursive = true, $hidden = false)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->files($paths, $recursive, $hidden);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function filesFromFinder($finder)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->filesFromFinder($finder);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function resolvePathUsing($callback)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->resolvePathUsing($callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function resolvePath($path)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->resolvePath($path);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function resolveClassnameUsing($callback)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->resolveClassnameUsing($callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function resolveClassname($file)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->resolveClassname($file);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBasePath($basePath)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->setBasePath($basePath);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getBasePath($path = '')
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->getBasePath($path);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setAutoloadPath($autoloadPath)
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->setAutoloadPath($autoloadPath);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getAutoloadPath()
+        {
+                        /** @var \Lorisleiva\Lody\LodyManager $instance */
+                        return $instance->getAutoloadPath();
         }
          
     }
@@ -24063,6 +24377,8 @@ namespace  {
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Breadcrumbs extends \Diglactic\Breadcrumbs\Breadcrumbs {}
             class Livewire extends \Livewire\Livewire {}
+            class Action extends \Lorisleiva\Actions\Facades\Actions {}
+            class Lody extends \Lorisleiva\Lody\Lody {}
             class Health extends \Spatie\Health\Facades\Health {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
