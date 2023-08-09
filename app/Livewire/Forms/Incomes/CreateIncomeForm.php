@@ -5,6 +5,7 @@ namespace App\Livewire\Forms\Incomes;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\Frequency;
 use Illuminate\Validation\Rules\Enum;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class CreateIncomeForm extends Component
@@ -15,6 +16,7 @@ class CreateIncomeForm extends Component
 
     public $frequency = null;
 
+    #[Locked]
     public $user_ulid = null;
 
     public function rules(): array

@@ -5,7 +5,6 @@ namespace App\Domains\Users\Models;
 use App\Domains\Budgets\Actions\CreateBudgetAction;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Shared\Enums\Currency;
 use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
 use App\Domains\Users\Actions\SwitchCurrentBudgetAction;
 use Database\Factories\UserFactory;
@@ -146,7 +145,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     'name' => 'Personal Budget',
                     'currency' => 'USD',
                     'personal' => true,
-            ]);
+                ]);
 
             $user->update(['current_budget_id' => $budget->id]);
         });

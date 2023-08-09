@@ -104,6 +104,6 @@ class BudgetsController
 
         user()->switchCurrentBudget($budget);
 
-        return redirect()->route('app.budgets.show', $budget);
+        return redirect()->route('app.index');
     }
 }

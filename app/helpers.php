@@ -4,9 +4,9 @@ use App\Domains\Budgets\Models\Budget;
 use App\Domains\Users\Models\User;
 use Illuminate\Support\Carbon;
 
-function carbon(): Carbon
+function carbon($time = null, $tz = null): Carbon
 {
-    return new Carbon();
+    return new Carbon($time, $tz);
 }
 
 /**
