@@ -10,13 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Rule;
 
-/**
- * Form Action Lifecycle
- *
- * 1. Instantiate the action with the request
- * 2. Set the request, this will merge the request data with any additional data
- * 3.
- */
 abstract class FormAction
 {
     public function __construct(public ?Container $app = null, public ?Request $request = null)
@@ -226,9 +219,27 @@ abstract class FormAction
         return $this;
     }
 
-    public function validate()
+    public function validate(): self
     {
-        // TODO:
+        if (! $this->shouldValidate) {
+            return $this;
+        }
+
+        foreach ($this->beforeValidationCallbacks as $callback) {
+            $this->app->call($callback);
+        }
+
+        $validator = $this->getValidatorInstance();
+
+        if ($validator->fails()) {
+            $this->failedValidation($this->validator);
+        }
+
+        foreach ($this->afterValidationCallbacks as $callback) {
+            $this->app->call($callback);
+        }
+
+        return $this;
     }
 
     public function afterValidation(callable $callback): self
@@ -245,11 +256,11 @@ abstract class FormAction
         return $this;
     }
 
-    public function failedValidation($validator)
+    public function failedValidation($validator): void
     {
-        $this->onFailedValidation(function () use ($validator) {
+        if (empty($this->onFailedValidationCallbacks)) {
             throw (new ValidationException($validator));
-        });
+        }
 
         foreach ($this->onFailedValidationCallbacks as $callback) {
             $this->app->call($callback);
@@ -270,7 +281,7 @@ abstract class FormAction
         return $this;
     }
 
-    protected function getValidatorInstance(): Validator
+    public function getValidatorInstance(): Validator
     {
         if ($this->validator) {
             return $this->validator;
@@ -290,8 +301,8 @@ abstract class FormAction
 
             $this->validator = $factory->make(
                 $this->request->all(),
-                $this->getAllValidationRules(), 
-                $this->getAllValidationMessages(), 
+                $this->getAllValidationRules(),
+                $this->getAllValidationMessages(),
                 $this->getAllValidationAttributes()
             );
         }
@@ -338,6 +349,28 @@ abstract class FormAction
         return $rules;
     }
 
+    private function getRulesFromRuleAttributesOnPublicProperties(): array
+    {
+        return [];
+
+        // TODO: implement this
+
+        $object = new \ReflectionObject($this);
+
+        $rules = [];
+
+        foreach ($object->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
+
+            // check if the property has a Rule attribute
+            $attributes = $property->getAttributes(Rule::class);
+
+            // if the property has a Rule attribute
+            if (count($attributes) > 0) {
+                //
+            }
+        }
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Validation Message Features
@@ -374,26 +407,6 @@ abstract class FormAction
         }
 
         return $messages;
-    }
-
-    private function getRulesFromRuleAttributesOnPublicProperties(): array
-    {
-        $object = new \ReflectionObject($this);
-
-        $rules = [];
-
-        foreach ($object->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
-
-            // check if the property has a Rule attribute
-            $attributes = $property->getAttributes(Rule::class);
-
-            // if the property has a Rule attribute
-            if (count($attributes) > 0) {
-                //
-            }
-        }
-
-        return [];
     }
 
     /*
@@ -487,21 +500,7 @@ abstract class FormAction
             /**
              * 2. Run the Validation Workflow
              */
-            if ($this->shouldValidate) {
-
-                foreach ($this->beforeValidationCallbacks as $callback) {
-                    $this->app->call($callback);
-                }
-
-                // validate the request
-                // TODO: Call the proper method
-
-                // run the after validation callbacks
-                foreach ($this->afterValidationCallbacks as $callback) {
-                    $this->app->call($callback);
-                }
-
-            }
+            $this->validate();
 
             /**
              * 3. Run the Action Workflow
