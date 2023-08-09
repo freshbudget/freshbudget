@@ -191,6 +191,8 @@ abstract class FormAction
 
     protected bool $shouldValidate = true;
 
+    protected bool $didValidationPass = false;
+
     /**
      * The array of callbacks to run before validation
      *
@@ -234,6 +236,8 @@ abstract class FormAction
         if ($validator->fails()) {
             $this->failedValidation($this->validator);
         }
+
+        $this->didValidationPass = true;
 
         foreach ($this->afterValidationCallbacks as $callback) {
             $this->app->call($callback);
@@ -279,6 +283,11 @@ abstract class FormAction
         $this->shouldValidate = false;
 
         return $this;
+    }
+
+    public function validationPassed(): bool
+    {
+        return $this->didValidationPass;
     }
 
     public function getValidatorInstance(): Validator

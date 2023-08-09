@@ -558,6 +558,33 @@ test('the action provides a default attributes method', function () {
     expect($action->attributes())->toBe([]);
 });
 
+// the action can validate the request
+test('the action can validate the request', function () {
+
+    $request = request()->merge([
+        'name' => 'John Doe',
+    ]);
+
+    $action = new class extends FormAction
+    {
+        public function rules(): array
+        {
+            return [
+                'name' => ['required', 'max:255'],
+                'email' => ['required', 'email'],
+            ];
+        }
+    };
+
+    $action
+        ->setRequest($request)
+        ->onValidationFailure(function () {
+            //
+        })->validate();
+
+    expect($action->validationPassed())->toBeFalse();
+});
+
 // the action has a default failedValidation method, which throws a ValidationException
 // test('the action has a default failedValidation method, which throws a ValidationException', function () {
 
