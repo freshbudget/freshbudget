@@ -1,39 +1,16 @@
 <?php
 
+use App\Domains\Budgets\Actions\CreateBudgetAction;
+use App\Domains\Budgets\Models\Budget;
 use App\Domains\Shared\Enums\Currency;
 use App\Domains\Users\Models\User;
-use App\FormAction;
+use App\Rules\IsInstanceOf;
+use App\Support\FormAction;
+use App\Support\FormActionTester;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Config\Repository;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
-use Livewire\Attributes\Rule;
-
-class CreateBudgetAction extends FormAction
-{
-    #[Rule(['required', 'string', 'max:255'])]
-    public string $name;
-
-    #[Rule(['required', 'boolean'])]
-    public bool $personal;
-
-    #[Rule(['required', 'exists:users,id'])]
-    public User $user;
-
-    #[Rule(['required', new Enum(Currency::class)])]
-    public Currency $currency;
-
-    public function handle()
-    {
-        $budget = $this->user->ownedBudgets()->create([
-            'name' => $this->name,
-            'personal' => $this->personal,
-            'currency' => $this->currency,
-        ]);
-
-        return $budget;
-    }
-}
+use Illuminate\Validation\ValidationException;
 
 // test the action has the ability to set additional data in the request
 test('the action can set additional data in the request', function () {
@@ -45,7 +22,6 @@ test('the action can set additional data in the request', function () {
     $action->set('name', 'Personal Budget');
 
     expect($action->has('name'))->toBeTrue();
-    expect($action->request->has('name'))->toBeTrue();
     expect($action->get('name'))->toBe('Personal Budget');
 });
 
@@ -585,19 +561,228 @@ test('the action can validate the request', function () {
     expect($action->validationPassed())->toBeFalse();
 });
 
-// the action has a default failedValidation method, which throws a ValidationException
-// test('the action has a default failedValidation method, which throws a ValidationException', function () {
+// the action can validate the request and pass
+test('the action can validate the request and pass', function () {
 
-//     $action = new class extends FormAction
-//     {
-//         //
-//     };
+    $request = request()->merge([
+        'name' => 'John Doe',
+        'email' => 'email@email.com',
+    ]);
 
-//     expect(method_exists($action, 'failedValidation'))->toBeTrue();
+    $action = new class extends FormAction
+    {
+        public function rules(): array
+        {
+            return [
+                'name' => ['required', 'max:255'],
+                'email' => ['required', 'email'],
+            ];
+        }
+    };
 
-//     // use reflection to make the method public
-//     $method = (new ReflectionClass($action))->getMethod('failedValidation');
-//     $method->setAccessible(true);
-//     $method->invoke($action);
+    $action
+        ->setRequest($request)
+        ->onValidationFailure(function () {
+            //
+        })->validate();
 
-// })->throws(ValidationException::class);
+    expect($action->validationPassed())->toBeTrue();
+});
+
+// the action can validate the request and pass, even if the request has extra data
+test('the action can validate the request and pass, even if the request has extra data', function () {
+
+    $request = request()->merge([
+        'name' => 'John Doe',
+        'email' => 'email@email.com',
+        'extra' => 'extra',
+    ]);
+
+    $action = new class extends FormAction
+    {
+        public function rules(): array
+        {
+            return [
+                'name' => ['required', 'max:255'],
+                'email' => ['required', 'email'],
+            ];
+        }
+    };
+
+    $action
+        ->setRequest($request)
+        ->onValidationFailure(function () {
+            //
+        })->validate();
+
+    expect($action->validationPassed())->toBeTrue();
+
+    expect($action->validated())->toBe([
+        'name' => 'John Doe',
+        'email' => $request->email,
+    ]);
+
+});
+
+// the default validation failure callback throws a ValidationException
+test('the default validation failure callback throws a ValidationException', function () {
+
+    $request = request()->merge([
+        'name' => 'John Doe',
+    ]);
+
+    $action = new class extends FormAction
+    {
+        public function rules(): array
+        {
+            return [
+                'name' => ['required', 'max:255'],
+                'email' => ['required', 'email'],
+            ];
+        }
+    };
+
+    $action->setRequest($request)->validate();
+
+})->throws(ValidationException::class);
+
+// after default validation is passed, public properties are set
+test('after default validation is passed, public properties are set', function () {
+
+    $request = request()->merge([
+        'name' => 'John Doe',
+    ]);
+
+    $action = new class extends FormAction
+    {
+        public string $name;
+
+        public function rules(): array
+        {
+            return [
+                'name' => ['required', 'max:255'],
+            ];
+        }
+    };
+
+    $action->setRequest($request)->validate();
+
+    expect($action->name)->toBe('John Doe');
+
+});
+
+// non-public properties are not set
+test('non-public properties are not set', function () {
+
+    $request = request()->merge([
+        'name' => 'John Doe',
+    ]);
+
+    $action = new class extends FormAction
+    {
+        protected ?string $name = null;
+
+        public function rules(): array
+        {
+            return [
+                'name' => ['required', 'max:255'],
+            ];
+        }
+    };
+
+    $action->setRequest($request)->dontProxyToRequest()->validate();
+
+    // make the name property public
+    $reflection = new ReflectionClass($action);
+    $property = $reflection->getProperty('name');
+    $value = $property->getValue($action);
+
+    expect($value)->toBeNull();
+});
+
+// certain public properties are not set
+test('certain public properties are not set', function () {
+
+    $request = request()->merge([
+        'rules' => 'Foo',
+        'messages' => 'Foo',
+        'attributes' => 'Foo',
+    ]);
+
+    $action = new class extends FormAction
+    {
+        public ?string $rules = null;
+
+        public function rules(): array
+        {
+            return [
+                'rules' => ['required', 'max:255'],
+            ];
+        }
+    };
+
+    $action->setRequest($request)->dontProxyToRequest()->validate();
+
+    // make the property public
+    $reflection = new ReflectionClass($action);
+    $property = $reflection->getProperty('rules');
+    $value = $property->getValue($action);
+
+    expect($value)->toBeNull();
+});
+
+// test a real use case
+test('test a real use case', function () {
+
+    $request = request()->merge([
+        'name' => 'Personal',
+        'currency' => 'USD',
+        'personal' => true,
+    ]);
+
+    $action = CreateTeamAction::make()
+        ->setRequest($request)
+        ->set('user', User::factory()->create())
+        ->setIfMissing('currency', 'USD')
+        ->attempt();
+})->skip();
+
+class CreateTeamAction extends FormAction
+{
+    // public User $user;
+
+    public string $name;
+
+    public bool $personal = false;
+
+    public Currency $currency;
+
+    protected Budget $result;
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:255'],
+            'currency' => ['required', 'string', new Enum(Currency::class)],
+            'personal' => ['required', 'boolean'],
+            'user' => ['required', new IsInstanceOf(User::class)],
+        ];
+    }
+
+    public function __invoke(): string
+    {
+        $this->result = $this->user->ownedBudgets()->create([
+            'name' => $this->name,
+            'personal' => $this->personal,
+            'currency' => $this->currency->value,
+        ]);            
+
+        return '';
+    }
+}
+

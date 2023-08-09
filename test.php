@@ -1,9 +1,21 @@
 <?php
 
-$name = 'name';
+// $name = 'name';
 
-$cb = (function () use ($name) {
-    echo $name;
-});
+// $cb = (function () use ($name) {
+//     echo $name;
+// });
 
-$cb();
+// $cb();
+
+$a = new class
+{
+    protected string $name = 'name';
+
+    public function __construct()
+    {
+        //
+    }
+};
+
+echo $a->email;
