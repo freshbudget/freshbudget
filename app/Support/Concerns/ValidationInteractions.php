@@ -11,30 +11,56 @@ trait ValidationInteractions
 {
     protected Validator $validator;
 
-    protected bool $shouldValidate = true;
-
     protected bool $didValidationPass = false;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Configuration Features
+    |--------------------------------------------------------------------------
+    */
+    protected bool $shouldValidate = true;
+
+    protected bool $shouldStopOnFirstFailure = false;
+
+    public function stopOnFirstFailure(): static
+    {
+        $this->shouldStopOnFirstFailure = true;
+
+        return $this;
+    }
+
+    public function dontStopOnFirstFailure(): static
+    {
+        $this->shouldStopOnFirstFailure = false;
+
+        return $this;
+    }
+
+    public function withValidation(): static
+    {
+        $this->shouldValidate = true;
+
+        return $this;
+    }
+
+    public function withoutValidation(): static
+    {
+        $this->shouldValidate = false;
+
+        return $this;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Lifecycle Features
+    |--------------------------------------------------------------------------
+    */
     /**
      * The array of callbacks to run before validation
      *
      * @var array<callable>
      */
     protected array $beforeValidationCallbacks = [];
-
-    /**
-     * The array of callbacks to run after validation
-     *
-     * @var array<callable>
-     */
-    protected array $afterValidationCallbacks = [];
-
-    /**
-     * The array of callbacks to run after a validation failure
-     *
-     * @var array<callable>
-     */
-    protected array $onFailedValidationCallbacks = [];
 
     public function beforeValidation(callable $callback): FormAction
     {
@@ -43,36 +69,19 @@ trait ValidationInteractions
         return $this;
     }
 
-    public function validate(): FormAction
+    public function runBeforeValidationCallbacks(): void
     {
-        if (! $this->shouldValidate) {
-            return $this;
-        }
-
         foreach ($this->beforeValidationCallbacks as $callback) {
             $this->app->call($callback);
         }
-
-        $validator = $this->getValidatorInstance();
-
-        if ($validator->fails()) {
-            $this->didValidationPass = false;
-
-            $this->failedValidation($this->validator);
-        } else {
-            $this->didValidationPass = true;
-        }
-
-        $this->afterValidation(function () {
-            $this->mapRequestInputsToPublicAttributes();
-        });
-
-        foreach ($this->afterValidationCallbacks as $callback) {
-            $this->app->call($callback);
-        }
-
-        return $this;
     }
+
+    /**
+     * The array of callbacks to run after validation
+     *
+     * @var array<callable>
+     */
+    protected array $afterValidationCallbacks = [];
 
     public function afterValidation(callable $callback): FormAction
     {
@@ -81,6 +90,20 @@ trait ValidationInteractions
         return $this;
     }
 
+    public function runAfterValidationCallbacks(): void
+    {
+        foreach ($this->afterValidationCallbacks as $callback) {
+            $this->app->call($callback);
+        }
+    }
+
+    /**
+     * The array of callbacks to run after a validation failure
+     *
+     * @var array<callable>
+     */
+    protected array $onFailedValidationCallbacks = [];
+
     public function onValidationFailure(callable $callback): FormAction
     {
         $this->onFailedValidationCallbacks[] = $callback;
@@ -88,72 +111,11 @@ trait ValidationInteractions
         return $this;
     }
 
-    public function failedValidation($validator): void
+    public function runOnValidationFailureCallbacks(): void
     {
-        if (empty($this->onFailedValidationCallbacks)) {
-            throw (new ValidationException($validator));
-        }
-
         foreach ($this->onFailedValidationCallbacks as $callback) {
             $this->app->call($callback);
         }
-    }
-
-    public function withValidation(): FormAction
-    {
-        $this->shouldValidate = true;
-
-        return $this;
-    }
-
-    public function withoutValidation(): FormAction
-    {
-        $this->shouldValidate = false;
-
-        return $this;
-    }
-
-    public function validationPassed(): bool
-    {
-        return $this->didValidationPass;
-    }
-
-    public function getValidatorInstance(): Validator
-    {
-        if (isset($this->validator)) {
-            return $this->validator;
-        }
-
-        if (method_exists($this, 'validator')) {
-            $validator = $this->app->call([$this, 'validator']);
-
-            if (! $validator instanceof Validator) {
-                throw new \Exception('The validator method must return an instance of '.Validator::class);
-            }
-
-            $this->validator = $validator;
-        } else {
-            /** @var ValidationFactory $factory */
-            $factory = $this->app->make(ValidationFactory::class);
-
-            $this->validator = $factory->make(
-                $this->request->all(),
-                $this->getAllValidationRules(),
-                $this->getAllValidationMessages(),
-                $this->getAllValidationAttributes()
-            );
-        }
-
-        return $this->validator;
-    }
-
-    public function validated(string|array|int $key = null, mixed $default = null): mixed
-    {
-        if(!isset($this->validator) && $this->validator instanceof Validator) {
-            throw new \Exception('The validator must be set before calling validated()');
-        }
-
-        return data_get($this->validator->validated(), $key, $default);
     }
 
     /*
@@ -161,11 +123,6 @@ trait ValidationInteractions
     | Validation Rule Features
     |--------------------------------------------------------------------------
     */
-    public function rules(): array
-    {
-        return [];
-    }
-
     public function getAllValidationRules(): array
     {
         return array_merge(
@@ -197,24 +154,7 @@ trait ValidationInteractions
 
     private function getRulesFromRuleAttributesOnPublicProperties(): array
     {
-        return [];
-
-        // TODO: implement this
-
-        $object = new \ReflectionObject($this);
-
-        $rules = [];
-
-        foreach ($object->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
-
-            // check if the property has a Rule attribute
-            $attributes = $property->getAttributes(Rule::class);
-
-            // if the property has a Rule attribute
-            if (count($attributes) > 0) {
-                //
-            }
-        }
+        return []; // TODO
     }
 
     /*
@@ -222,11 +162,6 @@ trait ValidationInteractions
     | Validation Message Features
     |--------------------------------------------------------------------------
     */
-    public function messages(): array
-    {
-        return [];
-    }
-
     public function getAllValidationMessages(): array
     {
         return array_merge(
@@ -260,11 +195,6 @@ trait ValidationInteractions
     | Validation Attribute Features
     |--------------------------------------------------------------------------
     */
-    public function attributes(): array
-    {
-        return [];
-    }
-
     public function getAllValidationAttributes(): array
     {
         return array_merge(
@@ -291,5 +221,109 @@ trait ValidationInteractions
         }
 
         return $attributes;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Validation Methods
+    | - Decent chance users will want to override these
+    |--------------------------------------------------------------------------
+    */
+    public function validate(): static
+    {
+        if (! $this->shouldValidate) {
+            return $this;
+        }
+
+        $this->runBeforeValidationCallbacks();
+
+        $validator = $this->getValidatorInstance();
+
+        if ($validator->fails()) {
+            $this->didValidationPass = false;
+
+            $this->failedValidation($this->validator);
+        } else {
+            $this->didValidationPass = true;
+        }
+
+        $this->afterValidation(function () {
+            $this->mapRequestInputsToPublicAttributes();
+        });
+
+        $this->runAfterValidationCallbacks();
+
+        return $this;
+    }
+
+    public function failedValidation($validator): void
+    {
+        if (empty($this->onFailedValidationCallbacks)) {
+            throw (new ValidationException($validator));
+        }
+
+        foreach ($this->onFailedValidationCallbacks as $callback) {
+            $this->app->call($callback);
+        }
+    }
+
+    public function validationPassed(): bool
+    {
+        return $this->didValidationPass;
+    }
+
+    public function getValidatorInstance(): Validator
+    {
+        if (isset($this->validator)) {
+            return $this->validator;
+        }
+
+        if (method_exists($this, 'validator')) {
+            $validator = $this->app->call([$this, 'validator']);
+
+            if (! $validator instanceof Validator) {
+                throw new \Exception('The validator method must return an instance of '.Validator::class);
+            }
+
+            $this->validator = $validator;
+        } else {
+            /** @var ValidationFactory $factory */
+            $factory = $this->app->make(ValidationFactory::class);
+
+            $this->validator = $factory->make(
+                $this->request->all(),
+                $this->getAllValidationRules(),
+                $this->getAllValidationMessages(),
+                $this->getAllValidationAttributes()
+            );
+
+            $this->validator->stopOnFirstFailure($this->shouldStopOnFirstFailure);
+        }
+
+        return $this->validator;
+    }
+
+    public function validated(string|array|int $key = null, mixed $default = null): mixed
+    {
+        if (! isset($this->validator) && $this->validator instanceof Validator) {
+            throw new \Exception('The validator must be set before calling validated()');
+        }
+
+        return data_get($this->validator->validated(), $key, $default);
+    }
+
+    public function attributes(): array
+    {
+        return [];
+    }
+
+    public function messages(): array
+    {
+        return [];
+    }
+
+    public function rules(): array
+    {
+        return [];
     }
 }

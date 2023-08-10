@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 trait RequestInteractions
 {
-    public function setRequest(Request $request): FormAction
+    public function setRequest(Request $request): static
     {
         $this->request = $request;
 
         return $this;
     }
 
-    public function set(string|array $key, mixed $value = null, bool $replace = false): FormAction
+    public function set(string|array $key, mixed $value = null, bool $replace = false): static
     {
         if (is_array($key)) {
             if ($replace) {
@@ -47,16 +47,16 @@ trait RequestInteractions
 
     public function setIfMissing(string|array $key, mixed $value): FormAction
     {
-        if(is_array($key)) {
+        if (is_array($key)) {
             foreach ($key as $k => $v) {
-                if(! $this->has($k)) {
+                if (! $this->has($k)) {
                     $this->set($k, $v);
                 }
             }
 
             return $this;
         }
-        
+
         $this->set($key, $value, replace: false);
 
         return $this;

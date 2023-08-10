@@ -66,7 +66,7 @@
         </form>
     
         <footer class="rounded-b border-t border-gray-300 bg-gray-50 px-4 py-3 flex items-center justify-end">
-            <x-forms.buttons.primary form="edit-form">
+            <x-forms.buttons.primary form="edit-form" type="submit">
                 Save Changes
             </x-forms.buttons.primary>
         </footer>

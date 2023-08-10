@@ -15,6 +15,11 @@ abstract class FormAction
         ValidationInteractions,
         AuthorizationInteractions;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Constructor Features
+    |--------------------------------------------------------------------------
+    */
     public function __construct(protected ?Container $app = null, protected ?Request $request = null)
     {
         if (! $app) {
@@ -28,12 +33,12 @@ abstract class FormAction
         $this->setRequest($this->request);
     }
 
-    public static function make(Container $app = null, Request $request = null): self
+    public static function make(Container $app = null, Request $request = null): static
     {
         return new static($app, $request);
     }
 
-    public static function test(string $action)
+    public static function test(string $action): FormActionTester
     {
         return new FormActionTester(app($action));
     }
@@ -51,7 +56,7 @@ abstract class FormAction
             'rules',
         ];
 
-        if(property_exists($this, 'dontMap')) {
+        if (property_exists($this, 'dontMap')) {
             $except = array_merge($except, $this->dontMap);
         }
 
@@ -103,7 +108,7 @@ abstract class FormAction
      */
     protected int $maxAttempts = 1;
 
-    public function attempt(int $maxAttempts = 1): self
+    public function attempt(int $maxAttempts = 1): static
     {
         if ($maxAttempts < 1) {
             throw new \InvalidArgumentException('The maximum number of attempts must be at least 1');
@@ -117,16 +122,16 @@ abstract class FormAction
 
             $this->validate();
 
-            if(method_exists($this, 'handle')) {
+            if (method_exists($this, 'handle')) {
                 $result = $this->handle();
-            } elseif(method_exists($this, 'execute')) {
+            } elseif (method_exists($this, 'execute')) {
                 $result = $this->execute();
-            } elseif(method_exists($this, '__invoke')) {
+            } elseif (method_exists($this, '__invoke')) {
                 $result = $this->__invoke();
             } else {
                 throw new \Exception('The action does not have a handle, execute, or __invoke method');
             }
-            
+
             $this->attemptCount++;
         }
 
@@ -191,5 +196,4 @@ abstract class FormAction
  * - If the service provider we can check if the class extends the interface
  * - implement the addError api from Livewire
  * - implement the stop on first error from normal requests
- * - implement the messages and attributes
  */
