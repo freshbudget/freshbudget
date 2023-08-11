@@ -13,11 +13,12 @@
             </div>
 
             <x-forms.buttons.secondary 
-                as="a" 
+                as="x-link" 
                 class="flex items-center"
                 href="{{ route('app.budgets.create') }}">
                 @svg('stack', 'w-4 h-4 mr-1.5') Create Budget
             </x-forms.buttons.secondary>
+
         </div>
 
         <div class="grid grid-cols-3 gap-4">
@@ -30,9 +31,9 @@
                     <div
                         class="relative p-4 bg-white border border-gray-300 rounded shadow-sm focus-within:ring-2 ring-offset-2 ring-offset-white ring-gray-400 focus-within:outline-none focus-within:shadow">
                         
-                        <a href="{{ route('app.budgets.show', $budget) }}" class="absolute inset-0 rounded focus:outline-none">
+                        <x-link href="{{ route('app.budgets.show', $budget) }}" class="absolute inset-0 rounded focus:outline-none">
                             <span class="sr-only">View budget</span>
-                        </a>
+                        </x-link>
 
                         <h2 class="text-lg font-semibold truncate">{{ $budget->name }}</h2>
 
@@ -67,12 +68,12 @@
                             </form>
                         @endif
                         
-                        <x-context-menu.option as="a" href="{{ route('app.budgets.members.index', $budget) }}">
+                        <x-context-menu.option as="x-link" href="{{ route('app.budgets.members.index', $budget) }}">
                             Invite Member
                         </x-context-menu.option>
 
                         @can('edit', $budget)
-                            <x-context-menu.option as="a" href="{{ route('app.budgets.edit', $budget) }}">
+                            <x-context-menu.option as="x-link" href="{{ route('app.budgets.edit', $budget) }}">
                                 Settings
                             </x-context-menu.option>
                         @endcan

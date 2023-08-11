@@ -117,7 +117,7 @@
 
 @push('body::end')
 <script>
-    document.addEventListener('alpine:init', () => {
+    document.addEventListener('livewire:navigated', () => {
         Alpine.data('form', () => ({
             /**
              * The entitlements.

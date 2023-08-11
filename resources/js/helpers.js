@@ -1,13 +1,4 @@
 /**
- * Navigate to a new page
- * 
- * @param {string} to
- */
-window.navigate = (to) => {
-    window.location.href = to
-}
-
-/**
  * Sync UI state with server
  * 
  * @param {string} key

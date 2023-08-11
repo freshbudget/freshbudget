@@ -3,6 +3,7 @@
 namespace App\Livewire\Panels\Budgets;
 
 use App\Domains\Budgets\Models\Budget;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
@@ -10,6 +11,7 @@ class PendingInvitationsPanel extends Component
 {
     protected $listeners = ['invitationSent' => '$refresh'];
 
+    #[Locked]
     public string $budgetUlid;
 
     #[Url(as: 'invitation')]
@@ -31,7 +33,7 @@ class PendingInvitationsPanel extends Component
             ->when($this->search, function ($query) {
                 $query
                     ->where('email', 'like', "%{$this->search}%")
-                    ->orWhere('name', 'like', "%{$this->search}%");
+                    ->where('name', 'like', "%{$this->search}%");
             })
             ->latest()
             ->get();

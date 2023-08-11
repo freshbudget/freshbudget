@@ -26,13 +26,13 @@
         
                     <div class="px-2">
         
-                        <a href="{{ route('app.budgets.show', currentBudget()) }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                        <x-link href="{{ route('app.budgets.show', currentBudget()) }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
                             @svg('cog', 'w-5 h-5 mr-2.5') Settings
-                        </a>
+                        </x-link>
         
-                        <a href="{{ route('app.budgets.members.index', currentBudget()) }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                        <x-link href="{{ route('app.budgets.members.index', currentBudget()) }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
                             @svg('userplus', 'w-5 h-5 mr-2.5') Invite a member
-                        </a>
+                        </x-link>
                                 
                     </div>
 
@@ -124,7 +124,8 @@
 
         @foreach ($links as $link)
             
-            <a 
+
+            <x-link 
                 href="{{ $link['route'] }}" 
                 x-on:mouseleave="$el.blur()"
                 x-on:mouseenter="$focus.focus($el)" 
@@ -138,7 +139,7 @@
                     {{ $link['label'] }}
                 </p>
                 
-            </a>
+            </x-link>
 
         @endforeach
 
@@ -167,9 +168,9 @@
 
             <div x-cloak x-show="open" x-trap="open" x-on:click.outside="open=false" class="absolute z-20 bottom-[110%] space-y-1 border border-gray-300 bg-white rounded-lg shadow-sm p-2 focus:outline-none w-64" tabindex="-1">
 
-                <a href="{{ route('app.settings.personal') }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                <x-link href="{{ route('app.settings.personal') }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
                     @svg('cog', 'w-5 h-5 mr-2.5') Account settings
-                </a>
+                </x-link>
 
                 <form action="{{ route('logout') }}" method="post">
                     

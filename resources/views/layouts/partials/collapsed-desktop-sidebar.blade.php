@@ -58,14 +58,14 @@
 
         @foreach($links as $link)
 
-            <a 
+            <x-link 
                 href="{{ $link['route'] }}" 
                 title="{{ $link['label'] }}"
                 class="flex items-center justify-center w-10 h-10 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed {{ active($link['active'], 'font-semibold text-gray-900') }}" 
                 x-on:mouseenter="$focus.focus($el)" 
                 x-on:mouseleave="$el.blur()">
                 @svg($link['icon'], 'w-5 h-5')
-            </a>
+            </x-link>
 
         @endforeach
 
@@ -74,9 +74,9 @@
     <!-- User profile menu -->  
     <div class="flex flex-col items-center justify-center pb-2 space-y-1">   
 
-        <a href="{{ route('app.settings.personal') }}" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="View account settings">
+        <x-link href="{{ route('app.settings.personal') }}" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="View account settings">
             @svg('profile', 'w-5 h-5')
-        </a>
+        </x-link>
 
         <button x-on:click="desktopSidebarExpanded=true" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="Expand sidebar (Ctrl+.)">
             @svg('sidebar', 'w-5 h-5')

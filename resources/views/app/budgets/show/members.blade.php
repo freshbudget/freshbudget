@@ -23,7 +23,7 @@
 
                 @foreach ($budget->members as $member)
     
-                    <li x-search="search" class="px-4 flex items-center justify-between py-3 select-none">
+                    <li class="px-4 flex items-center justify-between py-3 select-none">
                         <div>
                             
                             <h3 class="font-semibold text-lg text-gray-700 truncate">

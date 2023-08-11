@@ -5,6 +5,7 @@
 @push('body::end')
     @vite(['resources/js/highcharts.js'])
 @endpush
+
 @section('content')
 
     @if (user()->finished_onboarding)
@@ -49,7 +50,7 @@
                     @if(currentBudget()->incomes->count() < 1)
                         <h3>Add an Income Source</h3>
                         <p>
-                            We can help you track your income, you can add your first income source by clicking <a href="{{ route('app.incomes.create') }}">here</a>.
+                            We can help you track your income, you can add your first income source by clicking <x-link href="{{ route('app.incomes.create') }}">here</x-link>.
                         </p>
                     @else
                         <h3>✅ Add an Income Source</h3>
@@ -59,7 +60,7 @@
                     @if(currentBudget()->members->count() < 2)
                         <h3>Invite someone to help manage your budget</h3>
                         <p>
-                            You can invite someone to help manage your budget by clicking <a href="{{ route('app.budgets.members.index', currentBudget()) }}">here</a>.
+                            You can invite someone to help manage your budget by clicking <x-link href="{{ route('app.budgets.members.index', currentBudget()) }}">here</x-link>.
                         </p>
                     @endif
                 </li>
