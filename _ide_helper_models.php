@@ -10,6 +10,57 @@
  */
 
 
+namespace App\Domains\Accounts\Models{
+/**
+ * App\Domains\Accounts\Models\Account
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $budget_id
+ * @property int|null $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property \App\Domains\Shared\Enums\AccountType|null $type
+ * @property string|null $currency
+ * @property \App\Domains\Shared\Enums\Frequency|null $frequency
+ * @property string|null $url
+ * @property string|null $username
+ * @property string|null $institution
+ * @property string|null $color
+ * @property array|null $meta
+ * @property bool $active
+ * @property string|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domains\Budgets\Models\Budget $budget
+ * @property-read \App\Domains\Users\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Account active()
+ * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Account newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Account query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereInstitution($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereUsername($value)
+ */
+	class Account extends \Eloquent {}
+}
+
 namespace App\Domains\Budgets\Models{
 /**
  * App\Domains\Budgets\Models\Budget
@@ -424,6 +475,43 @@ namespace App\Domains\Incomes\Models{
  * @mixin \Eloquent
  */
 	class IncomeType extends \Eloquent {}
+}
+
+namespace App\Domains\Shared\Models{
+/**
+ * App\Domains\Shared\Models\Institute
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property string $name
+ * @property string $abbr
+ * @property string|null $color
+ * @property string|null $logo
+ * @property string|null $description
+ * @property string|null $general_url
+ * @property string|null $auth_url
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute active()
+ * @method static \Database\Factories\InstituteFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereAbbr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereAuthUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereGeneralUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUpdatedAt($value)
+ */
+	class Institute extends \Eloquent {}
 }
 
 namespace App\Domains\Users\Models{

@@ -97,13 +97,3 @@ class Account extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 }
-
-// $income = Account::create([
-//     'name' => 'Salary',
-//     'description' => 'My monthly salary',
-//     'budget_id' => currentBudget()->id,
-//     'user_id' => user()->id,
-//     'type' => AccountType::REVENUE,
-//     'currency' => Currency::USD,
-//     'frequency' => Frequency::MONTHLY,
-// ]);
