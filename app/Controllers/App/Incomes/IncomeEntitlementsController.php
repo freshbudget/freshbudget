@@ -2,6 +2,7 @@
 
 namespace App\Controllers\App\Incomes;
 
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Actions\CreateIncomeEntitlementAction;
 use App\Domains\Incomes\Actions\UpdateIncomeEntitlementAction;
 use App\Domains\Incomes\Actions\UpdateIncomeEntitlementEstimate;
@@ -20,7 +21,7 @@ class IncomeEntitlementsController
 
     public function create(Income $income)
     {
-        $this->authorize('addEntitlements', [$income, currentBudget()]);
+        // $this->authorize('addEntitlements', [$account, currentBudget()]);
 
         return view('app.incomes.show.entitlements.create', [
             'income' => $income,
@@ -29,7 +30,7 @@ class IncomeEntitlementsController
 
     public function edit(Income $income, IncomeEntitlement $entitlement)
     {
-        $this->authorize('editEntitlements', [$income, currentBudget()]);
+        // $this->authorize('editEntitlements', [$income, currentBudget()]);
 
         return view('app.incomes.show.entitlements.edit', [
             'income' => $income,
@@ -48,16 +49,16 @@ class IncomeEntitlementsController
             'reason' => ['nullable', 'string'],
         ]);
 
-        (new UpdateIncomeEntitlementAction($entitlement, $validated))->execute();
+        // (new UpdateIncomeEntitlementAction($entitlement, $validated))->execute();
 
-        (new UpdateIncomeEntitlementEstimate($income))->execute();
+        // (new UpdateIncomeEntitlementEstimate($income))->execute();
 
-        (new UpdateIncomeNetEstimate($income))->execute();
+        // (new UpdateIncomeNetEstimate($income))->execute();
 
-        StatsWriter::for(IncomeStatistic::class, [
-            'income_id' => $income->id,
-            'name' => 'estimated_entitlements_per_period',
-        ])->set($income->estimated_entitlements_per_period);
+        // StatsWriter::for(IncomeStatistic::class, [
+        //     'income_id' => $income->id,
+        //     'name' => 'estimated_entitlements_per_period',
+        // ])->set($income->estimated_entitlements_per_period);
 
         return redirect()->route('app.incomes.show', $income);
     }
@@ -88,21 +89,21 @@ class IncomeEntitlementsController
             'entitlements.*.amount' => ['required', 'string'],
         ]);
 
-        foreach ($request->entitlements as $entitlement) {
-            (new CreateIncomeEntitlementAction(
-                income: $income,
-                data: $entitlement,
-            ))->execute();
-        }
+        // foreach ($request->entitlements as $entitlement) {
+        //     (new CreateIncomeEntitlementAction(
+        //         income: $income,
+        //         data: $entitlement,
+        //     ))->execute();
+        // }
 
-        (new UpdateIncomeEntitlementEstimate($income))->execute();
+        // (new UpdateIncomeEntitlementEstimate($income))->execute();
 
-        (new UpdateIncomeNetEstimate($income))->execute();
+        // (new UpdateIncomeNetEstimate($income))->execute();
 
-        StatsWriter::for(IncomeStatistic::class, [
-            'income_id' => $income->id,
-            'name' => 'estimated_entitlements_per_period',
-        ])->set($income->estimated_entitlements_per_period);
+        // StatsWriter::for(IncomeStatistic::class, [
+        //     'income_id' => $income->id,
+        //     'name' => 'estimated_entitlements_per_period',
+        // ])->set($income->estimated_entitlements_per_period);
 
         return redirect()->route('app.incomes.entitlements.show', $income);
     }

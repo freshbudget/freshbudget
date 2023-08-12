@@ -6,7 +6,6 @@ use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Events\BudgetCreated;
 use App\Domains\Budgets\Events\BudgetDeleted;
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Users\Models\User;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -122,15 +121,24 @@ class Budget extends Model
     | Relationships
     |----------------------------------
     */
-    public function activeIncomes(): HasMany
+    public function accounts(): HasMany
     {
-        return $this->incomes()->active();
+        return $this->hasMany(Account::class, 'budget_id');
+    }
+
+    public function activeAccounts(): HasMany
+    {
+        return $this->accounts()->active();
     }
 
     public function incomes(): HasMany
     {
-        return $this->hasMany(Account::class, 'budget_id')
-            ->where('type', AccountType::REVENUE);
+        return $this->hasMany(Income::class, 'budget_id');
+    }
+
+    public function activeIncomes(): HasMany
+    {
+        return $this->incomes()->active();
     }
 
     public function deleter(): BelongsTo

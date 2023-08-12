@@ -2,7 +2,6 @@
 
 namespace App\Controllers\App\Incomes;
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\Frequency;
@@ -37,7 +36,7 @@ class IncomesController
 
     public function overview()
     {
-        $this->authorize('viewAny', [Account::class, currentBudget()]);
+        $this->authorize('viewAny', [Income::class, currentBudget()]);
 
         $incomes = currentBudget()->activeIncomes()->orderBy('name')->get();
 
@@ -48,9 +47,9 @@ class IncomesController
 
     public function index()
     {
-        $this->authorize('viewAny', [Account::class, currentBudget()]);
+        $this->authorize('viewAny', [Income::class, currentBudget()]);
 
-        $incomes = currentBudget()->incomes()->orderBy('name')->get();
+        $incomes = currentBudget()->activeIncomes()->orderBy('name')->get();
 
         return view('app.incomes.list', [
             'incomes' => $incomes,
@@ -63,7 +62,7 @@ class IncomesController
 
         $validated = $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'type_id' => ['required', 'exists:income_types,id'],
+            'subtype_id' => ['required', 'exists:income_types,id'],
             'frequency' => ['required', new Enum(Frequency::class)],
             'url' => ['nullable', 'url'],
         ]);
@@ -73,12 +72,12 @@ class IncomesController
         return redirect()->back(fallback: route('app.incomes.show', $income));
     }
 
-    public function show(Account $account)
+    public function show(Income $income)
     {
-        $this->authorize('view', [$account, currentBudget()]);
+        $this->authorize('view', [$income, currentBudget()]);
 
         return view('app.incomes.show.index', [
-            'income' => $account,
+            'income' => $income,
         ]);
     }
 }

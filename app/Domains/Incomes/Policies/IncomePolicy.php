@@ -8,6 +8,118 @@ use App\Domains\Users\Models\User;
 
 class IncomePolicy
 {
+    public function create(User $user, Budget $budget)
+    {
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('create account', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    public function viewAny(User $user, Budget $budget)
+    {
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('view accounts', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    public function view(User $user, Income $income, Budget $budget)
+    {
+        // check that the account belongs to the budget
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('view accounts', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    public function update(User $user, Income $income, Budget $budget)
+    {
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('edit accounts', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    public function delete(User $user, Income $income, Budget $budget)
+    {
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('delete accounts', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    public function forceDelete(User $user, Income $income, Budget $budget)
+    {
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('force delete accounts', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    public function restore(User $user, Income $income, Budget $budget)
+    {
+        if ($income->budget_id !== $budget->id) {
+            return false;
+        }
+
+        if (! $budget->hasMember($user)) {
+            return false;
+        }
+
+        // if (! $user->can('restore accounts', $budget)) {
+        //     return false;
+        // }
+
+        return true;
+    }
+
     public function addDeductions(User $user, Income $income, Budget $budget): bool
     {
         // check that the income belongs to the budget
@@ -81,62 +193,5 @@ class IncomePolicy
         }
 
         return true;
-    }
-
-    public function create(User $user, Budget $budget): bool
-    {
-        dd('eee');
-
-        return $budget->members->contains($user);
-    }
-
-    public function delete(User $user, Income $income, Budget $budget): bool
-    {
-        // check that the income belongs to the budget
-        if ($income->budget_id !== $budget->id) {
-            return false;
-        }
-
-        // check that the user is a member of the budget
-        if (! $budget->hasMember($user)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function view(User $user, Income $income, Budget $budget): bool
-    {
-        // check that the income belongs to the budget
-        if ($income->budget_id !== $budget->id) {
-            return false;
-        }
-
-        // check that the user is a member of the budget
-        if (! $budget->members->contains($user)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function update(User $user, Income $income, Budget $budget): bool
-    {
-        // check that the income belongs to the budget
-        if ($income->budget_id !== $budget->id) {
-            return false;
-        }
-
-        // check that the user is a member of the budget
-        if (! $budget->hasMember($user)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function viewAny(User $user, Budget $budget): bool
-    {
-        return $budget->members->contains($user);
     }
 }

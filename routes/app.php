@@ -47,7 +47,7 @@ Route::view('/incomes/create', 'app.incomes.create')
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.create');
 
-Route::get('/incomes/{account}', [IncomesController::class, 'show'])
+Route::get('/incomes/{income}', [IncomesController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.show');
 
@@ -68,7 +68,7 @@ Route::put('/incomes/{income}', [IncomesController::class, 'update'])
 | Incomes Entries
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{income}/entries/create', [IncomeEntriesController::class, 'create'])
+Route::get('/incomes/{account}/entries/create', [IncomeEntriesController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.entries.create');
 
@@ -104,15 +104,15 @@ Route::put('/incomes/{income}/entitlements/{entitlement}', [IncomeEntitlementsCo
 | Income Taxes
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{income}/taxes', [IncomeTaxesController::class, 'show'])
+Route::get('/incomes/{account}/taxes', [IncomeTaxesController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.taxes.show');
 
-Route::get('/incomes/{income}/taxes/create', [IncomeTaxesController::class, 'create'])
+Route::get('/incomes/{account}/taxes/create', [IncomeTaxesController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.taxes.create');
 
-Route::post('/incomes/{income}/taxes', [IncomeTaxesController::class, 'store'])
+Route::post('/incomes/{account}/taxes', [IncomeTaxesController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.taxes.store');
 
@@ -121,15 +121,15 @@ Route::post('/incomes/{income}/taxes', [IncomeTaxesController::class, 'store'])
 | Income Deductions
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{income}/deductions/create', [IncomeDeductionsController::class, 'create'])
+Route::get('/incomes/{account}/deductions/create', [IncomeDeductionsController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.deductions.create');
 
-Route::post('/incomes/{income}/deductions', [IncomeDeductionsController::class, 'store'])
+Route::post('/incomes/{account}/deductions', [IncomeDeductionsController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.deductions.store');
 
-Route::get('/incomes/{income}/deductions', [IncomeDeductionsController::class, 'show'])
+Route::get('/incomes/{account}/deductions', [IncomeDeductionsController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.deductions.show');
 

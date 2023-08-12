@@ -30,16 +30,16 @@
                 </div>
     
                 <div>
-                    <x-forms.label for="type_id" required class="block mb-1 text-gray-800">Income Type</x-forms.label>
-                    <x-forms.select id="type_id" name="type_id">
+                    <x-forms.label for="subtype_id" required class="block mb-1 text-gray-800">Income Type</x-forms.label>
+                    <x-forms.select id="subtype_id" name="subtype_id">
                         @foreach ($types as $type)
                             <option 
-                                value="{{ $type->id }}" @selected($income->type_id == $type->id)>
+                                value="{{ $type->id }}" @selected($income->subtype_id == $type->id)>
                                 {{ $type->name }}
                             </option>
                         @endforeach
                     </x-forms.select>
-                    <x-forms.validation-error for="type_id" />
+                    <x-forms.validation-error for="subtype_id" />
                 </div>
         
                 <div>

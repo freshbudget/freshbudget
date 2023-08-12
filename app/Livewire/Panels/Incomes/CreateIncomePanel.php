@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Panels\Incomes;
 
-use App\Domains\Accounts\Models\Account;
+use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeType;
-use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Shared\Enums\Currency;
 use App\Domains\Shared\Enums\Frequency;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -30,7 +29,7 @@ class CreateIncomePanel extends Component
 
     public function attempt()
     {
-        $this->authorize('create', [Account::class, currentBudget()]);
+        $this->authorize('create', [Income::class, currentBudget()]);
 
         $this->validate();
 
@@ -39,7 +38,6 @@ class CreateIncomePanel extends Component
         $income = currentBudget()->incomes()->create([
             'user_id' => $owner?->id,
             'name' => $this->name,
-            'type' => AccountType::REVENUE,
             'subtype_id' => $this->subtype_id,
             'currency' => Currency::USD,
             'frequency' => $this->frequency,

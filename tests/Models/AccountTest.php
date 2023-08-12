@@ -4,6 +4,7 @@ use App\Domains\Accounts\Events\AccountCreated;
 use App\Domains\Accounts\Events\AccountDeleted;
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Models\Income;
 use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Shared\Enums\Currency;
 use App\Domains\Shared\Enums\Frequency;
@@ -132,4 +133,28 @@ test('it has the soft deletes trait', function () {
     $model = Account::factory()->create();
 
     expect(class_uses_recursive($model))->toContain(SoftDeletes::class);
+});
+
+// the income model extends the account model
+test('the income model extends the account model', function () {
+    $data = Account::factory()->make([
+        'type' => null,
+    ])->toArray();
+
+    $income = Income::create($data);
+
+    expect($income)->toBeInstanceOf(Account::class);
+});
+
+// the income model has a global scope to only show income accounts
+test('the income model has a global scope to only show income accounts', function () {
+    Account::factory()->count(5)->create([
+        'type' => AccountType::EXPENSE,
+    ]);
+
+    Account::factory()->count(2)->create([
+        'type' => AccountType::REVENUE,
+    ]);
+
+    expect(Income::all())->toHaveCount(2);
 });
