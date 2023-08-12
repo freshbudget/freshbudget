@@ -86,6 +86,7 @@ class IncomePolicy
     public function create(User $user, Budget $budget): bool
     {
         dd('eee');
+
         return $budget->members->contains($user);
     }
 

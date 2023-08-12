@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Incomes\Models\Income;
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\IncomeEntitlement;
 use Mpociot\Versionable\VersionableTrait;
 
@@ -19,10 +19,10 @@ test('the route key name is ulid', function () {
     expect($model->getRouteKeyName())->toBe('ulid');
 });
 
-test('the model belongs to a income', function () {
+test('the model belongs to a income account', function () {
     $model = IncomeEntitlement::factory()->create();
 
-    expect($model->income)->toBeInstanceOf(Income::class);
+    expect($model->income)->toBeInstanceOf(Account::class);
 });
 
 // test it implements the versionable trait

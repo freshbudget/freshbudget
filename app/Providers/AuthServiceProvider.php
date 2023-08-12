@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\Income;
 use App\Domains\Accounts\Models\Account;
-use Illuminate\Validation\Rules\Password;
-use App\Domains\Budgets\Policies\BudgetPolicy;
-use App\Domains\Incomes\Policies\IncomePolicy;
 use App\Domains\Accounts\Policies\AccountPolicy;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Budgets\Policies\BudgetPolicy;
+use App\Domains\Incomes\Models\Income;
+use App\Domains\Incomes\Policies\IncomePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 
 class AuthServiceProvider extends ServiceProvider
 {

@@ -2,6 +2,7 @@
 
 namespace App\Domains\Incomes\Models;
 
+use App\Domains\Accounts\Models\Account;
 use Database\Factories\IncomeEntitlementFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -100,6 +101,6 @@ class IncomeEntitlement extends Model
     */
     public function income(): BelongsTo
     {
-        return $this->belongsTo(Income::class, 'account_id');
+        return $this->belongsTo(Account::class, 'account_id');
     }
 }

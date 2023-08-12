@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Shared\Models\Institute;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,8 +28,8 @@ class AccountFactory extends Factory
             'user_id' => null,
             'name' => $this->faker->name,
             'description' => null,
-            'type' => AccountType::ASSET,
-            'subtype_id' => null,
+            'type' => AccountType::REVENUE,
+            'subtype_id' => IncomeType::inRandomOrder()->first()->id,
             'currency' => 'USD',
             'frequency' => null,
             'url' => $this->faker->url,

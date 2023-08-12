@@ -2,9 +2,9 @@
 
 namespace App\Domains\Accounts\Policies;
 
-use App\Domains\Users\Models\User;
-use App\Domains\Budgets\Models\Budget;
 use App\Domains\Accounts\Models\Account;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Users\Models\User;
 
 class AccountPolicy
 {

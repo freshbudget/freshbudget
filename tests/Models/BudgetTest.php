@@ -1,10 +1,11 @@
 <?php
 
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Events\BudgetCreated;
 use App\Domains\Budgets\Events\BudgetDeleted;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Incomes\Models\Income;
+use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Users\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
@@ -124,16 +125,18 @@ test('it can check if a user exists with a given email', function () {
 });
 
 // test it has many incomes
-test('it has many incomes', function () {
+test('it has many incomes accounts', function () {
     $model = Budget::factory()->create();
 
     // create 3 incomes
     $model->incomes()->createMany(
-        Income::factory()->count(3)->make()->toArray()
+        Account::factory()->count(3)->make([
+            'type' => AccountType::REVENUE,
+        ])->toArray()
     );
 
     expect($model->incomes->count())->toBe(3);
-    expect($model->incomes->first())->toBeInstanceOf(Income::class);
+    expect($model->incomes->first())->toBeInstanceOf(Account::class);
 });
 
 // test when a budget is deleting, an event is dispatched

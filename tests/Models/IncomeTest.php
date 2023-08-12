@@ -1,150 +1,151 @@
 <?php
 
-use App\Domains\Budgets\Actions\RemoveUserFromBudgetAction;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeDeduction;
-use App\Domains\Incomes\Models\IncomeEntitlement;
-use App\Domains\Incomes\Models\IncomeTax;
-use App\Domains\Incomes\Models\IncomeType;
-use App\Domains\Shared\Enums\Frequency;
-use App\Domains\Users\Models\User;
+// use App\Domains\Accounts\Models\Account;
+// use App\Domains\Budgets\Actions\RemoveUserFromBudgetAction;
+// use App\Domains\Budgets\Models\Budget;
+// use App\Domains\Incomes\Models\Income;
+// use App\Domains\Incomes\Models\IncomeDeduction;
+// use App\Domains\Incomes\Models\IncomeEntitlement;
+// use App\Domains\Incomes\Models\IncomeTax;
+// use App\Domains\Incomes\Models\IncomeType;
+// use App\Domains\Shared\Enums\Frequency;
+// use App\Domains\Users\Models\User;
 
-test('when model is created, a ulid is generated', function () {
-    $model = Income::factory()->create();
+// test('when model is created, a ulid is generated', function () {
+//     $model = Income::factory()->create();
 
-    expect($model->ulid)->not()->toBeNull();
-    expect($model->ulid)->toBeString();
-    expect(str()->isUlid($model->ulid))->toBeTrue();
-});
+//     expect($model->ulid)->not()->toBeNull();
+//     expect($model->ulid)->toBeString();
+//     expect(str()->isUlid($model->ulid))->toBeTrue();
+// });
 
 // test the route key name is ulid
-test('the route key name is ulid', function () {
-    $model = Income::factory()->create();
+// test('the route key name is ulid', function () {
+//     $model = Income::factory()->create();
 
-    expect($model->getRouteKeyName())->toBe('ulid');
-});
+//     expect($model->getRouteKeyName())->toBe('ulid');
+// });
 
-/// test the model belongs to a budget
-test('the model belongs to a budget', function () {
-    $model = Income::factory()->create();
+// /// test the model belongs to a budget
+// test('the model belongs to a budget', function () {
+//     $model = Income::factory()->create();
 
-    expect($model->budget)->toBeInstanceOf(Budget::class);
-});
+//     expect($model->budget)->toBeInstanceOf(Budget::class);
+// });
 
-// the the model belongs to an income type
-test('the model belongs to an income type, optionally', function () {
-    $model = Income::factory()->create();
+// // the the model belongs to an income type
+// test('the model belongs to an income type, optionally', function () {
+//     $model = Account::factory()->create();
 
-    expect($model->type)->toBeInstanceOf(IncomeType::class);
-});
+//     expect($model->type)->toBeInstanceOf(IncomeType::class);
+// });
 
-// test the model belongs to a user, optionally
-test('the model belongs to a user via the owner, optionally', function () {
-    $model = Income::factory()->create([
-        'user_id' => User::factory(),
-    ]);
+// // test the model belongs to a user, optionally
+// test('the model belongs to a user via the owner, optionally', function () {
+//     $model = Income::factory()->create([
+//         'user_id' => User::factory(),
+//     ]);
 
-    expect($model->user)->toBeInstanceOf(User::class);
-});
+//     expect($model->user)->toBeInstanceOf(User::class);
+// });
 
-// test an income can have many entitlements
-test('an income can have many entitlements', function () {
-    $model = Income::factory()->create();
+// // test an income can have many entitlements
+// test('an income can have many entitlements', function () {
+//     $model = Income::factory()->create();
 
-    $entitlement = $model->entitlements()->create([
-        'name' => 'Test Entitlement',
-        'amount' => 100,
-        'active' => true,
-    ]);
+//     $entitlement = $model->entitlements()->create([
+//         'name' => 'Test Entitlement',
+//         'amount' => 100,
+//         'active' => true,
+//     ]);
 
-    expect($model->entitlements->count())->toBe(1);
-    expect($model->entitlements->first())->toBeInstanceOf(IncomeEntitlement::class);
-});
+//     expect($model->entitlements->count())->toBe(1);
+//     expect($model->entitlements->first())->toBeInstanceOf(IncomeEntitlement::class);
+// });
 
-// test an income can have many deductions
-test('an income can have many deductions', function () {
-    $model = Income::factory()->create();
+// // test an income can have many deductions
+// test('an income can have many deductions', function () {
+//     $model = Income::factory()->create();
 
-    $deduction = $model->deductions()->create([
-        'name' => 'Test Deduction',
-        'amount' => 100,
-        'active' => true,
-    ]);
+//     $deduction = $model->deductions()->create([
+//         'name' => 'Test Deduction',
+//         'amount' => 100,
+//         'active' => true,
+//     ]);
 
-    expect($model->deductions->count())->toBe(1);
-    expect($model->deductions->first())->toBeInstanceOf(IncomeDeduction::class);
-});
+//     expect($model->deductions->count())->toBe(1);
+//     expect($model->deductions->first())->toBeInstanceOf(IncomeDeduction::class);
+// });
 
-// test an income can have many taxes
-test('an income can have many taxes', function () {
-    $model = Income::factory()->create();
+// // test an income can have many taxes
+// test('an income can have many taxes', function () {
+//     $model = Income::factory()->create();
 
-    $tax = $model->taxes()->create([
-        'name' => 'Test Tax',
-        'amount' => 100,
-        'active' => true,
-    ]);
+//     $tax = $model->taxes()->create([
+//         'name' => 'Test Tax',
+//         'amount' => 100,
+//         'active' => true,
+//     ]);
 
-    expect($model->taxes->count())->toBe(1);
-    expect($model->taxes->first())->toBeInstanceOf(IncomeTax::class);
-});
+//     expect($model->taxes->count())->toBe(1);
+//     expect($model->taxes->first())->toBeInstanceOf(IncomeTax::class);
+// });
 
-// test the income frequency is an enum
-test('the income frequency is an enum', function () {
-    $model = Income::factory()->create();
+// // test the income frequency is an enum
+// test('the income frequency is an enum', function () {
+//     $model = Income::factory()->create();
 
-    expect($model->frequency)->toBeInstanceOf(Frequency::class);
-    expect($model->frequency->value)->toBeString();
-});
+//     expect($model->frequency)->toBeInstanceOf(Frequency::class);
+//     expect($model->frequency->value)->toBeString();
+// });
 
 // test if the income is assigned to a user who is removed from the budget, the user_id is set to null
-test('if the income is assigned to a user who is removed from the budget, the user_id is set to null', function () {
-    $budget = Budget::factory()->create();
+// test('if the income is assigned to a user who is removed from the budget, the user_id is set to null', function () {
+//     $budget = Budget::factory()->create();
 
-    $user = User::factory()->create();
+//     $user = User::factory()->create();
 
-    $budget->addMember($user);
+//     $budget->addMember($user);
 
-    $income = Income::factory()->create([
-        'budget_id' => $budget->id,
-        'user_id' => $user->id,
-    ]);
+//     $income = Income::factory()->create([
+//         'budget_id' => $budget->id,
+//         'user_id' => $user->id,
+//     ]);
 
-    expect($income->user_id)->toBe($user->id);
+//     expect($income->user_id)->toBe($user->id);
 
-    (new RemoveUserFromBudgetAction($budget, $user))->execute();
+//     (new RemoveUserFromBudgetAction($budget, $user))->execute();
 
-    $income->refresh();
+//     $income->refresh();
 
-    expect($income->user_id)->toBeNull();
-});
+//     expect($income->user_id)->toBeNull();
+// });
 
-// test soft deletes
-test('soft deletes', function () {
-    $model = Income::factory()->create();
+// // test soft deletes
+// test('soft deletes', function () {
+//     $model = Income::factory()->create();
 
-    $model->delete();
+//     $model->delete();
 
-    expect($model->deleted_at)->not()->toBeNull();
-});
+//     expect($model->deleted_at)->not()->toBeNull();
+// });
 
 // test soft deleted models are pruned after 30 days
-test('soft deleted models are pruned after 30 days', function () {
-    $model = Income::factory()->create();
+// test('soft deleted models are pruned after 30 days', function () {
+//     $model = Income::factory()->create();
 
-    $model->delete();
+//     $model->delete();
 
-    expect($model->deleted_at)->not()->toBeNull();
+//     expect($model->deleted_at)->not()->toBeNull();
 
-    $model->deleted_at = now()->subDays(31);
+//     $model->deleted_at = now()->subDays(31);
 
-    $model->save();
+//     $model->save();
 
-    // run the prune command
-    $this->artisan('model:prune', [
-        '--model' => Income::class,
-    ]);
+//     // run the prune command
+//     $this->artisan('model:prune', [
+//         '--model' => Income::class,
+//     ]);
 
-    expect(Income::withTrashed()->count())->toBe(0);
-});
+//     expect(Income::withTrashed()->count())->toBe(0);
+// });

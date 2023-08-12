@@ -2,7 +2,7 @@
 
 namespace App\Domains\Incomes\Actions;
 
-use App\Domains\Incomes\Models\Income;
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\IncomeEntitlement;
 use Illuminate\Support\Arr;
 
@@ -10,7 +10,7 @@ class CreateIncomeEntitlementAction
 {
     public IncomeEntitlement $entitlement;
 
-    public function __construct(public Income $income, public array $data)
+    public function __construct(public Account $income, public array $data)
     {
         //
     }
