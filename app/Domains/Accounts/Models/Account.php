@@ -2,22 +2,22 @@
 
 namespace App\Domains\Accounts\Models;
 
-use App\Domains\Users\Models\User;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Shared\Enums\Currency;
-use Database\Factories\AccountFactory;
-use App\Domains\Shared\Enums\Frequency;
-use Illuminate\Database\Eloquent\Model;
-use App\Domains\Shared\Models\Institute;
-use App\Domains\Shared\Enums\AccountType;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Prunable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Domains\Accounts\Events\AccountCreated;
 use App\Domains\Accounts\Events\AccountDeleted;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Shared\Enums\AccountType;
+use App\Domains\Shared\Enums\Currency;
+use App\Domains\Shared\Enums\Frequency;
+use App\Domains\Shared\Models\Institute;
+use App\Domains\Users\Models\User;
+use Database\Factories\AccountFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {

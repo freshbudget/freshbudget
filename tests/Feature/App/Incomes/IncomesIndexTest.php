@@ -9,9 +9,6 @@ test('incomes index page is not accessible to guests, only authenticated users',
     $response->assertRedirect(route('login'));
 
     $user = User::factory()->create();
-
-    $user->currentBudget;
-
     $response = $this->actingAs($user)->get(route('app.incomes.index'));
     $response->assertStatus(200);
 });

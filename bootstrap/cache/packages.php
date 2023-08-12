@@ -123,17 +123,6 @@
       0 => 'Pest\\Laravel\\PestServiceProvider',
     ),
   ),
-  'santigarcor/laratrust' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laratrust\\LaratrustServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Laratrust' => 'Laratrust\\LaratrustFacade',
-    ),
-  ),
   'spatie/laravel-ignition' => 
   array (
     'providers' => 

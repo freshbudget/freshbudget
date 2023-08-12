@@ -19491,51 +19491,6 @@
      
 }
 
-    namespace Laratrust { 
-            /**
-     * 
-     *
-     */ 
-        class LaratrustFacade {
-                    /**
-         * Checks if the current user has a role by its name.
-         *
-         * @static 
-         */ 
-        public static function hasRole($role, $team = null, $requireAll = false)
-        {
-                        /** @var \Laratrust\Laratrust $instance */
-                        return $instance->hasRole($role, $team, $requireAll);
-        }
-                    /**
-         * Check if the current user has a permission by its name.
-         *
-         * @static 
-         */ 
-        public static function hasPermission($permission, $team = null, $requireAll = false)
-        {
-                        /** @var \Laratrust\Laratrust $instance */
-                        return $instance->hasPermission($permission, $team, $requireAll);
-        }
-                    /**
-         * Check if the current user has a role or permission by its name.
-         *
-         * @param array|string $roles The role(s) needed.
-         * @param array|string $permissions The permission(s) needed.
-         * @param array $options The Options.
-         * @return bool 
-         * @static 
-         */ 
-        public static function ability($roles, $permissions, $team = null, $options = [])
-        {
-                        /** @var \Laratrust\Laratrust $instance */
-                        return $instance->ability($roles, $permissions, $team, $options);
-        }
-         
-    }
-     
-}
-
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -24024,7 +23979,6 @@ namespace  {
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Breadcrumbs extends \Diglactic\Breadcrumbs\Breadcrumbs {}
             class Livewire extends \Livewire\Livewire {}
-            class Laratrust extends \Laratrust\LaratrustFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }

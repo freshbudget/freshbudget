@@ -8,7 +8,9 @@ class SeedRolesAndPermissionTables extends Migration
     {
         $roles = [
             [
-                'name' => 'Owner',
+                'name' => 'owner',
+                'display_name' => 'Owner',
+                'description' => 'The owner of the budget.',
                 'permissions' => [
                     'view budget',
                     'view calendar',
@@ -52,11 +54,13 @@ class SeedRolesAndPermissionTables extends Migration
                     'restore accounts',
                     'restore expenses',
                     'restore transactions',
-                    'restore files'
-                ]
+                    'restore files',
+                ],
             ],
             [
-                'name' => 'Member',
+                'name' => 'member',
+                'display_name' => 'Member',
+                'description' => 'A member of the budget.',
                 'permissions' => [
                     'view budget',
                     'view calendar',
@@ -82,18 +86,26 @@ class SeedRolesAndPermissionTables extends Migration
                     'delete expenses',
                     'delete transactions',
                     'delete files',
-                ]
+                ],
             ],
         ];
 
         foreach ($roles as $data) {
-            // $role = Role::create(['name' => $data['name']]);
+            // $role = Role::create([
+            //     'name' => $data['name'],
+            //     'display_name' => $data['display_name'],
+            //     'description' => $data['description']
+            // ]);
 
-            foreach($data['permissions'] as $permission) {
+            foreach ($data['permissions'] as $permission) {
 
-                // $permission = Permission::findOrCreate($permission);
+                // Permission::firstOrCreate([
+                //     'name' => $permission,
+                //     'display_name' => Str::title($permission),
+                //     'description' => 'The ability to ' . $permission . '.'
+                // ]);
 
-                // $role->givePermissionTo($permission);
+                // $role->givePermission($permission);
             }
         }
     }

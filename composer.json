@@ -22,7 +22,6 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0@beta",
         "mpociot/versionable": "^4.4",
-        "santigarcor/laratrust": "^8.2",
         "spatie/laravel-stats": "^2.1",
         "watson/active": "^7.0"
     },
