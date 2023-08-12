@@ -2,8 +2,9 @@
 
 namespace App\Domains\Accounts\Policies;
 
-use App\Domains\Budgets\Models\Budget;
 use App\Domains\Users\Models\User;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Accounts\Models\Account;
 
 class AccountPolicy
 {
@@ -13,9 +14,9 @@ class AccountPolicy
             return false;
         }
 
-        if (! $user->can('create account', $budget)) {
-            return false;
-        }
+        // if (! $user->can('create account', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }
@@ -26,22 +27,22 @@ class AccountPolicy
             return false;
         }
 
-        if (! $user->can('view accounts', $budget)) {
-            return false;
-        }
+        // if (! $user->can('view accounts', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }
 
-    public function view(User $user, Budget $budget)
+    public function view(User $user, Account $account, Budget $budget)
     {
         if (! $budget->hasMember($user)) {
             return false;
         }
 
-        if (! $user->can('view accounts', $budget)) {
-            return false;
-        }
+        // if (! $user->can('view accounts', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }
@@ -52,9 +53,9 @@ class AccountPolicy
             return false;
         }
 
-        if (! $user->can('edit accounts', $budget)) {
-            return false;
-        }
+        // if (! $user->can('edit accounts', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }
@@ -65,9 +66,9 @@ class AccountPolicy
             return false;
         }
 
-        if (! $user->can('delete accounts', $budget)) {
-            return false;
-        }
+        // if (! $user->can('delete accounts', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }
@@ -78,9 +79,9 @@ class AccountPolicy
             return false;
         }
 
-        if (! $user->can('force delete accounts', $budget)) {
-            return false;
-        }
+        // if (! $user->can('force delete accounts', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }
@@ -91,9 +92,9 @@ class AccountPolicy
             return false;
         }
 
-        if (! $user->can('restore accounts', $budget)) {
-            return false;
-        }
+        // if (! $user->can('restore accounts', $budget)) {
+        //     return false;
+        // }
 
         return true;
     }

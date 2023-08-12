@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('income_entries', function (Blueprint $table) {
             $table->id();
             $table->ulid('ulid')->index()->unique();
-            $table->unsignedBigInteger('income_id')->index();
-            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
+            $table->unsignedBigInteger('account_id')->index();
             $table->date('date');
             $table->json('entitlements');
             $table->json('taxes');
@@ -27,6 +26,9 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            // Foreign Keys
+            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
         });
     }
 

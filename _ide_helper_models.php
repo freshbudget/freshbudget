@@ -21,7 +21,7 @@ namespace App\Domains\Accounts\Models{
  * @property string $name
  * @property string|null $description
  * @property \App\Domains\Shared\Enums\AccountType|null $type
- * @property string|null $subtype
+ * @property int|null $subtype_id
  * @property \App\Domains\Shared\Enums\Currency|null $currency
  * @property \App\Domains\Shared\Enums\Frequency|null $frequency
  * @property int|null $institution_id
@@ -34,7 +34,7 @@ namespace App\Domains\Accounts\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Domains\Budgets\Models\Budget $budget
- * @property-read \App\Domains\Shared\Models\Institute|null $institute
+ * @property-read \App\Domains\Shared\Models\Institute|null $institution
  * @property-read \App\Domains\Users\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
@@ -54,7 +54,7 @@ namespace App\Domains\Accounts\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereInstitutionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereMeta($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereSubtype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereSubtypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUpdatedAt($value)
@@ -205,6 +205,202 @@ namespace App\Domains\Incomes\Models{
  * @property string $name
  * @property string|null $description
  * @property int|null $type_id
+ * @property \App\Domains\Shared\Enums\Currency|null $currency
+ * @property \App\Domains\Shared\Enums\Frequency|null $frequency
+ * @property string|null $url
+ * @property string|null $username
+ * @property array|null $meta
+ * @property bool $active
+ * @property int|null $estimated_entitlements_per_period
+ * @property int|null $estimated_taxes_per_period
+ * @property int|null $estimated_deductions_per_period
+ * @property int|null $estimated_net_per_period
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \App\Domains\Shared\Enums\AccountType $type
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $activeDeductions
+ * @property-read int|null $active_deductions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $activeTaxes
+ * @property-read int|null $active_taxes_count
+ * @property-read \App\Domains\Budgets\Models\Budget $budget
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $deductions
+ * @property-read int|null $deductions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $entitlements
+ * @property-read int|null $entitlements_count
+ * @property-read \App\Domains\Shared\Models\Institute $institution
+ * @property-read \App\Domains\Incomes\Models\IncomeType|null $subtype
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
+ * @property-read int|null $taxes_count
+ * @property-read \App\Domains\Users\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Account active()
+ * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Income newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Income onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Income query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereEstimatedDeductionsPerPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereEstimatedEntitlementsPerPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereEstimatedNetPerPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereEstimatedTaxesPerPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
+ */
+	class Income extends \Eloquent {}
+}
+
+namespace App\Domains\Incomes\Models{
+/**
+ * App\Domains\Incomes\Models\IncomeDeduction
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $income_id
+ * @property string $name
+ * @property int $amount
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property int|null $previous_id
+ * @property string|null $change_reason
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domains\Incomes\Models\Income $income
+ * @property-read IncomeDeduction|null $previous
+ * @method static Builder|IncomeDeduction active()
+ * @method static \Database\Factories\IncomeDeductionFactory factory($count = null, $state = [])
+ * @method static Builder|IncomeDeduction newModelQuery()
+ * @method static Builder|IncomeDeduction newQuery()
+ * @method static Builder|IncomeDeduction query()
+ * @method static Builder|IncomeDeduction whereActive($value)
+ * @method static Builder|IncomeDeduction whereAmount($value)
+ * @method static Builder|IncomeDeduction whereChangeReason($value)
+ * @method static Builder|IncomeDeduction whereCreatedAt($value)
+ * @method static Builder|IncomeDeduction whereEndDate($value)
+ * @method static Builder|IncomeDeduction whereId($value)
+ * @method static Builder|IncomeDeduction whereIncomeId($value)
+ * @method static Builder|IncomeDeduction whereName($value)
+ * @method static Builder|IncomeDeduction wherePreviousId($value)
+ * @method static Builder|IncomeDeduction whereStartDate($value)
+ * @method static Builder|IncomeDeduction whereUlid($value)
+ * @method static Builder|IncomeDeduction whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property int $account_id
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeDeduction whereAccountId($value)
+ */
+	class IncomeDeduction extends \Eloquent {}
+}
+
+namespace App\Domains\Incomes\Models{
+/**
+ * App\Domains\Incomes\Models\IncomeEntitlement
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $income_id
+ * @property string $name
+ * @property int $amount
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domains\Incomes\Models\Income $income
+ * @property-write mixed $reason
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Mpociot\Versionable\Version> $versions
+ * @property-read int|null $versions_count
+ * @method static \Database\Factories\IncomeEntitlementFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereIncomeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property int $account_id
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereAccountId($value)
+ */
+	class IncomeEntitlement extends \Eloquent {}
+}
+
+namespace App\Domains\Incomes\Models{
+/**
+ * App\Domains\Incomes\Models\IncomeEntry
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $income_id
+ * @property \Illuminate\Support\Carbon $date
+ * @property array $entitlements
+ * @property array $taxes
+ * @property array $deductions
+ * @property int $entitlements_total
+ * @property int $taxes_total
+ * @property int $deductions_total
+ * @property int $net_income
+ * @property string|null $notes
+ * @property string|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Domains\Incomes\Models\Income $income
+ * @method static \Database\Factories\IncomeEntryFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDeductions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDeductionsTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereEntitlements($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereEntitlementsTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereIncomeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereNetIncome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereTaxes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereTaxesTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property int $account_id
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereAccountId($value)
+ */
+	class IncomeEntry extends \Eloquent {}
+}
+
+namespace App\Domains\Incomes\Models{
+/**
+ * App\Domains\Incomes\Models\Income
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $budget_id
+ * @property int|null $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property int|null $type_id
  * @property string|null $url
  * @property string|null $username
  * @property string|null $currency
@@ -263,148 +459,7 @@ namespace App\Domains\Incomes\Models{
  * @method static Builder|Income withoutTrashed()
  * @mixin \Eloquent
  */
-	class Income extends \Eloquent {}
-}
-
-namespace App\Domains\Incomes\Models{
-/**
- * App\Domains\Incomes\Models\IncomeDeduction
- *
- * @property int $id
- * @property string $ulid
- * @property int $income_id
- * @property string $name
- * @property int $amount
- * @property \Illuminate\Support\Carbon|null $start_date
- * @property \Illuminate\Support\Carbon|null $end_date
- * @property int|null $previous_id
- * @property string|null $change_reason
- * @property bool $active
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Domains\Incomes\Models\Income $income
- * @property-read IncomeDeduction|null $previous
- * @method static Builder|IncomeDeduction active()
- * @method static \Database\Factories\IncomeDeductionFactory factory($count = null, $state = [])
- * @method static Builder|IncomeDeduction newModelQuery()
- * @method static Builder|IncomeDeduction newQuery()
- * @method static Builder|IncomeDeduction query()
- * @method static Builder|IncomeDeduction whereActive($value)
- * @method static Builder|IncomeDeduction whereAmount($value)
- * @method static Builder|IncomeDeduction whereChangeReason($value)
- * @method static Builder|IncomeDeduction whereCreatedAt($value)
- * @method static Builder|IncomeDeduction whereEndDate($value)
- * @method static Builder|IncomeDeduction whereId($value)
- * @method static Builder|IncomeDeduction whereIncomeId($value)
- * @method static Builder|IncomeDeduction whereName($value)
- * @method static Builder|IncomeDeduction wherePreviousId($value)
- * @method static Builder|IncomeDeduction whereStartDate($value)
- * @method static Builder|IncomeDeduction whereUlid($value)
- * @method static Builder|IncomeDeduction whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class IncomeDeduction extends \Eloquent {}
-}
-
-namespace App\Domains\Incomes\Models{
-/**
- * App\Domains\Incomes\Models\IncomeEntitlement
- *
- * @property int $id
- * @property string $ulid
- * @property int $income_id
- * @property string $name
- * @property int $amount
- * @property \Illuminate\Support\Carbon|null $start_date
- * @property \Illuminate\Support\Carbon|null $end_date
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Domains\Incomes\Models\Income $income
- * @property-write mixed $reason
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Mpociot\Versionable\Version> $versions
- * @property-read int|null $versions_count
- * @method static \Database\Factories\IncomeEntitlementFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement query()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereAmount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereEndDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereIncomeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereStartDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUlid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class IncomeEntitlement extends \Eloquent {}
-}
-
-namespace App\Domains\Incomes\Models{
-/**
- * App\Domains\Incomes\Models\IncomeEntry
- *
- * @property int $id
- * @property string $ulid
- * @property int $income_id
- * @property \Illuminate\Support\Carbon $date
- * @property array $entitlements
- * @property array $taxes
- * @property array $deductions
- * @property int $entitlements_total
- * @property int $taxes_total
- * @property int $deductions_total
- * @property int $net_income
- * @property string|null $notes
- * @property string|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Domains\Incomes\Models\Income $income
- * @method static \Database\Factories\IncomeEntryFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry query()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDeductions($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDeductionsTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereEntitlements($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereEntitlementsTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereIncomeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereNetIncome($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereTaxes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereTaxesTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUlid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class IncomeEntry extends \Eloquent {}
-}
-
-namespace App\Domains\Incomes\Models{
-/**
- * App\Domains\Incomes\Models\IncomeNew
- *
- * @property \App\Domains\Shared\Enums\AccountType $type
- * @property \App\Domains\Shared\Enums\Currency $currency
- * @property \App\Domains\Shared\Enums\Frequency $frequency
- * @property-read \App\Domains\Budgets\Models\Budget $budget
- * @property-read \App\Domains\Shared\Models\Institute $institute
- * @property-read \App\Domains\Users\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|Account active()
- * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew query()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew withoutTrashed()
- */
-	class IncomeNew extends \Eloquent {}
+	class IncomeOld extends \Eloquent {}
 }
 
 namespace App\Domains\Incomes\Models{
@@ -472,6 +527,8 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $account_id
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereAccountId($value)
  */
 	class IncomeTax extends \Eloquent {}
 }
@@ -542,56 +599,6 @@ namespace App\Domains\Shared\Models{
 	class Institute extends \Eloquent {}
 }
 
-namespace App\Domains\Shared\Models{
-/**
- * App\Domains\Shared\Models\Permission
- *
- * @property int $id
- * @property string $name
- * @property string|null $display_name
- * @property string|null $description
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Shared\Models\Role> $roles
- * @property-read int|null $roles_count
- * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Permission query()
- * @method static \Illuminate\Database\Eloquent\Builder|Permission whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Permission whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Permission whereDisplayName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Permission whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Permission whereUpdatedAt($value)
- */
-	class Permission extends \Eloquent {}
-}
-
-namespace App\Domains\Shared\Models{
-/**
- * App\Domains\Shared\Models\Role
- *
- * @property int $id
- * @property string $name
- * @property string|null $display_name
- * @property string|null $description
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Shared\Models\Permission> $permissions
- * @property-read int|null $permissions_count
- * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Role query()
- * @method static \Illuminate\Database\Eloquent\Builder|Role whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Role whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Role whereDisplayName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Role whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Role whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
- */
-	class Role extends \Eloquent {}
-}
-
 namespace App\Domains\Users\Models{
 /**
  * App\Domains\Users\Models\User
@@ -645,21 +652,7 @@ namespace App\Domains\Users\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property bool $finished_onboarding
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Shared\Models\Permission> $permissions
- * @property-read int|null $permissions_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\Budget> $permissionsTeams
- * @property-read int|null $permissions_teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Shared\Models\Role> $roles
- * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\Budget> $rolesTeams
- * @property-read int|null $roles_teams_count
- * @method static \Illuminate\Database\Eloquent\Builder|User orWhereHasPermission(\BackedEnum|array|string $permission = '', ?mixed $team = null)
- * @method static \Illuminate\Database\Eloquent\Builder|User orWhereHasRole(\BackedEnum|array|string $role = '', ?mixed $team = null)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereDoesntHavePermissions()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereDoesntHaveRoles()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFinishedOnboarding($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereHasPermission(\BackedEnum|array|string $permission = '', ?mixed $team = null, string $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder|User whereHasRole(\BackedEnum|array|string $role = '', ?mixed $team = null, string $boolean = 'and')
  */
 	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
 }

@@ -28,6 +28,7 @@ class AccountFactory extends Factory
             'name' => $this->faker->name,
             'description' => null,
             'type' => AccountType::ASSET,
+            'subtype_id' => null,
             'currency' => 'USD',
             'frequency' => null,
             'url' => $this->faker->url,

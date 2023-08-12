@@ -4,7 +4,7 @@
         <h2 class="font-semibold text-gray-700">Create Income</h2>
     </header>
 
-    <main  class="p-4">
+    <main class="p-4">
 
         <div class="space-y-4">
 
@@ -19,18 +19,18 @@
             </div>
         
             <div class="space-y-2">
-                <x-forms.label for="type_id" required>
+                <x-forms.label for="subtype_id" required>
                     What type of income is this?
                 </x-forms.label>
         
-                <x-forms.select name="type_id" id="type_id" wire:model="type_id">
+                <x-forms.select name="subtype_id" id="subtype_id" wire:model="subtype_id">
                     <option value="">Select a type</option>
                     @foreach ($types as $type)
                         <option value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </x-forms.select>
         
-                <x-forms.validation-error for="type_id" />
+                <x-forms.validation-error for="subtype_id" />
             </div>
         
             <div class="space-y-2">

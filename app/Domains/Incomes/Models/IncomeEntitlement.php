@@ -53,7 +53,7 @@ class IncomeEntitlement extends Model
      */
     protected $fillable = [
         'ulid',
-        'income_id',
+        'account_id',
         'name',
         'amount',
         'start_date',
@@ -68,7 +68,7 @@ class IncomeEntitlement extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'income_id' => 'integer',
+        'account_id' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
     ];
@@ -100,6 +100,6 @@ class IncomeEntitlement extends Model
     */
     public function income(): BelongsTo
     {
-        return $this->belongsTo(Income::class);
+        return $this->belongsTo(Income::class, 'account_id');
     }
 }

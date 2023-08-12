@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Policies\BudgetPolicy;
 use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Policies\IncomePolicy;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Domains\Accounts\Models\Account;
 use Illuminate\Validation\Rules\Password;
+use App\Domains\Budgets\Policies\BudgetPolicy;
+use App\Domains\Incomes\Policies\IncomePolicy;
+use App\Domains\Accounts\Policies\AccountPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Income::class => IncomePolicy::class,
         Budget::class => BudgetPolicy::class,
+        Account::class => AccountPolicy::class,
     ];
 
     public function boot(): void

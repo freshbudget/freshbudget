@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name')->index();
             $table->text('description')->nullable();
             $table->string('type')->index()->nullable(); // AccountType::class
-            $table->string('subtype')->index()->nullable(); // Dependent on type
+            $table->unsignedBigInteger('subtype_id')->index()->nullable(); // Dependent on type
             $table->string('currency')->index()->nullable()->default(Currency::USD->value);
             $table->string('frequency')->index()->nullable(); // Frequency::class
             $table->unsignedBigInteger('institution_id')->nullable();

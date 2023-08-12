@@ -5,6 +5,7 @@ namespace App\Domains\Accounts\Models;
 use App\Domains\Accounts\Events\AccountCreated;
 use App\Domains\Accounts\Events\AccountDeleted;
 use App\Domains\Budgets\Models\Budget;
+use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Shared\Enums\Currency;
 use App\Domains\Shared\Enums\Frequency;
@@ -30,6 +31,7 @@ class Account extends Model
         'name',
         'description',
         'type',
+        'subtype_id',
         'currency',
         'frequency',
         'url',
@@ -45,6 +47,7 @@ class Account extends Model
         'budget_id' => 'integer',
         'user_id' => 'integer',
         'type' => AccountType::class,
+        'subtype_id' => 'integer',
         'currency' => Currency::class,
         'frequency' => Frequency::class,
         'meta' => 'array',
@@ -73,7 +76,7 @@ class Account extends Model
 
     public function prunable(): Builder
     {
-        return self::where('deleted_at', '<', now()->subDays(60));
+        return self::where('deleted_at', '<=', now()->subDays(60));
     }
 
     public function uniqueIds(): array
@@ -116,8 +119,17 @@ class Account extends Model
     /**
      * Goes to null if the institute is deleted.
      */
-    public function institute(): BelongsTo
+    public function institution(): BelongsTo
     {
         return $this->belongsTo(Institute::class, 'institution_id');
+    }
+
+    public function subtype(): BelongsTo
+    {
+        if ($this->type == AccountType::REVENUE) {
+            return $this->belongsTo(IncomeType::class, 'subtype_id');
+        }
+
+        throw new \Exception('Not implemented');
     }
 }

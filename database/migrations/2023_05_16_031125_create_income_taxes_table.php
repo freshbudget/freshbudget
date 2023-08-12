@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('income_taxes', function (Blueprint $table) {
             $table->id();
             $table->ulid('ulid')->index()->unique();
-            $table->unsignedBigInteger('income_id')->index();
-            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
+            $table->unsignedBigInteger('account_id')->index();
             $table->string('name');
             $table->integer('amount');
             $table->date('start_date')->nullable();
@@ -24,6 +23,9 @@ return new class extends Migration
             $table->string('change_reason')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
+
+            // Foreign Keys
+            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
         });
     }
 

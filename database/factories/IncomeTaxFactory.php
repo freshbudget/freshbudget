@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeTax;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,7 +25,7 @@ class IncomeTaxFactory extends Factory
         $endDate = $this->faker->dateTimeBetween($startDate, '+3 year');
 
         return [
-            'income_id' => Income::factory(),
+            'account_id' => Account::factory(),
             'name' => $this->faker->name,
             'amount' => $this->faker->numberBetween(0, 10000),
             'start_date' => $startDate,
@@ -42,7 +43,7 @@ class IncomeTaxFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($income) {
             return [
-                'income_id' => $income->id,
+                'account_id' => $income->id,
             ];
         });
     }

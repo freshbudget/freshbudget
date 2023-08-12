@@ -23,8 +23,6 @@
     ]" />
 
     <div class="max-w-6xl px-4 py-8 mx-auto" x-data="{ search: '' }">
-
-        {{-- @livewire(\App\Livewire\StatsOverview::class) --}}
         
         <!-- header, search and create -->
         <div class="flex items-center justify-between my-8">
@@ -68,7 +66,7 @@
                         <div class="flex items-center mt-1.5 space-x-2.5 text-sm text-gray-500">
 
                             <div class="flex items-center">
-                                @svg('info', 'w-4 h-4 mr-1') {{ $income->type->name }}
+                                @svg('info', 'w-4 h-4 mr-1') {{ $income->subtype->name }}
                             </div>
 
                             <div class="flex items-center">
@@ -76,7 +74,7 @@
                             </div>
 
                             <div class="flex items-center">
-                                @svg('banknotes', 'w-4 h-4 mr-1') {{ $income->presenter()->estimatedNetPerPeriod() }}
+                                @svg('banknotes', 'w-4 h-4 mr-1') 
                             </div>
 
                         </div>

@@ -10,7 +10,7 @@
     <div class="font-normal flex mt-2 text-gray-600 space-x-4 text-sm">
     
         <div class="flex items-center">
-            @svg('info', 'w-4 h-4 mr-1') {{ $income->type->name }}
+            @svg('info', 'w-4 h-4 mr-1') {{ $income->subtype->name }}
         </div>
 
         <div class="flex items-center">
@@ -18,7 +18,7 @@
         </div>
 
         <div class="flex items-center">
-            @svg('banknotes', 'w-4 h-4 mr-1') {{ $income->presenter()->estimatedNetPerPeriod() }}
+            @svg('banknotes', 'w-4 h-4 mr-1') TODO
         </div>
 
         @if($income->url)

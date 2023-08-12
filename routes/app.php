@@ -43,11 +43,11 @@ Route::get('/incomes/list', [IncomesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.list');
 
-Route::get('/incomes/create', [IncomesController::class, 'create'])
+Route::view('/incomes/create', 'app.incomes.create')
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.create');
 
-Route::get('/incomes/{income}', [IncomesController::class, 'show'])
+Route::get('/incomes/{account}', [IncomesController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.show');
 

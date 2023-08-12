@@ -146,5 +146,5 @@ test('soft deleted models are pruned after 30 days', function () {
         '--model' => Income::class,
     ]);
 
-    expect(Income::count())->toBe(0);
+    expect(Income::withTrashed()->count())->toBe(0);
 });

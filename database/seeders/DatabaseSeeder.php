@@ -24,39 +24,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $budget = $user->currentBudget;
-
-        // create a income
-        $income = Income::factory()
-            ->ownedByBudget($budget)
-            ->active()
-            ->withFrequency(Frequency::MONTHLY)
-            ->create();
-
-        $entitlements = [
-            [
-                'name' => 'Base',
-                'amount' => 1_000,
-            ],
-            [
-                'name' => 'Extra',
-                'amount' => 500,
-            ],
-        ];
-
-        foreach ($entitlements as $entitlement) {
-            (new CreateIncomeEntitlementAction($income, [
-                'name' => $entitlement['name'],
-                'amount' => $entitlement['amount'],
-            ]))->execute();
-        }
-
-        (new UpdateIncomeEntitlementEstimate($income))->execute();
-
-        (new UpdateIncomeNetEstimate($income))->execute();
-
-        StatsWriter::for(IncomeStatistic::class, [
-            'income_id' => $income->id,
-            'name' => 'estimated_entitlements_per_period',
-        ])->set($income->estimated_entitlements_per_period);
     }
 }

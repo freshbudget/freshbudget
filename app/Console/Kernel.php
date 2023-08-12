@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedDeductions;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedEntitlements;
@@ -15,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('model:prune', [
-            '--model' => [BudgetInvitation::class, Income::class],
+            '--model' => [BudgetInvitation::class, Income::class, Account::class],
         ])->dailyAt('00:00');
 
         $schedule->command('auth:clear-resets')->everyFourHours();

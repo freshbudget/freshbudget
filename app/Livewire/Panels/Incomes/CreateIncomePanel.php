@@ -2,19 +2,25 @@
 
 namespace App\Livewire\Panels\Incomes;
 
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\IncomeType;
+use App\Domains\Shared\Enums\AccountType;
+use App\Domains\Shared\Enums\Currency;
 use App\Domains\Shared\Enums\Frequency;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class CreateIncomePanel extends Component
 {
+    use AuthorizesRequests;
+
     #[Rule(['required', 'string', 'max:255'])]
     public $name = '';
 
     #[Rule(['required', 'exists:income_types,id'])]
-    public $type_id = null;
+    public $subtype_id = null;
 
     #[Rule(['required', new Enum(Frequency::class)])]
     public $frequency = null;
@@ -24,6 +30,8 @@ class CreateIncomePanel extends Component
 
     public function attempt()
     {
+        $this->authorize('create', [Account::class, currentBudget()]);
+
         $this->validate();
 
         $owner = currentBudget()->members()->where('ulid', $this->user_ulid)->first();
@@ -31,7 +39,9 @@ class CreateIncomePanel extends Component
         $income = currentBudget()->incomes()->create([
             'user_id' => $owner?->id,
             'name' => $this->name,
-            'type_id' => $this->type_id,
+            'type' => AccountType::REVENUE,
+            'subtype_id' => $this->subtype_id,
+            'currency' => Currency::USD,
             'frequency' => $this->frequency,
         ]);
 
