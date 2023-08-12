@@ -5,7 +5,6 @@ namespace App\Domains\Accounts\Models;
 use App\Domains\Accounts\Events\AccountCreated;
 use App\Domains\Accounts\Events\AccountDeleted;
 use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\IncomeType;
 use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Shared\Enums\Currency;
 use App\Domains\Shared\Enums\Frequency;
@@ -122,14 +121,5 @@ class Account extends Model
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institute::class, 'institution_id');
-    }
-
-    public function subtype(): BelongsTo
-    {
-        if ($this->type == AccountType::REVENUE) {
-            return $this->belongsTo(IncomeType::class, 'subtype_id');
-        }
-
-        throw new \Exception('Not implemented');
     }
 }

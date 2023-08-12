@@ -4,8 +4,9 @@ namespace App\Domains\Incomes\Models;
 
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Shared\Enums\AccountType;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domains\Incomes\Models\IncomeType;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Income extends Account
 {
