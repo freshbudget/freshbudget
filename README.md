@@ -2,10 +2,6 @@
 
 A family-friendly way to manage your money and stay on top of your budget.
 
-## Features
-
-- https://www.reddit.com/r/selfhosted/comments/11ja1k3/recommendations_for_easy_financial_management/
-
 ### Open-Source
 
 Because the codebase for Fresh Budget is open-source, you can see exactly how your infomation is being used. Additionally, you could even contribute and help shape the platform.
@@ -96,7 +92,3 @@ $FORGE_PHP artisan icons:cache
 
 $FORGE_PHP artisan up
 ```
-
-## Design 
-
-- Breadcrumbs should be included if greater than 1 page away from the dashboard, for example the incomes index would not require breadcrumbs because it is one page away from the dashboard in hierachy. The incomes create page would require breadcrumbs because it is a child of the incomes index and thus further than one page away.
