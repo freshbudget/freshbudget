@@ -2,7 +2,6 @@
 
 namespace App\Controllers\App\Incomes;
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Actions\CreateIncomeEntitlementAction;
 use App\Domains\Incomes\Actions\UpdateIncomeEntitlementAction;
 use App\Domains\Incomes\Actions\UpdateIncomeEntitlementEstimate;

@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Budget $budget
  * @property-read Institute|null $institution
  * @property-read User|null $user
+ *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static Builder|Account newModelQuery()
@@ -71,6 +72,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Account whereUsername($value)
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Account extends Model

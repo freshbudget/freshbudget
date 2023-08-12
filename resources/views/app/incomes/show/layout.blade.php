@@ -22,7 +22,7 @@
         </div>
 
         @if($income->url)
-            <a href="{{ $income->url }}" target="_blank" class="flex items-center">@svg('external-link', 'w-4 h-4 mr-1') Visit</a>
+            <a href="{{ $income->url }}" title="{{ $income->url }}" target="_blank" class="flex items-center">@svg('external-link', 'w-4 h-4 mr-1') Visit</a>
         @endif
 
     </div>

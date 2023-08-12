@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $active
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Institute active()
  * @method static \Database\Factories\InstituteFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Institute newModelQuery()
@@ -39,6 +40,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Institute extends Model

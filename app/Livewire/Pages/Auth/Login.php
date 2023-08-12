@@ -17,6 +17,16 @@ class Login extends Component
     #[Rule(['boolean'])]
     public bool $remember = true;
 
+    public function mount()
+    {
+        if(app()->environment('local')) {
+            $this->fill([
+                'email' => 'admin@email.com',
+                'password' => 'password',
+            ]);
+        }
+    }
+
     public function attempt()
     {
         $this->validate();

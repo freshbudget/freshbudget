@@ -4,9 +4,8 @@ namespace App\Domains\Incomes\Models;
 
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Shared\Enums\AccountType;
-use App\Domains\Incomes\Models\IncomeType;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Domains\Incomes\Models\Income
@@ -44,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
  * @property-read \App\Domains\Users\Models\User|null $user
+ *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
@@ -71,6 +71,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Income extends Account
@@ -95,12 +96,12 @@ class Income extends Account
      * 'estimated_taxes_per_period',
      * 'estimated_deductions_per_period',
      * 'estimated_net_per_period',
-     * 
+     *
      * // casts
      * 'estimated_entitlements_per_period' => 'integer',
      * 'estimated_taxes_per_period' => 'integer',
      * 'estimated_deductions_per_period' => 'integer',
-     * 
+     *
      * // presenters
      */
 
