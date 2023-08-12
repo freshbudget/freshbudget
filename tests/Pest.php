@@ -21,6 +21,11 @@ uses(
 uses(
     TestCase::class,
     LazilyRefreshDatabase::class,
+)->in('Policies');
+
+uses(
+    TestCase::class,
+    LazilyRefreshDatabase::class,
 )->in('Unit');
 
 /*

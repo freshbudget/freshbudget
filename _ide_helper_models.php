@@ -21,23 +21,26 @@ namespace App\Domains\Accounts\Models{
  * @property string $name
  * @property string|null $description
  * @property \App\Domains\Shared\Enums\AccountType|null $type
- * @property string|null $currency
+ * @property string|null $subtype
+ * @property \App\Domains\Shared\Enums\Currency|null $currency
  * @property \App\Domains\Shared\Enums\Frequency|null $frequency
+ * @property int|null $institution_id
  * @property string|null $url
  * @property string|null $username
- * @property string|null $institution
  * @property string|null $color
  * @property array|null $meta
  * @property bool $active
- * @property string|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Domains\Budgets\Models\Budget $budget
+ * @property-read \App\Domains\Shared\Models\Institute|null $institute
  * @property-read \App\Domains\Users\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Account onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Account query()
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereBudgetId($value)
@@ -48,15 +51,18 @@ namespace App\Domains\Accounts\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereFrequency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereInstitution($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereInstitutionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereMeta($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereSubtype($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Account withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Account withoutTrashed()
  */
 	class Account extends \Eloquent {}
 }
@@ -381,6 +387,28 @@ namespace App\Domains\Incomes\Models{
 
 namespace App\Domains\Incomes\Models{
 /**
+ * App\Domains\Incomes\Models\IncomeNew
+ *
+ * @property \App\Domains\Shared\Enums\AccountType $type
+ * @property \App\Domains\Shared\Enums\Currency $currency
+ * @property \App\Domains\Shared\Enums\Frequency $frequency
+ * @property-read \App\Domains\Budgets\Models\Budget $budget
+ * @property-read \App\Domains\Shared\Models\Institute $institute
+ * @property-read \App\Domains\Users\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Account active()
+ * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeNew withoutTrashed()
+ */
+	class IncomeNew extends \Eloquent {}
+}
+
+namespace App\Domains\Incomes\Models{
+/**
  * App\Domains\Incomes\Models\IncomeStatistic
  *
  * @property int $id
@@ -567,6 +595,12 @@ namespace App\Domains\Users\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property bool $finished_onboarding
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFinishedOnboarding($value)
  */
 	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}

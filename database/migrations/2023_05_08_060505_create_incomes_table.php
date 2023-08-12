@@ -16,17 +16,14 @@ return new class extends Migration
             $table->id();
             $table->string('ulid')->unique()->index();
             $table->unsignedBigInteger('budget_id');
-            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
-            $table->foreign('type_id')->references('id')->on('income_types')->onDelete('set null');
-            $table->text('url')->nullable();
-            $table->string('username')->nullable();
             $table->string('currency')->nullable()->default('USD');
             $table->string('frequency')->nullable()->default(Frequency::MONTHLY->value);
+            $table->text('url')->nullable();
+            $table->string('username')->nullable();
             $table->json('meta')->nullable();
             $table->boolean('active')->default(true);
             $table->integer('estimated_entitlements_per_period')->nullable()->default(0);
@@ -35,6 +32,10 @@ return new class extends Migration
             $table->integer('estimated_net_per_period')->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('type_id')->references('id')->on('income_types')->onDelete('set null');
         });
     }
 

@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string('name')->index();
             $table->text('description')->nullable();
             $table->string('type')->index()->nullable(); // AccountType::class
+            $table->string('subtype')->index()->nullable(); // Dependent on type
             $table->string('currency')->index()->nullable()->default(Currency::USD->value);
             $table->string('frequency')->index()->nullable(); // Frequency::class
+            $table->unsignedBigInteger('institution_id')->nullable();
             $table->text('url')->nullable();
             $table->string('username')->nullable();
-            $table->string('institution')->nullable();
             $table->string('color')->nullable();
             $table->json('meta')->nullable();
             $table->boolean('active')->default(true);
@@ -34,6 +35,7 @@ return new class extends Migration
             // Foreign Keys
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('institution_id')->references('id')->on('institutes')->onDelete('set null');
         });
     }
 

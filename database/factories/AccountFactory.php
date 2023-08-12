@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Shared\Enums\AccountType;
+use App\Domains\Shared\Models\Institute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,7 +32,7 @@ class AccountFactory extends Factory
             'frequency' => null,
             'url' => $this->faker->url,
             'username' => null,
-            'institution' => null,
+            'institution_id' => Institute::factory(),
             'color' => null,
             'meta' => null,
             'active' => true,

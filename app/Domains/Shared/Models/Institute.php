@@ -54,7 +54,7 @@ class Institute extends Model
     {
         return $query->where('active', true);
     }
-    
+
     /*
     |----------------------------------
     | Relationships

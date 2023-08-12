@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -71,7 +71,7 @@ return new class extends Migration
                 'description' => '',
                 'general_url' => 'https://www.usaa.com/',
                 'auth_url' => 'https://www.usaa.com/',
-            ]
+            ],
         ];
 
         foreach ($data as $institute) {

@@ -93,7 +93,9 @@ class Budget extends Model
     protected static function booted(): void
     {
         static::created(function (Budget $budget) {
-            $budget->members()->attach($budget->owner->id);
+            $budget->members()->attach($budget->owner->id, [
+                'role' => 'owner',
+            ]);
         });
     }
 

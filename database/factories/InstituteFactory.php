@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class InstituteFactory extends Factory
 {
     protected $model = Institute::class;
-    
+
     /**
      * Define the model's default state.
      *

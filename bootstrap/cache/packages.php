@@ -88,28 +88,6 @@
       'Livewire' => 'Livewire\\Livewire',
     ),
   ),
-  'lorisleiva/laravel-actions' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Lorisleiva\\Actions\\ActionServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Action' => 'Lorisleiva\\Actions\\Facades\\Actions',
-    ),
-  ),
-  'lorisleiva/lody' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Lorisleiva\\Lody\\LodyServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Lody' => 'Lorisleiva\\Lody\\Lody',
-    ),
-  ),
   'mpociot/versionable' => 
   array (
     'providers' => 
@@ -145,15 +123,15 @@
       0 => 'Pest\\Laravel\\PestServiceProvider',
     ),
   ),
-  'spatie/laravel-health' => 
+  'santigarcor/laratrust' => 
   array (
     'providers' => 
     array (
-      0 => 'Spatie\\Health\\HealthServiceProvider',
+      0 => 'Laratrust\\LaratrustServiceProvider',
     ),
     'aliases' => 
     array (
-      'Health' => 'Spatie\\Health\\Facades\\Health',
+      'Laratrust' => 'Laratrust\\LaratrustFacade',
     ),
   ),
   'spatie/laravel-ignition' => 
@@ -165,13 +143,6 @@
     'aliases' => 
     array (
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
-    ),
-  ),
-  'spatie/laravel-permission' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
   'spatie/laravel-stats' => 
@@ -190,17 +161,6 @@
     'aliases' => 
     array (
       'Active' => 'Watson\\Watson\\Facades\\Active',
-    ),
-  ),
-  'wulfheart/laravel-actions-ide-helper' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Wulfheart\\LaravelActionsIdeHelper\\LaravelActionsIdeHelperServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LaravelActionsIdeHelper' => 'Wulfheart\\LaravelActionsIdeHelper\\LaravelActionsIdeHelperFacade',
     ),
   ),
 );

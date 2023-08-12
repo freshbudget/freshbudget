@@ -2,21 +2,26 @@
 
 namespace App\Domains\Accounts\Models;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Shared\Enums\AccountType;
-use App\Domains\Shared\Enums\Currency;
-use App\Domains\Shared\Enums\Frequency;
 use App\Domains\Users\Models\User;
+use App\Domains\Budgets\Models\Budget;
+use App\Domains\Shared\Enums\Currency;
 use Database\Factories\AccountFactory;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Domains\Shared\Enums\Frequency;
 use Illuminate\Database\Eloquent\Model;
+use App\Domains\Shared\Models\Institute;
+use App\Domains\Shared\Enums\AccountType;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Domains\Accounts\Events\AccountCreated;
+use App\Domains\Accounts\Events\AccountDeleted;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Account extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasUlids, Prunable, SoftDeletes;
 
     protected $fillable = [
         'ulid',
@@ -29,7 +34,7 @@ class Account extends Model
         'frequency',
         'url',
         'username',
-        'institution',
+        'institution_id',
         'color',
         'meta',
         'active',
@@ -40,9 +45,15 @@ class Account extends Model
         'budget_id' => 'integer',
         'user_id' => 'integer',
         'type' => AccountType::class,
+        'currency' => Currency::class,
         'frequency' => Frequency::class,
         'meta' => 'array',
         'active' => 'boolean',
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => AccountCreated::class,
+        'deleted' => AccountDeleted::class,
     ];
 
     /*
@@ -58,6 +69,11 @@ class Account extends Model
     public static function newFactory()
     {
         return AccountFactory::new();
+    }
+
+    public function prunable(): Builder
+    {
+        return self::where('deleted_at', '<', now()->subDays(60));
     }
 
     public function uniqueIds(): array
@@ -95,5 +111,13 @@ class Account extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Goes to null if the institute is deleted.
+     */
+    public function institute(): BelongsTo
+    {
+        return $this->belongsTo(Institute::class, 'institution_id');
     }
 }
