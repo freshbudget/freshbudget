@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Database\Factories\IncomeTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeType newQuery()
@@ -31,7 +30,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereTagline($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeType whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class IncomeType extends Model

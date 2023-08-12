@@ -26,7 +26,6 @@ use Mpociot\Versionable\VersionableTrait;
  * @property-write mixed $reason
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Mpociot\Versionable\Version> $versions
  * @property-read int|null $versions_count
- *
  * @method static \Database\Factories\IncomeEntitlementFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement newQuery()
@@ -40,7 +39,8 @@ use Mpociot\Versionable\VersionableTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUpdatedAt($value)
- *
+ * @property int $account_id
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereAccountId($value)
  * @mixin \Eloquent
  */
 class IncomeEntitlement extends Model

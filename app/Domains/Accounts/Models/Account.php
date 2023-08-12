@@ -19,6 +19,60 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Domains\Accounts\Models\Account
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $budget_id
+ * @property int|null $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property AccountType|null $type
+ * @property int|null $subtype_id
+ * @property Currency|null $currency
+ * @property Frequency|null $frequency
+ * @property int|null $institution_id
+ * @property string|null $url
+ * @property string|null $username
+ * @property string|null $color
+ * @property array|null $meta
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read Budget $budget
+ * @property-read Institute|null $institution
+ * @property-read User|null $user
+ * @method static Builder|Account active()
+ * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
+ * @method static Builder|Account newModelQuery()
+ * @method static Builder|Account newQuery()
+ * @method static Builder|Account onlyTrashed()
+ * @method static Builder|Account query()
+ * @method static Builder|Account whereActive($value)
+ * @method static Builder|Account whereBudgetId($value)
+ * @method static Builder|Account whereColor($value)
+ * @method static Builder|Account whereCreatedAt($value)
+ * @method static Builder|Account whereCurrency($value)
+ * @method static Builder|Account whereDeletedAt($value)
+ * @method static Builder|Account whereDescription($value)
+ * @method static Builder|Account whereFrequency($value)
+ * @method static Builder|Account whereId($value)
+ * @method static Builder|Account whereInstitutionId($value)
+ * @method static Builder|Account whereMeta($value)
+ * @method static Builder|Account whereName($value)
+ * @method static Builder|Account whereSubtypeId($value)
+ * @method static Builder|Account whereType($value)
+ * @method static Builder|Account whereUlid($value)
+ * @method static Builder|Account whereUpdatedAt($value)
+ * @method static Builder|Account whereUrl($value)
+ * @method static Builder|Account whereUserId($value)
+ * @method static Builder|Account whereUsername($value)
+ * @method static Builder|Account withTrashed()
+ * @method static Builder|Account withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Account extends Model
 {
     use HasFactory, HasUlids, Prunable, SoftDeletes;

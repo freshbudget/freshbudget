@@ -20,10 +20,10 @@ namespace App\Domains\Accounts\Models{
  * @property int|null $user_id
  * @property string $name
  * @property string|null $description
- * @property \App\Domains\Shared\Enums\AccountType|null $type
+ * @property AccountType|null $type
  * @property int|null $subtype_id
- * @property \App\Domains\Shared\Enums\Currency|null $currency
- * @property \App\Domains\Shared\Enums\Frequency|null $frequency
+ * @property Currency|null $currency
+ * @property Frequency|null $frequency
  * @property int|null $institution_id
  * @property string|null $url
  * @property string|null $username
@@ -33,36 +33,37 @@ namespace App\Domains\Accounts\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Domains\Budgets\Models\Budget $budget
- * @property-read \App\Domains\Shared\Models\Institute|null $institution
- * @property-read \App\Domains\Users\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|Account active()
+ * @property-read Budget $budget
+ * @property-read Institute|null $institution
+ * @property-read User|null $user
+ * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Account newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Account onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Account query()
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereBudgetId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereFrequency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereInstitutionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereMeta($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereSubtypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereUlid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account whereUsername($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Account withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Account withoutTrashed()
+ * @method static Builder|Account newModelQuery()
+ * @method static Builder|Account newQuery()
+ * @method static Builder|Account onlyTrashed()
+ * @method static Builder|Account query()
+ * @method static Builder|Account whereActive($value)
+ * @method static Builder|Account whereBudgetId($value)
+ * @method static Builder|Account whereColor($value)
+ * @method static Builder|Account whereCreatedAt($value)
+ * @method static Builder|Account whereCurrency($value)
+ * @method static Builder|Account whereDeletedAt($value)
+ * @method static Builder|Account whereDescription($value)
+ * @method static Builder|Account whereFrequency($value)
+ * @method static Builder|Account whereId($value)
+ * @method static Builder|Account whereInstitutionId($value)
+ * @method static Builder|Account whereMeta($value)
+ * @method static Builder|Account whereName($value)
+ * @method static Builder|Account whereSubtypeId($value)
+ * @method static Builder|Account whereType($value)
+ * @method static Builder|Account whereUlid($value)
+ * @method static Builder|Account whereUpdatedAt($value)
+ * @method static Builder|Account whereUrl($value)
+ * @method static Builder|Account whereUserId($value)
+ * @method static Builder|Account whereUsername($value)
+ * @method static Builder|Account withTrashed()
+ * @method static Builder|Account withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Account extends \Eloquent {}
 }
@@ -110,11 +111,11 @@ namespace App\Domains\Budgets\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
- * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Accounts\Models\Account> $accounts
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $accounts
  * @property-read int|null $accounts_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Accounts\Models\Account> $activeAccounts
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
  * @property-read int|null $active_accounts_count
+ * @mixin \Eloquent
  */
 	class Budget extends \Eloquent {}
 }
@@ -155,10 +156,10 @@ namespace App\Domains\Budgets\Models{
  * @method static Builder|BudgetInvitation whereToken($value)
  * @method static Builder|BudgetInvitation whereUlid($value)
  * @method static Builder|BudgetInvitation whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $role
- * @method static \Illuminate\Database\Eloquent\Builder|BudgetInvitation pending()
- * @method static \Illuminate\Database\Eloquent\Builder|BudgetInvitation whereRole($value)
+ * @method static Builder|BudgetInvitation pending()
+ * @method static Builder|BudgetInvitation whereRole($value)
+ * @mixin \Eloquent
  */
 	class BudgetInvitation extends \Eloquent {}
 }
@@ -208,7 +209,7 @@ namespace App\Domains\Incomes\Models{
  * @property int|null $user_id
  * @property string $name
  * @property string|null $description
- * @property \App\Domains\Shared\Enums\AccountType|null $type
+ * @property AccountType|null $type
  * @property int|null $subtype_id
  * @property \App\Domains\Shared\Enums\Currency|null $currency
  * @property \App\Domains\Shared\Enums\Frequency|null $frequency
@@ -231,11 +232,11 @@ namespace App\Domains\Incomes\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $entitlements
  * @property-read int|null $entitlements_count
  * @property-read \App\Domains\Shared\Models\Institute|null $institution
- * @property-read \App\Domains\Incomes\Models\IncomeType|null $subtype
+ * @property-read IncomeType|null $subtype
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
  * @property-read \App\Domains\Users\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|Account active()
+ * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Income newQuery()
@@ -262,6 +263,7 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Income extends \Eloquent {}
 }
@@ -301,9 +303,9 @@ namespace App\Domains\Incomes\Models{
  * @method static Builder|IncomeDeduction whereStartDate($value)
  * @method static Builder|IncomeDeduction whereUlid($value)
  * @method static Builder|IncomeDeduction whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $account_id
- * @method static \Illuminate\Database\Eloquent\Builder|IncomeDeduction whereAccountId($value)
+ * @method static Builder|IncomeDeduction whereAccountId($value)
+ * @mixin \Eloquent
  */
 	class IncomeDeduction extends \Eloquent {}
 }
@@ -338,9 +340,9 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $account_id
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereAccountId($value)
+ * @mixin \Eloquent
  */
 	class IncomeEntitlement extends \Eloquent {}
 }
@@ -384,9 +386,9 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereTaxesTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $account_id
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntry whereAccountId($value)
+ * @mixin \Eloquent
  */
 	class IncomeEntry extends \Eloquent {}
 }
@@ -455,9 +457,9 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $account_id
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeTax whereAccountId($value)
+ * @mixin \Eloquent
  */
 	class IncomeTax extends \Eloquent {}
 }
@@ -524,6 +526,7 @@ namespace App\Domains\Shared\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Institute extends \Eloquent {}
 }
@@ -579,9 +582,9 @@ namespace App\Domains\Users\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property bool $finished_onboarding
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFinishedOnboarding($value)
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
 }

@@ -338,7 +338,7 @@ return [
     |
     */
     'post_migrate' => [
-        'ide-helper:models --nowrite',
+        'ide-helper:models -W',
     ],
 
 ];
