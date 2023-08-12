@@ -77,6 +77,12 @@ return new class extends Migration
                 'description' => 'An income that is received from the sales of goods or services.',
             ],
             [
+                'name' => 'Rental',
+                'abbr' => 'Rental',
+                'tagline' => 'Rental Income',
+                'description' => 'An income that is received from the payment of a rental fee.',
+            ],
+            [
                 'name' => 'Dues',
                 'abbr' => 'DUES',
                 'tagline' => 'Dues Income',
@@ -99,6 +105,12 @@ return new class extends Migration
                 'abbr' => 'OTH',
                 'tagline' => 'Other Income',
                 'description' => 'An income that is received as other.',
+            ],
+            [
+                'name' => 'Unknown',
+                'abbr' => 'UNK',
+                'tagline' => 'Unknown Income',
+                'description' => 'An income that is received from an unknown source.',
             ],
         ];
 
