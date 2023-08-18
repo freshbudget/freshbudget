@@ -12,13 +12,6 @@ class BudgetsController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function create()
-    {
-        $this->authorize('create', Budget::class);
-
-        return view('app.budgets.create');
-    }
-
     public function destroy(Budget $budget)
     {
         $this->authorize('delete', $budget);

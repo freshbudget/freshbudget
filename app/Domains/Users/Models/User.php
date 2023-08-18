@@ -2,7 +2,6 @@
 
 namespace App\Domains\Users\Models;
 
-use App\Domains\Budgets\Actions\CreateBudgetAction;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Users\Actions\AcceptBudgetInvitationAction;
@@ -48,7 +47,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $owned_budgets_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -69,11 +67,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- *
  * @property bool $finished_onboarding
- *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFinishedOnboarding($value)
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -92,11 +87,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     const REGISTERED_VIA_INVITATION = 'registered-via-invitation';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'nickname',
@@ -111,11 +101,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'finished_onboarding',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -123,11 +108,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_recovery_codes',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'two_factor_enabled' => 'boolean',
@@ -137,19 +117,18 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /*
-    |----------------------------------
+    |-----------------------------------------
     | Model Configuration
-    |----------------------------------
+    |-----------------------------------------
     */
     protected static function booted(): void
     {
         static::created(function (User $user) {
-            $budget = app(CreateBudgetAction::class)->execute(
-                $user, [
-                    'name' => 'Personal Budget',
-                    'currency' => 'USD',
-                    'personal' => true,
-                ]);
+            $budget = $user->ownedBudgets()->create([
+                'name' => 'Personal Budget',
+                'currency' => 'USD',
+                'personal' => true,
+            ]);
 
             $user->update(['current_budget_id' => $budget->id]);
         });
@@ -171,17 +150,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /*
-    |----------------------------------
+    |-----------------------------------------
     | Accessors, Mutators, Scopes, etc.
-    |----------------------------------
+    |-----------------------------------------
     */
-    public function getAvatarAttribute(): string
-    {
-        return 'https://ui-avatars.com/api/?name='.
-            urlencode(str()->ascii($this->displayName)).
-            '&color=c084fc&background=cbd5e1';
-    }
-
     public function getDisplayNameAttribute(): string
     {
         return $this->nickname ?? $this->name;
@@ -193,13 +165,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /*
-    |----------------------------------
+    |-----------------------------------------
     | Relationships
-    |----------------------------------
+    |-----------------------------------------
     */
     public function currentBudget(): BelongsTo
     {
-        if (is_null($this->current_budget_id) && $this->id) {
+        if (is_null($this->current_budget_id)) {
             $this->switchCurrentBudget($this->personalBudget());
         }
 
@@ -233,9 +205,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /*
-    |--------------------------------------------------------------------------
+    |-----------------------------------------
     | Budget (Team) Functionality
-    |--------------------------------------------------------------------------
+    |-----------------------------------------
     */
     public function acceptBudgetInvitation(BudgetInvitation $invitation): void
     {

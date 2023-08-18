@@ -43,7 +43,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
  * @property-read \App\Domains\Users\Models\User|null $user
- *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
@@ -71,7 +70,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Income extends Account

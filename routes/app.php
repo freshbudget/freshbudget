@@ -10,6 +10,7 @@ use App\Controllers\App\Incomes\IncomeEntitlementsController;
 use App\Controllers\App\Incomes\IncomeEntriesController;
 use App\Controllers\App\Incomes\IncomesController;
 use App\Controllers\App\Incomes\IncomeTaxesController;
+use App\Livewire\Pages\Budgets\CreateBudgetPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,7 +160,7 @@ Route::post('/budgets', [BudgetsController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('app.budgets.store');
 
-Route::get('/budgets/create', [BudgetsController::class, 'create'])
+Route::get('/budgets/create', CreateBudgetPage::class)
     ->middleware(['auth', 'verified'])
     ->name('app.budgets.create');
 

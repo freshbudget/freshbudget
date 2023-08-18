@@ -17,7 +17,6 @@ use Spatie\Stats\Traits\HasStats;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Domains\Incomes\Models\Income $income
- *
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeStatistic decrements()
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeStatistic groupByPeriod(string $period)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeStatistic increments()
@@ -31,7 +30,6 @@ use Spatie\Stats\Traits\HasStats;
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeStatistic whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeStatistic whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeStatistic whereValue($value)
- *
  * @mixin \Eloquent
  */
 class IncomeStatistic extends Model
