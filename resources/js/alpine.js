@@ -19,4 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
     Alpine.data('contextMenu', contextMenu)
 })
 
+document.addEventListener('keydown', (e) => {
+  
+    if (!e.target.hasAttribute('wire:navigate')) {
+        return;
+    }
+  
+    if (e.key.toLowerCase() == 'enter') {
+        Alpine.navigate(e.target.href);
+    }
+  
+});
+
 Livewire.start();
