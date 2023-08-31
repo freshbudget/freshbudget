@@ -6,6 +6,7 @@ use App\Domains\Users\Models\User;
 use App\Livewire\Pages\Auth\Login;
 use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Event;
+
 use function Pest\Livewire\livewire;
 
 test('login page is accessible', function () {

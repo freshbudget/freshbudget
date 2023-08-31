@@ -68,6 +68,18 @@ namespace App\Domains\Accounts\Models{
 	class Account extends \Eloquent {}
 }
 
+namespace App\Domains\Accounts\Models{
+/**
+ * App\Domains\Accounts\Models\AccountLedger
+ *
+ * @method static \Database\Factories\AccountLedgerFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger query()
+ */
+	class AccountLedger extends \Eloquent {}
+}
+
 namespace App\Domains\Budgets\Models{
 /**
  * App\Domains\Budgets\Models\Budget
@@ -263,6 +275,8 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $activeEntitlements
+ * @property-read int|null $active_entitlements_count
  * @mixin \Eloquent
  */
 	class Income extends \Eloquent {}
@@ -342,6 +356,8 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereUpdatedAt($value)
  * @property int $account_id
  * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereAccountId($value)
+ * @property bool $active
+ * @method static \Illuminate\Database\Eloquent\Builder|IncomeEntitlement whereActive($value)
  * @mixin \Eloquent
  */
 	class IncomeEntitlement extends \Eloquent {}

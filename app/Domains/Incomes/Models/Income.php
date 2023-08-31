@@ -43,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
  * @property-read \App\Domains\Users\Models\User|null $user
+ *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
@@ -70,6 +71,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $activeEntitlements
+ * @property-read int|null $active_entitlements_count
+ *
  * @mixin \Eloquent
  */
 class Income extends Account
@@ -108,56 +113,43 @@ class Income extends Account
     | Relationships
     |----------------------------------
     */
-    /**
-     * Cascade deletes when deleting an income.
-     */
     public function deductions(): HasMany
     {
         return $this->hasMany(IncomeDeduction::class, 'account_id');
     }
 
-    /**
-     * Cascade deletes when deleting an income.
-     */
     public function activeDeductions(): HasMany
     {
         return $this->deductions()->where('active', true);
     }
 
-    /**
-     * Cascade deletes when deleting an income.
-     */
     public function taxes(): HasMany
     {
         return $this->hasMany(IncomeTax::class, 'account_id');
     }
 
-    /**
-     * Cascade deletes when deleting an income.
-     */
     public function activeTaxes(): HasMany
     {
         return $this->taxes()->where('active', true);
     }
 
-    /**
-     * Cascade deletes when deleting an income.
-     */
     public function entitlements(): HasMany
     {
         return $this->hasMany(IncomeEntitlement::class, 'account_id');
     }
 
+    public function activeEntitlements(): HasMany
+    {
+        return $this->entitlements()->where('active', true);
+    }
+
+    public function subtype(): BelongsTo
+    {
+        return $this->belongsTo(IncomeType::class, 'subtype_id');
+    }
     // public function statistics(): HasMany
     // {
     //     return $this->hasMany(IncomeStatistic::class, 'income_id');
     // }
 
-    /**
-     * Goes to null if the income type is deleted.
-     */
-    public function subtype(): BelongsTo
-    {
-        return $this->belongsTo(IncomeType::class, 'subtype_id');
-    }
 }

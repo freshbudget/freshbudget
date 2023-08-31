@@ -6,6 +6,7 @@ use App\Domains\Users\Models\User;
 use App\Livewire\Auth\RegisterForm;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
+
 use function Pest\Livewire\livewire;
 
 test('register page is accessible', function () {

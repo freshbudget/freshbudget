@@ -30,6 +30,7 @@ class IncomeEntitlementFactory extends Factory
             'amount' => $this->faker->numberBetween(0, 10000),
             'start_date' => $startDate,
             'end_date' => $endDate,
+            'active' => true,
         ];
     }
 

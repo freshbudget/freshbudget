@@ -3,6 +3,7 @@
 namespace App\Domains\Budgets\Models;
 
 use App\Domains\Accounts\Models\Account;
+use App\Domains\Budgets\Concerns\ManagesMemberships;
 use App\Domains\Budgets\Events\BudgetCreated;
 use App\Domains\Budgets\Events\BudgetDeleted;
 use App\Domains\Incomes\Models\Income;
@@ -12,7 +13,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * App\Domains\Budgets\Models\Budget
  *
@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read User $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
+ *
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
@@ -55,10 +56,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $accounts
  * @property-read int|null $accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
  * @property-read int|null $active_accounts_count
+ *
  * @mixin \Eloquent
  */
 
@@ -67,7 +70,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Budget extends Model
 {
-    use HasFactory, HasUlids, SoftDeletes;
+    use HasFactory, HasUlids, ManagesMemberships, SoftDeletes;
 
     protected $fillable = [
         'ulid',
@@ -148,62 +151,8 @@ class Budget extends Model
         return $this->belongsTo(User::class, 'deleted_by');
     }
 
-    public function invitations(): HasMany
-    {
-        return $this->hasMany(BudgetInvitation::class, 'budget_id');
-    }
-
-    public function pendingInvitations(): HasMany
-    {
-        return $this->invitations()->where('state', BudgetInvitation::STATE_PENDING);
-    }
-
-    public function members(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'budget_users', 'budget_id', 'user_id')->withTimestamps();
-    }
-
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Team Budget Functionality
-    |--------------------------------------------------------------------------
-    */
-    public function addMember(User $user): void
-    {
-        $this->members()->attach($user->id);
-    }
-
-    public function hasMember(User $user): bool
-    {
-        return $this->members->contains($user) || $this->owner->is($user);
-    }
-
-    public function hasMemberWithEmail(string $email): bool
-    {
-        return $this->members()->where('email', $email)->exists();
-    }
-
-    public function isOwnedBy(User $user): bool
-    {
-        return $this->owner->is($user);
-    }
-
-    public function removeMember(User $user): void
-    {
-        $this->members()->detach($user->id);
-    }
-
-    public function hasCurrentMembers(User $exclude = null): bool
-    {
-        return $this->members()
-            ->where('current_budget_id', $this->id)
-            ->when($exclude, function ($query, $user) {
-                $query->where('user_id', '!=', $user->id);
-            })->exists();
     }
 }

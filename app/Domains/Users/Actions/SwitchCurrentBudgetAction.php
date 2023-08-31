@@ -11,7 +11,7 @@ class SwitchCurrentBudgetAction
 {
     public function execute(User $user, Budget $budget): User
     {
-        if(!$budget->hasMember($user)) {
+        if (! $budget->hasMember($user)) {
             throw new CannotAccessABudgetYouDontBelongTo();
         }
 

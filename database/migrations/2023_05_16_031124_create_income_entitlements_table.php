@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
 
             // Foreign Keys

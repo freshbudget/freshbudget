@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Domains\Incomes\Models\Income $income
  * @property-read IncomeDeduction|null $previous
+ *
  * @method static Builder|IncomeDeduction active()
  * @method static \Database\Factories\IncomeDeductionFactory factory($count = null, $state = [])
  * @method static Builder|IncomeDeduction newModelQuery()
@@ -43,8 +44,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static Builder|IncomeDeduction whereStartDate($value)
  * @method static Builder|IncomeDeduction whereUlid($value)
  * @method static Builder|IncomeDeduction whereUpdatedAt($value)
+ *
  * @property int $account_id
+ *
  * @method static Builder|IncomeDeduction whereAccountId($value)
+ *
  * @mixin \Eloquent
  */
 class IncomeDeduction extends Model

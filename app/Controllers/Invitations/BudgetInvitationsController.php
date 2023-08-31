@@ -154,6 +154,7 @@ class BudgetInvitationsController
 
                 return redirect()->route('app.index');
             }
+
             // maybe flash a message to the user
             return view('invitations.accepted');
         } else {

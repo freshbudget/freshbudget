@@ -4,6 +4,7 @@ use App\Domains\Users\Models\User;
 use App\Livewire\Auth\EmailVerificationRequestForm;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
+
 use function Pest\Livewire\livewire;
 
 // test the page is accessible

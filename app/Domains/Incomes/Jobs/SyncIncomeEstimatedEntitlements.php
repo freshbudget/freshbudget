@@ -13,7 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Spatie\Stats\StatsWriter;
 
-class SyncIncomeEstimatedEntitlements implements ShouldQueue, ShouldBeUnique
+class SyncIncomeEstimatedEntitlements implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

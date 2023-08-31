@@ -19,7 +19,7 @@ class Login extends Component
 
     public function mount()
     {
-        if(app()->environment('local')) {
+        if (app()->environment('local')) {
             $this->fill([
                 'email' => 'admin@email.com',
                 'password' => 'password',
