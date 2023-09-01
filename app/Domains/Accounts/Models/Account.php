@@ -73,6 +73,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
  *
+ * @property int|null $ledger_id
+ * @property-read AccountLedger|null $ledger
+ *
+ * @method static Builder|Account whereLedgerId($value)
+ *
  * @mixin \Eloquent
  */
 class Account extends Model
@@ -95,6 +100,7 @@ class Account extends Model
         'color',
         'meta',
         'active',
+        'ledger_id',
     ];
 
     protected $casts = [
@@ -119,6 +125,19 @@ class Account extends Model
     | Model Configuration
     |----------------------------------
     */
+    protected static function booted(): void
+    {
+        static::created(function (Account $account) {
+            $ledger = AccountLedger::create([
+                'account_id' => $account->id,
+            ]);
+
+            $account->update([
+                'ledger_id' => $ledger->id,
+            ]);
+        });
+    }
+
     public function getRouteKeyName()
     {
         return 'ulid';
@@ -162,6 +181,11 @@ class Account extends Model
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institute::class, 'institution_id');
+    }
+
+    public function ledger(): BelongsTo
+    {
+        return $this->belongsTo(AccountLedger::class, 'ledger_id');
     }
 
     public function user(): BelongsTo

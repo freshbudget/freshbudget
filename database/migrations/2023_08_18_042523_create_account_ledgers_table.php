@@ -15,16 +15,6 @@ return new class extends Migration
             $table->id();
             $table->ulid('ulid')->index();
             $table->unsignedBigInteger('account_id')->index();
-            $table->unsignedBigInteger('gross_amount')->default(0);
-            $table->unsignedBigInteger('net_amount')->default(0);
-            $table->unsignedBigInteger('total_entitlements')->default(0)->nullable();
-            $table->unsignedBigInteger('total_taxes')->default(0)->nullable();
-            $table->unsignedBigInteger('total_deductions')->default(0)->nullable();
-            $table->json('entitlements')->nullable();
-            $table->json('taxes')->nullable();
-            $table->json('deductions')->nullable();
-            $table->json('meta')->nullable();
-            $table->timestamp('date')->nullable();
             $table->timestamps();
 
             // Foreign Keys

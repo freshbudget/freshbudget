@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('role')->nullable();
             $table->timestamps();
-            
+
             // Foreign keys
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

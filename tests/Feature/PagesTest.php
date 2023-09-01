@@ -1,24 +1,28 @@
 <?php
 
-test('the home page is accessible', function () {
-    $response = $this->get('/');
-    $response->assertStatus(200);
-    $response = $this->get(route('welcome'));
-    $response->assertStatus(200);
+$routes = [
+    'welcome',
+    'terms',
+    'privacy',
+];
+
+$namedRoutes = [
+    'welcome',
+    'terms',
+    'privacy',
+];
+
+test('certain uris are accessible', function () use ($routes) {
+    foreach ($routes as $route) {
+        $response = $this->get($route);
+        $response->assertStatus(200);
+    }
 });
 
-// the terms page is accessible
-test('the terms page is accessible', function () {
-    $response = $this->get('/terms');
-    $response->assertStatus(200);
-    $response = $this->get(route('terms'));
-    $response->assertStatus(200);
-});
-
-// the privacy page is accessible
-test('the privacy page is accessible', function () {
-    $response = $this->get('/privacy');
-    $response->assertStatus(200);
-    $response = $this->get(route('privacy'));
-    $response->assertStatus(200);
+// test certain named routes are accessible
+test('certain named routes are accessible', function () use ($namedRoutes) {
+    foreach ($namedRoutes as $route) {
+        $response = $this->get(route($route));
+        $response->assertStatus(200);
+    }
 });

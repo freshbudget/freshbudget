@@ -32,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
     {
         \Debugbar::disable();
         Model::preventLazyLoading(! $this->app->isLocal());
-        Model::preventSilentlyDiscardingAttributes($this->app->isLocal());
+        Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
     }
 }

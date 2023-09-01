@@ -5,6 +5,7 @@ namespace App\Domains\Incomes\Models;
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Shared\Enums\AccountType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Domains\Incomes\Models\Income
@@ -73,10 +74,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $activeEntitlements
  * @property-read int|null $active_entitlements_count
- * @property int|null $ledger_id
- * @property-read \App\Domains\Accounts\Models\AccountLedger|null $ledger
- *
- * @method static \Illuminate\Database\Eloquent\Builder|Income whereLedgerId($value)
  *
  * @mixin \Eloquent
  */
@@ -95,11 +92,57 @@ class Income extends Account
         });
     }
 
+    /**
+     * OLD
+     * // fillable
+     * 'estimated_entitlements_per_period',
+     * 'estimated_taxes_per_period',
+     * 'estimated_deductions_per_period',
+     * 'estimated_net_per_period',
+     *
+     * // casts
+     * 'estimated_entitlements_per_period' => 'integer',
+     * 'estimated_taxes_per_period' => 'integer',
+     * 'estimated_deductions_per_period' => 'integer',
+     *
+     * // presenters
+     */
+
     /*
     |----------------------------------
     | Relationships
     |----------------------------------
     */
+    public function deductions(): HasMany
+    {
+        return $this->hasMany(IncomeDeduction::class, 'account_id');
+    }
+
+    public function activeDeductions(): HasMany
+    {
+        return $this->deductions()->where('active', true);
+    }
+
+    public function taxes(): HasMany
+    {
+        return $this->hasMany(IncomeTax::class, 'account_id');
+    }
+
+    public function activeTaxes(): HasMany
+    {
+        return $this->taxes()->where('active', true);
+    }
+
+    public function entitlements(): HasMany
+    {
+        return $this->hasMany(IncomeEntitlement::class, 'account_id');
+    }
+
+    public function activeEntitlements(): HasMany
+    {
+        return $this->entitlements()->where('active', true);
+    }
+
     public function subtype(): BelongsTo
     {
         return $this->belongsTo(IncomeType::class, 'subtype_id');

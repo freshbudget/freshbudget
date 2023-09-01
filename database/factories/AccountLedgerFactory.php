@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Domains\Accounts\Models\Account;
 use App\Domains\Accounts\Models\AccountLedger;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class AccountLedgerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'account_id' => Account::factory(),
         ];
     }
 }

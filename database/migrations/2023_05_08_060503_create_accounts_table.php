@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->json('meta')->nullable();
             $table->boolean('active')->default(true);
+            $table->unsignedBigInteger('ledger_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

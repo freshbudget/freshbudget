@@ -24,7 +24,7 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            'budget_id' => Budget::factory(),
+            'budget_id' => Budget::factory()->create()->id,
             'user_id' => null,
             'name' => $this->faker->name,
             'description' => null,
@@ -38,6 +38,7 @@ class AccountFactory extends Factory
             'color' => null,
             'meta' => null,
             'active' => true,
+            'ledger_id' => null,
         ];
     }
 
