@@ -22,11 +22,13 @@ return new class extends Migration
             $table->timestamp('expires_at');
             $table->string('state');
             $table->unsignedBigInteger('budget_id')->nullable();
-            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->unsignedBigInteger('sender_id')->nullable();
-            $table->foreign('sender_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamp('sent_at')->nullable();
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

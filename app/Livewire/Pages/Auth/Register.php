@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Auth;
+namespace App\Livewire\Pages\Auth;
 
 use App\Domains\Users\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class RegisterForm extends Component
+class Register extends Component
 {
     #[Rule(['required', 'string', 'min:2', 'max:255'])]
     public $name = '';

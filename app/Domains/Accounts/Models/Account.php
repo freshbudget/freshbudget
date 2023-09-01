@@ -154,28 +154,18 @@ class Account extends Model
     | Relationships
     |----------------------------------
     */
-    /**
-     * Cascade deletes when deleting a budget.
-     */
     public function budget(): BelongsTo
     {
         return $this->belongsTo(Budget::class, 'budget_id');
     }
 
-    /**
-     * Goes to null if the user is deleted.
-     * If the user is removed from the budget, goes to null.
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    /**
-     * Goes to null if the institute is deleted.
-     */
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institute::class, 'institution_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -40,4 +40,12 @@ class AccountFactory extends Factory
             'active' => true,
         ];
     }
+
+    public function income(): self
+    {
+        return $this->state([
+            'type' => AccountType::REVENUE,
+            'subtype_id' => IncomeType::inRandomOrder()->first()->id,
+        ]);
+    }
 }

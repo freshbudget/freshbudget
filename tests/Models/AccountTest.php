@@ -134,27 +134,3 @@ test('it has the soft deletes trait', function () {
 
     expect(class_uses_recursive($model))->toContain(SoftDeletes::class);
 });
-
-// the income model extends the account model
-test('the income model extends the account model', function () {
-    $data = Account::factory()->make([
-        'type' => null,
-    ])->toArray();
-
-    $income = Income::create($data);
-
-    expect($income)->toBeInstanceOf(Account::class);
-});
-
-// the income model has a global scope to only show income accounts
-test('the income model has a global scope to only show income accounts', function () {
-    Account::factory()->count(5)->create([
-        'type' => AccountType::EXPENSE,
-    ]);
-
-    Account::factory()->count(2)->create([
-        'type' => AccountType::REVENUE,
-    ]);
-
-    expect(Income::all())->toHaveCount(2);
-});

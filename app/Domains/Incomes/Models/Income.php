@@ -147,9 +147,4 @@ class Income extends Account
     {
         return $this->belongsTo(IncomeType::class, 'subtype_id');
     }
-    // public function statistics(): HasMany
-    // {
-    //     return $this->hasMany(IncomeStatistic::class, 'income_id');
-    // }
-
 }

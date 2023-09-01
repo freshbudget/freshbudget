@@ -3,7 +3,7 @@
 // test the register page is accessible
 
 use App\Domains\Users\Models\User;
-use App\Livewire\Auth\RegisterForm;
+use App\Livewire\Pages\Auth\Register;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 
@@ -19,7 +19,7 @@ test('register page is accessible', function () {
 test('register page contains livewire component', function () {
     $response = $this->get(route('register'));
 
-    $response->assertSeeLivewire(RegisterForm::class);
+    $response->assertSeeLivewire(Register::class);
 });
 
 // authenticated users are redirected to the welcome page
@@ -33,7 +33,7 @@ test('authenticated users are redirected to the app dashboard', function () {
 
 // test name is required
 test('name is required and must be between 2 and 255 chars', function () {
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', '')
         ->set('email', 'user@email.com')
         ->set('password', 'password')
@@ -41,7 +41,7 @@ test('name is required and must be between 2 and 255 chars', function () {
         ->call('attempt')
         ->assertHasErrors(['name' => 'required']);
 
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'a')
         ->set('email', 'user@email.com')
         ->set('password', 'password')
@@ -49,7 +49,7 @@ test('name is required and must be between 2 and 255 chars', function () {
         ->call('attempt')
         ->assertHasErrors(['name' => 'min']);
 
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', str_repeat('a', 256))
         ->set('email', 'user@email.com')
         ->set('password', 'password')
@@ -60,7 +60,7 @@ test('name is required and must be between 2 and 255 chars', function () {
 
 // test email is required
 test('email is required and must be a valid email address', function () {
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', '')
         ->set('password', 'password')
@@ -68,7 +68,7 @@ test('email is required and must be a valid email address', function () {
         ->call('attempt')
         ->assertHasErrors(['email' => 'required']);
 
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', 'not-an-email')
         ->set('password', 'password')
@@ -81,7 +81,7 @@ test('email is required and must be a valid email address', function () {
 test('email must be unique', function () {
     $user = User::factory()->create();
 
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', $user->email)
         ->set('password', 'password')
@@ -92,7 +92,7 @@ test('email must be unique', function () {
 
 // test password is required
 test('password is required, must be at least 8 chars, and confirmed', function () {
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', 'user@email.com')
         ->set('password', '')
@@ -100,7 +100,7 @@ test('password is required, must be at least 8 chars, and confirmed', function (
         ->call('attempt')
         ->assertHasErrors(['password' => 'required']);
 
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', 'user@email.com')
         ->set('password', 'password123')
@@ -111,7 +111,7 @@ test('password is required, must be at least 8 chars, and confirmed', function (
 
 // test valid inputs register a user
 test('valid inputs register a user', function () {
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', 'user@email.com')
         ->set('password', 'password123')
@@ -130,7 +130,7 @@ test('a registed event is dispatched', function () {
         Registered::class,
     ]);
 
-    livewire(RegisterForm::class)
+    livewire(Register::class)
         ->set('name', 'John Doe')
         ->set('email', 'user@email.com')
         ->set('password', 'password123')

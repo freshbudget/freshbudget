@@ -5,17 +5,17 @@ use App\Controllers\Auth\EmailVerificationRequestController;
 use App\Livewire\Auth\EmailVerificationRequestForm;
 use App\Livewire\Auth\PasswordResetForm;
 use App\Livewire\Auth\PasswordResetRequestForm;
-use App\Livewire\Auth\RegisterForm;
 use App\Livewire\Pages\Auth\Login;
+use App\Livewire\Pages\Auth\Register;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/register', Register::class)
+    ->middleware(['guest', 'throttle:50,1'])
+    ->name('register');
 
 Route::get('/login', Login::class)
     ->middleware(['guest', 'throttle:50,1'])
     ->name('login');
-
-Route::get('/register', RegisterForm::class)
-    ->middleware(['guest', 'throttle:50,1'])
-    ->name('register');
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware(['auth'])

@@ -69,70 +69,70 @@ Route::put('/incomes/{income}', [IncomesController::class, 'update'])
 | Incomes Entries
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{account}/entries/create', [IncomeEntriesController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.entries.create');
+// Route::get('/incomes/{account}/entries/create', [IncomeEntriesController::class, 'create'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.entries.create');
 
 /*
 |--------------------------------------------------------------------------
 | Income Entitlements
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.entitlements.show');
+// Route::get('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.entitlements.show');
 
-Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.entitlements.create');
+// Route::get('/incomes/{income}/entitlements/create', [IncomeEntitlementsController::class, 'create'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.entitlements.create');
 
-Route::post('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'store'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.entitlements.store');
+// Route::post('/incomes/{income}/entitlements', [IncomeEntitlementsController::class, 'store'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.entitlements.store');
 
-Route::get('/incomes/{income}/entitlements/{entitlement}/edit', [IncomeEntitlementsController::class, 'edit'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.entitlements.edit')
-    ->scopeBindings();
+// Route::get('/incomes/{income}/entitlements/{entitlement}/edit', [IncomeEntitlementsController::class, 'edit'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.entitlements.edit')
+//     ->scopeBindings();
 
-Route::put('/incomes/{income}/entitlements/{entitlement}', [IncomeEntitlementsController::class, 'update'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.entitlements.update')
-    ->scopeBindings();
+// Route::put('/incomes/{income}/entitlements/{entitlement}', [IncomeEntitlementsController::class, 'update'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.entitlements.update')
+//     ->scopeBindings();
 
 /*
 |--------------------------------------------------------------------------
 | Income Taxes
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{account}/taxes', [IncomeTaxesController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.taxes.show');
+// Route::get('/incomes/{account}/taxes', [IncomeTaxesController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.taxes.show');
 
-Route::get('/incomes/{account}/taxes/create', [IncomeTaxesController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.taxes.create');
+// Route::get('/incomes/{account}/taxes/create', [IncomeTaxesController::class, 'create'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.taxes.create');
 
-Route::post('/incomes/{account}/taxes', [IncomeTaxesController::class, 'store'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.taxes.store');
+// Route::post('/incomes/{account}/taxes', [IncomeTaxesController::class, 'store'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.taxes.store');
 
 /*
 |--------------------------------------------------------------------------
 | Income Deductions
 |--------------------------------------------------------------------------
 */
-Route::get('/incomes/{account}/deductions/create', [IncomeDeductionsController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.deductions.create');
+// Route::get('/incomes/{account}/deductions/create', [IncomeDeductionsController::class, 'create'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.deductions.create');
 
-Route::post('/incomes/{account}/deductions', [IncomeDeductionsController::class, 'store'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.deductions.store');
+// Route::post('/incomes/{account}/deductions', [IncomeDeductionsController::class, 'store'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.deductions.store');
 
-Route::get('/incomes/{account}/deductions', [IncomeDeductionsController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('app.incomes.deductions.show');
+// Route::get('/incomes/{account}/deductions', [IncomeDeductionsController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('app.incomes.deductions.show');
 
 /*
 |--------------------------------------------------------------------------

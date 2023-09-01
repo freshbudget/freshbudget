@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('budget_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('budget_id')->nullable();
-            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('role')->nullable();
             $table->timestamps();
+            
+            // Foreign keys
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

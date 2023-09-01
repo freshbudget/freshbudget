@@ -46,17 +46,17 @@
             ],
             [
                 'label' => 'Entitlements',
-                'route' => route('app.incomes.entitlements.show', $income),
+                'route' => '#',
                 'active' => 'app.incomes.entitlements.*'
             ],
             [
                 'label' => 'Taxes',
-                'route' => route('app.incomes.taxes.show', $income),
+                'route' => '#',
                 'active' => 'app.incomes.taxes.*'
             ],
             [
                 'label' => 'Deductions',
-                'route' => route('app.incomes.deductions.show', $income),
+                'route' => '#',
                 'active' => 'app.incomes.deductions.*'
             ],
             [

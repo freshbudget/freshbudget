@@ -1,15 +1,28 @@
 <?php
 
-// use App\Domains\Accounts\Models\Account;
-// use App\Domains\Budgets\Actions\RemoveUserFromBudgetAction;
-// use App\Domains\Budgets\Models\Budget;
-// use App\Domains\Incomes\Models\Income;
-// use App\Domains\Incomes\Models\IncomeDeduction;
-// use App\Domains\Incomes\Models\IncomeEntitlement;
-// use App\Domains\Incomes\Models\IncomeTax;
-// use App\Domains\Incomes\Models\IncomeType;
-// use App\Domains\Shared\Enums\Frequency;
-// use App\Domains\Users\Models\User;
+use App\Domains\Accounts\Models\Account;
+use App\Domains\Incomes\Models\Income;
+use App\Domains\Shared\Enums\AccountType;
+
+// the income model extends the account model
+test('the income model extends the account model', function () {
+    $income = Account::factory()->income()->create();
+
+    expect($income)->toBeInstanceOf(Account::class);
+});
+
+// the income model has a global scope to only show income accounts
+test('the income model has a global scope to only show income accounts', function () {
+    Account::factory()->count(5)->create([
+        'type' => AccountType::EXPENSE,
+    ]);
+
+    Account::factory()->count(2)->create([
+        'type' => AccountType::REVENUE,
+    ]);
+
+    expect(Income::all())->toHaveCount(2);
+});
 
 // test('when model is created, a ulid is generated', function () {
 //     $model = Income::factory()->create();
