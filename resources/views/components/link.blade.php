@@ -1,12 +1,16 @@
 @props([
-    'spa' => true
+    'spa' => true,
+    'hover' => true
 ])
 
 <a 
     @if($spa) 
-        wire:navigate 
+        @if($hover)
+            wire:navigate.hover
+        @else
+            wire:navigate 
+        @endif
         x-data
-        x-on:keydown.enter.prevent="$wire.navigate('{{ $attributes->get('href') }}')"
     @endif {{ $attributes }}>
     {{ $slot }}
 </a>

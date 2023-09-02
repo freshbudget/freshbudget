@@ -6,9 +6,9 @@
     
                     @if ($breadcrumb->url)
                         <li>
-                            <a href="{{ $breadcrumb->url }}" class="hover:underline focus:text-blue-900 focus:underline">
+                            <x-link href="{{ $breadcrumb->url }}" class="hover:underline focus:text-blue-900 focus:underline">
                                 {{ $breadcrumb->title }}
-                            </a>
+                            </x-link>
                         </li>
                     @else
                         <li>
