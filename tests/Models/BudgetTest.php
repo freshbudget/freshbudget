@@ -5,6 +5,7 @@ use App\Domains\Budgets\Events\BudgetCreated;
 use App\Domains\Budgets\Events\BudgetDeleted;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Budgets\Models\BudgetLedger;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Users\Models\User;
@@ -234,4 +235,11 @@ test('it can determine if any users have the budget set as their current budget,
     $user->switchCurrentBudget($budget);
 
     expect($budget->hasCurrentMembers(exclude: $user))->toBeFalse();
+});
+
+// when a budget is created, a ledger is created
+test('when a budget is created, a ledger is created', function () {
+    $budget = Budget::factory()->create();
+
+    expect($budget->ledger)->toBeInstanceOf(BudgetLedger::class);
 });

@@ -2,7 +2,6 @@
 
 namespace App\Controllers\App\Budgets;
 
-use App\Domains\Budgets\Actions\CreateBudgetAction;
 use App\Domains\Budgets\Models\Budget;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -89,11 +88,11 @@ class BudgetsController
     {
         $this->authorize('create', Budget::class);
 
-        $action = new CreateBudgetAction();
+        $validated = $this->validate($request, [
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+        ]);
 
-        $validated = $this->validate($request, $action::rules());
-
-        $budget = $action->execute(user(), $validated);
+        $budget = user()->ownedBudgets()->create($validated);
 
         user()->switchCurrentBudget($budget);
 

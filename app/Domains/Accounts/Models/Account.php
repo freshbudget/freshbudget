@@ -44,7 +44,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Budget $budget
  * @property-read Institute|null $institution
  * @property-read User|null $user
- *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static Builder|Account newModelQuery()
@@ -72,12 +71,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Account whereUsername($value)
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
- *
- * @property int|null $ledger_id
- * @property-read AccountLedger|null $ledger
- *
- * @method static Builder|Account whereLedgerId($value)
- *
  * @mixin \Eloquent
  */
 class Account extends Model
@@ -100,7 +93,6 @@ class Account extends Model
         'color',
         'meta',
         'active',
-        'ledger_id',
     ];
 
     protected $casts = [
@@ -125,19 +117,6 @@ class Account extends Model
     | Model Configuration
     |----------------------------------
     */
-    protected static function booted(): void
-    {
-        static::created(function (Account $account) {
-            $ledger = AccountLedger::create([
-                'account_id' => $account->id,
-            ]);
-
-            $account->update([
-                'ledger_id' => $ledger->id,
-            ]);
-        });
-    }
-
     public function getRouteKeyName()
     {
         return 'ulid';
@@ -181,11 +160,6 @@ class Account extends Model
     public function institution(): BelongsTo
     {
         return $this->belongsTo(Institute::class, 'institution_id');
-    }
-
-    public function ledger(): BelongsTo
-    {
-        return $this->belongsTo(AccountLedger::class, 'ledger_id');
     }
 
     public function user(): BelongsTo

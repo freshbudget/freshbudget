@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf2a2f2c3b5ca717b3ac1d9413fa13c2",
+    "content-hash": "5781476a273a068f9ceb7830225ca9a3",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -3908,16 +3908,16 @@
         },
         {
             "name": "statix-php/laravel-form-actions",
-            "version": "0.0.1",
+            "version": "0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/statix-php/laravel-form-actions.git",
-                "reference": "ae92397dd2f404359cdc5167e87d300170d1b8ee"
+                "reference": "83f0d33d4829468496973030fd73644c63a3548c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/statix-php/laravel-form-actions/zipball/ae92397dd2f404359cdc5167e87d300170d1b8ee",
-                "reference": "ae92397dd2f404359cdc5167e87d300170d1b8ee",
+                "url": "https://api.github.com/repos/statix-php/laravel-form-actions/zipball/83f0d33d4829468496973030fd73644c63a3548c",
+                "reference": "83f0d33d4829468496973030fd73644c63a3548c",
                 "shasum": ""
             },
             "require": {
@@ -3974,9 +3974,9 @@
             ],
             "support": {
                 "issues": "https://github.com/statix-php/laravel-form-actions/issues",
-                "source": "https://github.com/statix-php/laravel-form-actions/tree/0.0.1"
+                "source": "https://github.com/statix-php/laravel-form-actions/tree/0.0.3"
             },
-            "time": "2023-09-02T05:47:25+00:00"
+            "time": "2023-09-02T06:06:29+00:00"
         },
         {
             "name": "symfony/console",

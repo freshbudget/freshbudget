@@ -7,9 +7,6 @@ use Illuminate\Support\Str;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('institutes', function (Blueprint $table) {
@@ -87,9 +84,6 @@ return new class extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('institutes');

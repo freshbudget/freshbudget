@@ -38,7 +38,6 @@ class AccountFactory extends Factory
             'color' => null,
             'meta' => null,
             'active' => true,
-            'ledger_id' => null,
         ];
     }
 

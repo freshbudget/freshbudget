@@ -3,7 +3,6 @@
 use App\Domains\Accounts\Events\AccountCreated;
 use App\Domains\Accounts\Events\AccountDeleted;
 use App\Domains\Accounts\Models\Account;
-use App\Domains\Accounts\Models\AccountLedger;
 use App\Domains\Budgets\Models\Budget;
 use App\Domains\Shared\Enums\AccountType;
 use App\Domains\Shared\Enums\Currency;
@@ -133,12 +132,4 @@ test('it has the soft deletes trait', function () {
     $model = Account::factory()->create();
 
     expect(class_uses_recursive($model))->toContain(SoftDeletes::class);
-});
-
-// an account automatically gets a ledger when created
-test('an account automatically gets a ledger when created', function () {
-    $model = Account::factory()->create();
-
-    expect($model->ledger)->not()->toBeNull();
-    expect($model->ledger)->toBeInstanceOf(AccountLedger::class);
 });

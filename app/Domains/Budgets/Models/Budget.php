@@ -11,8 +11,6 @@ use App\Domains\Users\Models\User;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * App\Domains\Budgets\Models\Budget
  *
@@ -38,7 +36,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read User $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
- *
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
@@ -56,16 +53,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $accounts
  * @property-read int|null $accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
  * @property-read int|null $active_accounts_count
- *
+ * @property-read \App\Domains\Budgets\Models\BudgetLedger|null $ledger
  * @mixin \Eloquent
  */
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Budget extends Model
@@ -103,6 +102,9 @@ class Budget extends Model
             $budget->members()->attach($budget->owner->id, [
                 'role' => 'owner',
             ]);
+
+            // create a ledger for the budget
+            $budget->ledger()->create();
         });
     }
 
@@ -154,5 +156,10 @@ class Budget extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function ledger(): HasOne
+    {
+        return $this->hasOne(BudgetLedger::class, 'budget_id');
     }
 }

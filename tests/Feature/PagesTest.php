@@ -1,7 +1,7 @@
 <?php
 
 $routes = [
-    'welcome',
+    '/',
     'terms',
     'privacy',
 ];

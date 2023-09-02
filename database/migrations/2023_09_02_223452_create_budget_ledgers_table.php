@@ -8,21 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('budget_users', function (Blueprint $table) {
+        Schema::create('budget_ledgers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('budget_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('role')->nullable();
+            $table->ulid('ulid')->unique()->index();
+            $table->unsignedBigInteger('budget_id')->index();
             $table->timestamps();
 
             // Foreign keys
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('budget_users');
+        Schema::dropIfExists('budget_ledgers');
     }
 };

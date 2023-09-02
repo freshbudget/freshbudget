@@ -36,4 +36,13 @@ enum Currency: string
             default => '$',
         };
     }
+
+    public static function forSelectInput(): array
+    {
+        return [
+            self::USD => 'United States Dollar (USD)',
+            self::CAD => 'Canadian Dollar (CAD)',
+            self::EUR => 'Euro (EUR)',
+        ];
+    }
 }

@@ -50,6 +50,10 @@ trait ManagesMemberships
 
     public function removeMember(User $user): void
     {
+        $this->incomes()->where('user_id', $user->id)->update([
+            'user_id' => null,
+        ]);
+
         $this->members()->detach($user->id);
     }
 
