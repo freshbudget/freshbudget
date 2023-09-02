@@ -141,6 +141,17 @@
       0 => 'Spatie\\Stats\\StatsServiceProvider',
     ),
   ),
+  'statix-php/laravel-form-actions' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Statix\\FormAction\\FormActionServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'FormAction' => 'Statix\\FormAction\\Facades\\FormAction',
+    ),
+  ),
   'watson/active' => 
   array (
     'providers' => 

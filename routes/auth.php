@@ -1,6 +1,6 @@
 <?php
 
-use App\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Http\Request;
 use App\Controllers\Auth\EmailVerificationRequestController;
 use App\Livewire\Auth\EmailVerificationRequestForm;
 use App\Livewire\Auth\PasswordResetForm;
@@ -17,10 +17,6 @@ Route::get('/login', Login::class)
     ->middleware(['guest', 'throttle:50,1'])
     ->name('login');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware(['auth'])
-    ->name('logout');
-
 Route::get('/email/verification', EmailVerificationRequestForm::class)
     ->middleware(['auth'])
     ->name('verification.notice');
@@ -36,6 +32,16 @@ Route::get('/password/forgot', PasswordResetRequestForm::class)
 Route::get('/password/reset', PasswordResetForm::class)
     ->middleware(['guest'])
     ->name('password.reset');
+
+Route::post('/logout', function(Request $request) {
+    auth()->logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect()->route('welcome');
+})->middleware(['auth'])->name('logout');
 
 // Route::get('/password/confirm', PasswordConfirmForm::class)
 //     ->middleware(['auth'])

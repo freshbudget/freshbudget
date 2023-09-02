@@ -4,6 +4,9 @@ namespace App\Console;
 
 use App\Domains\Accounts\Models\Account;
 use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Domains\Incomes\Jobs\SyncIncomeEstimatedDeductions;
+use App\Domains\Incomes\Jobs\SyncIncomeEstimatedEntitlements;
+use App\Domains\Incomes\Jobs\SyncIncomeEstimatedTaxes;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +19,11 @@ class Kernel extends ConsoleKernel
         ])->dailyAt('00:00');
 
         $schedule->command('auth:clear-resets')->everyFourHours();
+
+        // TODO: Refactor this to use a parent job that does chaining and batching as required.
+        // $schedule->job(SyncIncomeEstimatedEntitlements::class)->dailyAt('00:00');
+        // $schedule->job(SyncIncomeEstimatedTaxes::class)->dailyAt('00:00');
+        // $schedule->job(SyncIncomeEstimatedDeductions::class)->dailyAt('00:00');
     }
 
     protected function commands(): void

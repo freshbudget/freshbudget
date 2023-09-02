@@ -63,8 +63,10 @@ namespace App\Domains\Accounts\Models{
  * @method static Builder|Account whereUsername($value)
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
+ * @property int|null $ledger_id
+ * @property-read AccountLedger|null $ledger
+ * @method static Builder|Account whereLedgerId($value)
  * @mixin \Eloquent
- * @property-read \App\Domains\Accounts\Models\AccountLedger|null $ledger
  */
 	class Account extends \Eloquent {}
 }
@@ -73,11 +75,22 @@ namespace App\Domains\Accounts\Models{
 /**
  * App\Domains\Accounts\Models\AccountLedger
  *
- * @property-read \App\Domains\Accounts\Models\Account|null $account
+ * @property int $id
+ * @property string $ulid
+ * @property int $account_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read Account $account
  * @method static \Database\Factories\AccountLedgerFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class AccountLedger extends \Eloquent {}
 }
@@ -244,8 +257,10 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $activeEntitlements
  * @property-read int|null $active_entitlements_count
- * @mixin \Eloquent
+ * @property int|null $ledger_id
  * @property-read \App\Domains\Accounts\Models\AccountLedger|null $ledger
+ * @method static \Illuminate\Database\Eloquent\Builder|Income whereLedgerId($value)
+ * @mixin \Eloquent
  */
 	class Income extends \Eloquent {}
 }

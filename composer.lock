@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "728597c4eb68e716d49111780313bd79",
+    "content-hash": "cf2a2f2c3b5ca717b3ac1d9413fa13c2",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -3905,6 +3905,78 @@
                 }
             ],
             "time": "2023-02-10T15:33:25+00:00"
+        },
+        {
+            "name": "statix-php/laravel-form-actions",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/statix-php/laravel-form-actions.git",
+                "reference": "ae92397dd2f404359cdc5167e87d300170d1b8ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/statix-php/laravel-form-actions/zipball/ae92397dd2f404359cdc5167e87d300170d1b8ee",
+                "reference": "ae92397dd2f404359cdc5167e87d300170d1b8ee",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.8",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Statix\\FormAction\\FormActionServiceProvider"
+                    ],
+                    "aliases": {
+                        "FormAction": "Statix\\FormAction\\Facades\\FormAction"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Statix\\FormAction\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wyatt Castaneda",
+                    "email": "wyatt.castaneda@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Form Requests mixed with Actions for Laravel",
+            "homepage": "https://github.com/statix-php/laravel-form-actions",
+            "keywords": [
+                "actions",
+                "laravel",
+                "laravel-form-actions",
+                "statix-php"
+            ],
+            "support": {
+                "issues": "https://github.com/statix-php/laravel-form-actions/issues",
+                "source": "https://github.com/statix-php/laravel-form-actions/tree/0.0.1"
+            },
+            "time": "2023-09-02T05:47:25+00:00"
         },
         {
             "name": "symfony/console",
