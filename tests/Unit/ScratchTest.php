@@ -53,4 +53,6 @@ test('new workflow', function () {
     // 13. I want to see my accounts
     get(route('app.accounts.index'))->assertStatus(200);
 
+    // 14. I want to create a transaction for my income, where I deposit it into my account
+    get(route('app.transactions.create'))->assertStatus(200);
 });
