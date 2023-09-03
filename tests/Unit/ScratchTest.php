@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Account;
+use App\Models\AssetAccountType;
+use App\Models\IncomeType;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -31,6 +33,8 @@ test('new workflow', function () {
 
     // 7. I magically create an income
     $income = Account::factory()->income()->create([
+        'name' => 'Salary',
+        'subtype_id' => IncomeType::where('name', 'Salary')->first()->id,
         'budget_id' => currentBudget()->id,
     ]);
 
@@ -45,6 +49,8 @@ test('new workflow', function () {
 
     // 11. I magically create an account
     $account = Account::factory()->asset()->create([
+        'name' => 'Checking Account',
+        'subtype_id' => AssetAccountType::where('name', 'Checking')->first()->id,
         'budget_id' => currentBudget()->id,
     ]);
 
@@ -58,13 +64,11 @@ test('new workflow', function () {
     get(route('app.transactions.create'))->assertStatus(200);
 
     // 15. I magically create a transaction
-    $transaction = Transaction::factory()->create([
+    $transaction = Transaction::factory()->from($income)->to($account)->create([
         'ledger_id' => currentBudget()->ledger->id,
-        'from_account_id' => $income->id,
-        'to_account_id' => $account->id,
         'amount' => 1000, // $10.00
         'date' => now()->startOfMonth(),
     ]);
 
-    dd($transaction);
+    // dd($transaction->fromAccount, $transaction->toAccount);
 });

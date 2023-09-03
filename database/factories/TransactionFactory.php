@@ -23,14 +23,19 @@ class TransactionFactory extends Factory
     {
         $ledger = BudgetLedger::factory()->create();
 
+        $fromAccount = Account::factory()->income()->forBudget($ledger->budget)->create();
+        $toAccount = Account::factory()->asset()->forBudget($ledger->budget)->create();
+
         return [
             'ledger_id' => $ledger->id,
-            'from_account_id' => Account::factory()->forBudget($ledger->budget),
-            'to_account_id' => Account::factory()->forBudget($ledger->budget),
+            'from_account_type' => $fromAccount->getMorphClass(),
+            'from_account_id' => $fromAccount->id,
+            'to_account_type' => $toAccount->getMorphClass(),
+            'to_account_id' => $toAccount->id,
             'type' => array_rand([
                 'transfer' => 'transfer',
-                'income' => 'income',
-                'expense' => 'expense',
+                'debit' => 'debit',
+                'credit' => 'credit',
             ]),
             'amount' => random_int(1, 10_000),
             'currency' => 'USD',
@@ -38,5 +43,21 @@ class TransactionFactory extends Factory
             'description' => rand(0, 1) ? $this->faker->paragraph : null,
             'date' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
+    }
+
+    public function from(Account $account): self
+    {
+        return $this->state([
+            'from_account_type' => $account->getMorphClass(),
+            'from_account_id' => $account->id,
+        ]);
+    }
+
+    public function to(Account $account): self
+    {
+        return $this->state([
+            'to_account_type' => $account->getMorphClass(),
+            'to_account_id' => $account->id,
+        ]);
     }
 }

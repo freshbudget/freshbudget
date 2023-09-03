@@ -12,10 +12,8 @@ return new class extends Migration
             $table->id();
             $table->ulid('ulid')->index();
             $table->unsignedBigInteger('ledger_id')->index();
-            $table->unsignedBigInteger('from_account_id')->index();
-            $table->unsignedBigInteger('to_account_id')->index();
-            $table->morphs('transactionable');
-
+            $table->morphs('from_account');
+            $table->morphs('to_account');
             $table->string('type')->nullable(); // Debit, Credit, Transfer
             $table->unsignedBigInteger('amount'); // in cents
             $table->string('currency')->default('USD');
@@ -26,8 +24,6 @@ return new class extends Migration
 
             // Foreign Keys
             $table->foreign('ledger_id')->references('id')->on('budget_ledgers')->onDelete('cascade');
-            $table->foreign('from_account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $table->foreign('to_account_id')->references('id')->on('accounts')->onDelete('cascade');
         });
     }
 

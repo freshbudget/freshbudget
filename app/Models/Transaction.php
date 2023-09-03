@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * App\Models\Transaction
@@ -60,10 +61,10 @@ class Transaction extends Model
     protected $fillable = [
         'ulid',
         'ledger_id',
+        'from_account_type',
         'from_account_id',
+        'to_account_type',
         'to_account_id',
-        'transactionable_type',
-        'transactionable_id',
         'type',
         'amount',
         'currency',
@@ -105,5 +106,15 @@ class Transaction extends Model
     public function ledger(): BelongsTo
     {
         return $this->belongsTo(BudgetLedger::class, 'ledger_id');
+    }
+
+    public function fromAccount(): MorphTo
+    {
+        return $this->morphTo('from_account');
+    }
+
+    public function toAccount(): MorphTo
+    {
+        return $this->morphTo('to_account');
     }
 }
