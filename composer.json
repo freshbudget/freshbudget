@@ -24,7 +24,8 @@
         "mpociot/versionable": "^4.4",
         "spatie/laravel-stats": "^2.1",
         "statix-php/laravel-form-actions": "^0.0.3",
-        "watson/active": "^7.0"
+        "watson/active": "^7.0",
+        "wire-elements/pro": "^4.0@beta"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

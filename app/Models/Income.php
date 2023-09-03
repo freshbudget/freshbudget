@@ -41,7 +41,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
  * @property-read \App\Models\User|null $user
- *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
@@ -69,12 +68,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeEntitlement> $activeEntitlements
  * @property-read int|null $active_entitlements_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereLedgerId($value)
- *
  * @mixin \Eloquent
  */
 class Income extends Account

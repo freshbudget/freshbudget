@@ -70,5 +70,9 @@ test('new workflow', function () {
         'date' => now()->startOfMonth(),
     ]);
 
-    // dd($transaction->fromAccount, $transaction->toAccount);
+    // todo, i need to add additional details to the transaction
+    // such as which the type of debit or credit for each account
+
+    // 16. The transaction should be logged in my budget's ledger
+    expect(currentBudget()->ledger->transactions()->count())->toBe(1);
 });

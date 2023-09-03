@@ -10,9 +10,9 @@
  */
 
 
-namespace App\Domains\Accounts\Models{
+namespace App\Models{
 /**
- * App\Domains\Accounts\Models\Account
+ * App\Models\Account
  *
  * @property int $id
  * @property string $ulid
@@ -63,41 +63,104 @@ namespace App\Domains\Accounts\Models{
  * @method static Builder|Account whereUsername($value)
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
- * @property int|null $ledger_id
- * @property-read AccountLedger|null $ledger
- * @method static Builder|Account whereLedgerId($value)
  * @mixin \Eloquent
  */
 	class Account extends \Eloquent {}
 }
 
-namespace App\Domains\Accounts\Models{
+namespace App\Models{
 /**
- * App\Domains\Accounts\Models\AccountLedger
+ * App\Models\AssetAccount
  *
  * @property int $id
  * @property string $ulid
- * @property int $account_id
+ * @property int $budget_id
+ * @property int|null $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property AccountType|null $type
+ * @property int|null $subtype_id
+ * @property \App\Enums\Currency|null $currency
+ * @property \App\Enums\Frequency|null $frequency
+ * @property int|null $institution_id
+ * @property string|null $url
+ * @property string|null $username
+ * @property string|null $color
+ * @property array|null $meta
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read Account $account
- * @method static \Database\Factories\AccountLedgerFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger query()
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereAccountId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereUlid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|AccountLedger whereUpdatedAt($value)
+ * @property-read \App\Models\Budget $budget
+ * @property-read \App\Models\Institute|null $institution
+ * @property-read \App\Models\AssetAccountType|null $subtype
+ * @property-read \App\Models\User|null $user
+ * @method static Builder|Account active()
+ * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereInstitutionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereSubtypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount withoutTrashed()
  * @mixin \Eloquent
  */
-	class AccountLedger extends \Eloquent {}
+	class AssetAccount extends \Eloquent {}
 }
 
-namespace App\Domains\Budgets\Models{
+namespace App\Models{
 /**
- * App\Domains\Budgets\Models\Budget
+ * App\Models\AssetAccountType
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property string $name
+ * @property string $abbr
+ * @property string|null $tagline
+ * @property string|null $description
+ * @property string $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\AssetAccountTypeFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereAbbr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereTagline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class AssetAccountType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Budget
  *
  * @property int $id
  * @property string $ulid
@@ -114,12 +177,12 @@ namespace App\Domains\Budgets\Models{
  * @property-read User|null $deleter
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Income> $incomes
  * @property-read int|null $incomes_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $invitations
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetInvitation> $invitations
  * @property-read int|null $invitations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $members
  * @property-read int|null $members_count
  * @property-read User $owner
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Budgets\Models\BudgetInvitation> $pendingInvitations
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
@@ -142,14 +205,17 @@ namespace App\Domains\Budgets\Models{
  * @property-read int|null $accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
  * @property-read int|null $active_accounts_count
+ * @property-read \App\Models\BudgetLedger|null $ledger
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, AssetAccount> $assetAccounts
+ * @property-read int|null $asset_accounts_count
  * @mixin \Eloquent
  */
 	class Budget extends \Eloquent {}
 }
 
-namespace App\Domains\Budgets\Models{
+namespace App\Models{
 /**
- * App\Domains\Budgets\Models\BudgetInvitation
+ * App\Models\BudgetInvitation
  *
  * @property int $id
  * @property string $ulid
@@ -164,7 +230,7 @@ namespace App\Domains\Budgets\Models{
  * @property Carbon|null $sent_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Domains\Budgets\Models\Budget|null $budget
+ * @property-read \App\Models\Budget|null $budget
  * @property-read User|null $sender
  * @method static \Database\Factories\BudgetInvitationFactory factory($count = null, $state = [])
  * @method static Builder|BudgetInvitation newModelQuery()
@@ -191,9 +257,35 @@ namespace App\Domains\Budgets\Models{
 	class BudgetInvitation extends \Eloquent {}
 }
 
-namespace App\Domains\Incomes\Models{
+namespace App\Models{
 /**
- * App\Domains\Incomes\Models\Income
+ * App\Models\BudgetLedger
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $budget_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Budget $budget
+ * @method static \Database\Factories\BudgetLedgerFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Transaction> $transactions
+ * @property-read int|null $transactions_count
+ * @mixin \Eloquent
+ */
+	class BudgetLedger extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Income
  *
  * @property int $id
  * @property string $ulid
@@ -203,8 +295,8 @@ namespace App\Domains\Incomes\Models{
  * @property string|null $description
  * @property AccountType|null $type
  * @property int|null $subtype_id
- * @property \App\Domains\Shared\Enums\Currency|null $currency
- * @property \App\Domains\Shared\Enums\Frequency|null $frequency
+ * @property \App\Enums\Currency|null $currency
+ * @property \App\Enums\Frequency|null $frequency
  * @property int|null $institution_id
  * @property string|null $url
  * @property string|null $username
@@ -214,20 +306,20 @@ namespace App\Domains\Incomes\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $activeDeductions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeDeduction> $activeDeductions
  * @property-read int|null $active_deductions_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $activeTaxes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeTax> $activeTaxes
  * @property-read int|null $active_taxes_count
- * @property-read \App\Domains\Budgets\Models\Budget $budget
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $deductions
+ * @property-read \App\Models\Budget $budget
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeDeduction> $deductions
  * @property-read int|null $deductions_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $entitlements
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeEntitlement> $entitlements
  * @property-read int|null $entitlements_count
- * @property-read \App\Domains\Shared\Models\Institute|null $institution
+ * @property-read \App\Models\Institute|null $institution
  * @property-read IncomeType|null $subtype
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
- * @property-read \App\Domains\Users\Models\User|null $user
+ * @property-read \App\Models\User|null $user
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Income newModelQuery()
@@ -255,19 +347,17 @@ namespace App\Domains\Incomes\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Income withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Income withoutTrashed()
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $activeEntitlements
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\IncomeEntitlement> $activeEntitlements
  * @property-read int|null $active_entitlements_count
- * @property int|null $ledger_id
- * @property-read \App\Domains\Accounts\Models\AccountLedger|null $ledger
  * @method static \Illuminate\Database\Eloquent\Builder|Income whereLedgerId($value)
  * @mixin \Eloquent
  */
 	class Income extends \Eloquent {}
 }
 
-namespace App\Domains\Incomes\Models{
+namespace App\Models{
 /**
- * App\Domains\Incomes\Models\IncomeType
+ * App\Models\IncomeType
  *
  * @property int $id
  * @property string $ulid
@@ -294,9 +384,9 @@ namespace App\Domains\Incomes\Models{
 	class IncomeType extends \Eloquent {}
 }
 
-namespace App\Domains\Shared\Models{
+namespace App\Models{
 /**
- * App\Domains\Shared\Models\Institute
+ * App\Models\Institute
  *
  * @property int $id
  * @property string $ulid
@@ -332,9 +422,55 @@ namespace App\Domains\Shared\Models{
 	class Institute extends \Eloquent {}
 }
 
-namespace App\Domains\Users\Models{
+namespace App\Models{
 /**
- * App\Domains\Users\Models\User
+ * App\Models\Transaction
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $ledger_id
+ * @property int $from_account_id
+ * @property int $to_account_id
+ * @property string|null $type
+ * @property int $amount
+ * @property string $currency
+ * @property string|null $title
+ * @property string|null $description
+ * @property string|null $date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read BudgetLedger $ledger
+ * @method static \Database\Factories\TransactionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereFromAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereLedgerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereToAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUpdatedAt($value)
+ * @property string $transactionable_type
+ * @property int $transactionable_id
+ * @property-read \App\Models\Account $fromAccount
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableType($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $toAccount
+ */
+	class Transaction extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\User
  *
  * @property int $id
  * @property string $ulid

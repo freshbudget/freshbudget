@@ -163,4 +163,11 @@
       'Active' => 'Watson\\Watson\\Facades\\Active',
     ),
   ),
+  'wire-elements/pro' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'WireElements\\Pro\\WireElementsProServiceProvider',
+    ),
+  ),
 );

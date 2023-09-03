@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -25,6 +27,17 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, Request $request) {
+
+            $requestDomain = $request->server('HTTP_HOST');
+            $appDomain = (string) str(config('app.app_url'))->replace('http://', '')->replace('https://', '');
+            
+            // if the request is on the 'app' subdomain, redirect to the app index
+            if ($requestDomain === $appDomain) {
+                return redirect()->route('app.errors.404');
+            } 
         });
     }
 }

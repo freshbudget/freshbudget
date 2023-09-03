@@ -97,7 +97,7 @@
                 ],
                 [
                     'label' => 'Expenses',
-                    'route' => "#",
+                    'route' => route('app.expenses.index'),
                     'icon' => 'creditcard',
                     'active' => 'app.expenses.*'
                 ],

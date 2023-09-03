@@ -1,4 +1,5 @@
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import '../../vendor/wire-elements/pro/resources/js/spotlight-component.js'
 import contextMenu from './components/context-menu'
 
 window.Alpine = Alpine

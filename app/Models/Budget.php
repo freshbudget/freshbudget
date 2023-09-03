@@ -32,7 +32,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @property-read User $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
- *
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
@@ -50,7 +49,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $accounts
  * @property-read int|null $accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
@@ -58,7 +56,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @property-read \App\Models\BudgetLedger|null $ledger
  * @property-read \Illuminate\Database\Eloquent\Collection<int, AssetAccount> $assetAccounts
  * @property-read int|null $asset_accounts_count
- *
  * @mixin \Eloquent
  */
 

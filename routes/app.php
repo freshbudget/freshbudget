@@ -40,6 +40,37 @@ Route::view('/calendar', 'app.calendar.index')
 
 /*
 |--------------------------------------------------------------------------
+| Accounts
+|--------------------------------------------------------------------------
+*/
+Route::get('/accounts', function () {
+
+    $accounts = currentBudget()->assetAccounts;
+
+    return view('app.accounts.index', [
+        'accounts' => $accounts,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.accounts.index');
+
+Route::view('/accounts/create', 'app.accounts.create')
+    ->middleware(['auth', 'verified'])
+    ->name('app.accounts.create');
+
+Route::get('/accounts/{account}', function (AssetAccount $account) {
+
+    $account = currentBudget()->assetAccounts()->findOrFail($account->id);
+
+    return view('app.accounts.show', [
+        'account' => $account,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.accounts.show');
+
+/*
+|--------------------------------------------------------------------------
 | Incomes
 |--------------------------------------------------------------------------
 */
@@ -73,34 +104,12 @@ Route::put('/incomes/{income}', [IncomesController::class, 'update'])
 
 /*
 |--------------------------------------------------------------------------
-| Accounts
+| Expenses
 |--------------------------------------------------------------------------
 */
-Route::get('/accounts', function () {
-
-    $accounts = currentBudget()->assetAccounts;
-
-    return view('app.accounts.index', [
-        'accounts' => $accounts,
-    ]);
-
-})->middleware(['auth', 'verified'])
-    ->name('app.accounts.index');
-
-Route::view('/accounts/create', 'app.accounts.create')
+Route::view('/expenses', 'app.expenses.index')
     ->middleware(['auth', 'verified'])
-    ->name('app.accounts.create');
-
-Route::get('/accounts/{account}', function (AssetAccount $account) {
-
-    $account = currentBudget()->assetAccounts()->findOrFail($account->id);
-
-    return view('app.accounts.show', [
-        'account' => $account,
-    ]);
-
-})->middleware(['auth', 'verified'])
-    ->name('app.accounts.show');
+    ->name('app.expenses.index');
 
 /*
 |--------------------------------------------------------------------------
@@ -266,3 +275,11 @@ Route::view('/files', 'app.files.index')
 Route::post('/cookies/{cookie}', CookiesController::class)
     ->middleware(['auth', 'verified'])
     ->name('app.cookies.update');
+
+/*
+|--------------------------------------------------------------------------
+| Error Pages
+|--------------------------------------------------------------------------
+*/
+Route::view('/errors/404', 'app.errors.404')
+    ->name('app.errors.404');

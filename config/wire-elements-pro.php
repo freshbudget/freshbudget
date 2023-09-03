@@ -37,8 +37,8 @@ return [
         // 'insert' => [
         //     'view' => 'wire-elements-pro::insert.component',
         //     'types' => [
-        //         'user' => \App\UserInsert::class,
-        //         'command' => \App\CommandInsert::class,
+        //         //'user' => \App\UserInsert::class,
+        //         //'command' => \App\CommandInsert::class,
         //     ],
         //     'default-behavior' => [
         //         'debounce_milliseconds' => 200,
@@ -92,40 +92,40 @@ return [
                 ],
             ],
         ],
-        'bootstrap' => [
-            'modal' => [
-                'size-map' => [
-                    'xs' => 'wep-modal-content-xs',
-                    'sm' => 'wep-modal-content-sm',
-                    'md' => 'wep-modal-content-md',
-                    'lg' => 'wep-modal-content-lg',
-                    'xl' => 'wep-modal-content-xl',
-                    '2xl' => 'wep-modal-content-2xl',
-                    '3xl' => 'wep-modal-content-3xl',
-                    '4xl' => 'wep-modal-content-4xl',
-                    '5xl' => 'wep-modal-content-5xl',
-                    '6xl' => 'wep-modal-content-6xl',
-                    '7xl' => 'wep-modal-content-7xl',
-                    'fullscreen' => 'wep-modal-content-fullscreen',
-                ],
-                'confirmation_view' => 'wire-elements-pro::modal.bootstrap.confirmation',
-            ],
-            'slide-over' => [
-                'size-map' => [
-                    'xs' => 'wep-slide-over-content-xs',
-                    'sm' => 'wep-slide-over-content-sm',
-                    'md' => 'wep-slide-over-content-md',
-                    'lg' => 'wep-slide-over-content-lg',
-                    'xl' => 'wep-slide-over-content-xl',
-                    '2xl' => 'wep-slide-over-content-2xl',
-                    '3xl' => 'wep-slide-over-content-3xl',
-                    '4xl' => 'wep-slide-over-content-4xl',
-                    '5xl' => 'wep-slide-over-content-5xl',
-                    '6xl' => 'wep-slide-over-content-6xl',
-                    '7xl' => 'wep-slide-over-content-7xl',
-                ],
-            ],
-        ],
+        // 'bootstrap' => [
+        //     'modal' => [
+        //         'size-map' => [
+        //             'xs' => 'wep-modal-content-xs',
+        //             'sm' => 'wep-modal-content-sm',
+        //             'md' => 'wep-modal-content-md',
+        //             'lg' => 'wep-modal-content-lg',
+        //             'xl' => 'wep-modal-content-xl',
+        //             '2xl' => 'wep-modal-content-2xl',
+        //             '3xl' => 'wep-modal-content-3xl',
+        //             '4xl' => 'wep-modal-content-4xl',
+        //             '5xl' => 'wep-modal-content-5xl',
+        //             '6xl' => 'wep-modal-content-6xl',
+        //             '7xl' => 'wep-modal-content-7xl',
+        //             'fullscreen' => 'wep-modal-content-fullscreen',
+        //         ],
+        //         'confirmation_view' => 'wire-elements-pro::modal.bootstrap.confirmation',
+        //     ],
+        //     'slide-over' => [
+        //         'size-map' => [
+        //             'xs' => 'wep-slide-over-content-xs',
+        //             'sm' => 'wep-slide-over-content-sm',
+        //             'md' => 'wep-slide-over-content-md',
+        //             'lg' => 'wep-slide-over-content-lg',
+        //             'xl' => 'wep-slide-over-content-xl',
+        //             '2xl' => 'wep-slide-over-content-2xl',
+        //             '3xl' => 'wep-slide-over-content-3xl',
+        //             '4xl' => 'wep-slide-over-content-4xl',
+        //             '5xl' => 'wep-slide-over-content-5xl',
+        //             '6xl' => 'wep-slide-over-content-6xl',
+        //             '7xl' => 'wep-slide-over-content-7xl',
+        //         ],
+        //     ],
+        // ],
     ],
 
     'icons' => [

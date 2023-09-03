@@ -6,7 +6,7 @@
 @endpush
 
 @push('body::end')
-    {{-- @livewire('spotlight-pro')     --}}
+    @livewire('spotlight-pro') 
     @livewireScriptConfig
     @vite(['resources/js/app.js'])
 @endpush
