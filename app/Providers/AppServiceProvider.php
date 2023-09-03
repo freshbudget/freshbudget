@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Account;
+use App\Models\AssetAccount;
 use App\Models\Budget;
 use App\Models\Income;
-use App\Models\IncomeEntitlement;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,9 +20,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Relation::enforceMorphMap([
+            'account' => Account::class,
+            'assetAccount' => AssetAccount::class,
             'budget' => Budget::class,
             'income' => Income::class,
-            'income.entitlement' => IncomeEntitlement::class,
             'user' => User::class,
         ]);
     }
@@ -31,7 +34,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \Debugbar::disable();
-        Model::preventLazyLoading(! $this->app->isLocal());
-        Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
+        /** @var Application $app */
+        $app = $this->app;
+        Model::preventLazyLoading(! $app->isLocal());
+        Model::preventSilentlyDiscardingAttributes(! $app->isProduction());
     }
 }

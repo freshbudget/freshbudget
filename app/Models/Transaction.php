@@ -44,11 +44,33 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUpdatedAt($value)
  *
+ * @property string $transactionable_type
+ * @property int $transactionable_id
+ * @property-read \App\Models\Account $fromAccount
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableType($value)
+ *
  * @mixin \Eloquent
  */
 class Transaction extends Model
 {
     use HasFactory, HasUlids;
+
+    protected $fillable = [
+        'ulid',
+        'ledger_id',
+        'from_account_id',
+        'to_account_id',
+        'transactionable_type',
+        'transactionable_id',
+        'type',
+        'amount',
+        'currency',
+        'title',
+        'description',
+        'date',
+    ];
 
     /*
     |----------------------------------

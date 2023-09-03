@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Account;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -55,4 +56,15 @@ test('new workflow', function () {
 
     // 14. I want to create a transaction for my income, where I deposit it into my account
     get(route('app.transactions.create'))->assertStatus(200);
+
+    // 15. I magically create a transaction
+    $transaction = Transaction::factory()->create([
+        'ledger_id' => currentBudget()->ledger->id,
+        'from_account_id' => $income->id,
+        'to_account_id' => $account->id,
+        'amount' => 1000, // $10.00
+        'date' => now()->startOfMonth(),
+    ]);
+
+    dd($transaction);
 });

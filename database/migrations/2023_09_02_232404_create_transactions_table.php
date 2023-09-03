@@ -14,6 +14,8 @@ return new class extends Migration
             $table->unsignedBigInteger('ledger_id')->index();
             $table->unsignedBigInteger('from_account_id')->index();
             $table->unsignedBigInteger('to_account_id')->index();
+            $table->morphs('transactionable');
+
             $table->string('type')->nullable(); // Debit, Credit, Transfer
             $table->unsignedBigInteger('amount'); // in cents
             $table->string('currency')->default('USD');
