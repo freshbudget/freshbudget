@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Incomes\Models\IncomeTax;
+use App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IncomeTaxFactory extends Factory

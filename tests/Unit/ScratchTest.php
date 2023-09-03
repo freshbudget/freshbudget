@@ -1,7 +1,8 @@
 <?php
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Users\Models\User;
+use App\Models\Account;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 use function Pest\Laravel\get;
@@ -35,4 +36,16 @@ test('new workflow', function () {
 
     // 8. I want to see my income
     get(route('app.incomes.show', $income))->assertStatus(200);
+
+    // 9. I want to see my incomes
+    get(route('app.incomes.index'))->assertStatus(200);
+
+    // 10. I want to log a transaction, for my income
+    get(route('app.transactions.create'))->assertStatus(200);
+
+    // 11. I magically create a transaction
+    // $transaction = Transaction::create([
+    //     'ledger_id' => currentBudget()->ledger->id,
+    //     'from_account_id' => $income->id,
+    // ]);
 });

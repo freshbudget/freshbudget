@@ -1,8 +1,8 @@
 <?php
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Shared\Enums\AccountType;
+use App\Enums\AccountType;
+use App\Models\Account;
+use App\Models\Income;
 
 // the income model extends the account model
 test('the income model extends the account model', function () {

@@ -2,7 +2,7 @@
 
 namespace App\Domains\Incomes\Models;
 
-use App\Domains\Accounts\Models\Account;
+use App\Models\Account;
 use Database\Factories\IncomeEntitlementFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

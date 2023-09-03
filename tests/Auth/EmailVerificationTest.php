@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Users\Models\User;
 use App\Livewire\Auth\EmailVerificationRequestForm;
+use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
 

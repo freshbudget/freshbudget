@@ -1,10 +1,10 @@
 <?php
 
-use App\Domains\Budgets\Events\BudgetInvitationAccepted;
-use App\Domains\Budgets\Notifications\InvitationAcceptedNotification;
-use App\Domains\Budgets\Notifications\InvitedToBudgetNotification;
-use App\Domains\Users\Actions\SendBudgetInvitationAction;
-use App\Domains\Users\Models\User;
+use App\Actions\User\SendBudgetInvitationAction;
+use App\Events\Budgets\BudgetInvitationAccepted;
+use App\Models\User;
+use App\Notifications\InvitationAcceptedNotification;
+use App\Notifications\InvitedToBudgetNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 

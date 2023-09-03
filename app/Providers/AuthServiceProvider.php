@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Accounts\Policies\AccountPolicy;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Policies\BudgetPolicy;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Policies\IncomePolicy;
+use App\Models\Account;
+use App\Models\Budget;
+use App\Models\Income;
+use App\Policies\AccountPolicy;
+use App\Policies\BudgetPolicy;
+use App\Policies\IncomePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 

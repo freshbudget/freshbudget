@@ -2,11 +2,11 @@
 
 namespace App\Console;
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Budgets\Models\BudgetInvitation;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedDeductions;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedEntitlements;
 use App\Domains\Incomes\Jobs\SyncIncomeEstimatedTaxes;
+use App\Models\Account;
+use App\Models\BudgetInvitation;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

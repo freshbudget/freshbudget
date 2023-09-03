@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Users\Models\User;
+use App\Models\User;
 
 // test the incomes index page is not accessible by a guest but is accessible by a logged in user
 test('incomes index page is not accessible to guests, only authenticated users', function () {

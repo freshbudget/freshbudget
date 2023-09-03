@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\Income;
+use App\Models\Budget;
+use App\Models\Income;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 

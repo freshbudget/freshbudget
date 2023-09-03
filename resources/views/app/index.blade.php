@@ -16,6 +16,11 @@
                 'label' => 'Timeline',
                 'route' => '#',
                 'active' => 'app.index2'
+            ],
+            [
+                'label' => 'Ledger',
+                'route' => route('app.ledger.index'),
+                'active' => 'app.ledger.index'
             ]
         ]" />
 

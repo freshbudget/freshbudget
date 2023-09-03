@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Panels\Budgets;
 
-use App\Domains\Budgets\Models\Budget;
+use App\Models\Budget;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Url;
 use Livewire\Component;

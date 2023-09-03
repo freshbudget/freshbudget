@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\IncomeType;
-use App\Domains\Shared\Enums\AccountType;
-use App\Domains\Shared\Models\Institute;
+use App\Enums\AccountType;
+use App\Models\Account;
+use App\Models\Budget;
+use App\Models\IncomeType;
+use App\Models\Institute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -46,6 +46,13 @@ class AccountFactory extends Factory
         return $this->state([
             'type' => AccountType::REVENUE,
             'subtype_id' => IncomeType::inRandomOrder()->first()->id,
+        ]);
+    }
+
+    public function forBudget(Budget $budget): self
+    {
+        return $this->state([
+            'budget_id' => $budget->id,
         ]);
     }
 }

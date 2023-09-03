@@ -83,7 +83,7 @@
 
                     <x-slot:options>
                         
-                        <x-context-menu.option as="a" href="{{ route('app.incomes.entries.create', $income) }}">
+                        <x-context-menu.option as="a" href="#">
                             Log Entry
                         </x-context-menu.option>
 

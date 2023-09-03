@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\IncomeEntitlement;
+use App\Models\Account;
 use Mpociot\Versionable\VersionableTrait;
 
 test('when model is created, a ulid is generated', function () {

@@ -2,9 +2,9 @@
 
 namespace App\Controllers\App\Incomes;
 
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeType;
-use App\Domains\Shared\Enums\Frequency;
+use App\Enums\Frequency;
+use App\Models\Income;
+use App\Models\IncomeType;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;

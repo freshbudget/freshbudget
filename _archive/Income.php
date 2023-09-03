@@ -2,8 +2,8 @@
 
 namespace App\Domains\Incomes\Models;
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Shared\Enums\AccountType;
+use App\Models\Account;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -33,7 +33,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $active_deductions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $activeTaxes
  * @property-read int|null $active_taxes_count
- * @property-read \App\Domains\Budgets\Models\Budget $budget
+ * @property-read \App\Models\Budget $budget
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeDeduction> $deductions
  * @property-read int|null $deductions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeEntitlement> $entitlements
@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read IncomeType|null $subtype
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Domains\Incomes\Models\IncomeTax> $taxes
  * @property-read int|null $taxes_count
- * @property-read \App\Domains\Users\Models\User|null $user
+ * @property-read \App\Models\User|null $user
  *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])

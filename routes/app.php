@@ -18,6 +18,16 @@ Route::view('/', 'app.index')
     ->middleware(['auth', 'verified'])
     ->name('app.index');
 
+Route::get('/ledger', function () {
+
+    $ledger = currentBudget()->ledger;
+
+    return view('app.ledger.index', [
+        'ledger' => $ledger,
+    ]);
+})->middleware(['auth', 'verified'])
+    ->name('app.ledger.index');
+
 /*
 |--------------------------------------------------------------------------
 | Calendar
@@ -59,6 +69,24 @@ Route::get('/incomes/{income}/settings', [IncomesController::class, 'edit'])
 Route::put('/incomes/{income}', [IncomesController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.update');
+
+/*
+|--------------------------------------------------------------------------
+| Transactions
+|--------------------------------------------------------------------------
+*/
+Route::get('/transactions/create', function () {
+
+    $accounts = currentBudget()->accounts;
+
+    // dd($accounts);
+
+    return view('app.transactions.create', [
+        'accounts' => $accounts,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.transactions.create');
 
 /*
 |--------------------------------------------------------------------------

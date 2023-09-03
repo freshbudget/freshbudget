@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Shared\Enums\Currency;
+use App\Enums\Currency;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

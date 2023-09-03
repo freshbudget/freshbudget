@@ -2,8 +2,8 @@
 
 namespace App\Controllers\App\Budgets;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
+use App\Models\Budget;
+use App\Models\BudgetInvitation;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Auth;
 
-use App\Domains\Users\Models\User;
+use App\Models\User;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Auth\Events\PasswordReset;

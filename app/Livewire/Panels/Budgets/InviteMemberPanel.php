@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Panels\Budgets;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Users\Actions\SendBudgetInvitationAction;
+use App\Actions\User\SendBudgetInvitationAction;
+use App\Models\Budget;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Validation\Rule;
 use Livewire\Component;

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetLedger;
+use App\Models\Budget;
+use App\Models\BudgetLedger;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

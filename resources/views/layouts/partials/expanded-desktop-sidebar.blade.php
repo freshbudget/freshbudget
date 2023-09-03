@@ -103,7 +103,7 @@
                 ],
                 [
                     'label' => 'Transactions',
-                    'route' => "#",
+                    'route' => route('app.transactions.create'),
                     'icon' => 'pencilsquare',
                     'active' => 'app.transactions.*'
                 ],

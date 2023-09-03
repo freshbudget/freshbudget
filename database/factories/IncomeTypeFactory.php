@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Domains\Incomes\Models\IncomeType;
+use App\Models\IncomeType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IncomeTypeFactory extends Factory

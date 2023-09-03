@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetLedger;
+use App\Models\Budget;
+use App\Models\BudgetLedger;
 
 test('when model is created, a ulid is generated', function () {
     $model = BudgetLedger::factory()->create();

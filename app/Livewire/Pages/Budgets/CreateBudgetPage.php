@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Pages\Budgets;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Shared\Enums\Currency;
+use App\Enums\Currency;
+use App\Models\Budget;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\Rule;
 use Livewire\Component;

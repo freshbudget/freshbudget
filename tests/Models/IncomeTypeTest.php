@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Incomes\Models\IncomeType;
+use App\Models\IncomeType;
 
 test('when model is created, a ulid is generated', function () {
     $model = IncomeType::factory()->create();

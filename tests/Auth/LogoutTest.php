@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Users\Models\User;
+use App\Models\User;
 
 // an authenticated user can logout
 test('an authenticated user can logout', function () {

@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Users\Models\User;
+use App\Models\Budget;
+use App\Models\BudgetInvitation;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BudgetInvitationFactory extends Factory

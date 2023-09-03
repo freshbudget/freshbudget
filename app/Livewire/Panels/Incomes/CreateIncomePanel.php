@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Panels\Incomes;
 
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeType;
-use App\Domains\Shared\Enums\Currency;
-use App\Domains\Shared\Enums\Frequency;
+use App\Enums\Currency;
+use App\Enums\Frequency;
+use App\Models\Income;
+use App\Models\IncomeType;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Rule;

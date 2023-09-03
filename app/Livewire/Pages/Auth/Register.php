@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use App\Domains\Users\Models\User;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Livewire\Attributes\Rule;
 use Livewire\Component;

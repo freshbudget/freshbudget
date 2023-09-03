@@ -1,9 +1,9 @@
 <?php
 
-use App\Domains\Budgets\Events\BudgetInvitationAccepted;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Users\Models\User;
+use App\Events\Budgets\BudgetInvitationAccepted;
+use App\Models\Budget;
+use App\Models\BudgetInvitation;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Event;
 

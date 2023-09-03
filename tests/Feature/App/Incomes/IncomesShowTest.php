@@ -1,10 +1,10 @@
 <?php
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeType;
-use App\Domains\Shared\Enums\AccountType;
-use App\Domains\Users\Models\User;
+use App\Enums\AccountType;
+use App\Models\Account;
+use App\Models\Income;
+use App\Models\IncomeType;
+use App\Models\User;
 
 // test the incomes index page is not accessible by a guest but is accessible by a logged in user
 test('incomes show page is not accessible to guests, only authenticated users', function () {

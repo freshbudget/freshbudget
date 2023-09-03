@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Incomes\Models\IncomeEntitlement;
-use App\Domains\Users\Models\User;
+use App\Models\Budget;
+use App\Models\Income;
+use App\Models\IncomeEntitlement;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Domains\Budgets\Models\BudgetStatistic;
+use App\Models\BudgetStatistic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

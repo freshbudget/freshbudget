@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Shared\Models\Institute;
+use App\Models\Institute;
 
 test('when model is created, a ulid is generated', function () {
     $model = Institute::factory()->create();

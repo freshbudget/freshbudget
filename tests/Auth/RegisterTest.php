@@ -2,8 +2,8 @@
 
 // test the register page is accessible
 
-use App\Domains\Users\Models\User;
 use App\Livewire\Pages\Auth\Register;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 

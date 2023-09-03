@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Users\Models\User;
+use App\Models\Budget;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BudgetFactory extends Factory

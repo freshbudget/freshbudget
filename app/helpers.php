@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Users\Models\User;
+use App\Models\Budget;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 
 function carbon($time = null, $tz = null): Carbon

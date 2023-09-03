@@ -2,8 +2,8 @@
 
 // test the login page is accessible
 
-use App\Domains\Users\Models\User;
 use App\Livewire\Pages\Auth\Login;
+use App\Models\User;
 use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\Facades\Event;
 

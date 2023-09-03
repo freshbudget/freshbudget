@@ -1,10 +1,10 @@
 <?php
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Actions\CreateIncomeEntitlementAction;
 use App\Domains\Incomes\Actions\UpdateIncomeEntitlementEstimate;
 use App\Domains\Incomes\Models\Income;
 use App\Domains\Shared\Enums\AccountType;
+use App\Models\Account;
 
 // // test that the action creates an entitlement
 // test('the action creates an entitlement', function () {

@@ -2,8 +2,8 @@
 
 namespace App\Domains\Incomes\Actions;
 
-use App\Domains\Accounts\Models\Account;
 use App\Domains\Incomes\Models\IncomeEntitlement;
+use App\Models\Account;
 use Illuminate\Support\Arr;
 
 class CreateIncomeEntitlementAction

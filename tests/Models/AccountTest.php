@@ -1,14 +1,14 @@
 <?php
 
-use App\Domains\Accounts\Events\AccountCreated;
-use App\Domains\Accounts\Events\AccountDeleted;
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Shared\Enums\AccountType;
-use App\Domains\Shared\Enums\Currency;
-use App\Domains\Shared\Enums\Frequency;
-use App\Domains\Shared\Models\Institute;
-use App\Domains\Users\Models\User;
+use App\Enums\AccountType;
+use App\Enums\Currency;
+use App\Enums\Frequency;
+use App\Events\Accounts\AccountCreated;
+use App\Events\Accounts\AccountDeleted;
+use App\Models\Account;
+use App\Models\Budget;
+use App\Models\Institute;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

@@ -1,14 +1,14 @@
 <?php
 
-use App\Domains\Accounts\Models\Account;
-use App\Domains\Budgets\Events\BudgetCreated;
-use App\Domains\Budgets\Events\BudgetDeleted;
-use App\Domains\Budgets\Models\Budget;
-use App\Domains\Budgets\Models\BudgetInvitation;
-use App\Domains\Budgets\Models\BudgetLedger;
-use App\Domains\Incomes\Models\Income;
-use App\Domains\Shared\Enums\AccountType;
-use App\Domains\Users\Models\User;
+use App\Enums\AccountType;
+use App\Events\Budgets\BudgetCreated;
+use App\Events\Budgets\BudgetDeleted;
+use App\Models\Account;
+use App\Models\Budget;
+use App\Models\BudgetInvitation;
+use App\Models\BudgetLedger;
+use App\Models\Income;
+use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Budgets\Models;
+namespace App\Models;
 
 use Database\Factories\BudgetStatisticFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Stats\Traits\HasStats;
 
 /**
- * App\Domains\Budgets\Models\BudgetStatistic
+ * App\Models\BudgetStatistic
  *
  * @property int $id
  * @property int $budget_id
@@ -19,7 +19,7 @@ use Spatie\Stats\Traits\HasStats;
  * @property string|null $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Domains\Budgets\Models\Budget $budget
+ * @property-read \App\Models\Budget $budget
  *
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetStatistic decrements()
  * @method static \Database\Factories\BudgetStatisticFactory factory($count = null, $state = [])

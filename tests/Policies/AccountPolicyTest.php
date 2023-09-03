@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Accounts\Policies\AccountPolicy;
-use App\Domains\Users\Models\User;
+use App\Models\User;
+use App\Policies\AccountPolicy;
 
 // test that a user can create an account
 test('a user can create an account', function () {
