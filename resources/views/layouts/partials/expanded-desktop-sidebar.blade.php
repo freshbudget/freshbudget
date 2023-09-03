@@ -84,16 +84,16 @@
                     'active' => 'app.calendar.*'
                 ],
                 [
+                    'label' => 'Accounts',
+                    'route' => route('app.accounts.index'),
+                    'icon' => 'bank',
+                    'active' => 'app.accounts.*'
+                ],
+                [
                     'label' => 'Incomes',
                     'route' => route('app.incomes.index'),
                     'icon' => 'banknotes',
                     'active' => 'app.incomes.*'
-                ],
-                [
-                    'label' => 'Accounts',
-                    'route' => "#",
-                    'icon' => 'bank',
-                    'active' => 'app.accounts.*'
                 ],
                 [
                     'label' => 'Expenses',

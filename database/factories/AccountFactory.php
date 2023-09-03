@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\AccountType;
 use App\Models\Account;
+use App\Models\AssetAccountType;
 use App\Models\Budget;
 use App\Models\IncomeType;
 use App\Models\Institute;
@@ -46,6 +47,14 @@ class AccountFactory extends Factory
         return $this->state([
             'type' => AccountType::REVENUE,
             'subtype_id' => IncomeType::inRandomOrder()->first()->id,
+        ]);
+    }
+
+    public function asset(): self
+    {
+        return $this->state([
+            'type' => AccountType::ASSET,
+            'subtype_id' => AssetAccountType::inRandomOrder()->first()->id,
         ]);
     }
 

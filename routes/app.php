@@ -7,6 +7,7 @@ use App\Controllers\App\Budgets\CurrentBudgetController;
 use App\Controllers\App\CookiesController;
 use App\Controllers\App\Incomes\IncomesController;
 use App\Livewire\Pages\Budgets\CreateBudgetPage;
+use App\Models\AssetAccount;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,37 @@ Route::get('/incomes/{income}/settings', [IncomesController::class, 'edit'])
 Route::put('/incomes/{income}', [IncomesController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.update');
+
+/*
+|--------------------------------------------------------------------------
+| Accounts
+|--------------------------------------------------------------------------
+*/
+Route::get('/accounts', function () {
+
+    $accounts = currentBudget()->assetAccounts;
+
+    return view('app.accounts.index', [
+        'accounts' => $accounts,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.accounts.index');
+
+Route::view('/accounts/create', 'app.accounts.create')
+    ->middleware(['auth', 'verified'])
+    ->name('app.accounts.create');
+
+Route::get('/accounts/{account}', function (AssetAccount $account) {
+
+    $account = currentBudget()->assetAccounts()->findOrFail($account->id);
+
+    return view('app.accounts.show', [
+        'account' => $account,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.accounts.show');
 
 /*
 |--------------------------------------------------------------------------

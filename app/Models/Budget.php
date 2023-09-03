@@ -7,7 +7,6 @@ use App\Events\Budgets\BudgetCreated;
 use App\Events\Budgets\BudgetDeleted;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * App\Models\Budget
  *
@@ -57,10 +56,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
  * @property-read int|null $active_accounts_count
  * @property-read \App\Models\BudgetLedger|null $ledger
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, AssetAccount> $assetAccounts
+ * @property-read int|null $asset_accounts_count
  *
  * @mixin \Eloquent
  */
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -141,6 +143,11 @@ class Budget extends Model
     public function incomes(): HasMany
     {
         return $this->hasMany(Income::class, 'budget_id');
+    }
+
+    public function assetAccounts(): HasMany
+    {
+        return $this->hasMany(AssetAccount::class, 'budget_id');
     }
 
     public function activeIncomes(): HasMany

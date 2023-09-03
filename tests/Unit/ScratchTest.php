@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Account;
-use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -40,12 +39,18 @@ test('new workflow', function () {
     // 9. I want to see my incomes
     get(route('app.incomes.index'))->assertStatus(200);
 
-    // 10. I want to log a transaction, for my income
-    get(route('app.transactions.create'))->assertStatus(200);
+    // 10. I want to create an account for my checking account
+    get(route('app.accounts.create'))->assertStatus(200);
 
-    // 11. I magically create a transaction
-    // $transaction = Transaction::create([
-    //     'ledger_id' => currentBudget()->ledger->id,
-    //     'from_account_id' => $income->id,
-    // ]);
+    // 11. I magically create an account
+    $account = Account::factory()->asset()->create([
+        'budget_id' => currentBudget()->id,
+    ]);
+
+    // 12. I want to see my account
+    get(route('app.accounts.show', $account))->assertStatus(200);
+
+    // 13. I want to see my accounts
+    get(route('app.accounts.index'))->assertStatus(200);
+
 });

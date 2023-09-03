@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AssetAccount;
 use App\Models\Budget;
 use App\Models\Income;
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -37,4 +38,19 @@ Breadcrumbs::for('app.incomes.index', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('app.incomes.show', function (BreadcrumbTrail $trail, Income $income) {
     $trail->parent('app.incomes.index');
     $trail->push($income->name, route('app.incomes.show', $income));
+});
+
+/*
+|--------------------------------------------------------------------------
+| Accounts
+|--------------------------------------------------------------------------
+*/
+Breadcrumbs::for('app.accounts.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Accounts', route('app.accounts.index'));
+});
+
+Breadcrumbs::for('app.accounts.show', function (BreadcrumbTrail $trail, AssetAccount $account) {
+    $trail->parent('app.accounts.index');
+    $trail->push($account->name, route('app.accounts.show', $account));
 });
