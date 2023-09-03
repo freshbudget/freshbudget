@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('keydown', (e) => {
   
-    if (!e.target.hasAttribute('wire:navigate')) {
+    if (!e.target.hasAttribute('wire:navigate') && !e.target.hasAttribute('wire:navigate.hover')) {
         return;
     }
   
