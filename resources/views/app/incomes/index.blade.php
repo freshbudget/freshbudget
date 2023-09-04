@@ -22,10 +22,20 @@
         ]
     ]" />
 
-    <div class="max-w-6xl px-4 py-8 mx-auto">
+    <div class="max-w-6xl px-4 py-8 mx-auto prose">
 
-        Todo: Show overview of incomes
+        <ul>
+            
+            @foreach ($incomes as $income)
+                <li>
+                    <x-link href="{{ route('app.incomes.show', $income) }}">
+                        {{ $income->name }}
+                    </x-link>
+                </li>
+            @endforeach
+
+        </ul>
         
     </div>
-    
+
 @endsection

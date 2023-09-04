@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Factories\TransactionFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read BudgetLedger $ledger
+ *
  * @method static \Database\Factories\TransactionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction newQuery()
@@ -43,16 +43,21 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereUpdatedAt($value)
+ *
  * @property string $transactionable_type
  * @property int $transactionable_id
  * @property-read \App\Models\Account $fromAccount
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableType($value)
+ *
  * @property string $from_account_type
  * @property string $to_account_type
  * @property-read Model|\Eloquent $toAccount
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereFromAccountType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereToAccountType($value)
+ *
  * @mixin \Eloquent
  */
 class Transaction extends Model
@@ -82,11 +87,6 @@ class Transaction extends Model
     public function getRouteKeyName()
     {
         return 'ulid';
-    }
-
-    public static function newFactory()
-    {
-        return TransactionFactory::new();
     }
 
     public function uniqueIds(): array

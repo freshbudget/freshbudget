@@ -12,17 +12,17 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 
 /*
 |--------------------------------------------------------------------------
-| Budgets
+| Accounts
 |--------------------------------------------------------------------------
 */
-Breadcrumbs::for('app.budgets.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('app.accounts.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Budgets', route('app.budgets.index'));
+    $trail->push('Accounts', route('app.accounts.index'));
 });
 
-Breadcrumbs::for('app.budgets.show', function (BreadcrumbTrail $trail, Budget $budget) {
-    $trail->parent('app.budgets.index');
-    $trail->push($budget->name, route('app.budgets.show', $budget));
+Breadcrumbs::for('app.accounts.show', function (BreadcrumbTrail $trail, AssetAccount $account) {
+    $trail->parent('app.accounts.index');
+    $trail->push($account->name, route('app.accounts.show', $account));
 });
 
 /*
@@ -42,15 +42,35 @@ Breadcrumbs::for('app.incomes.show', function (BreadcrumbTrail $trail, Income $i
 
 /*
 |--------------------------------------------------------------------------
-| Accounts
+| Expenses
 |--------------------------------------------------------------------------
 */
-Breadcrumbs::for('app.accounts.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('app.expenses.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Accounts', route('app.accounts.index'));
+    $trail->push('Expenses', route('app.expenses.index'));
 });
 
-Breadcrumbs::for('app.accounts.show', function (BreadcrumbTrail $trail, AssetAccount $account) {
-    $trail->parent('app.accounts.index');
-    $trail->push($account->name, route('app.accounts.show', $account));
+/*
+|--------------------------------------------------------------------------
+| Transactions
+|--------------------------------------------------------------------------
+*/
+Breadcrumbs::for('app.transactions.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Transactions', route('app.transactions.index'));
+});
+
+/*
+|--------------------------------------------------------------------------
+| Budgets
+|--------------------------------------------------------------------------
+*/
+Breadcrumbs::for('app.budgets.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Budgets', route('app.budgets.index'));
+});
+
+Breadcrumbs::for('app.budgets.show', function (BreadcrumbTrail $trail, Budget $budget) {
+    $trail->parent('app.budgets.index');
+    $trail->push($budget->name, route('app.budgets.show', $budget));
 });

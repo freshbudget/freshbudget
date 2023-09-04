@@ -15,13 +15,12 @@ class SpotlightServiceProvider extends ServiceProvider
     public function register(): void
     {
         Spotlight::registerGroup('pages', 'Pages');
+        Spotlight::registerGroup('incomes', 'Incomes');
 
         Spotlight::setup(function () {
 
-            // Here you can access the user, request, etc.
-            // auth()->user() // Returns current user
-
             Spotlight::registerQueries(
+
                 SpotlightQuery::asDefault(function ($query) {
                     $collection = collect();
 

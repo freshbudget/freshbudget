@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \App\Models\Institute|null $institution
  * @property-read \App\Models\AssetAccountType|null $subtype
  * @property-read \App\Models\User|null $user
+ *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount newModelQuery()
@@ -58,6 +59,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount whereUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AssetAccount extends Account

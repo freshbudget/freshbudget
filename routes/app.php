@@ -8,6 +8,7 @@ use App\Controllers\App\CookiesController;
 use App\Controllers\App\Incomes\IncomesController;
 use App\Livewire\Pages\Budgets\CreateBudgetPage;
 use App\Models\AssetAccount;
+use App\Models\Expense;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'app.index')
     ->middleware(['auth', 'verified'])
     ->name('app.index');
-
-Route::get('/ledger', function () {
-
-    $ledger = currentBudget()->ledger;
-
-    return view('app.ledger.index', [
-        'ledger' => $ledger,
-    ]);
-})->middleware(['auth', 'verified'])
-    ->name('app.ledger.index');
 
 /*
 |--------------------------------------------------------------------------
@@ -107,20 +98,49 @@ Route::put('/incomes/{income}', [IncomesController::class, 'update'])
 | Expenses
 |--------------------------------------------------------------------------
 */
-Route::view('/expenses', 'app.expenses.index')
+Route::get('/expenses', function () {
+
+    return view('app.expenses.index', [
+        'expenses' => currentBudget()->expenses,
+    ]);
+})
     ->middleware(['auth', 'verified'])
     ->name('app.expenses.index');
+
+Route::view('/expenses/create', 'app.expenses.create')
+    ->middleware(['auth', 'verified'])
+    ->name('app.expenses.create');
+
+Route::get('/expenses/{expense}', function (Expense $expense) {
+
+    $expense = currentBudget()->expenses()->findOrFail($expense->id);
+
+    return view('app.expenses.show', [
+        'expense' => $expense,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.expenses.show');
 
 /*
 |--------------------------------------------------------------------------
 | Transactions
 |--------------------------------------------------------------------------
 */
+Route::get('/transactions', function () {
+
+    $transactions = currentBudget()->transactions;
+
+    return view('app.transactions.index', [
+        'transactions' => $transactions,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.transactions.index');
+
 Route::get('/transactions/create', function () {
 
     $accounts = currentBudget()->accounts;
-
-    // dd($accounts);
 
     return view('app.transactions.create', [
         'accounts' => $accounts,

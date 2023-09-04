@@ -16,8 +16,28 @@
 
     </div>
 
-
     <div class="prose my-10 mx-auto">
+
+        <h1>List of Accounts</h1>
+
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Balance</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach (currentBudget()->accounts as $account)
+                    <tr>
+                        <td><x-link href="{{ route('app.accounts.show', $account) }}">{{ $account->name }}</x-link></td>
+                        <td>{{ $account->type }}</td>
+                        <td>TBD</td>
+                        <td>Actions</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
         <table>
             <thead>

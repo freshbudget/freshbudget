@@ -9,7 +9,7 @@
         <div class="space-y-4">
 
             <div class="space-y-2">
-                <x-forms.label for="name" required>
+                <x-forms.label for="name" required help="Required; between 3 and 255 characters">
                     Your Name
                 </x-forms.label>
         

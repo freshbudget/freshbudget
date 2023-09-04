@@ -5,8 +5,6 @@ namespace App\Models;
 use App\Concerns\ManagesMemberships;
 use App\Events\Budgets\BudgetCreated;
 use App\Events\Budgets\BudgetDeleted;
-use Database\Factories\BudgetFactory;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
 /**
  * App\Models\Budget
  *
@@ -32,6 +30,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @property-read User $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
+ *
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
@@ -49,6 +48,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $accounts
  * @property-read int|null $accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
@@ -56,9 +56,13 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @property-read \App\Models\BudgetLedger|null $ledger
  * @property-read \Illuminate\Database\Eloquent\Collection<int, AssetAccount> $assetAccounts
  * @property-read int|null $asset_accounts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Expense> $expenses
+ * @property-read int|null $expenses_count
+ *
  * @mixin \Eloquent
  */
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -112,11 +116,6 @@ class Budget extends Model
         return 'ulid';
     }
 
-    public static function newFactory()
-    {
-        return BudgetFactory::new();
-    }
-
     public function uniqueIds(): array
     {
         return ['ulid'];
@@ -155,6 +154,11 @@ class Budget extends Model
     public function deleter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class, 'budget_id');
     }
 
     public function owner(): BelongsTo

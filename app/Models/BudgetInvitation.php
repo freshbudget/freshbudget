@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Factories\BudgetInvitationFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +29,7 @@ use Illuminate\Support\Str;
  * @property Carbon|null $updated_at
  * @property-read \App\Models\Budget|null $budget
  * @property-read User|null $sender
+ *
  * @method static \Database\Factories\BudgetInvitationFactory factory($count = null, $state = [])
  * @method static Builder|BudgetInvitation newModelQuery()
  * @method static Builder|BudgetInvitation newQuery()
@@ -47,9 +47,12 @@ use Illuminate\Support\Str;
  * @method static Builder|BudgetInvitation whereToken($value)
  * @method static Builder|BudgetInvitation whereUlid($value)
  * @method static Builder|BudgetInvitation whereUpdatedAt($value)
+ *
  * @property string|null $role
+ *
  * @method static Builder|BudgetInvitation pending()
  * @method static Builder|BudgetInvitation whereRole($value)
+ *
  * @mixin \Eloquent
  */
 class BudgetInvitation extends Model
@@ -126,11 +129,6 @@ class BudgetInvitation extends Model
     public function prunable(): Builder
     {
         return static::where('expires_at', '<=', now());
-    }
-
-    public static function newFactory()
-    {
-        return BudgetInvitationFactory::new();
     }
 
     public function uniqueIds(): array

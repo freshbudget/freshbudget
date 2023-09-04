@@ -37,7 +37,7 @@
                 ],
                 [
                     'label' => 'Transactions',
-                    'route' => route('app.transactions.create'),
+                    'route' => route('app.transactions.index'),
                     'icon' => 'pencilsquare',
                     'active' => 'app.transactions.*'
                 ],

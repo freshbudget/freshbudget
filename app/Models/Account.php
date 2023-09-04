@@ -7,7 +7,6 @@ use App\Enums\Currency;
 use App\Enums\Frequency;
 use App\Events\Accounts\AccountCreated;
 use App\Events\Accounts\AccountDeleted;
-use Database\Factories\AccountFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,6 +40,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Budget $budget
  * @property-read Institute|null $institution
  * @property-read User|null $user
+ *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static Builder|Account newModelQuery()
@@ -68,6 +68,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Account whereUsername($value)
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Account extends Model
@@ -119,11 +120,6 @@ class Account extends Model
         return 'ulid';
     }
 
-    public static function newFactory()
-    {
-        return AccountFactory::new();
-    }
-
     public function prunable(): Builder
     {
         return self::where('deleted_at', '<=', now()->subDays(60));
@@ -132,6 +128,15 @@ class Account extends Model
     public function uniqueIds(): array
     {
         return ['ulid'];
+    }
+
+    public function route(string $method = 'show'): string
+    {
+        return match ($this->type) {
+            AccountType::ASSET => route('app.accounts.'.$method, $this),
+            AccountType::REVENUE => route('app.incomes.'.$method, $this),
+            AccountType::EXPENSE => route('app.expenses.'.$method, $this),
+        };
     }
 
     /*

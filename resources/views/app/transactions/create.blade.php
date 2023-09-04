@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('breadcrumbs', Breadcrumbs::render('home'))
+@section('breadcrumbs', Breadcrumbs::render('app.transactions.index'))
 @section('page::title', 'Create Transaction')
 
 @section('content')

@@ -25,7 +25,7 @@
 
         <footer class="rounded-b border-t border-gray-300 bg-gray-50 px-4 py-3 flex items-center justify-end">
             <x-forms.buttons.secondary>
-                Activate Two Factor Authentication
+                Enable Two Factor Authentication
             </x-forms.buttons.secondary>
         </footer>
 

@@ -52,6 +52,18 @@ enum AccountType: string
      */
     case EXPENSE = 'Expense';
 
+    public function displayName(): string
+    {
+        return match ($this) {
+            self::ASSET => 'Account',
+            self::LIABILITY => 'Expense',
+            self::EQUITY => 'Equity',
+            self::REVENUE => 'Income',
+            self::EXPENSE => 'Expense',
+            default => 'Unknown',
+        };
+    }
+
     // case ASSET = 'Asset account';
     // case BENEFICIARY = 'Beneficiary account';
     // case CASH = 'Cash account';

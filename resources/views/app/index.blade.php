@@ -11,18 +11,33 @@
                 'label' => 'Overview',
                 'route' => route('app.index'),
                 'active' => 'app.index'
-            ],
-            [
-                'label' => 'Timeline',
-                'route' => '#',
-                'active' => 'app.index2'
-            ],
-            [
-                'label' => 'Ledger',
-                'route' => route('app.ledger.index'),
-                'active' => 'app.ledger.index'
             ]
         ]" />
+
+    </div>
+
+    <div class="prose my-10 mx-auto">
+
+        <h1>List of Accounts</h1>
+
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Balance</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach (currentBudget()->accounts as $account)
+                    <tr>
+                        <td><x-link href="{{ $account->route('show') }}">{{ $account->name }}</x-link></td>
+                        <td>{{ $account->type->displayName() }}</td>
+                        <td>TBD</td>
+                        <td>Actions</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
     </div>
 

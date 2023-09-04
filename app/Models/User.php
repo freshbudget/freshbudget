@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Actions\User\AcceptBudgetInvitationAction;
 use App\Actions\User\SwitchCurrentBudgetAction;
-use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,6 +44,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $owned_budgets_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -65,8 +65,11 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
  * @property bool $finished_onboarding
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFinishedOnboarding($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -135,11 +138,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName()
     {
         return 'ulid';
-    }
-
-    public static function newFactory()
-    {
-        return UserFactory::new();
     }
 
     public function uniqueIds(): array
