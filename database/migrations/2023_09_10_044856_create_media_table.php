@@ -10,9 +10,7 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('budget_id')->index();
-
+            $table->unsignedBigInteger('budget_id')->index()->nullable();
             $table->morphs('model');
             $table->uuid('uuid')->nullable()->unique();
             $table->string('collection_name');
