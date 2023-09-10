@@ -83,6 +83,6 @@ class Expense extends Account
     */
     public function subtype(): BelongsTo
     {
-        return $this->belongsTo(IncomeType::class, 'subtype_id');
+        return $this->belongsTo(ExpenseType::class, 'subtype_id');
     }
 }

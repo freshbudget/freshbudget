@@ -19,12 +19,14 @@
 
     <div class="max-w-6xl px-4 py-8 mx-auto prose">
 
+        <h1>List of Accounts</h1>
+
         <ul>
             
             @foreach ($accounts as $account)
                 <li>
                     <x-link href="{{ route('app.accounts.show', $account) }}">
-                        {{ $account->name }}
+                        {{ $account->name }} ({{ $account->subtype->name }})
                     </x-link>
                 </li>
             @endforeach

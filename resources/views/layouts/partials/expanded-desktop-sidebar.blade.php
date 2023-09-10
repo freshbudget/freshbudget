@@ -67,7 +67,7 @@
     @endif
 
     <!-- Main sidebar links -->
-    <div class="flex-1 p-4 space-y-1 text-gray-600" x-data="{}">
+    <div class="flex-1 p-4 space-y-1 text-gray-600">
 
         @php
             $links = [
@@ -113,18 +113,11 @@
                     'icon' => 'files',
                     'active' => 'app.files.*'
                 ],
-                [
-                    'label' => 'Budgets',
-                    'route' => route('app.budgets.index'),
-                    'icon' => 'stack',
-                    'active' => 'app.budgets.*'
-                ],
             ]
         @endphp
 
         @foreach ($links as $link)
             
-
             <x-link 
                 href="{{ $link['route'] }}" 
                 x-on:mouseleave="$el.blur()"
@@ -167,6 +160,10 @@
             </template>
 
             <div x-cloak x-show="open" x-trap="open" x-on:click.outside="open=false" class="absolute z-20 bottom-[110%] space-y-1 border border-gray-300 bg-white rounded-lg shadow-sm p-2 focus:outline-none w-64" tabindex="-1">
+
+                <x-link href="{{ route('app.budgets.index') }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
+                    @svg('stack', 'w-5 h-5 mr-2.5') Manage budgets
+                </x-link>
 
                 <x-link href="{{ route('app.settings.personal') }}" class="flex items-center px-2.5 py-1.5 relative focus:outline-none border border-transparent focus:border-gray-300 focus:bg-gray-100 rounded-lg tracking-tight leading-relaxed" x-on:mouseenter="$focus.focus($el)">
                     @svg('cog', 'w-5 h-5 mr-2.5') Account settings

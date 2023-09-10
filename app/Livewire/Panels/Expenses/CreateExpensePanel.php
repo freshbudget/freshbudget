@@ -37,7 +37,7 @@ class CreateExpensePanel extends Component
             'currency' => Currency::USD,
         ]);
 
-        return redirect()->route('app.expenses.index');
+        return redirect()->route('app.expenses.show', $expense);
     }
 
     public function render()

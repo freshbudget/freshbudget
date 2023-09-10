@@ -4,13 +4,13 @@
 ])
 
 <a 
+    x-data="{}"
     @if($spa) 
         @if($hover)
             wire:navigate.hover
         @else
             wire:navigate 
         @endif
-        x-data
     @endif {{ $attributes }}>
     {{ $slot }}
 </a>

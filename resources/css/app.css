@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.choices__inner {
+    @apply !block !w-full !transition !duration-75 !border-gray-300 !rounded-lg focus:!outline-none !ring-green-500 focus:!border-gray-300 focus:!ring-2 focus:!ring-offset-2 focus:!ring-offset-white focus:!ring-green-400 focus:!bg-gray-50 !select-none !bg-white;
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded], .is-active {
+    @apply !my-1 !rounded-lg !bg-white;
+}

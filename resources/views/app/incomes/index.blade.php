@@ -24,6 +24,8 @@
 
     <div class="max-w-6xl px-4 py-8 mx-auto prose">
 
+        <h1>List of Incomes</h1>
+
         <ul>
             
             @foreach ($incomes as $income)

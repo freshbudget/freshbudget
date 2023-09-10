@@ -5,6 +5,15 @@
 
 @section('content')
 
-{{ $account->name }} asset account
+<div class="mx-auto px-4 prose">
+
+    <h1>{{ $account->name }}</h1>
+
+    <ul>
+        <li>Institution: {{ $account->institution?->name }}</li>
+        <li>URL: <a href="{{ $account->url }}" target="_blank">{{ $account->url }}</a></li>
+    </ul>
+
+</div>
 
 @endsection

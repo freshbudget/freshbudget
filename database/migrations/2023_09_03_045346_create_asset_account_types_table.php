@@ -17,7 +17,12 @@ return new class extends Migration
             $table->string('tagline')->nullable();
             $table->text('description')->nullable();
             $table->enum('type', ['current', 'long'])->default('current');
+            $table->unsignedBigInteger('budget_id')->nullable()->index();
+            $table->boolean('include_in_net_worth')->default(true);
             $table->timestamps();
+
+            // Foreign Keys
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
         });
 
         $this->seedInitialData();
@@ -45,6 +50,20 @@ return new class extends Migration
                 'abbr' => 'SAV',
                 'tagline' => 'Savings Account',
                 'description' => 'An savings account that holds cash.',
+                'type' => 'current',
+            ],
+            [
+                'name' => 'Certificate of Deposit',
+                'abbr' => 'CD',
+                'tagline' => 'Certificate of Deposit',
+                'description' => 'An certificate of deposit that holds cash.',
+                'type' => 'long',
+            ],
+            [
+                'name' => 'Money Market Account',
+                'abbr' => 'MMA',
+                'tagline' => 'Money Market Account',
+                'description' => 'An money market account that holds cash.',
                 'type' => 'current',
             ],
         ];

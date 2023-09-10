@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -13,14 +14,19 @@ return new class extends Migration
             $table->id();
             $table->ulid('ulid')->index();
             $table->string('name')->index();
-            $table->string('abbr')->unique()->index();
+            $table->string('abbr')->unique()->index()->nullable();
             $table->string('color')->nullable();
             $table->text('logo')->nullable();
             $table->text('description')->nullable();
             $table->text('general_url')->nullable();
             $table->text('auth_url')->nullable();
             $table->boolean('active')->default(true)->index();
+            $table->unsignedBigInteger('budget_id')->nullable()->index();
+            $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->timestamps();
+
+            $table->foreign('budget_id')->references('id')->on('budgets')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
 
         $this->seedInitialInstitutes();
@@ -68,6 +74,70 @@ return new class extends Migration
                 'description' => '',
                 'general_url' => 'https://www.usaa.com/',
                 'auth_url' => 'https://www.usaa.com/',
+            ],
+            [
+                'name' => 'Navy Federal Credit Union',
+                'abbr' => 'NFCU',
+                'color' => '#0d4c92', // blue
+                'description' => '',
+                'general_url' => 'https://www.navyfederal.org/',
+                'auth_url' => 'https://www.navyfederal.org/',
+            ],
+            [
+                'name' => 'Capital One',
+                'abbr' => 'CO',
+                'color' => '#004481', // blue
+                'description' => '',
+                'general_url' => 'https://www.capitalone.com/',
+                'auth_url' => 'https://www.capitalone.com/',
+            ],
+            [
+                'name' => 'Ally',
+                'abbr' => 'Ally',
+                'color' => '#e4002b', // red
+                'description' => '',
+                'general_url' => 'https://www.ally.com/',
+                'auth_url' => 'https://www.ally.com/',
+            ],
+            [
+                'name' => 'Discover',
+                'abbr' => 'Discover',
+                'color' => '#ff6000', // orange
+                'description' => '',
+                'general_url' => 'https://www.discover.com/',
+                'auth_url' => 'https://www.discover.com/',
+            ],
+            [
+                'name' => 'American Express',
+                'abbr' => 'Amex',
+                'color' => '#0078d2', // blue
+                'description' => '',
+                'general_url' => 'https://www.americanexpress.com/',
+                'auth_url' => 'https://www.americanexpress.com/',
+            ],
+            [
+                'name' => 'US Bank',
+                'abbr' => 'US Bank',
+                'color' => '#0d4c92', // blue
+                'description' => '',
+                'general_url' => 'https://www.usbank.com/',
+                'auth_url' => 'https://www.usbank.com/',
+            ],
+            [
+                'name' => 'Not Applicable',
+                'abbr' => 'N/A',
+                'color' => '#0d4c92', // blue
+                'description' => null,
+                'general_url' => null,
+                'auth_url' => null,
+            ],
+            [
+                'name' => 'Sandia Area Federal Credit Union',
+                'abbr' => 'Sandia Area',
+                'color' => '#0d4c92', // blue
+                'description' => null,
+                'general_url' => 'https://www.sandia.org/',
+                'auth_url' => 'https://www.sandia.org/',
             ],
         ];
 

@@ -69,10 +69,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Budget extends Model
+class Budget extends Model implements HasMedia
 {
-    use HasFactory, HasUlids, ManagesMemberships, SoftDeletes;
+    use HasFactory, HasUlids, InteractsWithMedia, ManagesMemberships, SoftDeletes;
 
     protected $fillable = [
         'ulid',
@@ -119,6 +123,14 @@ class Budget extends Model
     public function uniqueIds(): array
     {
         return ['ulid'];
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
     }
 
     /*

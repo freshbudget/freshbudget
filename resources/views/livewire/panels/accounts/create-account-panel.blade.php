@@ -23,7 +23,7 @@
                     What type of account is this?
                 </x-forms.label>
         
-                <x-forms.select name="subtype_id" id="subtype_id" wire:model="subtype_id">
+                <x-forms.select name="subtype_id" id="subtype_id" wire:model.live="subtype_id">
                     <option value="">Select a type</option>
                     @foreach ($types as $type)
                         <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -32,7 +32,52 @@
         
                 <x-forms.validation-error for="subtype_id" />
             </div>
-        
+
+            @if($subtype_id != null && $subtype_id != \App\Models\AssetAccountType::where('name', 'Cash')->first()->id)
+            
+                <div class="space-y-2">
+                    <x-forms.label for="institution_id">
+                        What institution is this account associated with?
+                    </x-forms.label>
+            
+                    <x-forms.select name="institution_id" id="institution_id" wire:model.live="institution_id">
+                        @foreach ($institutes as $institute)
+                            <option value="{{ $institute->id }}">{{ $institute->name }}</option>                            
+                        @endforeach
+                        <option value="0">
+                            Other
+                        </option>
+                    </x-forms.select>
+            
+                    <x-forms.validation-error for="institution_id" />
+                </div>    
+
+                @if($institution_id == 0 && $institution_id != null)
+            
+                    <div class="space-y-2">
+                        <x-forms.label for="institution_name">
+                            What is the name of the institution?
+                        </x-forms.label>
+                
+                        <x-forms.input type="text" name="institution_name" id="institution_name" wire:model="institution_name" />
+                
+                        <x-forms.validation-error for="institution_name" />
+                    </div>
+                    
+                @endif
+            
+                <div class="space-y-2">
+                    <x-forms.label for="url">
+                        Where can you access this account online?
+                    </x-forms.label>
+            
+                    <x-forms.input type="url" name="url" id="url" wire:model="url" />
+            
+                    <x-forms.validation-error for="url" />
+                </div>           
+
+            @endif
+
             @if($users->count() > 1) 
         
                 <div class="space-y-2">

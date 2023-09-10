@@ -22,6 +22,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0@beta",
         "mpociot/versionable": "^4.4",
+        "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-stats": "^2.1",
         "statix-php/laravel-form-actions": "^0.0.3",
         "watson/active": "^7.0",

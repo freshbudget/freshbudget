@@ -153,6 +153,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereUpdatedAt($value)
+ * @property int|null $budget_id
+ * @property int $include_in_net_worth
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereIncludeInNetWorth($value)
  * @mixin \Eloquent
  */
 	class AssetAccountType extends \Eloquent {}
@@ -208,6 +212,8 @@ namespace App\Models{
  * @property-read \App\Models\BudgetLedger|null $ledger
  * @property-read \Illuminate\Database\Eloquent\Collection<int, AssetAccount> $assetAccounts
  * @property-read int|null $asset_accounts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Expense> $expenses
+ * @property-read int|null $expenses_count
  * @mixin \Eloquent
  */
 	class Budget extends \Eloquent {}
@@ -281,6 +287,93 @@ namespace App\Models{
  * @mixin \Eloquent
  */
 	class BudgetLedger extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Expense
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property int $budget_id
+ * @property int|null $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property AccountType|null $type
+ * @property int|null $subtype_id
+ * @property \App\Enums\Currency|null $currency
+ * @property \App\Enums\Frequency|null $frequency
+ * @property int|null $institution_id
+ * @property string|null $url
+ * @property string|null $username
+ * @property string|null $color
+ * @property array|null $meta
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Budget $budget
+ * @property-read \App\Models\Institute|null $institution
+ * @property-read \App\Models\IncomeType|null $subtype
+ * @property-read \App\Models\User|null $user
+ * @method static Builder|Account active()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereInstitutionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereSubtypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class Expense extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ExpenseType
+ *
+ * @property int $id
+ * @property string $ulid
+ * @property string $name
+ * @property string $abbr
+ * @property string|null $tagline
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\ExpenseTypeFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereAbbr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereTagline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereUlid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseType whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class ExpenseType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -417,6 +510,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUpdatedAt($value)
+ * @property int|null $budget_id
+ * @property int|null $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUserId($value)
+ * @property-read Budget|null $budget
+ * @property-read User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute budget($budget)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute global()
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute inactive()
  * @mixin \Eloquent
  */
 	class Institute extends \Eloquent {}
@@ -462,8 +564,12 @@ namespace App\Models{
  * @property-read \App\Models\Account $fromAccount
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereTransactionableType($value)
+ * @property string $from_account_type
+ * @property string $to_account_type
+ * @property-read Model|\Eloquent $toAccount
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereFromAccountType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Transaction whereToAccountType($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $toAccount
  */
 	class Transaction extends \Eloquent {}
 }

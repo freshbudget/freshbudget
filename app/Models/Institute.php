@@ -40,6 +40,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUpdatedAt($value)
  *
+ * @property int|null $budget_id
+ * @property int|null $user_id
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereBudgetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUserId($value)
+ *
+ * @property-read Budget|null $budget
+ * @property-read User|null $user
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute budget($budget)
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute global()
+ * @method static \Illuminate\Database\Eloquent\Builder|Institute inactive()
+ *
  * @mixin \Eloquent
  */
 class Institute extends Model
@@ -54,6 +67,8 @@ class Institute extends Model
         'general_url',
         'auth_url',
         'active',
+        'budget_id',
+        'user_id',
     ];
 
     protected $casts = [
@@ -85,9 +100,33 @@ class Institute extends Model
         return $query->where('active', true);
     }
 
+    public function scopeInactive($query)
+    {
+        return $query->where('active', false);
+    }
+
+    public function scopeGlobal($query)
+    {
+        return $query->whereNull('budget_id');
+    }
+
+    public function scopeBudget($query, $budget)
+    {
+        return $query->where('budget_id', $budget->id);
+    }
+
     /*
     |----------------------------------
     | Relationships
     |----------------------------------
     */
+    public function budget()
+    {
+        return $this->belongsTo(Budget::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

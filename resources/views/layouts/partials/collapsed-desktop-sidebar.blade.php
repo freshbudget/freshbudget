@@ -47,12 +47,6 @@
                     'icon' => 'files',
                     'active' => 'app.files.*'
                 ],
-                [
-                    'label' => 'Budgets',
-                    'route' => route('app.budgets.index'),
-                    'icon' => 'stack',
-                    'active' => 'app.budgets.*'
-                ],
             ]
         @endphp
 
@@ -73,6 +67,10 @@
 
     <!-- User profile menu -->  
     <div class="flex flex-col items-center justify-center pb-2 space-y-1">   
+
+        <x-link href="{{ route('app.budgets.index') }}" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="Manage your budgets">
+            @svg('stack', 'w-5 h-5')
+        </x-link>
 
         <x-link href="{{ route('app.settings.personal') }}" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="View account settings">
             @svg('profile', 'w-5 h-5')

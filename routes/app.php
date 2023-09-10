@@ -7,6 +7,7 @@ use App\Controllers\App\Budgets\CurrentBudgetController;
 use App\Controllers\App\CookiesController;
 use App\Controllers\App\Incomes\IncomesController;
 use App\Livewire\Pages\Budgets\CreateBudgetPage;
+use App\Livewire\Pages\Files\FilesIndex;
 use App\Models\AssetAccount;
 use App\Models\Expense;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,7 @@ Route::view('/calendar', 'app.calendar.index')
 */
 Route::get('/accounts', function () {
 
-    $accounts = currentBudget()->assetAccounts;
+    $accounts = currentBudget()->assetAccounts()->with('subtype')->get();
 
     return view('app.accounts.index', [
         'accounts' => $accounts,
@@ -283,7 +284,7 @@ Route::delete('/budgets/{budget}', [BudgetsController::class, 'destroy'])
 | Budget Files Explorer
 |--------------------------------------------------------------------------
 */
-Route::view('/files', 'app.files.index')
+Route::get('/files', FilesIndex::class)
     ->middleware(['auth', 'verified'])
     ->name('app.files.index');
 
