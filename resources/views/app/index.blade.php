@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="prose my-10 mx-auto">
+    <div class="prose md:my-10 my-6 mx-auto px-4">
 
         <h1>List of Accounts</h1>
 

@@ -304,3 +304,6 @@ Route::post('/cookies/{cookie}', CookiesController::class)
 */
 Route::view('/errors/404', 'app.errors.404')
     ->name('app.errors.404');
+
+Route::view('/errors/500', 'app.errors.500')
+    ->name('app.errors.500');

@@ -7,6 +7,7 @@
 
 @push('body::end')
     @livewire('spotlight-pro') 
+    @livewire('slideovers.file-uploader')
     @livewireScriptConfig
     @vite(['resources/js/app.js'])
 @endpush

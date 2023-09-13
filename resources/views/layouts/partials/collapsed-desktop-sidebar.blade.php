@@ -79,6 +79,16 @@
         <button x-on:click="desktopSidebarExpanded=true" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="Expand sidebar (Ctrl+.)">
             @svg('sidebar', 'w-5 h-5')
         </button>
+
+        <form action="{{ route('logout') }}" method="post">
+                    
+            @csrf
+
+            <button type="submit" class="relative flex items-center w-10 h-10 max-w-full p-2 leading-relaxed tracking-tight truncate border border-transparent rounded-lg hover:bg-gray-100/90 focus:outline-none hover:shadow-sm hover:border-gray-300 focus:border-gray-300 focus:bg-gray-100" title="Logout of your account">
+                @svg('logout', 'w-5 h-5')
+            </button>
+
+        </form>
         
     </div>
 

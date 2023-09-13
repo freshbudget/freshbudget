@@ -29,7 +29,6 @@
 
             <!-- mobile menu -->
             <div 
-                
                 x-data="{ open: false }"
                 class="block sm:hidden">
 

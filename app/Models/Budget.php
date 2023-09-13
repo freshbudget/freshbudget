@@ -58,6 +58,8 @@ use App\Events\Budgets\BudgetDeleted;
  * @property-read int|null $asset_accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Expense> $expenses
  * @property-read int|null $expenses_count
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
+ * @property-read int|null $media_count
  *
  * @mixin \Eloquent
  */

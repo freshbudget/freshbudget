@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -25,18 +24,27 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        $requestDomain = request()->server('HTTP_HOST');
+        $appDomain = (string) str(config('app.app_url'))
+            ->replace('http://', '')
+            ->replace('https://', '');
 
-        $this->renderable(function (NotFoundHttpException $e, Request $request) {
+        $isLivewire = request()->is('livewire/*');
 
-            $requestDomain = $request->server('HTTP_HOST');
-            $appDomain = (string) str(config('app.app_url'))->replace('http://', '')->replace('https://', '');
+        if ($isLivewire) {
+            return;
+        }
 
-            // if the request is on the 'app' subdomain, redirect to the app index
+        $this->renderable(function (NotFoundHttpException $e) use ($requestDomain, $appDomain) {
             if ($requestDomain === $appDomain) {
                 return redirect()->route('app.errors.404');
+            }
+        });
+
+        // render a custom 500 error page
+        $this->renderable(function (Throwable $e) use ($requestDomain, $appDomain) {
+            if ($requestDomain === $appDomain) {
+                return redirect()->route('app.errors.500');
             }
         });
     }

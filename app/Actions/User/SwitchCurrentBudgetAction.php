@@ -19,10 +19,8 @@ class SwitchCurrentBudgetAction
             'current_budget_id' => $budget->id,
         ]);
 
-        // set the currentBudget relationship to the new budget
         $user->setRelation('currentBudget', $budget);
 
-        // fire the event
         event(new CurrentBudgetSwitched($user, $budget));
 
         return $user;

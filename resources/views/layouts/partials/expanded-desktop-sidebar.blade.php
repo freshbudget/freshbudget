@@ -1,5 +1,5 @@
 <div class="flex flex-col w-full h-full select-none">
-
+{{-- 
     <!-- Budget selector -->
     @if(user()->joinedBudgets->count() > 1)
         <div class="p-4">
@@ -64,7 +64,7 @@
             </div>
 
         </div>
-    @endif
+    @endif --}}
 
     <!-- Main sidebar links -->
     <div class="flex-1 p-4 space-y-1 text-gray-600">

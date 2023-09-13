@@ -2,23 +2,34 @@
 
 namespace App\Livewire\Pages\Files;
 
+use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 class FilesIndex extends Component
 {
     use WithFileUploads;
 
-    #[Rule(['files.*' => 'required|file|max:3072'])]
+    #[Rule(rule: [
+        'files.*' => 'required|file|max:50000',
+    ], attribute: [
+        'files.*.required' => 'Please select at least one file to upload.',
+    ])]
     public $files = [];
 
-    public function upload()
+    public function updatedFiles()
     {
         $this->validate();
 
+        /** @var TemporaryUploadedFile $file */
         foreach ($this->files as $file) {
-            $file->store('files');
+            currentBudget()
+                ->addMedia($file)
+                ->usingName($file->getClientOriginalName())
+                ->usingFileName(Str::ulid())
+                ->toMediaCollection('root');
         }
 
         $this->files = [];
