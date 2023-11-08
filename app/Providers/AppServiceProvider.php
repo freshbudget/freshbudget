@@ -2,15 +2,18 @@
 
 namespace App\Providers;
 
-use App\Models\Account;
-use App\Models\AssetAccount;
+use App\Models\User;
 use App\Models\Budget;
 use App\Models\Income;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Livewire\Livewire;
+use App\Models\Account;
+use App\Models\AssetAccount;
 use Illuminate\Foundation\Application;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Livewire\Wizards\Incomes\AddEntitlementsStep;
+use App\Livewire\Wizards\Incomes\ConfigureIncomeWizard;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,5 +41,12 @@ class AppServiceProvider extends ServiceProvider
         $app = $this->app;
         Model::preventLazyLoading(! $app->isLocal());
         Model::preventSilentlyDiscardingAttributes(! $app->isProduction());
+        $this->registerLiveWireComponents();
+    }
+
+    protected function registerLiveWireComponents(): void
+    {
+        Livewire::component('wizards.incomes.configure-income-wizard', ConfigureIncomeWizard::class);
+        Livewire::component('wizards.incomes.add-entitlements-step', AddEntitlementsStep::class);
     }
 }

@@ -72,7 +72,7 @@
                 @endif
                 
                 @hasSection ('page::title')
-                    <div class="text-xl font-bold leading-none sm:text-2xl">
+                    <div class="text-xl font-bold leading-none sm:text-2xl mt-1">
                         @yield('page::title')
                     </div>    
                 @endif
@@ -85,3 +85,8 @@
     </div>
 
 @endsection
+
+@push('body::end')
+    @livewire('spotlight-pro') 
+    {{-- @livewire('slideovers.file-uploader') --}}
+@endpush

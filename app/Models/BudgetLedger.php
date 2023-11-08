@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Budget $budget
- *
  * @method static \Database\Factories\BudgetLedgerFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger newQuery()
@@ -27,10 +26,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BudgetLedger whereUpdatedAt($value)
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Transaction> $transactions
  * @property-read int|null $transactions_count
- *
  * @mixin \Eloquent
  */
 class BudgetLedger extends Model

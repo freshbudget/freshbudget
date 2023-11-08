@@ -134,6 +134,13 @@
       0 => 'Pest\\Laravel\\PestServiceProvider',
     ),
   ),
+  'spatie/laravel-collection-macros' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\CollectionMacros\\CollectionMacroServiceProvider',
+    ),
+  ),
   'spatie/laravel-ignition' => 
   array (
     'providers' => 
@@ -143,6 +150,13 @@
     'aliases' => 
     array (
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
+    ),
+  ),
+  'spatie/laravel-livewire-wizard' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\LivewireWizard\\WizardServiceProvider',
     ),
   ),
   'spatie/laravel-medialibrary' => 

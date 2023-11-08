@@ -113,6 +113,12 @@
                     'icon' => 'files',
                     'active' => 'app.files.*'
                 ],
+                [
+                    'label' => 'AI Chat',
+                    'route' => '#',
+                    'icon' => 'sparkle',
+                    'active' => 'app.chat.*'
+                ],
             ]
         @endphp
 

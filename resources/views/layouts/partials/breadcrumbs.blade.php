@@ -1,5 +1,5 @@
 @unless ($breadcrumbs->isEmpty())
-    <div class="mb-1 text-sm">
+    <div class="text-sm">
         <nav>
             <ol class="flex flex-wrap text-sm text-gray-700">
                 @foreach ($breadcrumbs as $breadcrumb)

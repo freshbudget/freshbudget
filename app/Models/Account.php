@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use App\Enums\AccountType;
 use App\Enums\Currency;
 use App\Enums\Frequency;
+use App\Enums\AccountType;
+use App\Models\AccountEntitlement;
 use App\Events\Accounts\AccountCreated;
 use App\Events\Accounts\AccountDeleted;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Prunable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\Account
@@ -40,7 +42,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Budget $budget
  * @property-read Institute|null $institution
  * @property-read User|null $user
- *
  * @method static Builder|Account active()
  * @method static \Database\Factories\AccountFactory factory($count = null, $state = [])
  * @method static Builder|Account newModelQuery()
@@ -68,7 +69,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|Account whereUsername($value)
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Account extends Model
@@ -157,6 +157,11 @@ class Account extends Model
     public function budget(): BelongsTo
     {
         return $this->belongsTo(Budget::class, 'budget_id');
+    }
+
+    public function entitlements(): MorphMany
+    {
+        return $this->morphMany(AccountEntitlement::class, 'account');
     }
 
     public function institution(): BelongsTo

@@ -1,16 +1,17 @@
 <?php
 
-use App\Controllers\App\Budgets\BudgetInvitationsController;
-use App\Controllers\App\Budgets\BudgetMembersController;
-use App\Controllers\App\Budgets\BudgetsController;
-use App\Controllers\App\Budgets\CurrentBudgetController;
-use App\Controllers\App\CookiesController;
-use App\Controllers\App\Incomes\IncomesController;
-use App\Livewire\Pages\Budgets\CreateBudgetPage;
-use App\Livewire\Pages\Files\FilesIndex;
-use App\Models\AssetAccount;
+use App\Models\Income;
 use App\Models\Expense;
+use App\Models\AssetAccount;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Pages\Files\FilesIndex;
+use App\Controllers\App\CookiesController;
+use App\Livewire\Pages\Budgets\CreateBudgetPage;
+use App\Controllers\App\Budgets\BudgetsController;
+use App\Controllers\App\Incomes\IncomesController;
+use App\Controllers\App\Budgets\BudgetMembersController;
+use App\Controllers\App\Budgets\CurrentBudgetController;
+use App\Controllers\App\Budgets\BudgetInvitationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,17 @@ Route::view('/incomes/create', 'app.incomes.create')
 Route::get('/incomes/{income}', [IncomesController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('app.incomes.show');
+
+Route::get('/incomes/{income}/configure', function(Income $income) {
+    // i need to ensure that the income hasn't been configured yet. if it has, then redirect to the show page, just going to assume that the income has not been configured for now
+
+    // this route should present a wizard like form that allows the user to configure the income, including the entitlements, taxes, and deductions
+    return view('app.incomes.configure.index', [
+        'income' => $income,
+    ]);
+
+})->middleware(['auth', 'verified'])
+    ->name('app.incomes.configure');
 
 Route::delete('/incomes/{income}', [IncomesController::class, 'destroy'])
     ->middleware(['auth', 'verified'])

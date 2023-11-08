@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Database\Factories\AssetAccountTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType newQuery()
@@ -32,13 +31,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereUpdatedAt($value)
- *
  * @property int|null $budget_id
  * @property int $include_in_net_worth
- *
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereBudgetId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccountType whereIncludeInNetWorth($value)
- *
  * @mixin \Eloquent
  */
 class AssetAccountType extends Model

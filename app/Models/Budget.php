@@ -30,7 +30,6 @@ use App\Events\Budgets\BudgetDeleted;
  * @property-read User $owner
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BudgetInvitation> $pendingInvitations
  * @property-read int|null $pending_invitations_count
- *
  * @method static \Database\Factories\BudgetFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget newQuery()
@@ -48,7 +47,6 @@ use App\Events\Budgets\BudgetDeleted;
  * @method static \Illuminate\Database\Eloquent\Builder|Budget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Budget withoutTrashed()
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $accounts
  * @property-read int|null $accounts_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Account> $activeAccounts
@@ -60,7 +58,6 @@ use App\Events\Budgets\BudgetDeleted;
  * @property-read int|null $expenses_count
  * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- *
  * @mixin \Eloquent
  */
 

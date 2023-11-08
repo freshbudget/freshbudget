@@ -1,14 +1,15 @@
 <?php
 
-use App\Enums\AccountType;
+use App\Models\User;
+use App\Models\Budget;
 use App\Enums\Currency;
+use App\Models\Account;
 use App\Enums\Frequency;
+use App\Models\Institute;
+use App\Enums\AccountType;
+use App\Models\AccountEntitlement;
 use App\Events\Accounts\AccountCreated;
 use App\Events\Accounts\AccountDeleted;
-use App\Models\Account;
-use App\Models\Budget;
-use App\Models\Institute;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -73,6 +74,26 @@ test('it belongs to a budget', function () {
     $model = Account::factory()->create();
 
     expect($model->budget)->toBeInstanceOf(Budget::class);
+});
+
+// test it has many entitlements
+test('it has many entitlements', function () {
+    $model = Account::factory()->create();
+
+    expect($model->entitlements)->toHaveCount(0);
+
+    $model->entitlements()->create([
+        'name' => 'Test Entitlement',
+        'amount' => 1000,
+        'start_date' => '2020-01-01',
+        'end_date' => '2023-12-31',
+        'active' => true,
+    ]);
+
+    $model->refresh();
+
+    expect($model->entitlements)->toHaveCount(1);
+    expect($model->entitlements->first())->toBeInstanceOf(AccountEntitlement::class);
 });
 
 // test it can belong to a user

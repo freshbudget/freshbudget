@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $active
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Institute active()
  * @method static \Database\Factories\InstituteFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Institute newModelQuery()
@@ -39,20 +38,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUlid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUpdatedAt($value)
- *
  * @property int|null $budget_id
  * @property int|null $user_id
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereBudgetId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute whereUserId($value)
- *
  * @property-read Budget|null $budget
  * @property-read User|null $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Institute budget($budget)
  * @method static \Illuminate\Database\Eloquent\Builder|Institute global()
  * @method static \Illuminate\Database\Eloquent\Builder|Institute inactive()
- *
  * @mixin \Eloquent
  */
 class Institute extends Model

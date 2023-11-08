@@ -47,6 +47,9 @@ class CreateIncomePanel extends Component
             $income->update(['active' => false]);
         }
 
+        // okay i want to redirect to the next setup stage, which is configuring the income entitlements, deductions, and taxes
+        return redirect()->route('app.incomes.configure', $income);
+
         return redirect()->route('app.incomes.show', $income);
     }
 

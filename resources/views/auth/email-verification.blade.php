@@ -1,6 +1,6 @@
 <x-livewire-component>
 
-    @if (auth()->user()->hasVerifiedEmail())
+    @if (user()->hasVerifiedEmail())
 
         <h2 class="text-2xl font-semibold text-center select-none text-gray-800/70">Verify your email address</h2>
 

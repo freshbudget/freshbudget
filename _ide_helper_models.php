@@ -64,8 +64,23 @@ namespace App\Models{
  * @method static Builder|Account withTrashed()
  * @method static Builder|Account withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AccountEntitlement> $entitlements
+ * @property-read int|null $entitlements_count
  */
 	class Account extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\AccountEntitlement
+ *
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $account
+ * @method static \Database\Factories\AccountEntitlementFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountEntitlement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountEntitlement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AccountEntitlement query()
+ */
+	class AccountEntitlement extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -123,6 +138,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|AssetAccount withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AccountEntitlement> $entitlements
+ * @property-read int|null $entitlements_count
  */
 	class AssetAccount extends \Eloquent {}
 }
